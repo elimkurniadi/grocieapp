@@ -1,0 +1,8 @@
+{
+    "name": "klikgo",
+    "integrations": {
+        "capacitor": {},
+        "cordova": {}
+    },
+    "type": "angular"
+}

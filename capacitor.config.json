@@ -1,0 +1,8 @@
+{
+    "appId": "com.klikgo.ionic",
+    "appName": "Klikgo",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "www",
+    "cordova": {}
+}
