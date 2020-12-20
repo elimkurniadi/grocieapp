@@ -1,0 +1,43 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid class="ion-padding-top h-100 ion-padding-horizontal">
+        <ion-row class="ion-text-center ion-justify-content-center ion-align-items-center h-30">
+            <ion-col>
+                <img src="https://via.placeholder.com/100.png?text=LOGO+Placeholder" />
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-padding-top ion-text-center">
+            <ion-col size="12">
+                <ion-button expand="full" [routerLink]="[ 'form' ]">
+                    Login
+                </ion-button>
+            </ion-col>
+            <ion-col size="12">
+                <ion-button expand="block" fill="outline" (click)="loginFb()">
+                    <fa-icon [icon]="faFb"></fa-icon>
+                    <span class="ion-padding-start">
+                      Login With Facebook
+                    </span>
+                </ion-button>
+            </ion-col>
+            <ion-col size="12">
+                <ion-button expand="block" fill="outline" (click)="loginGoogle()">
+                    <fa-icon [icon]="faGoogle"></fa-icon>
+                    <span class="ion-padding-start">
+                    Login With Google
+                  </span>
+                </ion-button>
+            </ion-col>
+            <ion-col size="12" class="ion-text-center">
+                <ion-text class="login-redirect-text">
+                    New Here? Register Now
+                </ion-text>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>

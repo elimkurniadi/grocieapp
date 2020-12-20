@@ -19,6 +19,7 @@ import * as Sentry from '@sentry/browser';
 import { environment } from '@env/environment';
 import { JwtAuthModule } from './jwt-auth.module';
 import { HTTP } from '@ionic-native/http/ngx';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 registerLocaleData(localeId, 'id');
 
@@ -47,6 +48,7 @@ export class SentryErrorHandler implements ErrorHandler {
     AppRoutingModule,
     HttpClientModule,
     JwtAuthModule,
+    FontAwesomeModule,
   ],
   providers: [
     StatusBar,
