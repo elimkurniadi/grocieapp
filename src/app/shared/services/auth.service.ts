@@ -7,6 +7,7 @@ import { tap } from 'rxjs/operators';
 import { ApiService } from './core/api.service';
 import { Response } from '@shared/models';
 
+import { Plugins } from '@capacitor/core';
 @Injectable({
   providedIn: 'root',
 })
@@ -39,7 +40,6 @@ export class AuthService {
       }
     });
   }
-
   login(credentials: any): Observable<Response> {
     // temporary token
     credentials.token =
@@ -56,6 +56,31 @@ export class AuthService {
     );
   }
 
+  async loginGoogle() {
+    const googleUser = await Plugins.GoogleAuth.signIn();
+    const credentials = {
+      user_token: googleUser.authentication.idToken,
+      email: googleUser.email,
+    };
+
+    console.log('my user: ', googleUser);
+
+    return true;
+    // return this.login(credentials).toPromise();
+  }
+
+  async loginFb() {
+    // const FACEBOOK_PERMISSIONS = ['public_profile','email'];
+    const FACEBOOK_PERMISSIONS = ['email'];
+    const result = await Plugins.FacebookLogin.login({
+      permissions: FACEBOOK_PERMISSIONS,
+    });
+
+    const credentials = { user_token: result.accessToken.token };
+    console.log('result: ', credentials);
+    return true;
+    // return this.login(credentials).toPromise();
+  }
   isAuthenticated() {
     return new Observable<boolean>((observer) => {
       this.cache.getToken().then((token) => {
@@ -77,4 +102,13 @@ export class AuthService {
       });
     });
   }
+
+  async logoutGoogle() {
+    const logout = await Plugins.GoogleAuth.signOut();
+  }
+
+  async logoutFacebook() {
+    const logout = await Plugins.FacebookLogin.logout();
+  }
+
 }

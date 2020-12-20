@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "682784712996",
+    "project_id": "klikgo-dev",
+    "storage_bucket": "klikgo-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682784712996:android:5b9b729fd4d8cc3c736bb1",
+        "android_client_info": {
+          "package_name": "com.klikgo.ionic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682784712996-n7ppdsgms8he6jtb3vujfrvbskt335ns.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.klikgo.ionic",
+            "certificate_hash": "2d9781dff5b336932ad27c560c1627349979e85f"
+          }
+        },
+        {
+          "client_id": "682784712996-65cbu37faq1lu6lc94erb48uf53cdka9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPWsA89pBi-RCay7Eqf_LDZzqASTlqpzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682784712996-65cbu37faq1lu6lc94erb48uf53cdka9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
