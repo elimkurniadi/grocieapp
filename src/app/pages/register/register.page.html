@@ -1,0 +1,118 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
+    <ion-row class="ion-justify-content-between">
+      <ion-col size="12">
+        <ion-row>
+          <ion-col size="5.5" class="ion-text-center stepper"> Step 1 </ion-col>
+          <ion-col size="1"> &nbsp; </ion-col>
+          <ion-col size="5.5" class="ion-text-center stepper stepper-inactive"> Step 2 </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12" class="ion-no-padding">
+        <form [formGroup]="fg">
+          <ion-item lines="none">
+            <ion-label position="stacked">Name</ion-label>
+            <ion-input
+              class="default-theme"
+              required
+              placeholder="Your Name"
+              type="text"
+              formControlName="name"
+            ></ion-input>
+            <small>{{ fg.controls.name.errors?.required?.message }}</small>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input
+              class="default-theme"
+              required
+              placeholder="Your E-mail Address"
+              type="email"
+              formControlName="email"
+            ></ion-input>
+            <small>
+              {{ fg.controls.email.errors?.required?.message }} {{ fg.controls.email.errors?.email?.message }}
+            </small>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="stacked">Phone Number</ion-label>
+            <ion-input
+              class="default-theme"
+              required
+              placeholder="Your Phone Number"
+              type="tel"
+              formControlName="phone_number"
+            ></ion-input>
+            <small
+              >{{fg.controls.phone_number.errors?.required?.message}}
+              {{fg.controls.phone_number.errors?.numeric?.message}}</small
+            >
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="stacked">Gender</ion-label>
+            <ion-input
+              class="default-theme"
+              required
+              placeholder="Your Gender"
+              type="text"
+              formControlName="gender"
+            ></ion-input>
+            <small>{{fg.controls.gender.errors?.required?.message}}</small>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="stacked">Date of Birth</ion-label>
+            <ion-input
+              class="default-theme"
+              required
+              placeholder="Your Date of Birth"
+              type="text"
+              formControlName="birthdate"
+            ></ion-input>
+            <small>{{fg.controls.birthdate.errors?.required?.message}}</small>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="stacked">Password</ion-label>
+            <ion-input
+              class="default-theme"
+              required
+              placeholder="Your Password"
+              type="password"
+              formControlName="password"
+            ></ion-input>
+            <small>{{fg.controls.password.errors?.required?.message}}</small>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="stacked">Verify Password</ion-label>
+            <ion-input
+              class="default-theme"
+              required
+              placeholder="Your Password Confirm"
+              type="password"
+              formControlName="confirm_password"
+            ></ion-input>
+            <small>{{fg.controls.confirm_password.errors?.required?.message}}</small>
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-button expand="block" (click)="next()" [disabled]="fg.invalid"> Next </ion-button>
+</ion-footer>
