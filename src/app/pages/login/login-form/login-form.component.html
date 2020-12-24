@@ -1,46 +1,47 @@
 <ion-header class="ion-no-border">
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-back-button defaultHref="/login">
-            </ion-back-button>
-            <ion-title>Login</ion-title>
-        </ion-buttons>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start" mode="md">
+      <ion-back-button defaultHref="/login"> </ion-back-button>
+      <ion-title>Login</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-grid class="ion-padding-top">
-        <ion-row>
-            <ion-col size="12" class="ion-no-padding">
-                <form (ngSubmit)="login()" #loginForm="ngForm">
-
-                    <ion-item lines="none">
-                        <ion-label position="stacked">Email</ion-label>
-                        <ion-input class="default-theme" required placeholder="Your E-mail Address"></ion-input>
-                    </ion-item>
-                    <ion-item lines="none" class="padding-form">
-                        <ion-label position="stacked">Password</ion-label>
-                        <ion-input class="default-theme" required placeholder="Your Password"></ion-input>
-                    </ion-item>
-                </form>
-            </ion-col>
-        </ion-row>
-        <ion-row class="ion-padding">
-            <ion-col class="padding-forgot-pass">
-                <ion-text class="login-redirect-text ion-padding-top">Forgot Password</ion-text>
-            </ion-col>
-            <ion-col class="ion-text-right">
-                <ion-text class="login-redirect-text">New Here? Register Now</ion-text>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-    <ion-grid>
-    </ion-grid>
+  <ion-grid class="ion-padding-top">
+    <ion-row>
+      <ion-col size="12" class="ion-no-padding">
+        <form (ngSubmit)="login()" #loginForm="ngForm">
+          <ion-item lines="none">
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input class="default-theme" required placeholder="{{ 'YOUR_EMAIL_ADDRESS' | translate }}"></ion-input>
+          </ion-item>
+          <ion-item lines="none" class="padding-form">
+            <ion-label position="stacked">Password</ion-label>
+            <ion-input class="default-theme" required placeholder="{{ 'YOUR_PASSWORD' | translate }}"></ion-input>
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding">
+      <ion-col class="padding-forgot-pass">
+        <ion-text class="login-redirect-text ion-padding-top" [routerLink]="['/change-password']"
+          >{{ 'FORGOT_PASSWORD' | translate }}
+        </ion-text>
+      </ion-col>
+      <ion-col class="ion-text-right">
+        <ion-text class="login-redirect-text">
+          {{ 'NEW_HERE' | translate }}? <a class="link" href="#">{{ 'REGISTER_NOW' | translate }}</a>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid> </ion-grid>
 </ion-content>
 <ion-footer class="ion-no-border">
-    <ion-row class="ion-padding-bottom">
-        <ion-col class="ion-padding">
-            <ion-button expand="full" (click)="loginForm.ngSubmit.emit()"> Login</ion-button>
-        </ion-col>
-    </ion-row>
+  <ion-row class="ion-padding-bottom">
+    <ion-col class="ion-padding">
+      <ion-button expand="full" (click)="loginForm.ngSubmit.emit()"> {{ 'LOGIN' | translate }}</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-footer>
