@@ -9,7 +9,7 @@ describe('RequestOtpComponent', () => {
   let component: RequestOtpComponent;
   let fixture: ComponentFixture<RequestOtpComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [RequestOtpComponent],
       imports: [IonicModule.forRoot(), SharedModule, FormsModule, ReactiveFormsModule],
@@ -18,7 +18,7 @@ describe('RequestOtpComponent', () => {
     fixture = TestBed.createComponent(RequestOtpComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

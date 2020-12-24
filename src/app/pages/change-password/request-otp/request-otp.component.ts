@@ -8,38 +8,33 @@ import { TranslateService } from '@shared/pipes/translate/translate.service';
   styleUrls: ['./request-otp.component.scss'],
 })
 export class RequestOtpComponent implements OnInit {
-  headerText: string
+  headerText: string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private translate: TranslateService,
-    private router: Router
-  ) {
-    this.route.params.subscribe(param => {
-      if(param.type !== null && param.type !== ''){
-        this.setHeader(param.type)
+  constructor(private route: ActivatedRoute, private translate: TranslateService, private router: Router) {
+    this.route.params.subscribe((param) => {
+      if (param.type !== null && param.type !== '') {
+        this.setHeader(param.type);
       }
-    })
+    });
   }
 
   ngOnInit() {}
 
   sendOtp() {
-    console.log('success')
-    this.router.navigate(['/change-password','verify-otp'])
+    console.log('success');
+    this.router.navigate(['/change-password', 'verify-otp']);
   }
-  setHeader(type:string){
+  setHeader(type: string) {
     switch (type) {
       case 'forgot-password':
-        this.headerText = this.translate.get("FORGOT_PASSWORD")
+        this.headerText = this.translate.get('FORGOT_PASSWORD');
         break;
       case 'change-password':
-        this.headerText = this.translate.get("CHANGE_PASSWORD")
+        this.headerText = this.translate.get('CHANGE_PASSWORD');
         break;
 
       default:
         break;
     }
   }
-
 }

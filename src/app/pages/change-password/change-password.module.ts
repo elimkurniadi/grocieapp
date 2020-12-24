@@ -11,17 +11,7 @@ import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    IonicModule,
-    ChangePasswordPageRoutingModule,
-    SharedModule
-  ],
-  declarations: [
-    RequestOtpComponent,
-    VerifyOtpComponent
-  ]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule, ChangePasswordPageRoutingModule, SharedModule],
+  declarations: [RequestOtpComponent, VerifyOtpComponent],
 })
 export class ChangePasswordPageModule {}

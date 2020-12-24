@@ -12,12 +12,12 @@ const routes: Routes = [
   },
   {
     path: 'request-otp/:type',
-    component: RequestOtpComponent
+    component: RequestOtpComponent,
   },
   {
     path: 'verify-otp',
-    component: VerifyOtpComponent
-  }
+    component: VerifyOtpComponent,
+  },
 ];
 
 @NgModule({
