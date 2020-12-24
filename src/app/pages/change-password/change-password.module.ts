@@ -9,9 +9,19 @@ import { ChangePasswordPageRoutingModule } from './change-password-routing.modul
 import { RequestOtpComponent } from './request-otp/request-otp.component';
 import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 import { SharedModule } from '@shared/shared.module';
+import { SetPasswordComponent } from './set-password/set-password.component';
+import { ModalsModule } from '@shared/common/modals/modals.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule, ChangePasswordPageRoutingModule, SharedModule],
-  declarations: [RequestOtpComponent, VerifyOtpComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    IonicModule,
+    ChangePasswordPageRoutingModule,
+    SharedModule,
+    ModalsModule,
+  ],
+  declarations: [RequestOtpComponent, VerifyOtpComponent, SetPasswordComponent],
 })
 export class ChangePasswordPageModule {}

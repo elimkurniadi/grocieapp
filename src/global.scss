@@ -40,7 +40,7 @@ ion-input.default-theme {
     padding-left: 16px;
   }
   .native-input::placeholder {
-    color: #d7dde0;
+    color: #a6a6a6;
   }
 }
 
@@ -50,4 +50,12 @@ ion-input.default-theme {
 
 .font-sm {
   font-size: 11px;
+}
+
+.modal-info .modal-wrapper {
+  height: 32%;
+  width: 80%;
+  position: absolute;
+  display: block;
+  border-radius: 0.5em;
 }
