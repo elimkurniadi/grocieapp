@@ -1,0 +1,8 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button *ngFor="let menu of menus" [tab]="menu.route">
+      <ion-icon [name]="menu.icon"></ion-icon>
+      <ion-label>{{menu.label}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

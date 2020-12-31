@@ -14,5 +14,16 @@
   "NEW_PASSWORD": "Password Baru",
   "VERIFY_NEW_PASSWORD": "Konfirmasi Password Baru",
   "CHANGE_PASSWORD_SUCCESS_TITLE": "Ubah Password Berhasil",
-  "CHANGE_PASSWORD_SUCCESS_MESSAGE": "Password Anda telah diubah. Sekarang login dengan password baru Anda"
+  "CHANGE_PASSWORD_SUCCESS_MESSAGE": "Password Anda telah diubah. Sekarang login dengan password baru Anda",
+  "STORE_LOCATION": "Lokasi Toko",
+  "SEE_ALL": "Lihat Semua",
+  "FRESH_GROCERIES": "Bahan Makanan Segar",
+  "FRESH_GROCERIES_DESC": "Makanan rumahan adalah yang terbaik. isi makanan rumahan Anda dengan bahan makanan segar!",
+  "TODAYS_SPECIAL": "Spesial Hari ini",
+  "TODAYS_SPECIAL_DESC": "Semua yang Anda butuhkan untuk membuat hari ini sedikit istimewa ada di sini!",
+  "FEATURED_BRAND": "Merek Unggulan",
+  "FEATURED_BRAND_DESC": "Merek dicintai oleh semua orang",
+  "KLIKGO_ARTICLE": "Artikel KlikGo",
+  "KLIKGO_ARTICLE_DESC": "Diperbarui dengan berita terbaru dan terhangat!",
+  "READ_MORE": "Selanjutnya"
 }

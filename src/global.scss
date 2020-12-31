@@ -59,3 +59,82 @@ ion-input.default-theme {
   display: block;
   border-radius: 0.5em;
 }
+
+.truncate {
+  /* width: 250px; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+ion-searchbar.custom-search {
+  padding-bottom: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  .searchbar-input-container input {
+    padding-left: 15px !important;
+    border: 1px solid lightgrey !important;
+    border-radius: 5px;
+    background-color: white;
+  }
+
+  ion-icon {
+    right: 16px !important;
+    left: auto !important;
+  }
+}
+
+.ion-no-padding-bottom {
+  padding-bottom: 0;
+}
+
+ion-slide.full-width {
+  width: 100% !important;
+}
+
+.rounded {
+  border-radius: 50%;
+}
+
+.swiper-pagination {
+  .swiper-pagination-bullet {
+    background-color: white !important;
+  }
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.section-desc {
+  font-size: 14px;
+}
+
+.section-see-all {
+  font-size: 12px;
+}
+
+img.full-width {
+  object-fit: fill;
+}
+
+ion-card.ion-no-border {
+  box-shadow: none !important;
+}
+
+.slide-product .swiper-slide:nth-child(1) {
+  margin-left: 20px;
+}
+/* .slide-product .swiper-slide:nth-child(1) {
+  padding-left: 0;
+}
+.slide-product .swiper-slide:nth-last-child(1) {
+  padding-right: 0;
+}
+
+.slide-product .swiper-wrapper {
+  margin: 0 auto;
+  width: 86%;
+} */
