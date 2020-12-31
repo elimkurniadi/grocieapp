@@ -12,7 +12,7 @@ export class TranslateService {
   public lang;
 
   constructor() {
-    this.lang = sessionStorage.getItem(this.prefix) || 'id';
+    this.lang = sessionStorage.getItem(this.prefix) || 'en';
     this.setLanguage(this.lang);
   }
 

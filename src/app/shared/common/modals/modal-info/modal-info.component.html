@@ -1,0 +1,24 @@
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-padding-top">
+      <ion-col class="ion-text-center ion-padding-horizontal"
+        ><ion-text class="modal-title">{{ title }}</ion-text></ion-col
+      >
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center ion-padding-horizontal ion-padding-top"
+        ><ion-text class="modal-message">{{ message }}</ion-text></ion-col
+      >
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col class="ion-padding-horizontal ion-padding-bottom">
+      <ion-button expand="full" (click)="dismiss()">
+        {{ btnText }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

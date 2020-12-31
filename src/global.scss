@@ -12,14 +12,12 @@
 /* Core CSS required for Ionic components to work properly */
 
 @import '~@ionic/angular/css/core.css';
-
 /* Basic CSS for apps built with Ionic */
 
 @import '~@ionic/angular/css/normalize.css';
 @import '~@ionic/angular/css/structure.css';
 @import '~@ionic/angular/css/typography.css';
 @import '~@ionic/angular/css/display.css';
-
 /* Optional CSS utils that can be commented out */
 
 @import '~@ionic/angular/css/padding.css';
@@ -96,4 +94,20 @@
     border-bottom: 3px solid black;
     filter: opacity(0.5) !important;
   }
+
+.font-md {
+  font-size: 13px;
+}
+
+.font-sm {
+  font-size: 11px;
+}
+
+.modal-info .modal-wrapper {
+  height: 32%;
+  width: 80%;
+  position: absolute;
+  display: block;
+  border-radius: 0.5em;
+}
 }

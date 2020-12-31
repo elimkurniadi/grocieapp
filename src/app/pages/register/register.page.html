@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Register</ion-title>
+    <ion-title>{{'REGISTER' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,19 +12,19 @@
     <ion-row class="ion-justify-content-between">
       <ion-col size="12">
         <ion-row>
-          <ion-col size="5.5" class="ion-text-center stepper"> Step 1 </ion-col>
+          <ion-col size="5.5" class="ion-text-center stepper"> {{'STEP' | translate}} 1 </ion-col>
           <ion-col size="1"> &nbsp; </ion-col>
-          <ion-col size="5.5" class="ion-text-center stepper stepper-inactive"> Step 2 </ion-col>
+          <ion-col size="5.5" class="ion-text-center stepper stepper-inactive"> {{'STEP' | translate}} 2 </ion-col>
         </ion-row>
       </ion-col>
       <ion-col size="12" class="ion-no-padding">
         <form [formGroup]="fg">
           <ion-item lines="none" class="form-group">
-            <ion-label position="stacked">Name</ion-label>
+            <ion-label position="stacked">{{'NAME' | translate}}</ion-label>
             <ion-input
               class="default-theme"
               required
-              placeholder="Your Name"
+              placeholder="{{'NAME_PLACEHOLDER' | translate}}"
               type="text"
               formControlName="name"
             ></ion-input>
@@ -32,11 +32,11 @@
           </ion-item>
 
           <ion-item lines="none" class="form-group">
-            <ion-label position="stacked">Email</ion-label>
+            <ion-label position="stacked">{{'EMAIL_ADDRESS' | translate}}</ion-label>
             <ion-input
               class="default-theme"
               required
-              placeholder="Your E-mail Address"
+              placeholder="{{'YOUR_EMAIL_ADDRESS' | translate}}"
               type="email"
               formControlName="email"
             ></ion-input>
@@ -46,11 +46,11 @@
           </ion-item>
 
           <ion-item lines="none" class="form-group">
-            <ion-label position="stacked">Phone Number</ion-label>
+            <ion-label position="stacked">{{'PHONE_NUMBER' | translate}}</ion-label>
             <ion-input
               class="default-theme"
               required
-              placeholder="Your Phone Number"
+              placeholder="{{'PHONE_NUMBER_PLACEHOLDER' | translate}}"
               type="tel"
               formControlName="phone_number"
             ></ion-input>
@@ -61,36 +61,35 @@
           </ion-item>
 
           <ion-item lines="none" class="form-group">
-            <ion-label position="stacked">Gender</ion-label>
+            <ion-label position="stacked">{{'GENDER' | translate}}</ion-label>
             <fieldset class="radio-wrapper-inline">
               <div>
                 <input class="radio-input" type="radio" name="gender" [value]="'m'" formControlName="gender" />
-                <label class="radio-label">Male</label>
+                <label class="radio-label">{{'MALE' | translate}}</label>
                 <input class="radio-input" type="radio" name="gender" [value]="'f'" formControlName="gender" />
-                <label class="radio-label">Female</label>
+                <label class="radio-label">{{'FEMALE' | translate}}</label>
               </div>
             </fieldset>
             <small>{{fg.controls.gender.errors?.required?.message}}</small>
           </ion-item>
 
           <ion-item lines="none" class="form-group">
-            <ion-label position="stacked">Date of Birth</ion-label>
+            <ion-label position="stacked">{{'DOB' | translate}}</ion-label>
             <ion-datetime
               displayFormat="D MMMM YYYY"
               pickerFormat="D MMMM YYYY"
               [max]="currDate"
               formControlName="birthdate"
-              placeholder="Your Date of Birth"
             ></ion-datetime>
             <small>{{fg.controls.birthdate.errors?.required?.message}}</small>
           </ion-item>
 
           <ion-item lines="none" class="form-group">
-            <ion-label position="stacked">Password</ion-label>
+            <ion-label position="stacked">{{'PASSWORD' | translate}}</ion-label>
             <ion-input
               class="default-theme"
               required
-              placeholder="Your Password"
+              placeholder="{{'PASSWORD_PLACEHOLDER' | translate}}"
               type="password"
               formControlName="password"
             ></ion-input>
@@ -98,11 +97,11 @@
           </ion-item>
 
           <ion-item lines="none" class="form-group">
-            <ion-label position="stacked">Verify Password</ion-label>
+            <ion-label position="stacked">{{'VERIFY_PASSWORD' | translate}}</ion-label>
             <ion-input
               class="default-theme"
               required
-              placeholder="Your Password Confirm"
+              placeholder="{{'VERIFY_PASSWORD_PLACEHOLDER' | translate}}"
               type="password"
               formControlName="confirm_password"
             ></ion-input>
@@ -118,7 +117,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" (click)="next()" [disabled]="fg.invalid"> Next </ion-button>
+        <ion-button expand="block" (click)="next()" [disabled]="fg.invalid"> {{'NEXT' | translate}} </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

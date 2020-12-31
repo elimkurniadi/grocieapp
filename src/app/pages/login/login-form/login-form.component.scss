@@ -1,12 +1,20 @@
 .padding-form {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 
 .padding-forgot-pass {
-    padding-top: 10px
+  padding-top: 10px;
 }
 
 .login-redirect-text {
-    font-size: 12px;
-    font-weight: bold;
+  font-size: 12px;
+  font-weight: bold;
+  &:focus {
+    outline: 0;
+  }
+  .link {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
 }
