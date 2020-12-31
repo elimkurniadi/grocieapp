@@ -60,6 +60,7 @@
         "@types/jest": "^26.0.19",
         "@types/node": "^12.19.9",
         "codelyzer": "^6.0.0",
+        "husky": "^4.3.5",
         "istanbul-reports": "^3.0.0",
         "jest": "^26.6.3",
         "jest-createspyobj": "^1.2.2",
@@ -75,7 +76,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "ng lint && npm test",
+            "pre-commit": "ng lint",
             "pre-push": "ng build --aot true"
         }
     },
