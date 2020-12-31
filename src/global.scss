@@ -35,21 +35,65 @@
   height: 30%;
 }
 
-ion-input.default-theme {
-  border: 1px solid #d7dde0;
-  border-radius: 5px;
-  margin-top: 16px;
-  .native-input {
-    padding-left: 16px;
+.form-group {
+  ion-input.default-theme,
+  ion-textarea,
+  ion-select,
+  ion-datetime {
+    border: 1px solid #d7dde0;
+    border-radius: 5px;
+    margin-top: 16px;
+    .native-input {
+      padding-left: 16px;
+    }
+    .native-input::placeholder {
+      color: #d7dde0;
+    }
   }
-  .native-input::placeholder {
-    color: #d7dde0;
+
+  ion-textarea,
+  ion-select,
+  ion-datetime {
+    --padding-start: 16px;
+    --placeholder-color: #d7dde0;
+    font-size: 14px;
+
+    .native-textarea {
+      padding-left: 16px;
+      font-size: 16px;
+    }
+  }
+
+  .radio-wrapper-inline {
+    border: none;
+    width: 100%;
+    padding-left: 0;
+    margin-top: 0.5em;
+    div {
+      margin: auto;
+
+      .radio-label {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 4%;
+        padding-left: 10px;
+        font-size: 14px;
+      }
+      .radio-input {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+  small {
+    color: var(--ion-color-danger);
   }
 }
 
 .stepper {
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid var(--ion-color-primary);
   &-inactive {
+    border-bottom: 3px solid black;
     filter: opacity(0.5) !important;
   }
 }

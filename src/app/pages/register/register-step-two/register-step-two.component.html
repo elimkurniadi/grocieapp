@@ -12,16 +12,115 @@
     <ion-row class="ion-justify-content-between">
       <ion-col size="12">
         <ion-row>
-          <ion-col size="5.5" class="ion-text-center stepper"> Step 2 </ion-col>
+          <ion-col size="5.5" class="ion-text-center stepper"> Step 1 </ion-col>
           <ion-col size="1"> &nbsp; </ion-col>
           <ion-col size="5.5" class="ion-text-center stepper"> Step 2 </ion-col>
         </ion-row>
       </ion-col>
-      <ion-col size="12"> </ion-col>
+      <ion-col size="12">
+        <form [formGroup]="fg">
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">Delivery Address</ion-label>
+            <ion-input
+              class="default-theme"
+              required
+              placeholder="Pin Location"
+              type="text"
+              formControlName="delivery_address"
+            >
+            </ion-input>
+            <small>{{ fg.controls.delivery_address.errors?.required?.message }}</small>
+          </ion-item>
+
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">Address Detail</ion-label>
+            <ion-textarea
+              placeholder="Your Address Detail"
+              formControlName="delivery_address_detail"
+              rows="6"
+            ></ion-textarea>
+            <small>{{ fg.controls.delivery_address_detail.errors?.required?.message }}</small>
+          </ion-item>
+
+          <ion-row>
+            <ion-col size="6" class="ion-no-padding">
+              <ion-item lines="none" class="form-group">
+                <ion-label position="stacked">Province</ion-label>
+                <ion-select placeholder="Select Province" formControlName="province">
+                  <ion-select-option [value]="'1'">Provinsi</ion-select-option>
+                </ion-select>
+                <small>{{ fg.controls.province.errors?.required?.message }}</small>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6" class="ion-no-padding">
+              <ion-item lines="none" class="form-group">
+                <ion-label position="stacked">City</ion-label>
+                <ion-select placeholder="Select City" formControlName="city">
+                  <ion-select-option [value]="'1'">Kota</ion-select-option>
+                </ion-select>
+                <small>{{ fg.controls.city.errors?.required?.message }}</small>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="6" class="ion-no-padding">
+              <ion-item lines="none" class="form-group">
+                <ion-label position="stacked">District</ion-label>
+                <ion-select placeholder="Select District" formControlName="district">
+                  <ion-select-option [value]="'1'">Kecamatan</ion-select-option>
+                </ion-select>
+                <small>{{ fg.controls.district.errors?.required?.message }}</small>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6" class="ion-no-padding">
+              <ion-item lines="none" class="form-group">
+                <ion-label position="stacked">Postal Code</ion-label>
+                <ion-input
+                  class="default-theme"
+                  required
+                  placeholder="Your Postal Code"
+                  type="number"
+                  formControlName="postal_code"
+                ></ion-input>
+                <small
+                  >{{ fg.controls.postal_code.errors?.required?.message }}
+                  {{ fg.controls.postal_code.errors?.required?.message }}</small
+                >
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">Address Name</ion-label>
+            <ion-input
+              class="default-theme"
+              required
+              placeholder="Pin Location"
+              type="text"
+              formControlName="address_name"
+            >
+            </ion-input>
+            <small>{{ fg.controls.address_name.errors?.required?.message }}</small>
+          </ion-item>
+
+          <ion-item lines="none" class="form-group">
+            <ion-checkbox formControlName="tos" class="ion-margin-end"></ion-checkbox>
+            <ion-label>TOS</ion-label>
+            <small>{{ fg.controls.tos.errors?.requiredTrue?.message }}</small>
+          </ion-item>
+        </form>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
 
-<ion-footer>
-  <ion-button expand="block" shape="round" [routerLink]="['']"> Next </ion-button>
+<ion-footer class="ion-no-border ion-padding-horizontal">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="register()"> Next </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-footer>

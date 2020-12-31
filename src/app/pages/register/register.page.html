@@ -19,7 +19,7 @@
       </ion-col>
       <ion-col size="12" class="ion-no-padding">
         <form [formGroup]="fg">
-          <ion-item lines="none">
+          <ion-item lines="none" class="form-group">
             <ion-label position="stacked">Name</ion-label>
             <ion-input
               class="default-theme"
@@ -31,7 +31,7 @@
             <small>{{ fg.controls.name.errors?.required?.message }}</small>
           </ion-item>
 
-          <ion-item lines="none">
+          <ion-item lines="none" class="form-group">
             <ion-label position="stacked">Email</ion-label>
             <ion-input
               class="default-theme"
@@ -45,7 +45,7 @@
             </small>
           </ion-item>
 
-          <ion-item lines="none">
+          <ion-item lines="none" class="form-group">
             <ion-label position="stacked">Phone Number</ion-label>
             <ion-input
               class="default-theme"
@@ -60,31 +60,32 @@
             >
           </ion-item>
 
-          <ion-item lines="none">
+          <ion-item lines="none" class="form-group">
             <ion-label position="stacked">Gender</ion-label>
-            <ion-input
-              class="default-theme"
-              required
-              placeholder="Your Gender"
-              type="text"
-              formControlName="gender"
-            ></ion-input>
+            <fieldset class="radio-wrapper-inline">
+              <div>
+                <input class="radio-input" type="radio" name="gender" [value]="'m'" formControlName="gender" />
+                <label class="radio-label">Male</label>
+                <input class="radio-input" type="radio" name="gender" [value]="'f'" formControlName="gender" />
+                <label class="radio-label">Female</label>
+              </div>
+            </fieldset>
             <small>{{fg.controls.gender.errors?.required?.message}}</small>
           </ion-item>
 
-          <ion-item lines="none">
+          <ion-item lines="none" class="form-group">
             <ion-label position="stacked">Date of Birth</ion-label>
-            <ion-input
-              class="default-theme"
-              required
-              placeholder="Your Date of Birth"
-              type="text"
+            <ion-datetime
+              displayFormat="D MMMM YYYY"
+              pickerFormat="D MMMM YYYY"
+              [max]="currDate"
               formControlName="birthdate"
-            ></ion-input>
+              placeholder="Your Date of Birth"
+            ></ion-datetime>
             <small>{{fg.controls.birthdate.errors?.required?.message}}</small>
           </ion-item>
 
-          <ion-item lines="none">
+          <ion-item lines="none" class="form-group">
             <ion-label position="stacked">Password</ion-label>
             <ion-input
               class="default-theme"
@@ -96,7 +97,7 @@
             <small>{{fg.controls.password.errors?.required?.message}}</small>
           </ion-item>
 
-          <ion-item lines="none">
+          <ion-item lines="none" class="form-group">
             <ion-label position="stacked">Verify Password</ion-label>
             <ion-input
               class="default-theme"
@@ -113,6 +114,12 @@
   </ion-grid>
 </ion-content>
 
-<ion-footer class="ion-no-border">
-  <ion-button expand="block" (click)="next()" [disabled]="fg.invalid"> Next </ion-button>
+<ion-footer class="ion-no-border ion-padding-horizontal">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="next()" [disabled]="fg.invalid"> Next </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-footer>

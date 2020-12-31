@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
 
@@ -11,7 +12,7 @@ describe('RegisterStepTwoComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [RegisterStepTwoComponent],
-      imports: [IonicModule.forRoot(), RouterTestingModule],
+      imports: [IonicModule.forRoot(), RouterTestingModule, ReactiveFormsModule, FormsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RegisterStepTwoComponent);

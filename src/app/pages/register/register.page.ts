@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { RxValidatorService } from '@shared/services';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-register',
@@ -11,24 +12,25 @@ import { RxValidatorService } from '@shared/services';
 })
 export class RegisterPage implements OnInit, OnDestroy {
   fg: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router, private validatorSrv: RxValidatorService) {
+  currDate = moment(new Date()).format('YYYY-MM-DD');
+  constructor(private fb: FormBuilder, private router: Router, private validatorSrv: RxValidatorService) {}
+
+  ngOnInit() {
     this.initRegisterFormStepOne();
   }
-
-  ngOnInit() {}
 
   ngOnDestroy() {}
 
   initRegisterFormStepOne() {
     this.validatorSrv.validatorErrorMessage();
     this.fg = this.fb.group({
-      name: [null, [RxwebValidators.required()]],
-      email: [null, [RxwebValidators.required(), RxwebValidators.email()]],
-      phone_number: [null, [RxwebValidators.required(), RxwebValidators.numeric()]],
-      gender: [null, [RxwebValidators.required()]],
-      birthdate: [null, [RxwebValidators.required()]],
-      password: [null, [RxwebValidators.required()]],
-      confirm_password: [null, [RxwebValidators.required()]],
+      name: ['someone', [RxwebValidators.required()]],
+      email: ['someone@placeholder.com', [RxwebValidators.required(), RxwebValidators.email()]],
+      phone_number: ['081388355324', [RxwebValidators.required(), RxwebValidators.numeric()]],
+      gender: ['m', [RxwebValidators.required()]],
+      birthdate: [this.currDate, [RxwebValidators.required()]],
+      password: ['qwe123', [RxwebValidators.required()]],
+      confirm_password: ['qwe123', [RxwebValidators.required()]],
     });
   }
 
