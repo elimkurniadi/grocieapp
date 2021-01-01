@@ -5,13 +5,8 @@ import { AuthGuard } from '@shared/guards/auth.guard';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then((m) => m.HomePageModule),
-    // canActivate: [AuthGuard],
-  },
-  {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'register',
@@ -19,9 +14,14 @@ const routes: Routes = [
   },
   {
     path: 'change-password',
-    loadChildren: () => import('./pages/change-password/change-password.module').then( m => m.ChangePasswordPageModule)
+    loadChildren: () =>
+      import('./pages/change-password/change-password.module').then((m) => m.ChangePasswordPageModule),
   },
-
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then((m) => m.TabsPageModule),
+    // canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

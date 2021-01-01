@@ -10,7 +10,18 @@ import { AuthService, ExampleService, GlobalService } from '@shared/services';
 })
 export class HomePage implements OnInit {
   selectedLanguage: any = 'id';
-  ctr = 0;
+  banners = [
+    {
+      source: 'https://via.placeholder.com/360x203.png?text=Promotional+Banner',
+    },
+
+    {
+      source: 'https://via.placeholder.com/360x203.png?text=Promotional+Banner',
+    },
+    {
+      source: null,
+    },
+  ];
 
   constructor(
     private translate: TranslateService,
