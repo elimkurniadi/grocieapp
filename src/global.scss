@@ -169,7 +169,8 @@ ion-slide.full-width {
 }
 
 img.full-width {
-  object-fit: fill;
+  object-fit: cover;
+  width: 100%;
 }
 
 ion-card.ion-no-border {

@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/register/register.module').then((m) => m.RegisterPageModule),
   },
   {
     path: 'change-password',
@@ -21,6 +21,10 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then((m) => m.TabsPageModule),
     // canActivate: [AuthGuard],
+  },
+  {
+    path: 'product',
+    loadChildren: () => import('./pages/product/product.module').then((m) => m.ProductPageModule),
   },
 ];
 
