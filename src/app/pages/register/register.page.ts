@@ -26,9 +26,9 @@ export class RegisterPage implements OnInit, OnDestroy {
     this.fg = this.fb.group({
       name: ['someone', [RxwebValidators.required()]],
       email: ['someone@placeholder.com', [RxwebValidators.required(), RxwebValidators.email()]],
-      phone_number: ['081388355324', [RxwebValidators.required(), RxwebValidators.numeric()]],
+      phone: ['081388355324', [RxwebValidators.required(), RxwebValidators.numeric()]],
       gender: ['m', [RxwebValidators.required()]],
-      birthdate: [this.currDate, [RxwebValidators.required()]],
+      birth_date: [this.currDate, [RxwebValidators.required()]],
       password: ['qwe123', [RxwebValidators.required()]],
       confirm_password: ['qwe123', [RxwebValidators.required()]],
     });

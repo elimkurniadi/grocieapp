@@ -62,7 +62,7 @@ export class ApiService {
     headers?: any,
     apiTimeout = 5000
   ): Observable<any> {
-    return this.http.getData(path, pagination, ordering, filter, headers).pipe(
+    return this.http.getData(environment.api_url + path, pagination, ordering, filter, headers).pipe(
       map((res: Response) => {
         return res;
       }),
@@ -90,7 +90,7 @@ export class ApiService {
     if (multipart) {
       this.http = this.angularHttp;
     }
-    return this.http.postData(path, model, httpHeaders, multipart).pipe(
+    return this.http.postData(environment.api_url + path, model, httpHeaders, multipart).pipe(
       catchError((err) => {
         return throwError(err);
       }),
@@ -112,7 +112,7 @@ export class ApiService {
     if (multipart) {
       this.http = this.angularHttp;
     }
-    return this.http.patchData(path, model, httpHeaders, multipart).pipe(
+    return this.http.patchData(environment.api_url + path, model, httpHeaders, multipart).pipe(
       catchError((err) => {
         return throwError(err);
       }),
@@ -127,7 +127,7 @@ export class ApiService {
     if (multipart) {
       this.http = this.angularHttp;
     }
-    return this.http.putData(path, model, httpHeaders, multipart).pipe(
+    return this.http.putData(environment.api_url + path, model, httpHeaders, multipart).pipe(
       catchError((err) => {
         return throwError(err);
       }),
@@ -139,7 +139,7 @@ export class ApiService {
   }
 
   deleteData(path: string, model: object = {}, httpHeaders?: any, apiTimeout = 5000): Observable<any> {
-    return this.http.deleteData(path, model, httpHeaders).pipe(
+    return this.http.deleteData(environment.api_url + path, model, httpHeaders).pipe(
       catchError((err) => {
         return throwError(err);
       }),

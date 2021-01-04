@@ -52,11 +52,10 @@
               required
               placeholder="{{'PHONE_NUMBER_PLACEHOLDER' | translate}}"
               type="tel"
-              formControlName="phone_number"
+              formControlName="phone"
             ></ion-input>
             <small
-              >{{fg.controls.phone_number.errors?.required?.message}}
-              {{fg.controls.phone_number.errors?.numeric?.message}}</small
+              >{{fg.controls.phone.errors?.required?.message}} {{fg.controls.phone.errors?.numeric?.message}}</small
             >
           </ion-item>
 
@@ -79,9 +78,9 @@
               displayFormat="D MMMM YYYY"
               pickerFormat="D MMMM YYYY"
               [max]="currDate"
-              formControlName="birthdate"
+              formControlName="birth_date"
             ></ion-datetime>
-            <small>{{fg.controls.birthdate.errors?.required?.message}}</small>
+            <small>{{fg.controls.birth_date.errors?.required?.message}}</small>
           </ion-item>
 
           <ion-item lines="none" class="form-group">

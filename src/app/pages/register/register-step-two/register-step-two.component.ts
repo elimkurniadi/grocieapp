@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { RxValidatorService } from '@shared/services';
+import { UserService } from '@shared/services/modules/user.service';
 
 @Component({
   selector: 'app-register-step-two',
@@ -16,7 +17,8 @@ export class RegisterStepTwoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private validatorSrv: RxValidatorService
+    private validatorSrv: RxValidatorService,
+    private userSrv: UserService
   ) {
     this.observeQueryParams();
     this.initRegisterFormStepTwo();
@@ -46,6 +48,9 @@ export class RegisterStepTwoComponent implements OnInit {
   register() {
     if (this.fg.valid) {
       const value = this.combineFormValues();
+      this.userSrv.register(value).then((res) => {
+        this.router.navigateByUrl('/home', { replaceUrl: true });
+      });
       this.router.navigate(['/']);
     }
   }
