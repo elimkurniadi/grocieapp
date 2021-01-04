@@ -22,14 +22,20 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         if (event instanceof HttpResponse) {
           this.gs.log('event--->>>', event);
         }
+        this.endRequest();
         return event;
       }),
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           this.router.navigate(['/login']);
         }
+        this.endRequest();
         return throwError(error);
       })
     );
+  }
+
+  endRequest() {
+    this.gs.unsubscribeSubscriptions();
   }
 }

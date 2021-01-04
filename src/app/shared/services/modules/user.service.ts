@@ -12,9 +12,9 @@ export class UserService {
   register(data): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.postData('profile/register', data);
+      this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
-          this.gs.pushSubscription(subscription);
           res.code === 201 ? resolve(res) : reject('!201');
         },
         (err) => {
