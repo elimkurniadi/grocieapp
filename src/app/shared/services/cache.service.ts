@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
   providedIn: 'root',
 })
 export class CacheService {
-  private tokenKey = 'ionic5-token';
+  private tokenKey = 'klikgo-mobile-token';
   currentUser: any;
 
   constructor(private storage: Storage) {}

@@ -20,9 +20,10 @@ export class RxValidatorService {
         url: this.translateSrv.get('VALIDATOR_URL'),
         email: this.translateSrv.get('VALIDATOR_EMAIL'),
         phonenumber: this.translateSrv.get('VALIDATOR_PHONE'),
+        compare: this.translateSrv.get('VALIDATOR_PASSWORD_COMPARE'),
       },
       reactiveForm: {
-        errorMessageBindingStrategy: ErrorMessageBindingStrategy.OnDirtyOrTouched,
+        errorMessageBindingStrategy: ErrorMessageBindingStrategy.OnDirty,
       },
     });
   }

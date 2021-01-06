@@ -23,13 +23,14 @@
             <ion-label position="stacked">{{ 'DELIVERY_ADDRESS' | translate }}</ion-label>
             <ion-input
               class="default-theme"
-              required
               placeholder="{{ 'PIN_LOCATION' | translate }}"
               type="text"
               formControlName="delivery_address"
             >
             </ion-input>
-            <small>{{ fg.controls.delivery_address.errors?.required?.message }}</small>
+            <small *ngIf="fg.controls.delivery_address.dirty">{{
+              fg.controls.delivery_address.errors?.required?.message
+            }}</small>
           </ion-item>
 
           <ion-item lines="none" class="form-group">
@@ -39,7 +40,18 @@
               formControlName="delivery_address_detail"
               rows="6"
             ></ion-textarea>
-            <small>{{ fg.controls.delivery_address_detail.errors?.required?.message }}</small>
+            <ion-row class="ion-no-padding">
+              <ion-col size="6" class="ion-no-padding">
+                <small *ngIf="fg.controls.delivery_address_detail.dirty"
+                  >{{ fg.controls.delivery_address_detail.errors?.required?.message }}
+                  {{ fg.controls.delivery_address_detail.errors?.minLength?.message }}
+                  {{ fg.controls.delivery_address_detail.errors?.maxLength?.message }}</small
+                >
+              </ion-col>
+              <ion-col size="6" class="ion-no-padding ion-text-right">
+                <small class="count">{{ currentChar }} / 100</small>
+              </ion-col>
+            </ion-row>
           </ion-item>
 
           <ion-row>
@@ -49,7 +61,7 @@
                 <ion-select placeholder="{{ 'PROVINCE_PLACEHOLDER' | translate }}" formControlName="province">
                   <ion-select-option [value]="'1'">Provinsi</ion-select-option>
                 </ion-select>
-                <small>{{ fg.controls.province.errors?.required?.message }}</small>
+                <small *ngIf="fg.controls.province.touched">{{ fg.controls.province.errors?.required?.message }}</small>
               </ion-item>
             </ion-col>
             <ion-col size="6" class="ion-no-padding">
@@ -58,7 +70,7 @@
                 <ion-select placeholder="{{ 'CITY_PLACEHOLDER' | translate }}" formControlName="city">
                   <ion-select-option [value]="'1'">Kota</ion-select-option>
                 </ion-select>
-                <small>{{ fg.controls.city.errors?.required?.message }}</small>
+                <small *ngIf="fg.controls.city.touched">{{ fg.controls.city.errors?.required?.message }}</small>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -70,7 +82,7 @@
                 <ion-select placeholder="{{ 'DISTRICT_PLACEHOLDER' | translate }}" formControlName="district">
                   <ion-select-option [value]="'1'">Kecamatan</ion-select-option>
                 </ion-select>
-                <small>{{ fg.controls.district.errors?.required?.message }}</small>
+                <small *ngIf="fg.controls.district.touched">{{ fg.controls.district.errors?.required?.message }}</small>
               </ion-item>
             </ion-col>
             <ion-col size="6" class="ion-no-padding">
@@ -78,15 +90,13 @@
                 <ion-label position="stacked">{{ 'POSTAL_CODE' | translate }}</ion-label>
                 <ion-input
                   class="default-theme"
-                  required
                   placeholder="{{ 'POSTAL_CODE_PLACEHOLDER' | translate }}"
                   type="number"
                   formControlName="postal_code"
                 ></ion-input>
-                <small
-                  >{{ fg.controls.postal_code.errors?.required?.message }}
-                  {{ fg.controls.postal_code.errors?.required?.message }}</small
-                >
+                <small *ngIf="fg.controls.postal_code.dirty">{{
+                  fg.controls.postal_code.errors?.required?.message
+                }}</small>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -95,13 +105,14 @@
             <ion-label position="stacked">{{ 'ADDRESS_NAME' | translate }}</ion-label>
             <ion-input
               class="default-theme"
-              required
               placeholder="{{ 'ADDRESS_NAME_PLACEHOLDER' | translate }}"
               type="text"
               formControlName="address_name"
             >
             </ion-input>
-            <small>{{ fg.controls.address_name.errors?.required?.message }}</small>
+            <small *ngIf="fg.controls.address_name.dirty">{{
+              fg.controls.address_name.errors?.required?.message
+            }}</small>
           </ion-item>
 
           <ion-item lines="none" class="form-group">

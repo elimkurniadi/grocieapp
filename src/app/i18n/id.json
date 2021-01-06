@@ -38,7 +38,7 @@
   "DOB": "Tanggal Lahir",
   "PASSWORD": "Kata Sandi",
   "VERIFY_PASSWORD": "Verifikasi Kata Sandi",
-  "VERIGY_PASSWORD_PLACEHOLDER": "Verifikasi Kata Sandi Anda",
+  "VERIFY_PASSWORD_PLACEHOLDER": "Verifikasi Kata Sandi Anda",
   "NEXT": "Selanjutnya",
   "DELIVERY_ADDRESS": "Alamat Pengiriman",
   "PIN_LOCATION": "Pilih Titik Lokasi",
@@ -61,5 +61,8 @@
   "VALIDATOR_NUM": "Hanya menerima numerik",
   "VALIDATOR_URL": "Hanya menerima URL (cth: www.example.com)",
   "VALIDATOR_EMAIL": "Silahkan input format email yang benar (cth: someone@example.com)",
-  "VALIDATOR_PHONE": "Silahkan input format nomot telepon yang benar (cth: 08123456789)"
+  "VALIDATOR_PHONE": "Silahkan input format nomot telepon yang benar (cth: 08123456789)",
+  "VALIDATOR_PASSWORD_COMPARE": "Password tidak sama",
+  "VALIDATOR_MIN": "Minimal karakter adalah",
+  "VALIDATOR_MAX": "Maksimal karakter adalah"
 }
