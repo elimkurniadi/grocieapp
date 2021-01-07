@@ -32,7 +32,7 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getData();
+    // this.getData();
   }
 
   getData() {

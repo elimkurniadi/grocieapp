@@ -77,6 +77,7 @@
               pickerFormat="D MMMM YYYY"
               [max]="currDate"
               formControlName="birth_date"
+              (ionChange)="onDateSelect($event.detail.value)"
             ></ion-datetime>
             <small *ngIf="fg.controls.birth_date.dirty">{{fg.controls.birth_date.errors?.required?.message}}</small>
           </ion-item>
@@ -89,7 +90,10 @@
               type="password"
               formControlName="password"
             ></ion-input>
-            <small *ngIf="fg.controls.password.dirty">{{fg.controls.password.errors?.required?.message}}</small>
+            <small *ngIf="fg.controls.password.dirty"
+              >{{fg.controls.password.errors?.required?.message}}
+              {{fg.controls.password.errors?.minLength?.message}}</small
+            >
           </ion-item>
 
           <ion-item lines="none" class="form-group">

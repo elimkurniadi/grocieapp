@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { RxValidatorService } from '@shared/services';
+import { UserService } from '@shared/services/modules/user.service';
+import { ToastService } from '@shared/services/toast.service';
 import * as moment from 'moment';
 
 @Component({
@@ -18,7 +20,9 @@ export class RegisterPage implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private validatorSrv: RxValidatorService,
-    private translateSrv: TranslateService
+    private translateSrv: TranslateService,
+    private userSrv: UserService,
+    private toastSrv: ToastService
   ) {
     this.initRegisterFormStepOne();
   }
@@ -43,14 +47,37 @@ export class RegisterPage implements OnInit, OnDestroy {
       ],
       gender: ['m', [RxwebValidators.required()]],
       birth_date: [this.currDate, [RxwebValidators.required()]],
-      password: [null, [RxwebValidators.required()]],
+      password: [
+        null,
+        [
+          RxwebValidators.required(),
+          RxwebValidators.minLength({ value: 5, message: `${this.translateSrv.get('VALIDATOR_MIN')} 5` }),
+        ],
+      ],
       confirm_password: [null, [RxwebValidators.required(), RxwebValidators.compare({ fieldName: 'password' })]],
     });
   }
 
+  onDateSelect(event) {
+    const formatted = moment(event).format('YYYY-MM-DD');
+    this.fg.controls.birth_date.patchValue(formatted);
+  }
+
   next() {
     if (this.fg.valid) {
-      this.router.navigate(['/register/step-two'], { queryParams: { prefix: JSON.stringify(this.fg.value) } });
+      this.userSrv
+        .checkEmailPhoneAvailability(this.fg.value.email, this.fg.value.phone)
+        .then(() => {
+          this.router.navigate(['/register/step-two'], { queryParams: { prefix: JSON.stringify(this.fg.value) } });
+        })
+        .catch(() => {
+          const controls = this.fg.controls;
+          controls.phone.reset();
+          controls.email.reset();
+          controls.phone.markAsDirty();
+          controls.email.markAsDirty();
+          this.toastSrv.show(this.translateSrv.get('PHONE_EMAIL_TAKEN'));
+        });
     }
   }
 }
