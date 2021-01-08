@@ -7,6 +7,7 @@ import { ModalOtpComponent } from '@shared/common/otp/modal-otp/modal-otp.compon
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { GlobalService, RxValidatorService } from '@shared/services';
 import { AlertService } from '@shared/services/alert.service';
+import { AddressService } from '@shared/services/modules/address.service';
 import { UserService } from '@shared/services/modules/user.service';
 
 @Component({
@@ -18,6 +19,9 @@ export class RegisterStepTwoComponent implements OnInit {
   prefixFormValue: any = null;
   fg: FormGroup;
   currentChar = 0;
+  provinceList = [];
+  cityList = [];
+  districtList = [];
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -27,7 +31,8 @@ export class RegisterStepTwoComponent implements OnInit {
     private translateSrv: TranslateService,
     private gs: GlobalService,
     private alertSrv: AlertService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private addressSrv: AddressService
   ) {
     this.observeQueryParams();
     this.initRegisterFormStepTwo();
@@ -53,14 +58,15 @@ export class RegisterStepTwoComponent implements OnInit {
           RxwebValidators.maxLength({ value: 100, message: `${this.translateSrv.get('VALIDATOR_MAX')} 100` }),
         ],
       ],
-      provinsi_id: [null, [RxwebValidators.required()]],
-      kabupaten_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
-      kecamatan_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
+      province_id: [null, [RxwebValidators.required()]],
+      city_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
+      district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       postal_code: [null, [RxwebValidators.required(), RxwebValidators.numeric()]],
       address_name: [null, [RxwebValidators.required()]],
       tos: [false, RxwebValidators.requiredTrue()],
     });
     this.countCurrentChar();
+    this.fetchProvinces();
   }
 
   register() {
@@ -82,7 +88,6 @@ export class RegisterStepTwoComponent implements OnInit {
 
   countCurrentChar() {
     const subscription = this.fg.controls.address.valueChanges;
-    this.gs.pushSubscription(subscription);
     subscription.subscribe((res) => {
       this.currentChar = this.gs.countChar(res);
     });
@@ -114,24 +119,39 @@ export class RegisterStepTwoComponent implements OnInit {
     return await modal.present();
   }
 
-  onProvinceSelect(event) {
-    console.log('event: ', event);
-    const controls = this.fg.controls;
-    controls.kabupaten_id.setValue(null);
-    controls.kabupaten_id.enable();
-    controls.kecamatan_id.setValue(null);
-    controls.kecamatan_id.disable();
+  fetchProvinces() {
+    this.addressSrv.getProvinces().then((res) => {
+      this.provinceList = res;
+    });
+  }
 
-    // FETCH CITY LIST
+  fetchCities(provinceId) {
+    this.addressSrv.getCities(provinceId).then((res) => {
+      this.cityList = res;
+    });
+  }
+
+  fetchDistricts(cityId) {
+    this.addressSrv.getDistricts(cityId).then((res) => {
+      this.districtList = res;
+    });
+  }
+
+  onProvinceSelect(event) {
+    const controls = this.fg.controls;
+    controls.city_id.setValue(null);
+    controls.city_id.enable();
+    controls.district_id.setValue(null);
+    controls.district_id.disable();
+    this.fetchCities(event);
   }
 
   onCitySelect(event) {
     const controls = this.fg.controls;
     if (event) {
-      controls.kecamatan_id.setValue(null);
-      controls.kecamatan_id.enable();
-
-      // FETCH DISTRICT LIST
+      controls.district_id.setValue(null);
+      controls.district_id.enable();
+      this.fetchDistricts(event);
     }
   }
 }

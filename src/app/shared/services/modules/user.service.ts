@@ -15,15 +15,11 @@ export class UserService {
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
-          if (res.code === 201) {
-            this.authSrv.loginByToken(res.response);
-            resolve(res);
-          } else {
-            reject('!201');
-          }
+          this.authSrv.loginByToken(res.response);
+          resolve(res);
         },
-        () => {
-          reject('!201');
+        (err) => {
+          reject(err);
         }
       );
     });
@@ -35,10 +31,10 @@ export class UserService {
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
-          res.code === 200 ? resolve(res) : reject('!200');
+          resolve(res);
         },
-        () => {
-          reject('!200');
+        (err) => {
+          reject(err);
         }
       );
     });

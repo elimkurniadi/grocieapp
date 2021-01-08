@@ -51,14 +51,15 @@
                 <ion-label position="stacked">{{ 'PROVINCE' | translate }}</ion-label>
                 <ion-select
                   placeholder="{{ 'PROVINCE_PLACEHOLDER' | translate }}"
-                  formControlName="provinsi_id"
+                  formControlName="province_id"
                   (ionChange)="onProvinceSelect($event?.detail?.value)"
                 >
-                  <ion-select-option [value]="'1'">Provinsi</ion-select-option>
-                  <ion-select-option [value]="'2'">Provinsi 2</ion-select-option>
+                  <ion-select-option *ngFor="let province of provinceList" [value]="province?.province_id">{{
+                    province?.name | titlecase
+                  }}</ion-select-option>
                 </ion-select>
-                <small *ngIf="fg.controls.provinsi_id.touched">{{
-                  fg.controls.provinsi_id.errors?.required?.message
+                <small *ngIf="fg.controls.province_id.touched">{{
+                  fg.controls.province_id.errors?.required?.message
                 }}</small>
               </ion-item>
             </ion-col>
@@ -67,15 +68,14 @@
                 <ion-label position="stacked">{{ 'CITY' | translate }}</ion-label>
                 <ion-select
                   placeholder="{{ 'CITY_PLACEHOLDER' | translate }}"
-                  formControlName="kabupaten_id"
+                  formControlName="city_id"
                   (ionChange)="onCitySelect($event?.detail?.value)"
                 >
-                  <ion-select-option [value]="'1'">Kota</ion-select-option>
-                  <ion-select-option [value]="'2'">Kota 2</ion-select-option>
+                  <ion-select-option *ngFor="let city of cityList" [value]="city?.city_id">{{
+                    city?.name | titlecase
+                  }}</ion-select-option>
                 </ion-select>
-                <small *ngIf="fg.controls.kabupaten_id.touched">{{
-                  fg.controls.kabupaten_id.errors?.required?.message
-                }}</small>
+                <small *ngIf="fg.controls.city_id.touched">{{ fg.controls.city_id.errors?.required?.message }}</small>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -84,12 +84,13 @@
             <ion-col size="6" class="ion-no-padding">
               <ion-item lines="none" class="form-group">
                 <ion-label position="stacked">{{ 'DISTRICT' | translate }}</ion-label>
-                <ion-select placeholder="{{ 'DISTRICT_PLACEHOLDER' | translate }}" formControlName="kecamatan_id">
-                  <ion-select-option [value]="'1'">Kecamatan</ion-select-option>
-                  <ion-select-option [value]="'2'">Kecamatan 2</ion-select-option>
+                <ion-select placeholder="{{ 'DISTRICT_PLACEHOLDER' | translate }}" formControlName="district_id">
+                  <ion-select-option *ngFor="let district of districtList" [value]="district?.district_id">{{
+                    district?.name | titlecase
+                  }}</ion-select-option>
                 </ion-select>
-                <small *ngIf="fg.controls.kecamatan_id.touched">{{
-                  fg.controls.kecamatan_id.errors?.required?.message
+                <small *ngIf="fg.controls.district_id.touched">{{
+                  fg.controls.district_id.errors?.required?.message
                 }}</small>
               </ion-item>
             </ion-col>

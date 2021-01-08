@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './core/api.service';
-import { GlobalService } from './global.service';
+import { GlobalService } from '..';
+import { ApiService } from '../core/api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +14,10 @@ export class AddressService {
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
-          res.code === 200 ? resolve(res.response) : reject('!200');
+          resolve(res.response);
         },
-        () => {
-          reject('!200');
+        (err) => {
+          reject(err);
         }
       );
     });
@@ -25,14 +25,14 @@ export class AddressService {
 
   getCities(provinceId): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData('address/city', null, null, { province_id: provinceId });
+      const subscription = this.api.getData(`address/city/${provinceId}`);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
-          res.code === 200 ? resolve(res.response) : reject('!200');
+          resolve(res.response);
         },
-        () => {
-          reject('!200');
+        (err) => {
+          reject(err);
         }
       );
     });
@@ -40,14 +40,14 @@ export class AddressService {
 
   getDistricts(cityId): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData('address/district', null, null, { city_id: cityId });
+      const subscription = this.api.getData(`address/district/${cityId}`);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
-          res.code === 200 ? resolve(res.response) : reject('!200');
+          resolve(res.response);
         },
-        () => {
-          reject('!200');
+        (err) => {
+          reject(err);
         }
       );
     });
