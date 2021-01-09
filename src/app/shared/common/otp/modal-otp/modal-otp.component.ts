@@ -17,7 +17,7 @@ import { ModalSuccessComponent } from '../modal-success/modal-success.component'
 export class ModalOtpComponent implements OnInit {
   otpConfig = {
     allowNumbersOnly: true,
-    length: 4,
+    length: 6,
     isPasswordInput: false,
     disableAutoFocus: false,
     placeholder: '',
@@ -53,7 +53,6 @@ export class ModalOtpComponent implements OnInit {
     this.gs.pushSubscription(observer);
     this.setBanOtp();
     observer.subscribe((res) => {
-      console.log('res: ', res);
       res === 0 ? (this.countdown = 0) : (this.countdown = res);
     });
   }
@@ -69,7 +68,6 @@ export class ModalOtpComponent implements OnInit {
   }
 
   verifyOtp() {
-    console.log('otp', this.otpValue);
     // POST VERIFY EMAIL IF SUCCESS  OPEN MODAL SUCCESS
     this.userSrv
       .verifyEmail(this.otpValue)
