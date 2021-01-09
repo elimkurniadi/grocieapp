@@ -4,6 +4,8 @@ import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { GlobalService } from '@shared/services';
 import { AlertService } from '@shared/services/alert.service';
 import { OtpService } from '@shared/services/modules/otp.service';
+import { UserService } from '@shared/services/modules/user.service';
+import { ToastService } from '@shared/services/toast.service';
 import * as moment from 'moment';
 import { ModalSuccessComponent } from '../modal-success/modal-success.component';
 
@@ -31,7 +33,9 @@ export class ModalOtpComponent implements OnInit {
     private alertSrv: AlertService,
     private translateSrv: TranslateService,
     private gs: GlobalService,
-    private otpSrv: OtpService
+    private otpSrv: OtpService,
+    private userSrv: UserService,
+    private toastSrv: ToastService
   ) {}
 
   ngOnInit() {}
@@ -67,7 +71,14 @@ export class ModalOtpComponent implements OnInit {
   verifyOtp() {
     console.log('otp', this.otpValue);
     // POST VERIFY EMAIL IF SUCCESS  OPEN MODAL SUCCESS
-    this.showSuccessOtpModal();
+    this.userSrv
+      .verifyEmail(this.otpValue)
+      .then(() => {
+        this.showSuccessOtpModal();
+      })
+      .catch(() => {
+        this.toastSrv.show(`${this.translateSrv.get('OTP_FAILED')}`);
+      });
   }
 
   onOtpChange(event) {

@@ -76,5 +76,6 @@
   "RESEND_OTP": "Kirim ulang kode OTP ke email",
   "EMAIL_OTP_SUCCESS": "Verifikasi email berhasil",
   "BACK_HOME": "Kembali ke Beranda",
-  "SUCCESS": "Berhasil"
+  "SUCCESS": "Berhasil",
+  "OTP_FAILED": "Verifikasi gagal, kode OTP tidak valid"
 }

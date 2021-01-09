@@ -58,4 +58,22 @@ export class UserService {
       );
     });
   }
+
+  verifyEmail(otp): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const data = {
+        token: otp,
+      };
+      const subscription = this.api.postData('authentication/verify_email', data);
+      subscription.subscribe(
+        (res: any) => {
+          res.code === 200 && res.response ? resolve(true) : reject(false);
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }
