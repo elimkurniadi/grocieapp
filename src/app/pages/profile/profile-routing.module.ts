@@ -6,8 +6,12 @@ import { ProfilePage } from './profile.page';
 const routes: Routes = [
   {
     path: '',
-    component: ProfilePage
-  }
+    component: ProfilePage,
+  },
+  {
+    path: 'edit',
+    loadChildren: () => import('../profile/edit-profile/edit-profile.module').then((m) => m.EditProfilePageModule),
+  },
 ];
 
 @NgModule({

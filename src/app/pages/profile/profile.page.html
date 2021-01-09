@@ -28,9 +28,9 @@
     <ion-row class="ion-margin-vertical">
       <ion-col size="12">
         <ion-list>
-          <ion-item *ngFor="let menu of menuList">
+          <ion-item *ngFor="let menu of menuList" (click)="onMenuClick(menu)">
             <ion-label>{{menu?.title | titlecase}}</ion-label>
-            <ng-container *ngIf="menu?.route then chevronComp; else langComp"></ng-container>
+            <ng-container *ngIf="menu?.route || menu?.url then chevronComp; else langComp"></ng-container>
             <ng-template #chevronComp>
               <ion-icon name="chevron-forward-outline" color="dark"></ion-icon>
             </ng-template>
