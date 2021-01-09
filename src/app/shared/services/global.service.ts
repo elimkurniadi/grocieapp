@@ -37,4 +37,11 @@ export class GlobalService {
       }
     });
   }
+
+  countChar(value) {
+    let char = '';
+    char = value;
+    const charLength = char ? char.length : 0;
+    return charLength;
+  }
 }
