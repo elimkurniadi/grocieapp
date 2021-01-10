@@ -22,7 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'notification',
-        loadChildren: () => import('../pages/home/home.module').then((m) => m.HomePageModule),
+        loadChildren: () => import('../pages/notification/notification.module').then((m) => m.NotificationPageModule),
       },
       {
         path: 'profile',
