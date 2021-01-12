@@ -61,5 +61,6 @@
   "VALIDATOR_NUM": "Only numeric are allowed",
   "VALIDATOR_URL": "Only URL are allowed (ex: www.example.com)",
   "VALIDATOR_EMAIL": "Please input correct email format (ex: someone@example.com)",
-  "VALIDATOR_PHONE": "Please input correct phone number format (ex: 08123456789)"
+  "VALIDATOR_PHONE": "Please input correct phone number format (ex: 08123456789)",
+  "NOTIFICATION": "Notification"
 }

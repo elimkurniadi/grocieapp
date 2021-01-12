@@ -61,5 +61,6 @@
   "VALIDATOR_NUM": "Hanya menerima numerik",
   "VALIDATOR_URL": "Hanya menerima URL (cth: www.example.com)",
   "VALIDATOR_EMAIL": "Silahkan input format email yang benar (cth: someone@example.com)",
-  "VALIDATOR_PHONE": "Silahkan input format nomot telepon yang benar (cth: 08123456789)"
+  "VALIDATOR_PHONE": "Silahkan input format nomot telepon yang benar (cth: 08123456789)",
+  "NOTIFICATION": "Notifikasi"
 }
