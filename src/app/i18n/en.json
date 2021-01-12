@@ -62,6 +62,7 @@
   "VALIDATOR_URL": "Only URL are allowed (ex: www.example.com)",
   "VALIDATOR_EMAIL": "Please input correct email format (ex: someone@example.com)",
   "VALIDATOR_PHONE": "Please input correct phone number format (ex: 08123456789)",
+  "NOTIFICATION": "Notification",
   "VALIDATOR_PASSWORD_COMPARE": "Password not match",
   "VALIDATOR_MIN": "Minimum length is",
   "VALIDATOR_MAX": "Maximum length is",
@@ -78,5 +79,4 @@
   "BACK_HOME": "Back to Home",
   "SUCCESS": "Success",
   "OTP_FAILED": "Verification failed, OTP code not valid"
-  
 }
