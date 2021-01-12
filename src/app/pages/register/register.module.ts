@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { RegisterStepTwoComponent } from './register-step-two/register-step-two.component';
 import { SharedModule } from '@shared/shared.module';
+import { OtpModule } from '@shared/common/otp/otp.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { SharedModule } from '@shared/shared.module';
     FontAwesomeModule,
     ReactiveFormsModule,
     SharedModule,
+    OtpModule,
   ],
   declarations: [RegisterPage, RegisterStepTwoComponent],
 })
