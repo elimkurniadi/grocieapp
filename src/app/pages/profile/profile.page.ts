@@ -10,43 +10,7 @@ import { BrowserService } from '@shared/services/browser.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  menuList = [
-    {
-      title: 'Edit Profile',
-      route: '/profile/edit',
-      url: null,
-    },
-    {
-      title: 'Address List',
-      route: '/profile/address-list',
-      url: null,
-    },
-    {
-      title: 'Article',
-      route: '/article',
-      url: null,
-    },
-    {
-      title: 'Language',
-      route: null,
-      url: null,
-    },
-    {
-      title: 'Privacy Policy',
-      route: null,
-      url: 'https://google.com',
-    },
-    {
-      title: 'Terms and Conditions',
-      route: null,
-      url: 'https://facebook.com',
-    },
-    {
-      title: 'Help Center',
-      route: null,
-      url: 'https://detik.com',
-    },
-  ];
+  menuList: any[] = null;
 
   currentLang = null;
   langList = null;
@@ -60,9 +24,50 @@ export class ProfilePage implements OnInit {
   ) {
     this.getAppVersion();
     this.setupLanguage();
+    this.initMenuList();
   }
 
   ngOnInit() {}
+
+  initMenuList() {
+    this.menuList = [
+      {
+        title: `${this.translateSrv.get('EDIT_PROFILE')}`,
+        route: '/profile/edit',
+        url: null,
+      },
+      {
+        title: `${this.translateSrv.get('ADDRESS_LIST')}`,
+        route: '/profile/address-list',
+        url: null,
+      },
+      {
+        title: `${this.translateSrv.get('ARTICLE')}`,
+        route: '/article',
+        url: null,
+      },
+      {
+        title: `${this.translateSrv.get('LANGUAGE')}`,
+        route: null,
+        url: null,
+      },
+      {
+        title: `${this.translateSrv.get('PRIVACY_POLICY')}`,
+        route: null,
+        url: 'https://google.com',
+      },
+      {
+        title: `${this.translateSrv.get('TERMS_CONDITIONS')}`,
+        route: null,
+        url: 'https://facebook.com',
+      },
+      {
+        title: `${this.translateSrv.get('HELP_CENTER')}`,
+        route: null,
+        url: 'https://detik.com',
+      },
+    ];
+  }
 
   getAppVersion() {
     this.appVersion.getVersionNumber().then((value) => {
@@ -78,6 +83,7 @@ export class ProfilePage implements OnInit {
   onSelectLang(value) {
     this.translateSrv.setLanguage(value);
     this.currentLang = this.translateSrv.lang;
+    this.initMenuList();
   }
 
   onMenuClick(menu) {
