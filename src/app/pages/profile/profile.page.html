@@ -35,7 +35,11 @@
               <ion-icon name="chevron-forward-outline" color="dark"></ion-icon>
             </ng-template>
             <ng-template #langComp>
-              <ion-select [value]="currentLang" (ionChange)="onSelectLang($event?.detail?.value)">
+              <ion-select
+                [value]="currentLang"
+                (ionChange)="onSelectLang($event?.detail?.value)"
+                cancelText="{{'CANCEL' | translate}}"
+              >
                 <ion-select-option *ngFor="let lang of langList" [value]="lang">
                   {{lang | uppercase}}
                 </ion-select-option>
