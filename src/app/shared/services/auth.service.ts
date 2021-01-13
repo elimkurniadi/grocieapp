@@ -111,4 +111,8 @@ export class AuthService {
     const logout = await Plugins.FacebookLogin.logout();
   }
 
+  loginByToken(token) {
+    const decoded = this.jwtHelper.decodeToken(token);
+    this.cache.setCurrentUser(decoded, token);
+  }
 }
