@@ -1,9 +1,71 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>edit-profile</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'EDIT_PROFILE' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
+    <ion-row class="ion-justify-content-between">
+      <ion-col size="12" class="ion-no-padding">
+        <form [formGroup]="fg">
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">{{'NAME' | translate}}</ion-label>
+            <ion-input
+              type="text"
+              placeholder="{{'NAME_PLACEHOLDER' | translate}}"
+              class="default-theme"
+              formControlName="full_name"
+            ></ion-input>
+            <small *ngIf="fg.controls.full_name.dirty">{{fg.controls.full_name.errors?.required?.message}}</small>
+          </ion-item>
 
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">{{'EMAIL_ADDRESS' | translate}}</ion-label>
+            <ion-input
+              type="email"
+              placeholder="{{'YOUR_EMAIL_ADDRESS' | translate}}"
+              class="default-theme"
+              formControlName="email"
+            ></ion-input>
+            <small *ngIf="fg.controls.email.dirty"
+              >{{fg.controls.email.errors?.required?.message}} {{fg.controls.email.errors?.email?.message}}</small
+            >
+          </ion-item>
+
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">{{'PHONE_NUMBER' | translate}}</ion-label>
+            <ion-input
+              type="tel"
+              placeholder="{{'PHONE_NUMBER' | translate}}"
+              class="default-theme"
+              formControlName="phone"
+            ></ion-input>
+            <small *ngIf="fg.controls.phone.dirty"
+              >{{fg.controls.phone.errors?.required?.message}} {{fg.controls.phone.errors?.numeric?.message}}
+              {{fg.controls.phone.errors?.minLength?.message}} {{fg.controls.phone.errors?.maxLength?.message}}</small
+            >
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<ion-footer class="ion-no-border ion-padding-horizontal">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button [routerLink]="['/change-password']" expand="block"> {{'CHANGE_PASSWORD' | translate}} </ion-button>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button (click)="updateProfile()" expand="block" [disabled]="fg.pristine">
+          {{'UPDATE' | translate}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
