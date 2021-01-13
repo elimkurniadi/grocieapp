@@ -70,9 +70,12 @@ export class ProfilePage implements OnInit {
   }
 
   getAppVersion() {
-    this.appVersion.getVersionNumber().then((value) => {
-      this.currentVersion = value;
-    });
+    this.appVersion
+      .getVersionNumber()
+      .then((value) => {
+        this.currentVersion = value;
+      })
+      .catch(() => {});
   }
 
   setupLanguage() {

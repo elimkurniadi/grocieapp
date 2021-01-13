@@ -88,5 +88,8 @@
   "PRIVACY_POLICY": "Privacy Policy",
   "TERMS_CONDITIONS": "Terms and Conditions",
   "HELP_CENTER": "Help Center",
-  "UPDATE": "Update"
+  "UPDATE": "Update",
+  "SHOW_QR": "Show QR",
+  "SCAN_QR": "Scan QR",
+  "ALERT_CAM_DENIED": "You need to grant access to device camera to access this feature"
 }

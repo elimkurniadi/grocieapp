@@ -88,5 +88,8 @@
   "PRIVACY_POLICY": "Kebijakan Pribadi",
   "TERMS_CONDITIONS": "Syarat dan Ketentuan",
   "HELP_CENTER": "Pusat Bantuan",
-  "UPDATE": "Perbarui"
+  "UPDATE": "Perbarui",
+  "SHOW_QR": "Lihat QR",
+  "SCAN_QR": "Pindai QR",
+  "ALERT_CAM_DENIED": "Anda harus memberikan akses kamera pada perangkat untuk menggunakan fitur ini"
 }
