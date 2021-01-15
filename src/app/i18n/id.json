@@ -78,5 +78,13 @@
   "EMAIL_OTP_SUCCESS": "Verifikasi email berhasil",
   "BACK_HOME": "Kembali ke Beranda",
   "SUCCESS": "Berhasil",
-  "OTP_FAILED": "Verifikasi gagal, kode OTP tidak valid"
+  "OTP_FAILED": "Verifikasi gagal, kode OTP tidak valid",
+  "POPULAR_SEARCHES": "Pencarian Populer",
+  "SEARCH_BY_CATEGORY": "Cari Berdasarkan Kategori",
+  "RECENT_SEARCHES": "Pencarian Terkini",
+  "CLEAR_RECENT": "Hapus Riwayat",
+  "FILTER": "Saring",
+  "SORT": "Urutkan",
+  "RELATED_ITEMS": "Produk Terkait",
+  "RELATED_BRAND": "Merek Terkait"
 }

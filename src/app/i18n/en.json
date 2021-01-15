@@ -78,5 +78,13 @@
   "EMAIL_OTP_SUCCESS": "Email verification success",
   "BACK_HOME": "Back to Home",
   "SUCCESS": "Success",
-  "OTP_FAILED": "Verification failed, OTP code not valid"
+  "OTP_FAILED": "Verification failed, OTP code not valid",
+  "POPULAR_SEARCHES": "Popular Searches",
+  "SEARCH_BY_CATEGORY": "Search By Category",
+  "RECENT_SEARCHES": "Recent Searches",
+  "CLEAR_RECENT": "Clear Recent",
+  "FILTER": "Filter",
+  "SORT": "Sort",
+  "RELATED_ITEMS": "Related Items",
+  "RELATED_BRAND": "Related Brand"
 }

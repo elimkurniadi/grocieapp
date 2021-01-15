@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
   title: string;
+  search: string;
 
   banners = [
     {
@@ -21,9 +23,20 @@ export class ProductListComponent implements OnInit {
     },
   ];
 
-  constructor() {
-    this.title = 'Fruit';
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.route.queryParams.subscribe((param) => {
+      if (param.search !== null && param.search !== '') {
+        this.search = param.search;
+      } else {
+        this.title = 'Fruit';
+        this.search = '';
+      }
+    });
   }
 
   ngOnInit() {}
+
+  searchProduct() {
+    this.router.navigate(['/product', 'search']);
+  }
 }

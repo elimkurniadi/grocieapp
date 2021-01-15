@@ -1,11 +1,22 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar *ngIf="search">
+    <div (click)="searchProduct()" class="ion-padding-start">
+      <ion-searchbar class="custom-search" mode="ios" disabled [value]="search"></ion-searchbar>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="funnel" slot="start" class="header-action-size"></ion-icon>
+        <ion-text class="header-action-size"> {{ 'SORT' | translate }} </ion-text>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="!search">
     <ion-buttons slot="start" mode="md">
       <ion-back-button defaultHref="/tabs/home"> </ion-back-button>
       <ion-title>{{ title }}</ion-title>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="searchProduct()">
         <ion-icon name="search" class="header-action-size"></ion-icon>
       </ion-button>
       <ion-button>
@@ -17,7 +28,7 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <ion-grid class="ion-no-padding">
-    <ion-row class="ion-no-padding">
+    <ion-row class="ion-no-padding" *ngIf="!search">
       <ion-col class="ion-no-padding">
         <app-slide-promo [banners]="banners"></app-slide-promo>
       </ion-col>
