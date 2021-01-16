@@ -6,10 +6,11 @@ import { CardBrandComponent } from './card-brand/card-brand.component';
 import { CardArticleComponent } from './card-article/card-article.component';
 import { SharedModule } from '@shared/shared.module';
 import { CardCategoryComponent } from './card-category/card-category.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [CardProductComponent, CardBrandComponent, CardArticleComponent, CardCategoryComponent],
-  imports: [CommonModule, IonicModule.forRoot(), SharedModule],
+  imports: [CommonModule, IonicModule.forRoot(), SharedModule, RouterModule],
   exports: [CardProductComponent, CardBrandComponent, CardArticleComponent, CardCategoryComponent],
 })
 export class CardModule {}

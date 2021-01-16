@@ -102,5 +102,11 @@
   "ALERT_CAM_DENIED": "Anda harus memberikan akses kamera pada perangkat untuk menggunakan fitur ini",
   "FAVORITES": "Favorit",
   "ADD_NEW_LIST": "Tambah baru",
-  "SEE_LIST": "Lihat Daftar"
+  "SEE_LIST": "Lihat Daftar",
+  "ADD_TO_CART": "Masukkan Keranjang",
+  "DESCRIPTION": "Deskripsi",
+  "RELATED_PRODUCT": "Produk Terkait",
+  "SUCCESS_ADD_FAVORITE": "Berhasil menambahkan favorit",
+  "SUCCESS_REMOVE_FAVORITE": "Berhasil melepas favorit",
+  "SUCCESS_ADD_TO_CART": "Berhasil dimasukkan ke keranjang"
 }
