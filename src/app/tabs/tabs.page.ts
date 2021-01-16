@@ -16,7 +16,7 @@ export class TabsPage implements OnInit {
     {
       icon: 'heart-outline',
       label: 'Favorites',
-      route: 'favorites',
+      route: 'favorite',
     },
 
     {
