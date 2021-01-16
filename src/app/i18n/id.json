@@ -99,5 +99,11 @@
   "UPDATE": "Perbarui",
   "SHOW_QR": "Lihat QR",
   "SCAN_QR": "Pindai QR",
-  "ALERT_CAM_DENIED": "Anda harus memberikan akses kamera pada perangkat untuk menggunakan fitur ini"
+  "ALERT_CAM_DENIED": "Anda harus memberikan akses kamera pada perangkat untuk menggunakan fitur ini",
+  "ADD_TO_CART": "Masukkan Keranjang",
+  "DESCRIPTION": "Deskripsi",
+  "RELATED_PRODUCT": "Produk Terkait",
+  "SUCCESS_ADD_FAVORITE": "Berhasil menambahkan favorit",
+  "SUCCESS_REMOVE_FAVORITE": "Berhasil melepas favorit",
+  "SUCCESS_ADD_TO_CART": "Berhasil dimasukkan ke keranjang"
 }
