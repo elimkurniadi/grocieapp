@@ -99,5 +99,8 @@
   "UPDATE": "Perbarui",
   "SHOW_QR": "Lihat QR",
   "SCAN_QR": "Pindai QR",
-  "ALERT_CAM_DENIED": "Anda harus memberikan akses kamera pada perangkat untuk menggunakan fitur ini"
+  "ALERT_CAM_DENIED": "Anda harus memberikan akses kamera pada perangkat untuk menggunakan fitur ini",
+  "FAVORITES": "Favorit",
+  "ADD_NEW_LIST": "Tambah baru",
+  "SEE_LIST": "Lihat Daftar"
 }

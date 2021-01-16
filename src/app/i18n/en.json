@@ -99,5 +99,8 @@
   "UPDATE": "Update",
   "SHOW_QR": "Show QR",
   "SCAN_QR": "Scan QR",
-  "ALERT_CAM_DENIED": "You need to grant access to device camera to access this feature"
+  "ALERT_CAM_DENIED": "You need to grant access to device camera to access this feature",
+  "FAVORITES": "Favorites",
+  "ADD_NEW_LIST": "Add New List",
+  "SEE_LIST": "See List"
 }
