@@ -86,5 +86,18 @@
   "FILTER": "Filter",
   "SORT": "Sort",
   "RELATED_ITEMS": "Related Items",
-  "RELATED_BRAND": "Related Brand"
+  "RELATED_BRAND": "Related Brand",
+  "MY_PROFILE": "My Profile",
+  "VIEW_QR": "View QR",
+  "EDIT_PROFILE": "Edit Profile",
+  "ADDRESS_LIST": "Address List",
+  "ARTICLE": "Article",
+  "LANGUAGE": "Language",
+  "PRIVACY_POLICY": "Privacy Policy",
+  "TERMS_CONDITIONS": "Terms and Conditions",
+  "HELP_CENTER": "Help Center",
+  "UPDATE": "Update",
+  "SHOW_QR": "Show QR",
+  "SCAN_QR": "Scan QR",
+  "ALERT_CAM_DENIED": "You need to grant access to device camera to access this feature"
 }

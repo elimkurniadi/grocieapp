@@ -86,5 +86,18 @@
   "FILTER": "Saring",
   "SORT": "Urutkan",
   "RELATED_ITEMS": "Produk Terkait",
-  "RELATED_BRAND": "Merek Terkait"
+  "RELATED_BRAND": "Merek Terkait",
+  "MY_PROFILE": "Profil Saya",
+  "VIEW_QR": "Lihat QR",
+  "EDIT_PROFILE": "Ubah Profil",
+  "ADDRESS_LIST": "Daftar Alamat",
+  "ARTICLE": "Artikel",
+  "LANGUAGE": "Bahasa",
+  "PRIVACY_POLICY": "Kebijakan Pribadi",
+  "TERMS_CONDITIONS": "Syarat dan Ketentuan",
+  "HELP_CENTER": "Pusat Bantuan",
+  "UPDATE": "Perbarui",
+  "SHOW_QR": "Lihat QR",
+  "SCAN_QR": "Pindai QR",
+  "ALERT_CAM_DENIED": "Anda harus memberikan akses kamera pada perangkat untuk menggunakan fitur ini"
 }

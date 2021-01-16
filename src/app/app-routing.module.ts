@@ -25,7 +25,15 @@ const routes: Routes = [
   {
     path: 'product',
     loadChildren: () => import('./pages/product/product.module').then((m) => m.ProductPageModule),
+  },  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'qr',
+    loadChildren: () => import('./pages/qr/qr.module').then( m => m.QrPageModule)
+  },
+
 ];
 
 @NgModule({
