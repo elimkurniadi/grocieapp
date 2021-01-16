@@ -45,4 +45,8 @@ export class HomePage implements OnInit {
     this.selectedLanguage = lang;
     this.translate.setLanguage(lang);
   }
+
+  searchProduct() {
+    this.router.navigate(['/product', 'search']);
+  }
 }
