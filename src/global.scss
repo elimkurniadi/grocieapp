@@ -195,3 +195,12 @@ ion-card.ion-no-border {
   margin: 0 auto;
   width: 86%;
 } */
+
+.link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link:focus {
+  outline: 0;
+}
