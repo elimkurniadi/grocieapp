@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border product-detail-upper">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" defaultHref="/tabs/home">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-row>
@@ -20,7 +20,7 @@
             <h4>Alpukat Super Mentega Alpukat Super Mentega</h4>
           </ion-col>
           <ion-col size="1" class="ion-no-padding ion-text-right">
-            <ion-icon name="heart-outline"></ion-icon>
+            <ion-icon name="{{ !isFavorite ? 'heart-outline' : 'heart' }}" (click)="ctaFavorite()"></ion-icon>
           </ion-col>
         </ion-row>
 
@@ -35,7 +35,9 @@
             <h4>Rp. 22,000 /kg</h4>
           </ion-col>
           <ion-col size="5" class="ion-no-padding">
-            <ion-button expand="block" color="primary"> Add to Cart </ion-button>
+            <ion-button expand="block" color="primary" (click)="addToCart()">
+              {{ 'ADD_TO_CART' | translate }}
+            </ion-button>
           </ion-col>
         </ion-row>
       </ion-col>
@@ -43,14 +45,14 @@
 
     <ion-row class="ion-justify-content-between">
       <ion-col size="12">
-        <h5>Description</h5>
+        <h5>{{ 'DESCRIPTION' | translate }}</h5>
         <p [innerHTML]="'OKEEE!'"></p>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col size="12">
-        <h5>Related Product</h5>
+        <h5>{{ 'RELATED_PRODUCT' | translate }}</h5>
       </ion-col>
       <ion-col size="12"><app-slide-product></app-slide-product></ion-col>
     </ion-row>
