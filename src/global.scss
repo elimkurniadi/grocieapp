@@ -207,3 +207,12 @@ ion-searchbar {
   margin: 0;
   height: auto;
 }
+
+.link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link:focus {
+  outline: 0;
+}
