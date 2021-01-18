@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@shared/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'tabs/home', pathMatch: 'full' },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginPageModule),
@@ -20,24 +20,28 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then((m) => m.TabsPageModule),
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'product',
     loadChildren: () => import('./pages/product/product.module').then((m) => m.ProductPageModule),
-  },  {
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./pages/profile/profile.module').then((m) => m.ProfilePageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'qr',
-    loadChildren: () => import('./pages/qr/qr.module').then( m => m.QrPageModule)
+    loadChildren: () => import('./pages/qr/qr.module').then((m) => m.QrPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'favorite',
-    loadChildren: () => import('./pages/favorite/favorite.module').then( m => m.FavoritePageModule)
+    loadChildren: () => import('./pages/favorite/favorite.module').then((m) => m.FavoritePageModule),
+    canActivate: [AuthGuard],
   },
-
 ];
 
 @NgModule({

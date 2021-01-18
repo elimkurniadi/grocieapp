@@ -12,8 +12,6 @@ import { Plugins } from '@capacitor/core';
   providedIn: 'root',
 })
 export class AuthService {
-  apiVersion = 'v1/';
-
   constructor(
     private jwtHelper: JwtHelperService,
     private cache: CacheService,
@@ -29,31 +27,32 @@ export class AuthService {
         const decoded = this.jwtHelper.decodeToken(token);
         const isExpired = this.jwtHelper.isTokenExpired(token);
 
-        // hide check condition expired token (temp)
-        // if (!isExpired) {
-        this.cache.setCurrentUser(decoded, token);
-        this.gs.log('not expired');
-        // }else{
-        //   this.cache.removeToken()
-        //   this.gs.log("expired")
-        // }
+        if (!isExpired) {
+          this.cache.setCurrentUser(decoded, token);
+          this.gs.log('not expired');
+        } else {
+          this.cache.removeToken();
+          this.gs.log('expired');
+        }
       }
     });
   }
-  login(credentials: any): Observable<Response> {
-    // temporary token
-    credentials.token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1cGVyYWRtaW4iLCJ1c2VyX3R5cGUiOiJBZG1pbiIsInJvbGVfaWQiOjEsInJvbGUiOiJTdXBlcmFkbWluIiwidXNlcl9pZCI6MSwiaWF0IjoxNTYxMzUyNzk4LCJleHAiOjE1NjE0MzkxOTh9.giKYpbgmi2XNjA8vXI1rD1ZhzsrdfQFI3uBlwJqv-Ag';
-    return this.api.postData(`${this.apiVersion}auth-user`, { result: credentials }).pipe(
-      tap((res) => {
-        const response = res.result;
-        const token = response.token;
-        const decoded = this.jwtHelper.decodeToken(token);
-        this.cache.setCurrentUser(decoded, token);
 
-        this.gs.log(`post login`);
-      })
-    );
+  login(credentials: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.postData('authentication/login', credentials);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          const token = res.response;
+          this.loginByToken(token);
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
   }
 
   async loginGoogle() {
@@ -89,13 +88,13 @@ export class AuthService {
           const isExpired = this.jwtHelper.isTokenExpired(token);
 
           // hide check condition expired token (temp)
-          // if (!isExpired) {
-          this.cache.setCurrentUser(decoded, token);
-          observer.next(true);
-          // }else{
-          //   this.cache.removeCurrentUser()
-          //   observer.next(false)
-          // }
+          if (!isExpired) {
+            this.cache.setCurrentUser(decoded, token);
+            observer.next(true);
+          } else {
+            this.cache.removeCurrentUser();
+            observer.next(false);
+          }
         } else {
           observer.next(false);
         }

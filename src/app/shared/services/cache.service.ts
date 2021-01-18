@@ -27,4 +27,9 @@ export class CacheService {
     this.currentUser = data;
     this.currentUser.token = token;
   }
+
+  removeCurrentUser() {
+    this.currentUser = null;
+    this.removeToken();
+  }
 }
