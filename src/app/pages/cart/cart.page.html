@@ -21,7 +21,7 @@
         <span>{{'TOTAL_PRICE' | translate}}</span> <br />
         <span><b>Rp. {{totalPrice | number}}</b></span>
       </ion-col>
-      <ion-col size="6" class="ion-text-right">
+      <ion-col size="6" class="ion-text-right" [routerLink]="['/checkout']">
         <ion-button> {{'CHECKOUT' | translate}} </ion-button>
       </ion-col>
     </ion-row>
