@@ -111,5 +111,7 @@
   "SUCCESS_ADD_TO_CART": "Berhasil dimasukkan ke keranjang",
   "NEW_LIST": "Daftar Baru",
   "LIST_NAME": "Nama",
-  "ADD_LIST": "Tambah Daftar"
+  "ADD_LIST": "Tambah Daftar",
+  "ADD_TO_FAVORITES": "Tambah ke Favorit",
+  "CHOOSE_FAVORITE_LIST": "Pilih List Favorit"
 }
