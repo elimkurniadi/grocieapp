@@ -108,5 +108,8 @@
   "RELATED_PRODUCT": "Related Product",
   "SUCCESS_ADD_FAVORITE": "Success add to favorite",
   "SUCCESS_REMOVE_FAVORITE": "Success remove from favorite",
-  "SUCCESS_ADD_TO_CART": "Success add to cart"
+  "SUCCESS_ADD_TO_CART": "Success add to cart",
+  "NEW_LIST": "New List",
+  "LIST_NAME": "List Name",
+  "ADD_LIST": "Add List"
 }
