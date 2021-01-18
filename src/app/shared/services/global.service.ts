@@ -58,4 +58,10 @@ export class GlobalService {
     });
     return dirtyValues ? dirtyValues : null;
   }
+
+  markDirtyForm(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((key) => {
+      formGroup.get(key).markAsDirty();
+    });
+  }
 }
