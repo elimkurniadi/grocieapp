@@ -108,5 +108,8 @@
   "RELATED_PRODUCT": "Produk Terkait",
   "SUCCESS_ADD_FAVORITE": "Berhasil menambahkan favorit",
   "SUCCESS_REMOVE_FAVORITE": "Berhasil melepas favorit",
-  "SUCCESS_ADD_TO_CART": "Berhasil dimasukkan ke keranjang"
+  "SUCCESS_ADD_TO_CART": "Berhasil dimasukkan ke keranjang",
+  "MY_CART": "Keranjang Saya",
+  "CHECKOUT": "Checkout",
+  "TOTAL_PRICE": "Total Harga"
 }

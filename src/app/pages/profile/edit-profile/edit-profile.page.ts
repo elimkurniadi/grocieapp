@@ -50,7 +50,6 @@ export class EditProfilePage implements OnInit {
   updateProfile() {
     if (this.fg.valid) {
       const data = this.getDirtyValues();
-      console.log('data: ', data);
       this.router.navigate(['/tabs/profile']);
     }
   }
