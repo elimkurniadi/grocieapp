@@ -3,7 +3,7 @@
     <ion-title> {{ 'FAVORITES' | translate }} </ion-title>
     <ion-title slot="end" class="add-favorite">
       <ion-icon name="add-outline"></ion-icon>
-      <ion-text>
+      <ion-text (click)="addToList()">
         {{ 'ADD_NEW_LIST' | translate }}
       </ion-text>
     </ion-title>

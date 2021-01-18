@@ -98,14 +98,22 @@
     border-bottom: 3px solid black;
     filter: opacity(0.5) !important;
   }
+}
 
-  .modal-info .modal-wrapper {
-    height: 32%;
-    width: 80%;
-    position: absolute;
-    display: block;
-    border-radius: 0.5em;
-  }
+.modal-info .modal-wrapper {
+  height: 32%;
+  width: 80%;
+  position: absolute;
+  display: block;
+  border-radius: 0.5em;
+}
+
+.modal-add-favorite .modal-wrapper {
+  height: 25%;
+  width: 80%;
+  position: absolute;
+  display: block;
+  border-radius: 0.5em;
 }
 
 .font-md {
