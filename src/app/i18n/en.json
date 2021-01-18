@@ -111,5 +111,7 @@
   "SUCCESS_ADD_TO_CART": "Success add to cart",
   "NEW_LIST": "New List",
   "LIST_NAME": "List Name",
-  "ADD_LIST": "Add List"
+  "ADD_LIST": "Add List",
+  "ADD_TO_FAVORITES": "Add to Favorites",
+  "CHOOSE_FAVORITE_LIST": "Choose Favorite List"
 }
