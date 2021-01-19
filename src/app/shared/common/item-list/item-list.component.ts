@@ -2,15 +2,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CartService } from '@shared/services/modules/cart.service';
 
 @Component({
-  selector: 'app-cart-list',
-  templateUrl: './cart-list.component.html',
-  styleUrls: ['./cart-list.component.scss'],
+  selector: 'app-item-list',
+  templateUrl: './item-list.component.html',
+  styleUrls: ['./item-list.component.scss'],
 })
-export class CartListComponent implements OnInit {
+export class ItemListComponent implements OnInit {
   @Input() cartData = null;
+  @Input() showSubstract = true;
   @Output() quantityChange = new EventEmitter();
   totalPrice = 0;
-
   constructor(private cartSrv: CartService) {}
 
   ngOnInit() {

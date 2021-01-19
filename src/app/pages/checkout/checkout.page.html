@@ -10,8 +10,126 @@
 <ion-content>
   <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
     <ion-row class="ion-justify-content-between">
-      <ion-col size="6">Checkout!</ion-col>
-      <ion-col size="6">Checkout!</ion-col>
+      <ion-col size="12">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="6"
+            ><span><b>{{'DELIVERY_LOCATION' | translate}}</b></span></ion-col
+          >
+          <ion-col size="6" class="ion-text-right">
+            <small><b>{{"CHANGE_DELIVERY_LOCATION" | translate}}</b></small>
+          </ion-col>
+          <ion-col size="12">
+            <ion-text color="medium">
+              <span>Jl. In Aja dulu no. 666</span>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-padding-vertical">
+          <ion-col size="12">
+            <span><b>{{'LOCATION_DETAIL' | translate}}</b></span>
+          </ion-col>
+          <ion-col size="12" class="ion-no-padding">
+            <ion-item lines="none" class="form-group">
+              <ion-textarea rows="3" placeholder="{{'LOCATION_DETAIL_PLACEHOLDER' | translate}}"></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12"
+            ><span><b>{{'DELIVERY_TIME' | translate}}</b></span></ion-col
+          >
+          <ion-col size="12">
+            <fieldset class="radio-wrapper">
+              <div>
+                <input class="radio-input" type="radio" name="delivery_time" [value]="false" />
+                <label class="radio-label">{{'DELIVER_NOW' | translate}}</label>
+              </div>
+              <div>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="6" class="ion-no-padding">
+                    <input class="radio-input" type="radio" name="delivery_time" [value]="true" />
+                    <label class="radio-label">{{'SCHEDULE_FOR_LATER' | translate}}</label>
+                  </ion-col>
+                  <ion-col size="6" class="ion-text-right">
+                    <ion-button expand="block" color="primary" (click)="scheduleDatepicker.open()">
+                      {{selectedDate ? selectedDate : ('SELECT_DATE' | translate)}}
+                    </ion-button>
+                    <ion-datetime
+                      #scheduleDatepicker
+                      class="ion-hide"
+                      displayFormat="D MMMM YYYY"
+                      pickerFormat="D MMMM YYYY"
+                      [min]="currDate"
+                      (ionChange)="onDateSelect($event.detail.value)"
+                    ></ion-datetime>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </fieldset>
+          </ion-col>
+
+          <ion-col size="3" *ngFor="let time of timeList;let i = index">
+            <ion-chip
+              [color]="time.selected ? 'primary': 'secondary'"
+              [outline]="!time?.selected"
+              [disabled]="!selectedDate"
+              (click)="onTimeSelect(i)"
+            >
+              <small>{{time?.time}}</small>
+            </ion-chip>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-padding-vertical">
+          <ion-col size="12">
+            <app-item-list [showSubstract]="false" [cartData]="cartList"></app-item-list>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <span>
+              <b> {{'PAYMENT_SUMMARY' | translate}} </b>
+            </span>
+          </ion-col>
+          <ion-col size="12">
+            <ion-row>
+              <ion-col size="6">
+                <span>{{'SUBTOTAL' |translate}}</span>
+              </ion-col>
+              <ion-col size="6" class="ion-text-right"> Rp. 50,000 </ion-col>
+              <ion-col size="6">
+                <span>{{'SERVICE_FEE' |translate}}</span>
+              </ion-col>
+              <ion-col size="6" class="ion-text-right"> Rp. 50,000 </ion-col>
+              <ion-col size="6">
+                <span>{{'VOUCHER' |translate}}</span>
+              </ion-col>
+              <ion-col size="6" class="ion-text-right">
+                <span>
+                  <b> {{'USE_VOUCHER' | translate}} </b>
+                </span>
+              </ion-col>
+              <ion-col size="6">
+                <span>{{'DELIVERY_FEE' |translate}}</span>
+              </ion-col>
+              <ion-col size="6" class="ion-text-right"> Rp. 50,000 </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer class="ion-no-border ion-padding-horizontal">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block"> {{'PROCEED_TO_PAYMENT' | translate}} </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

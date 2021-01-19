@@ -22,13 +22,15 @@
     </ion-col>
     <ion-col size="3" class="ion-text-center">
       <ion-row>
-        <ion-col size="4">
+        <ion-col size="4" *ngIf="showSubstract">
           <ion-icon name="remove-circle-outline" (click)="updateQuantity(false, i)"></ion-icon
         ></ion-col>
-        <ion-col size="4" class="ion-text-center">
+        <ion-col [size]="showSubstract ? 4 : 12" class="ion-text-center">
           <span>{{ cart?.quantity | number }}</span>
         </ion-col>
-        <ion-col size="4"> <ion-icon name="add-circle-outline" (click)="updateQuantity(true, i)"></ion-icon> </ion-col>
+        <ion-col size="4" *ngIf="showSubstract">
+          <ion-icon name="add-circle-outline" (click)="updateQuantity(true, i)"></ion-icon>
+        </ion-col>
       </ion-row>
     </ion-col>
     <ion-col size="3">

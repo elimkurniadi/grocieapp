@@ -8,10 +8,10 @@ import { CartPageRoutingModule } from './cart-routing.module';
 
 import { CartPage } from './cart.page';
 import { SharedModule } from '@shared/shared.module';
-import { CartListComponent } from './cart-list/cart-list.component';
+import { ItemListModule } from '@shared/common/item-list/item-list.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, CartPageRoutingModule, SharedModule],
-  declarations: [CartPage, CartListComponent],
+  imports: [CommonModule, FormsModule, IonicModule, CartPageRoutingModule, SharedModule, ItemListModule],
+  declarations: [CartPage],
 })
 export class CartPageModule {}

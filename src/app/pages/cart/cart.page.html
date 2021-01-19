@@ -8,7 +8,7 @@
   <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
     <ion-row class="ion-justify-content-between">
       <ion-col size="12">
-        <app-cart-list [cartData]="cartList" (quantityChange)="updateTotalPrice($event)"></app-cart-list>
+        <app-item-list [cartData]="cartList" (quantityChange)="updateTotalPrice($event)"></app-item-list>
       </ion-col>
     </ion-row>
   </ion-grid>
