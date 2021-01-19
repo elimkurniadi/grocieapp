@@ -1,0 +1,21 @@
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-padding-top">
+      <ion-col class="ion-padding-horizontal"
+        ><ion-text class="modal-title">{{ 'NEW_LIST' | translate }}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-padding-horizontal ion-padding-top">
+        <ion-input placeholder="{{ 'LIST_NAME' | translate }}"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-padding-horizontal">
+        <ion-button expand="full" (click)="dismiss()">
+          {{ 'ADD_LIST' | translate }}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
