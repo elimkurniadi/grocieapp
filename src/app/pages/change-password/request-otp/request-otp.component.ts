@@ -21,7 +21,6 @@ export class RequestOtpComponent implements OnInit {
   ngOnInit() {}
 
   sendOtp() {
-    console.log('success');
     this.router.navigate(['/change-password', 'verify-otp']);
   }
   setHeader(type: string) {

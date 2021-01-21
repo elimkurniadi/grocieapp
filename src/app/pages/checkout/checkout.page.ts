@@ -62,7 +62,6 @@ export class CheckoutPage implements OnInit {
   }
 
   onTimeSelect(idx) {
-    console.log('index: ', idx);
     const list = this.timeList;
     list.forEach((element, index) => {
       if (index === idx) {

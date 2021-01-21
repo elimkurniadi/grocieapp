@@ -21,7 +21,6 @@ export class SetPasswordComponent implements OnInit {
   ngOnInit() {}
 
   setPassword() {
-    console.log('success');
     this.presentSuccessModal();
   }
 

@@ -34,15 +34,7 @@ export class HomePage implements OnInit {
     private modalCtrl: ModalController
   ) {}
 
-  ngOnInit() {
-    // this.getData();
-  }
-
-  getData() {
-    this.exampleSrv.getData().subscribe((res) => {
-      console.log('result', res);
-    });
-  }
+  ngOnInit() {}
 
   selectLang(lang) {
     this.selectedLanguage = lang;

@@ -16,7 +16,9 @@
             ><span><b>{{'DELIVERY_LOCATION' | translate}}</b></span></ion-col
           >
           <ion-col size="6" class="ion-text-right">
-            <small><b>{{"CHANGE_DELIVERY_LOCATION" | translate}}</b></small>
+            <small [routerLink]="['/address']" [queryParams]="{mode: 'select'}"
+              ><b>{{"CHANGE_DELIVERY_LOCATION" | translate}}</b></small
+            >
           </ion-col>
           <ion-col size="12">
             <ion-text color="medium">
