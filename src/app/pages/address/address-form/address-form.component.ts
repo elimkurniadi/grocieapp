@@ -70,7 +70,6 @@ export class AddressFormComponent implements OnInit {
 
   submit() {
     if (this.fg.valid) {
-      console.log('this.fg: ', this.fg.value);
     }
   }
 

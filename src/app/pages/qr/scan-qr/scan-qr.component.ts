@@ -21,10 +21,8 @@ export class ScanQrComponent implements OnInit {
   initScanner() {
     this.prepareQr()
       .then((allowed: any) => {
-        console.log('allowed: ', JSON.stringify(allowed));
         if (allowed) {
           const observer = this.scanningQr().subscribe((res: string) => {
-            console.log('res!!!!!: ', res);
             this.toastSrv.show(res);
             this.qrScanner.hide();
             observer.unsubscribe();
@@ -34,9 +32,7 @@ export class ScanQrComponent implements OnInit {
           this.permissionSrv.cameraPermissionHandler();
         }
       })
-      .catch((err) => {
-        console.log(JSON.stringify(err));
-      });
+      .catch((err) => {});
   }
 
   prepareQr(): Promise<any> {

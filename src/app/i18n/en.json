@@ -132,7 +132,12 @@
   "USE_VOUCHER": "Use Voucher",
   "DELIVERY_FEE": "Delivery Fee",
   "PROCEED_TO_PAYMENT": "Proceed to Payment",
+<<<<<<< HEAD
   "ADD_NEW_ADDRESS": "Add New Address",
   "USE_ADDRESS": "Use Address",
   "SELECTED": "Selected"
+=======
+  "CHOOSE_LOCATION": "Choose Location",
+  "SELECT": "Select"
+>>>>>>> 7e5a29dea366f68723a1106cd702a5e2a8b8fb06
 }

@@ -33,7 +33,6 @@ export class AddressPage implements OnInit {
     this.activatedRoute.queryParams.subscribe((param) => {
       const mode = param?.mode;
       mode && mode === 'select' ? (this.selectMode = true) : (this.selectMode = false);
-      console.log('this.selectMode: ', this.selectMode);
     });
   }
 }

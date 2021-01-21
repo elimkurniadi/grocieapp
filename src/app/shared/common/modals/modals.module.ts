@@ -4,10 +4,11 @@ import { ModalInfoComponent } from './modal-info/modal-info.component';
 import { IonicModule } from '@ionic/angular';
 import { ModalAddToFavoriteComponent } from './modal-add-to-favorite/modal-add-to-favorite.component';
 import { SharedModule } from '@shared/shared.module';
+import { ModalLocationComponent } from './modal-location/modal-location.component';
 
 @NgModule({
-  declarations: [ModalInfoComponent, ModalAddToFavoriteComponent],
+  declarations: [ModalInfoComponent, ModalAddToFavoriteComponent, ModalLocationComponent],
   imports: [CommonModule, IonicModule.forRoot(), SharedModule],
-  exports: [ModalInfoComponent, ModalAddToFavoriteComponent],
+  exports: [ModalInfoComponent, ModalAddToFavoriteComponent, ModalLocationComponent],
 })
 export class ModalsModule {}

@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-grid class="ion-padding-horizontal">
+    <ion-row class="ion-padding-top">
+      <ion-col size="10">
+        <ion-text class="location-title"> {{ 'CHOOSE_LOCATION' | translate }}</ion-text>
+      </ion-col>
+      <ion-col size="2" class="ion-text-right">
+        <ion-icon name="close" (click)="dismiss()"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-searchbar class="custom-search" mode="ios"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content
+  ><ion-list class="ion-padding">
+    <ion-radio-group>
+      <ion-item lines="none" *ngFor="let item of ['Bandung', 'Jakarta', 'Tangerang']">
+        <ion-radio slot="start" class="location-radio" [value]="item"></ion-radio>
+        <ion-label>{{ item }} </ion-label>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-row class="ion-padding-horizontal">
+    <ion-col class="ion-padding-bottom">
+      <ion-button expand="full" (click)="dismiss()">
+        {{ 'SELECT' | translate }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

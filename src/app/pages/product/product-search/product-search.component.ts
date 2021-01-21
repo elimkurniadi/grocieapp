@@ -15,6 +15,5 @@ export class ProductSearchComponent implements OnInit {
   searchProduct(event: any) {
     const value = event.detail.value;
     this.keyword = value;
-    console.log('val', value);
   }
 }

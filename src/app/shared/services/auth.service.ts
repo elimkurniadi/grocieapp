@@ -62,8 +62,6 @@ export class AuthService {
       email: googleUser.email,
     };
 
-    console.log('my user: ', googleUser);
-
     return true;
     // return this.login(credentials).toPromise();
   }
@@ -76,7 +74,7 @@ export class AuthService {
     });
 
     const credentials = { user_token: result.accessToken.token };
-    console.log('result: ', credentials);
+
     return true;
     // return this.login(credentials).toPromise();
   }
