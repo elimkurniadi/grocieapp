@@ -38,7 +38,7 @@ export class ProfilePage implements OnInit {
       },
       {
         title: `${this.translateSrv.get('ADDRESS_LIST')}`,
-        route: '/profile/address-list',
+        route: '/address',
         url: null,
       },
       {

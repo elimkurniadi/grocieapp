@@ -13,6 +13,10 @@ const routes: Routes = [
     path: 'form',
     component: AddressFormComponent,
   },
+  {
+    path: 'form/:id',
+    component: AddressFormComponent,
+  },
 ];
 
 @NgModule({

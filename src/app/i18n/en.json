@@ -131,5 +131,8 @@
   "VOUCHER": "Voucher",
   "USE_VOUCHER": "Use Voucher",
   "DELIVERY_FEE": "Delivery Fee",
-  "PROCEED_TO_PAYMENT": "Proceed to Payment"
+  "PROCEED_TO_PAYMENT": "Proceed to Payment",
+  "ADD_NEW_ADDRESS": "Add New Address",
+  "USE_ADDRESS": "Use Address",
+  "SELECTED": "Selected"
 }
