@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-card-address',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 export class CardAddressComponent implements OnInit {
   @Input() addressList = null;
   @Input() showButton = true;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private navCtrl: NavController) {}
 
   ngOnInit() {}
 
@@ -18,9 +19,12 @@ export class CardAddressComponent implements OnInit {
     this.addressList.forEach((element, index) => {
       index === idx ? (element.selected = true) : (element.selected = false);
     });
+    this.navCtrl.back();
   }
 
   onAddressClick(idx) {
-    this.router.navigate([`/address/form/${idx}`]);
+    if (!this.showButton) {
+      this.router.navigate([`/address/form/${idx}`]);
+    }
   }
 }
