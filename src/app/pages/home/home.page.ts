@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { Router } from '@angular/router';
 import { AuthService, ExampleService, GlobalService } from '@shared/services';
+import { ModalController } from '@ionic/angular';
+import { ModalLocationComponent } from '@shared/common/modals/modal-location/modal-location.component';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +30,8 @@ export class HomePage implements OnInit {
     private router: Router,
     private authSrv: AuthService,
     private gs: GlobalService,
-    private exampleSrv: ExampleService
+    private exampleSrv: ExampleService,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -48,5 +51,17 @@ export class HomePage implements OnInit {
 
   searchProduct() {
     this.router.navigate(['/product', 'search']);
+  }
+
+  async changeLocation() {
+    const modal = await this.modalCtrl.create({
+      component: ModalLocationComponent,
+    });
+
+    modal.onDidDismiss().then(() => {
+      // Refresh data
+    });
+
+    return await modal.present();
   }
 }
