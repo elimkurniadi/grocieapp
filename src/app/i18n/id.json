@@ -109,7 +109,8 @@
   "SUCCESS_ADD_FAVORITE": "Berhasil menambahkan favorit",
   "SUCCESS_REMOVE_FAVORITE": "Berhasil melepas favorit",
   "SUCCESS_ADD_TO_CART": "Berhasil dimasukkan ke keranjang",
-  "MY_CART": "Keranjang Saya",
+  "MY_CART":
+   "Keranjang Saya",
   "CHECKOUT": "Checkout",
   "TOTAL_PRICE": "Total Harga",
   "NEW_LIST": "Daftar Baru",
@@ -131,5 +132,8 @@
   "VOUCHER": "Voucher",
   "USE_VOUCHER": "Gunakan Voucher",
   "DELIVERY_FEE": "Biaya Pengiriman",
-  "PROCEED_TO_PAYMENT": "Lanjut ke Pembayaran"
+  "PROCEED_TO_PAYMENT": "Lanjut ke Pembayaran",
+  "ADD_NEW_ADDRESS": "Tambah Alamat Pengiriman",
+  "USE_ADDRESS": "Gunakan Alamat",
+  "SELECTED": "Dipilih"
 }
