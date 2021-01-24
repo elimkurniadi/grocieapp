@@ -1,5 +1,5 @@
 <ion-card class="ion-no-border">
-  <ion-card-header class="ion-no-padding" [routerLink]="['/product/detail', product?.product_id]">
+  <ion-card-header class="ion-no-padding link" [routerLink]="['/product/detail', product?.product_id]">
     <img [src]="product?.image_url" class="product-img full-width" *ngIf="product?.image_url" />
     <img src="https://via.placeholder.com/200.png" class="product-img full-width" *ngIf="!product?.image_url" />
   </ion-card-header>

@@ -232,3 +232,11 @@ ion-searchbar {
 .link:focus {
   outline: 0;
 }
+
+.header-title {
+  text-transform: capitalize;
+}
+
+.ion-no-margin-bottom {
+  margin-bottom: 0;
+}
