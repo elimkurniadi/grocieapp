@@ -1,0 +1,29 @@
+.radio-wrapper {
+  border: none;
+  width: 100%;
+  padding-left: 0;
+  margin-top: 0.5em;
+  div {
+    margin: auto;
+    padding-bottom: 1em;
+
+    .radio-label {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 4%;
+      padding-left: 10px;
+      font-size: 14px;
+    }
+    .radio-input {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+}
+small {
+  color: var(--ion-color-danger);
+}
+
+.count {
+  color: var(--ion-color-medium);
+}

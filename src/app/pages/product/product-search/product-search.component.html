@@ -1,0 +1,25 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="ion-padding-start">
+      <ion-searchbar
+        class="custom-search"
+        mode="ios"
+        (ionChange)="searchProduct($event)"
+        debounce="1000"
+      ></ion-searchbar>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="funnel" slot="start" class="header-action-size"></ion-icon>
+        <ion-text class="header-action-size"> {{ 'FILTER' | translate }} </ion-text>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-no-padding">
+    <app-product-search-without-keyword *ngIf="!keyword"></app-product-search-without-keyword>
+    <app-product-search-with-keyword *ngIf="keyword" [keyword]="keyword"></app-product-search-with-keyword>
+  </ion-grid>
+</ion-content>

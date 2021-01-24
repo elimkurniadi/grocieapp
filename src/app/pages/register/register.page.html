@@ -1,0 +1,126 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'REGISTER' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
+    <ion-row class="ion-justify-content-between">
+      <ion-col size="12">
+        <ion-row>
+          <ion-col size="5.5" class="ion-text-center stepper"> {{'STEP' | translate}} 1 </ion-col>
+          <ion-col size="1"> &nbsp; </ion-col>
+          <ion-col size="5.5" class="ion-text-center stepper stepper-inactive"> {{'STEP' | translate}} 2 </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12" class="ion-no-padding">
+        <form [formGroup]="fg">
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">{{'NAME' | translate}}</ion-label>
+            <ion-input
+              class="default-theme"
+              placeholder="{{'NAME_PLACEHOLDER' | translate}}"
+              type="text"
+              formControlName="full_name"
+            ></ion-input>
+            <small *ngIf="fg.controls.full_name.dirty">{{ fg.controls.full_name.errors?.required?.message }}</small>
+          </ion-item>
+
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">{{'EMAIL_ADDRESS' | translate}}</ion-label>
+            <ion-input
+              class="default-theme"
+              placeholder="{{'YOUR_EMAIL_ADDRESS' | translate}}"
+              type="email"
+              formControlName="email"
+            ></ion-input>
+            <small *ngIf="fg.controls.email.dirty">
+              {{ fg.controls.email.errors?.required?.message }} {{ fg.controls.email.errors?.email?.message }}
+            </small>
+          </ion-item>
+
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">{{'PHONE_NUMBER' | translate}}</ion-label>
+            <ion-input
+              class="default-theme"
+              placeholder="{{'PHONE_NUMBER_PLACEHOLDER' | translate}}"
+              type="tel"
+              formControlName="phone"
+            ></ion-input>
+            <small *ngIf="fg.controls.phone.dirty"
+              >{{fg.controls.phone.errors?.required?.message}} {{fg.controls.phone.errors?.numeric?.message}}
+              {{fg.controls.phone.errors?.minLength?.message}} {{fg.controls.phone.errors?.maxLength?.message}}</small
+            >
+          </ion-item>
+
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">{{'GENDER' | translate}}</ion-label>
+            <fieldset class="radio-wrapper-inline">
+              <div>
+                <input class="radio-input" type="radio" name="gender" [value]="'m'" formControlName="gender" />
+                <label class="radio-label">{{'MALE' | translate}}</label>
+                <input class="radio-input" type="radio" name="gender" [value]="'f'" formControlName="gender" />
+                <label class="radio-label">{{'FEMALE' | translate}}</label>
+              </div>
+            </fieldset>
+            <small *ngIf="fg.controls.gender.dirty">{{fg.controls.gender.errors?.required?.message}}</small>
+          </ion-item>
+
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">{{'DOB' | translate}}</ion-label>
+            <ion-datetime
+              displayFormat="D MMMM YYYY"
+              pickerFormat="D MMMM YYYY"
+              [max]="currDate"
+              formControlName="birth_date"
+              (ionChange)="onDateSelect($event.detail.value)"
+            ></ion-datetime>
+            <small *ngIf="fg.controls.birth_date.dirty">{{fg.controls.birth_date.errors?.required?.message}}</small>
+          </ion-item>
+
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">{{'PASSWORD' | translate}}</ion-label>
+            <ion-input
+              class="default-theme"
+              placeholder="{{'YOUR_PASSWORD' | translate}}"
+              type="password"
+              formControlName="password"
+            ></ion-input>
+            <small *ngIf="fg.controls.password.dirty"
+              >{{fg.controls.password.errors?.required?.message}}
+              {{fg.controls.password.errors?.minLength?.message}}</small
+            >
+          </ion-item>
+
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">{{'VERIFY_PASSWORD' | translate}}</ion-label>
+            <ion-input
+              class="default-theme"
+              placeholder="{{'VERIFY_PASSWORD_PLACEHOLDER' | translate}}"
+              type="password"
+              formControlName="confirm_password"
+            ></ion-input>
+            <small *ngIf="fg.controls.confirm_password.dirty"
+              >{{fg.controls.confirm_password.errors?.required?.message}}
+              {{fg.controls.confirm_password.errors?.compare?.message}}</small
+            >
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer class="ion-no-border ion-padding-horizontal">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="next()" [disabled]="fg.invalid"> {{'NEXT' | translate}} </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

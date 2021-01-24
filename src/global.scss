@@ -10,17 +10,225 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import '~@ionic/angular/css/core.css';
 
+@import '~@ionic/angular/css/core.css';
 /* Basic CSS for apps built with Ionic */
+
 @import '~@ionic/angular/css/normalize.css';
 @import '~@ionic/angular/css/structure.css';
 @import '~@ionic/angular/css/typography.css';
 @import '~@ionic/angular/css/display.css';
-
 /* Optional CSS utils that can be commented out */
+
 @import '~@ionic/angular/css/padding.css';
 @import '~@ionic/angular/css/float-elements.css';
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+.h-100 {
+  height: 100%;
+}
+
+.h-30 {
+  height: 30%;
+}
+
+.form-group {
+  ion-input.default-theme,
+  ion-textarea,
+  ion-select,
+  ion-datetime {
+    border: 1px solid #d7dde0;
+    border-radius: 5px;
+    margin-top: 16px;
+    .native-input {
+      padding-left: 16px;
+    }
+    .native-input::placeholder {
+      color: #d7dde0;
+    }
+  }
+
+  ion-textarea,
+  ion-select,
+  ion-datetime {
+    --padding-start: 16px;
+    --placeholder-color: #d7dde0;
+    font-size: 14px;
+
+    .native-textarea {
+      padding-left: 16px;
+      font-size: 16px;
+    }
+  }
+
+  .radio-wrapper-inline {
+    border: none;
+    width: 100%;
+    padding-left: 0;
+    margin-top: 0.5em;
+    div {
+      margin: auto;
+
+      .radio-label {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 4%;
+        padding-left: 10px;
+        font-size: 14px;
+      }
+      .radio-input {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+  small {
+    color: var(--ion-color-danger);
+  }
+
+  .count {
+    color: var(--ion-color-medium);
+  }
+}
+
+.stepper {
+  border-bottom: 3px solid var(--ion-color-primary);
+  &-inactive {
+    border-bottom: 3px solid black;
+    filter: opacity(0.5) !important;
+  }
+}
+
+.modal-info .modal-wrapper {
+  height: 32%;
+  width: 80%;
+  position: absolute;
+  display: block;
+  border-radius: 0.5em;
+}
+
+.modal-add-favorite .modal-wrapper {
+  height: 25%;
+  width: 80%;
+  position: absolute;
+  display: block;
+  border-radius: 0.5em;
+}
+
+.modal-add-to-favorite .modal-wrapper {
+  height: 42%;
+  width: 80%;
+  position: absolute;
+  display: block;
+  border-radius: 0.5em;
+}
+
+.font-md {
+  font-size: 13px;
+}
+
+.font-sm {
+  font-size: 11px;
+}
+
+.truncate {
+  /* width: 250px; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+ion-searchbar.custom-search {
+  padding-bottom: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  .searchbar-input-container input {
+    padding-left: 15px !important;
+    border: 1px solid lightgrey !important;
+    border-radius: 5px;
+    background-color: white;
+  }
+
+  ion-icon {
+    right: 16px !important;
+    left: auto !important;
+  }
+}
+
+.ion-no-padding-bottom {
+  padding-bottom: 0;
+}
+
+ion-slide.full-width {
+  width: 100% !important;
+}
+
+.rounded {
+  border-radius: 50%;
+}
+
+.swiper-pagination {
+  .swiper-pagination-bullet {
+    background-color: white !important;
+  }
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.section-desc {
+  font-size: 14px;
+}
+
+.section-see-all {
+  font-size: 12px;
+}
+
+img.full-width {
+  object-fit: cover;
+  width: 100%;
+}
+
+ion-card.ion-no-border {
+  box-shadow: none !important;
+}
+
+.slide-product .swiper-slide:nth-child(1) {
+  margin-left: 20px;
+}
+/* .slide-product .swiper-slide:nth-child(1) {
+  padding-left: 0;
+}
+.slide-product .swiper-slide:nth-last-child(1) {
+  padding-right: 0;
+}
+
+.slide-product .swiper-wrapper {
+  margin: 0 auto;
+  width: 86%;
+} */
+
+ion-searchbar {
+  .searchbar-clear-button {
+    display: none !important;
+  }
+}
+
+.btn-see-all {
+  padding: 0;
+  margin: 0;
+  height: auto;
+}
+
+.link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link:focus {
+  outline: 0;
+}

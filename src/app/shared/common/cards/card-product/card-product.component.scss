@@ -1,0 +1,32 @@
+.product-name {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.product-size {
+  font-size: 8px;
+  color: lightgray;
+  width: 95px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-price {
+  font-size: 10px;
+  text-decoration: line-through;
+  width: 95px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 10px;
+}
+
+.product-final-price {
+  font-size: 10px;
+  font-weight: bold;
+  width: 95px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

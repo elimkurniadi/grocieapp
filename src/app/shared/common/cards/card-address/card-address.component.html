@@ -1,0 +1,33 @@
+<ng-container *ngFor="let address of addressList; let i = index">
+  <ion-card class="ion-border ion-no-margin ion-margin-bottom" (click)="onAddressClick(i)">
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="12">
+          <span
+            ><b>{{ address.title }}</b></span
+          >
+          <br />
+          <span>{{ address?.address }}</span>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <span
+            ><b>{{ 'ADDRESS_DETAIL' | translate }}</b></span
+          >
+          <br />
+          <small>{{ address?.detail }}</small>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="showButton">
+        <ion-col size="12">
+          <ion-button expand="block" [disabled]="address?.selected" (click)="onUseAddress(i, $event)">
+            {{ address?.selected ? ('SELECTED' | translate) : ('USE_ADDRESS' | translate) }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ng-container>

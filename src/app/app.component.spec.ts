@@ -11,7 +11,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 describe('AppComponent', () => {
   // let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     // statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
     // splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
     // platformReadySpy = Promise.resolve();
@@ -27,7 +27,7 @@ describe('AppComponent', () => {
       //   { provide: Platform, useValue: platformSpy },
       // ],
     }).compileComponents();
-  }));
+  });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);

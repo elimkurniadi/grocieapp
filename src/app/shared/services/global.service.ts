@@ -1,4 +1,5 @@
 import { Injectable, isDevMode } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 
@@ -35,6 +36,32 @@ export class GlobalService {
       } catch {
         exec = null;
       }
+    });
+  }
+
+  countChar(value) {
+    let char = '';
+    char = value;
+    const charLength = char ? char.length : 0;
+    return charLength;
+  }
+
+  getChangedFormProperties(form: any) {
+    const dirtyValues = {};
+    Object.keys(form.controls).forEach((key) => {
+      const currentControl = form.controls[key];
+
+      if (currentControl.dirty) {
+        if (currentControl.controls) dirtyValues[key] = this.getChangedFormProperties(currentControl);
+        else dirtyValues[key] = currentControl.value;
+      }
+    });
+    return dirtyValues ? dirtyValues : null;
+  }
+
+  markDirtyForm(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((key) => {
+      formGroup.get(key).markAsDirty();
     });
   }
 }

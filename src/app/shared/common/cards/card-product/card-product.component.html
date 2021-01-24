@@ -1,0 +1,22 @@
+<ion-card class="ion-no-border">
+  <ion-card-header class="ion-no-padding" [routerLink]="['/product/detail/1']">
+    <img src="https://via.placeholder.com/200.png" class="full-width" />
+  </ion-card-header>
+
+  <ion-card-content class="ion-no-padding ion-text-left">
+    <ion-row>
+      <ion-col size="10" class="truncate">
+        <ion-text class="product-name">Alpukat Mentega </ion-text>
+      </ion-col>
+      <ion-col size="2" class="ion-text-right">
+        <ion-icon name="list" (click)="addToFavorite()"></ion-icon>
+      </ion-col>
+
+      <ion-col size="12">
+        <p class="product-size">250gr/pcs</p>
+        <p class="product-price">Rp 25.000</p>
+        <p class="product-final-price">Rp 20.000 <span> /pcs</span></p>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>

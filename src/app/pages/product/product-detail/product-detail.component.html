@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border product-detail-upper">
+  <ion-toolbar>
+    <ion-buttons slot="start" defaultHref="/tabs/home">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col size="12" class="ion-no-padding">
+        <img src="assets/images/placeholder-banner.png" />
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
+    <ion-row class="ion-justify-content-between">
+      <ion-col size="12">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="11" class="ion-no-padding">
+            <h4>Alpukat Super Mentega Alpukat Super Mentega</h4>
+          </ion-col>
+          <ion-col size="1" class="ion-no-padding ion-text-right">
+            <ion-icon name="{{ !isFavorite ? 'heart-outline' : 'heart' }}" (click)="ctaFavorite()"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="12" class="ion-no-padding">
+            <ion-text color="medium">250-400gr/pcs</ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="6" class="ion-no-padding">
+            <h4>Rp. 22,000 /kg</h4>
+          </ion-col>
+          <ion-col size="6" class="ion-no-padding">
+            <ion-button expand="block" color="primary" (click)="addToCart()">
+              {{ 'ADD_TO_CART' | translate }}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-between">
+      <ion-col size="12">
+        <h5>{{ 'DESCRIPTION' | translate }}</h5>
+        <p [innerHTML]="'OKEEE!'"></p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <h5>{{ 'RELATED_PRODUCT' | translate }}</h5>
+      </ion-col>
+      <ion-col size="12"><app-slide-product></app-slide-product></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

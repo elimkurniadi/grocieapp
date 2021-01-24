@@ -19,6 +19,8 @@ import * as Sentry from '@sentry/browser';
 import { environment } from '@env/environment';
 import { JwtAuthModule } from './jwt-auth.module';
 import { HTTP } from '@ionic-native/http/ngx';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 registerLocaleData(localeId, 'id');
 
@@ -47,6 +49,7 @@ export class SentryErrorHandler implements ErrorHandler {
     AppRoutingModule,
     HttpClientModule,
     JwtAuthModule,
+    FontAwesomeModule,
   ],
   providers: [
     StatusBar,
@@ -62,6 +65,7 @@ export class SentryErrorHandler implements ErrorHandler {
       useFactory: (translateService: any) => translateService.lang,
     },
     { provide: ErrorHandler, useClass: SentryErrorHandler },
+    AndroidPermissions,
   ],
   bootstrap: [AppComponent],
 })
