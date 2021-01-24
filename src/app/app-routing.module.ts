@@ -49,6 +49,10 @@ const routes: Routes = [
     path: 'address',
     loadChildren: () => import('./pages/address/address.module').then( m => m.AddressPageModule)
   },
+  {
+    path: 'bundling',
+    loadChildren: () => import('./pages/bundling/bundling.module').then( m => m.BundlingPageModule)
+  },
 
 ];
 

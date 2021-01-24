@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons mode="md" class="ion-text-center">
+      <ion-back-button defaultHref="/tabs/home" icon="chevron-back-outline"> </ion-back-button>
+      <ion-title class="header-title">{{ bundling?.name }}</ion-title>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="searchProduct()">
+        <ion-icon name="search" class="header-action-size"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card class="ion-no-border ion-no-margin-bottom">
+          <ion-card-header class="ion-no-padding" *ngIf="bundling?.image_url">
+            <img [src]="bundling?.image_url" class="full-width img-header" />
+          </ion-card-header>
+
+          <ion-card-content class="ion-no-padding ion-text-left">
+            <ion-row class="ion-padding-top">
+              <ion-col size="12" class="truncate">
+                <ion-text class="bundling-title">{{ bundling?.name }} </ion-text>
+              </ion-col>
+              <ion-col size="12">
+                <ion-text class="bundling-desc">
+                  {{ bundling?.description }}
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row class="padding-product">
+      <ion-col size="4" *ngFor="let item of products">
+        <app-card-product [product]="item"></app-card-product>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreProduct($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"> </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
