@@ -1,6 +1,6 @@
 <ion-row class="ion-padding">
   <ion-col size="8">
-    <ion-text class="section-title">{{ 'FRESH_GROCERIES' | translate }}</ion-text>
+    <ion-text class="section-title">{{ bundling.name }}</ion-text>
   </ion-col>
   <ion-col size="4" class="ion-text-right">
     <ion-text class="section-see-all">{{ 'SEE_ALL' | translate }}</ion-text>
@@ -9,13 +9,17 @@
     <ion-text class="section-desc">{{ 'FRESH_GROCERIES_DESC' | translate }}</ion-text>
   </ion-col>
 </ion-row>
-<ion-row class="ion-no-padding">
+<ion-row class="ion-no-padding" *ngIf="bundling.image_url">
   <ion-col class="ion-no-padding">
-    <app-slide-promo [banners]="banners"></app-slide-promo>
+    <img class="img-banner" [src]="bundling.image_url" />
   </ion-col>
 </ion-row>
-<ion-row class="ion-padding-top">
+<ion-row [ngClass]="{ 'ion-padding-top': bundling.image_url }">
   <ion-col>
-    <app-slide-product></app-slide-product>
+    <app-slide-product [products]="bundling.products"></app-slide-product>
   </ion-col>
+</ion-row>
+
+<ion-row>
+  <ion-col class="divider"></ion-col>
 </ion-row>

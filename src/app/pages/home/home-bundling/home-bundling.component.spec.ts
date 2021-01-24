@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { HomeGroceriesComponent } from './home-groceries.component';
+import { HomeBundlingComponent } from './home-bundling.component';
 
-describe('HomeGroceriesComponent', () => {
-  let component: HomeGroceriesComponent;
-  let fixture: ComponentFixture<HomeGroceriesComponent>;
+describe('HomeBundlingComponent', () => {
+  let component: HomeBundlingComponent;
+  let fixture: ComponentFixture<HomeBundlingComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeGroceriesComponent ],
+      declarations: [ HomeBundlingComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HomeGroceriesComponent);
+    fixture = TestBed.createComponent(HomeBundlingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

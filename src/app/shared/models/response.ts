@@ -1,5 +1,4 @@
 export interface Response {
-  code?: string;
-  message?: string;
-  payload?: any;
+  code?: number;
+  response?: any[];
 }

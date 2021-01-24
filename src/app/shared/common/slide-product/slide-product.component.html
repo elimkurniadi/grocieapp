@@ -1,5 +1,5 @@
-<ion-slides pager="false" [options]="slideOpts" class="slide-product">
-  <ion-slide *ngFor="let item of [1, 2, 3, 4, 5, 6]">
-    <app-card-product></app-card-product>
+<ion-slides pager="false" [options]="slideOpts" class="slide-product" *ngIf="products && products.length">
+  <ion-slide *ngFor="let item of products">
+    <app-card-product [product]="item"></app-card-product>
   </ion-slide>
 </ion-slides>

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { Router } from '@angular/router';
-import { AuthService, ExampleService, GlobalService } from '@shared/services';
+import { GlobalService, ToastService } from '@shared/services';
 import { ModalController } from '@ionic/angular';
 import { ModalLocationComponent } from '@shared/common/modals/modal-location/modal-location.component';
+import { BannerService, BundlingService } from '@shared/services/modules';
+import { Banner, Bundling } from '@shared/models';
 
 @Component({
   selector: 'app-home',
@@ -12,29 +14,22 @@ import { ModalLocationComponent } from '@shared/common/modals/modal-location/mod
 })
 export class HomePage implements OnInit {
   selectedLanguage: any = 'id';
-  banners = [
-    {
-      source: 'https://via.placeholder.com/360x203.png?text=Promotional+Banner',
-    },
-
-    {
-      source: 'https://via.placeholder.com/360x203.png?text=Promotional+Banner',
-    },
-    {
-      source: null,
-    },
-  ];
+  banners: Banner[];
+  bundlings: Bundling[];
 
   constructor(
     private translate: TranslateService,
     private router: Router,
-    private authSrv: AuthService,
-    private gs: GlobalService,
-    private exampleSrv: ExampleService,
+    private toastSrv: ToastService,
+    private bannerSrv: BannerService,
+    private bundlingSrv: BundlingService,
     private modalCtrl: ModalController
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getBanner();
+    this.getBundling();
+  }
 
   selectLang(lang) {
     this.selectedLanguage = lang;
@@ -55,5 +50,30 @@ export class HomePage implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  getBanner() {
+    this.bannerSrv
+      .getList()
+      .then((res) => {
+        const banners = res.response as Banner[];
+        this.banners = banners;
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
+  }
+  getBundling() {
+    this.bundlingSrv
+      .getList()
+      .then((res) => {
+        const bundlings = res.response.rows as Bundling[];
+        this.bundlings = bundlings;
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
   }
 }
