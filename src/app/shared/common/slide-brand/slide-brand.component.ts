@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Brand } from '@shared/models';
 
 @Component({
   selector: 'app-slide-brand',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./slide-brand.component.scss'],
 })
 export class SlideBrandComponent implements OnInit {
+  @Input() brands: Brand[];
+
   slideOpts = {
     slidesPerView: 4.8,
     speed: 900,

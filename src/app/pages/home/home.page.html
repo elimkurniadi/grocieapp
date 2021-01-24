@@ -48,21 +48,10 @@
     <ion-row>
       <ion-col class="divider"></ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngFor="let bundling of bundlings">
       <ion-col>
-        <app-home-groceries></app-home-groceries>
+        <app-home-bundling [bundling]="bundling"></app-home-bundling>
       </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="divider"></ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <app-home-specials></app-home-specials>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="divider"></ion-col>
     </ion-row>
     <ion-row>
       <ion-col>

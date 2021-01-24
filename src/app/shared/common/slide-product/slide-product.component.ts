@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Product } from '@shared/models';
 
 @Component({
   selector: 'app-slide-product',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./slide-product.component.scss'],
 })
 export class SlideProductComponent implements OnInit {
+  @Input() products: Product[];
+
   slideOpts = {
     slidesPerView: 3.5,
     speed: 900,

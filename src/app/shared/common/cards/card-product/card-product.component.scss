@@ -1,3 +1,9 @@
+.product-img {
+  width: 200px;
+  height: 80px;
+  object-fit: fill;
+}
+
 .product-name {
   font-size: 12px;
   font-weight: bold;
@@ -14,12 +20,15 @@
 
 .product-price {
   font-size: 10px;
-  text-decoration: line-through;
   width: 95px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   height: 10px;
+}
+
+.price-linethrough {
+  text-decoration: line-through;
 }
 
 .product-final-price {

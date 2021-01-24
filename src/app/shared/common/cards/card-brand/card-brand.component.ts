@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Brand } from '@shared/models';
 
 @Component({
   selector: 'app-card-brand',
@@ -6,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./card-brand.component.scss'],
 })
 export class CardBrandComponent implements OnInit {
+  @Input() brand: Brand;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
-
 }
