@@ -22,9 +22,9 @@ export class CardAddressComponent implements OnInit {
     this.navCtrl.back();
   }
 
-  onAddressClick(idx) {
+  onAddressClick(id) {
     if (!this.showButton) {
-      this.router.navigate([`/address/form/${idx}`]);
+      this.router.navigate([`/address/form/${id}`]);
     }
   }
 }

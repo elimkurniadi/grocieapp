@@ -1,5 +1,5 @@
 <ng-container *ngFor="let address of addressList; let i = index">
-  <ion-card class="ion-border ion-no-margin ion-margin-bottom" (click)="onAddressClick(i)">
+  <ion-card class="ion-border ion-no-margin ion-margin-bottom" (click)="onAddressClick(address?.address_id)">
     <ion-card-content>
       <ion-row>
         <ion-col size="12">
