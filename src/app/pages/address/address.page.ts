@@ -15,7 +15,9 @@ export class AddressPage implements OnInit {
     this.observeQueryParam();
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
     this.fetchAddressList();
   }
 

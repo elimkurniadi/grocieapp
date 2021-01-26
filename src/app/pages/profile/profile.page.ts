@@ -25,13 +25,16 @@ export class ProfilePage implements OnInit {
     private browserSrv: BrowserService,
     private userSrv: UserService
   ) {
-    this.fetchUserData();
     this.getAppVersion();
     this.setupLanguage();
     this.initMenuList();
   }
 
   ngOnInit() {}
+
+  ionViewWillEnter() {
+    this.fetchUserData();
+  }
 
   initMenuList() {
     this.menuList = [
