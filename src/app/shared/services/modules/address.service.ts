@@ -8,13 +8,15 @@ import { ApiService } from '../core/api.service';
 export class AddressService {
   constructor(private api: ApiService, private gs: GlobalService) {}
 
-  getAddressList(): Promise<any> {
+  getAddress(id: number = null): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData('address');
+      const path = id ? `address/${id}` : 'address';
+      const subscription = this.api.getData(`${path}`);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
-          resolve(res?.response?.rows);
+          const response = id ? res?.response : res?.response?.rows;
+          resolve(response);
         },
         (err) => {
           reject(err);
@@ -26,6 +28,21 @@ export class AddressService {
   createAddress(data): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.postData('address', data);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          resolve(true);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  putAddress(data, id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.putData(`address/${id}`, data);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {

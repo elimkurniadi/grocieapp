@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ 'ADD_NEW_ADDRESS' | translate }}</ion-title>
+    <ion-title>{{ addressId ? ('UPDATE_ADDRESS' | translate) : ('ADD_NEW_ADDRESS' | translate) }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
   <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
     <ion-row class="ion-justify-content-between">
       <ion-col size="12">
-        <form [formGroup]="fg">
+        <form [formGroup]="fg" *ngIf="fg">
           <ion-item lines="none" class="form-group">
             <ion-label position="stacked">{{ 'DELIVERY_ADDRESS' | translate }}</ion-label>
             <ion-input class="default-theme" placeholder="{{ 'PIN_LOCATION' | translate }}" type="text"> </ion-input>
@@ -126,7 +126,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" (click)="submit()" [disabled]="fg.invalid"> {{ 'NEXT' | translate }} </ion-button>
+        <ion-button expand="block" (click)="submit()" [disabled]="fg?.invalid"> {{ 'NEXT' | translate }} </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

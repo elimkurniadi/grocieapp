@@ -28,9 +28,17 @@ export class AddressPage implements OnInit {
     });
   }
 
-  fetchAddressList() {
-    this.addressSrv.getAddressList().then((res) => {
-      this.listAddress = res;
-    });
+  fetchAddressList(event = null) {
+    this.addressSrv
+      .getAddress()
+      .then((res) => {
+        this.listAddress = res;
+        if (event) {
+          event.target.complete();
+        }
+      })
+      .catch(() => {
+        event.target.complete();
+      });
   }
 }

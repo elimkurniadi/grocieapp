@@ -137,5 +137,6 @@
   "SELECTED": "Selected",
   "CHOOSE_LOCATION": "Choose Location",
   "SELECT": "Select",
-  "YOUR_QR_CODE": "Your QR Code"
+  "YOUR_QR_CODE": "Your QR Code",
+  "UPDATE_ADDRESS": "Update Adress"
 }

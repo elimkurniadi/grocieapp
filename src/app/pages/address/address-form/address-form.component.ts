@@ -39,7 +39,14 @@ export class AddressFormComponent implements OnInit {
     this.activatedRoute.params.subscribe((param) => {
       const id = +param?.id;
       this.addressId = id;
-      id ? this.initAddressForm(this.addressId) : this.initAddressForm();
+      this.addressId ? this.fetchAddressDetail(this.addressId) : this.initAddressForm();
+    });
+  }
+
+  fetchAddressDetail(id) {
+    this.addressSrv.getAddress(id).then((res) => {
+      this.addressData = res;
+      this.initAddressForm(this.addressData);
     });
   }
 
@@ -62,7 +69,7 @@ export class AddressFormComponent implements OnInit {
           RxwebValidators.maxLength({ value: 100, message: `${this.translateSrv.get('VALIDATOR_MAX')} 100` }),
         ],
       ],
-      province_id: [data?.province_id, [RxwebValidators.required()]],
+      province_id: [data?.province?.province_id, [RxwebValidators.required()]],
       city_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       postal_code: [data?.postal_code, [RxwebValidators.required(), RxwebValidators.numeric()]],
@@ -70,19 +77,27 @@ export class AddressFormComponent implements OnInit {
     });
 
     this.countCurrentChar();
-    data ? this.initAreaList(data?.province_id, data?.city_id, data?.district_id) : this.fetchProvinces();
+    console.log('data: ', data);
+    data
+      ? this.initAreaList(data?.province?.province_id, data?.city?.city_id, data?.district?.district_id)
+      : this.fetchProvinces();
   }
 
   submit() {
     if (this.fg.valid) {
-      if (!this.addressId) {
-        this.addAddress(this.fg.value);
-      }
+      this.addressId ? this.updateAddress(this.fg, this.addressId) : this.addAddress(this.fg.value);
     }
   }
 
   addAddress(data) {
     this.addressSrv.createAddress(data).then(() => {
+      this.navCtrl.back();
+    });
+  }
+
+  updateAddress(data, id) {
+    const dirtyValue = this.gs.getChangedFormProperties(data);
+    this.addressSrv.putAddress(dirtyValue, id).then(() => {
       this.navCtrl.back();
     });
   }
@@ -104,6 +119,7 @@ export class AddressFormComponent implements OnInit {
     this.fetchDistricts(idCity);
     controls.district_id.setValue(idDistrict);
     controls.district_id.enable();
+    this.fg.updateValueAndValidity();
   }
 
   fetchProvinces() {
