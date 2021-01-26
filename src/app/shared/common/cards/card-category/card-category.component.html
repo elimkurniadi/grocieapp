@@ -1,12 +1,12 @@
 <ion-row>
-  <ion-col class="ion-text-center ion-padding-vertical" (click)="goToProductByCategory('CategoryId')">
+  <ion-col class="ion-text-center ion-padding-vertical" (click)="goToProductByCategory(category?.category_id)">
     <ion-row>
       <ion-col size="12">
-        <img [src]="category.image_url" class="cat-icon rounded" *ngIf="category.image_url" />
-        <img src="https://via.placeholder.com/50.png" class="cat-icon rounded" *ngIf="!category.image_url" />
+        <img [src]="category?.image_url" class="cat-icon rounded" *ngIf="category?.image_url" />
+        <img src="https://via.placeholder.com/50.png" class="cat-icon rounded" *ngIf="!category?.image_url" />
       </ion-col>
       <ion-col size="12">
-        <ion-text class="category-name">{{ category.name }}</ion-text>
+        <ion-text class="category-name">{{ category?.name }}</ion-text>
       </ion-col>
     </ion-row>
   </ion-col>
