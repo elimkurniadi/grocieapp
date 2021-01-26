@@ -80,6 +80,7 @@ export class UserService {
   updateProfile(data): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.putData('profile', data);
+      this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
           res.code === 200 ? resolve(true) : reject(false);

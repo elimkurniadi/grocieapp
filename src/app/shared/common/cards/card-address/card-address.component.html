@@ -4,7 +4,7 @@
       <ion-row>
         <ion-col size="12">
           <span
-            ><b>{{ address.title }}</b></span
+            ><b>{{ address?.address_name }}</b></span
           >
           <br />
           <span>{{ address?.address }}</span>
@@ -17,7 +17,7 @@
             ><b>{{ 'ADDRESS_DETAIL' | translate }}</b></span
           >
           <br />
-          <small>{{ address?.detail }}</small>
+          <small>{{ address?.address_detail ? address?.address_detail : '-' }}</small>
         </ion-col>
       </ion-row>
 
