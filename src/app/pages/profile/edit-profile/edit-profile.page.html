@@ -1,14 +1,17 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>{{'EDIT_PROFILE' | translate}}</ion-title>
   </ion-toolbar>
+  <ion-row>
+    <ion-col size="12" class="divider"></ion-col>
+  </ion-row>
 </ion-header>
 
 <ion-content>
-  <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
+  <ion-grid class="ion-padding-horizontal h-100">
     <ion-row class="ion-justify-content-between">
       <ion-col size="12" class="ion-no-padding">
         <form [formGroup]="fg" *ngIf="fg">
@@ -51,6 +54,12 @@
           </ion-item>
         </form>
       </ion-col>
+
+      <ion-col size="12" class="ion-padding">
+        <ion-button [routerLink]="['/change-password']" expand="block" shape="round" fill="outline" color="success">
+          {{'CHANGE_PASSWORD' | translate}}
+        </ion-button>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
@@ -59,10 +68,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <ion-button [routerLink]="['/change-password']" expand="block"> {{'CHANGE_PASSWORD' | translate}} </ion-button>
-      </ion-col>
-      <ion-col size="12">
-        <ion-button (click)="updateProfile()" expand="block" [disabled]="fg?.pristine">
+        <ion-button (click)="updateProfile()" expand="block" shape="round" color="success" [disabled]="fg?.pristine">
           {{'UPDATE' | translate}}
         </ion-button>
       </ion-col>
