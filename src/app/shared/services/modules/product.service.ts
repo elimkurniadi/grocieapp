@@ -23,4 +23,18 @@ export class ProductService {
       );
     });
   }
+  getListByCategory(categoryId: string, pagination?: Page, ordering?: Sort): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData(`product/category/${categoryId}`, pagination, ordering);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: ResponsePagination) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }
