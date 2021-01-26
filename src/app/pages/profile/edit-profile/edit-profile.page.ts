@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { GlobalService, RxValidatorService } from '@shared/services';
+import { UserService } from '@shared/services/modules';
 
 @Component({
   selector: 'app-edit-profile',
@@ -12,20 +13,18 @@ import { GlobalService, RxValidatorService } from '@shared/services';
 })
 export class EditProfilePage implements OnInit {
   fg: FormGroup;
-  userData = {
-    full_name: 'Sapri Sikidipapap',
-    email: 'email@email.com',
-    phone: '081388355240',
-  };
 
   constructor(
     private validatorSrv: RxValidatorService,
     private fb: FormBuilder,
     private router: Router,
     private gs: GlobalService,
-    private translateSrv: TranslateService
+    private translateSrv: TranslateService,
+    private userSrv: UserService
   ) {
-    this.initProfileForm(this.userData);
+    this.userSrv.getProfile().then((res) => {
+      this.initProfileForm(res);
+    });
   }
 
   ngOnInit() {}
@@ -50,7 +49,9 @@ export class EditProfilePage implements OnInit {
   updateProfile() {
     if (this.fg.valid) {
       const data = this.getDirtyValues();
-      this.router.navigate(['/tabs/profile']);
+      this.userSrv.updateProfile(data).then(() => {
+        this.router.navigate(['/tabs/profile']);
+      });
     }
   }
 

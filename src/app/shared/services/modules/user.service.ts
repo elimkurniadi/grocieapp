@@ -31,7 +31,7 @@ export class UserService {
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
-          resolve(res);
+          resolve(res?.response);
         },
         (err) => {
           reject(err);
@@ -69,6 +69,20 @@ export class UserService {
         (res: any) => {
           res.code === 200 && res.response ? resolve(true) : reject(false);
           resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  updateProfile(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.putData('profile', data);
+      subscription.subscribe(
+        (res: any) => {
+          res.code === 200 ? resolve(true) : reject(false);
         },
         (err) => {
           reject(err);

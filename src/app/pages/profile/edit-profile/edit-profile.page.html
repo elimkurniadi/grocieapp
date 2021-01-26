@@ -11,7 +11,7 @@
   <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
     <ion-row class="ion-justify-content-between">
       <ion-col size="12" class="ion-no-padding">
-        <form [formGroup]="fg">
+        <form [formGroup]="fg" *ngIf="fg">
           <ion-item lines="none" class="form-group">
             <ion-label position="stacked">{{'NAME' | translate}}</ion-label>
             <ion-input
@@ -62,7 +62,7 @@
         <ion-button [routerLink]="['/change-password']" expand="block"> {{'CHANGE_PASSWORD' | translate}} </ion-button>
       </ion-col>
       <ion-col size="12">
-        <ion-button (click)="updateProfile()" expand="block" [disabled]="fg.pristine">
+        <ion-button (click)="updateProfile()" expand="block" [disabled]="fg?.pristine">
           {{'UPDATE' | translate}}
         </ion-button>
       </ion-col>
