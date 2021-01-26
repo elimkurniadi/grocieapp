@@ -23,6 +23,21 @@ export class AddressService {
     });
   }
 
+  createAddress(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.postData('address', data);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          resolve(true);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
   getProvinces(): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData('address/province');

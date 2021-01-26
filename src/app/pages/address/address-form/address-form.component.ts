@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { GlobalService, RxValidatorService } from '@shared/services';
@@ -14,10 +15,11 @@ import { AddressService } from '@shared/services/modules/address.service';
 export class AddressFormComponent implements OnInit {
   fg: FormGroup;
   addressData = null;
-  currentChar = null;
+  currentChar = 0;
   provinceList: any[] = null;
   cityList: any[] = null;
   districtList: any[] = null;
+  addressId: any = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -25,7 +27,8 @@ export class AddressFormComponent implements OnInit {
     private fb: FormBuilder,
     private translateSrv: TranslateService,
     private gs: GlobalService,
-    private addressSrv: AddressService
+    private addressSrv: AddressService,
+    private navCtrl: NavController
   ) {
     this.observerParam();
   }
@@ -35,21 +38,22 @@ export class AddressFormComponent implements OnInit {
   observerParam() {
     this.activatedRoute.params.subscribe((param) => {
       const id = +param?.id;
-      if (id) {
-        // FETCH ADDRESS DETAIL AND PASS TO INIT FORM ARGUMENT
-      } else {
-        // INIT FORM WITHOUT ARGUMENT
-      }
-
-      this.initAddressForm();
+      this.addressId = id;
+      id ? this.initAddressForm(this.addressId) : this.initAddressForm();
     });
   }
 
   initAddressForm(data = null) {
     this.validatorSrv.validatorErrorMessage();
     this.fg = this.fb.group({
-      latitude: [data?.latitude, [RxwebValidators.required(), RxwebValidators.latitude()]],
-      longitude: [data?.longitude, [RxwebValidators.required(), RxwebValidators.longitude()]],
+      latitude: [
+        data?.latitude ? data?.latitude : '-6.598574',
+        [RxwebValidators.required(), RxwebValidators.latitude()],
+      ],
+      longitude: [
+        data?.longitude ? data?.longitude : '106.807496',
+        [RxwebValidators.required(), RxwebValidators.longitude()],
+      ],
       address: [
         data?.address,
         [
@@ -65,15 +69,25 @@ export class AddressFormComponent implements OnInit {
       address_name: [data?.address_name, [RxwebValidators.required()]],
     });
 
+    this.countCurrentChar();
     data ? this.initAreaList(data?.province_id, data?.city_id, data?.district_id) : this.fetchProvinces();
   }
 
   submit() {
     if (this.fg.valid) {
+      if (!this.addressId) {
+        this.addAddress(this.fg.value);
+      }
     }
   }
 
-  countCurrentChate() {
+  addAddress(data) {
+    this.addressSrv.createAddress(data).then(() => {
+      this.navCtrl.back();
+    });
+  }
+
+  countCurrentChar() {
     const subscription = this.fg.controls.address.valueChanges;
     subscription.subscribe((res) => {
       this.currentChar = this.gs.countChar(res);

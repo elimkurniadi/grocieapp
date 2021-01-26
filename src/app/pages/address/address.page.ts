@@ -13,10 +13,11 @@ export class AddressPage implements OnInit {
   selectMode = false;
   constructor(private activatedRoute: ActivatedRoute, private addressSrv: AddressService) {
     this.observeQueryParam();
-    this.fetchAddressList();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchAddressList();
+  }
 
   observeQueryParam() {
     this.activatedRoute.queryParams.subscribe((param) => {
