@@ -49,13 +49,13 @@ export class ProfilePage implements OnInit {
         url: null,
       },
       {
-        title: `${this.translateSrv.get('ARTICLE')}`,
-        route: '/article',
+        title: `${this.translateSrv.get('LANGUAGE')}`,
+        route: null,
         url: null,
       },
       {
-        title: `${this.translateSrv.get('LANGUAGE')}`,
-        route: null,
+        title: `${this.translateSrv.get('SHARE_MY_APP')}`,
+        route: '/',
         url: null,
       },
       {
