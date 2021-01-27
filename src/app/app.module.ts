@@ -21,7 +21,7 @@ import { JwtAuthModule } from './jwt-auth.module';
 import { HTTP } from '@ionic-native/http/ngx';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { Camera } from '@ionic-native/Camera/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 
 registerLocaleData(localeId, 'id');
