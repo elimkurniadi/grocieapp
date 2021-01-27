@@ -55,6 +55,36 @@ export class AddressService {
     });
   }
 
+  deleteAddress(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.deleteData(`address/${id}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          resolve(true);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  setDefaultAddress(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.putData(`address/set_default/${id}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
   getProvinces(): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData('address/province');

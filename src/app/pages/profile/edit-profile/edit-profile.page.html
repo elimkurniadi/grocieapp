@@ -5,9 +5,6 @@
     </ion-buttons>
     <ion-title>{{'EDIT_PROFILE' | translate}}</ion-title>
   </ion-toolbar>
-  <ion-row>
-    <ion-col size="12" class="divider"></ion-col>
-  </ion-row>
 </ion-header>
 
 <ion-content>
@@ -15,6 +12,31 @@
     <ion-row class="ion-justify-content-between">
       <ion-col size="12" class="ion-no-padding">
         <form [formGroup]="fg" *ngIf="fg">
+          <ion-row class="ion-padding ion-align-items-center bg-white">
+            <ion-col size="2" class="ion-no-padding">
+              <img width="80%" class="rounded" [src]="selectedImage" />
+            </ion-col>
+            <ion-col size="7">
+              <ion-row>
+                <ion-col size="12" class="ion-no-padding">
+                  <ion-text color="dark">{{'PROFILE_PICTURE' | translate}}</ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col size="3" class="ion-no-padding">
+              <ion-button
+                expand="block"
+                fill="solid"
+                shape="round"
+                color="success"
+                size="small"
+                (click)="showActionSheet()"
+              >
+                {{'CHANGE' | translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
           <ion-item lines="none" class="form-group">
             <ion-label position="stacked">{{'NAME' | translate}}</ion-label>
             <ion-input

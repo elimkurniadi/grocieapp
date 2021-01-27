@@ -26,7 +26,11 @@
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <app-card-address [addressList]="listAddress" [showButton]="selectMode"></app-card-address>
+        <app-card-address
+          [addressList]="listAddress"
+          [isSelectMode]="selectMode"
+          (action)="fetchAddressList()"
+        ></app-card-address>
       </ion-col>
     </ion-row>
   </ion-grid>

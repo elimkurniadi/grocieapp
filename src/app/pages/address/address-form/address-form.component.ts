@@ -53,6 +53,16 @@ export class AddressFormComponent implements OnInit {
   initAddressForm(data = null) {
     this.validatorSrv.validatorErrorMessage();
     this.fg = this.fb.group({
+      receiver_name: [data?.receiver_name ? data?.receiver_name : null, RxwebValidators.required()],
+      phone: [
+        data?.phone ? data?.phone : null,
+        [
+          RxwebValidators.required(),
+          RxwebValidators.numeric(),
+          RxwebValidators.minLength({ value: 7, message: `${this.translateSrv.get('VALIDATOR_MIN')} 7` }),
+          RxwebValidators.maxLength({ value: 15, message: `${this.translateSrv.get('VALIDATOR_MAX')} 15` }),
+        ],
+      ],
       latitude: [
         data?.latitude ? data?.latitude : '-6.598574',
         [RxwebValidators.required(), RxwebValidators.latitude()],
@@ -61,8 +71,9 @@ export class AddressFormComponent implements OnInit {
         data?.longitude ? data?.longitude : '106.807496',
         [RxwebValidators.required(), RxwebValidators.longitude()],
       ],
-      address: [
-        data?.address,
+      address: [data?.address ? data?.address : '-', [RxwebValidators.required()]],
+      address_detail: [
+        data?.address_detail ? data?.address_detail : null,
         [
           RxwebValidators.required(),
           RxwebValidators.minLength({ value: 8, message: `${this.translateSrv.get('VALIDATOR_MIN')} 8` }),
@@ -77,10 +88,11 @@ export class AddressFormComponent implements OnInit {
     });
 
     this.countCurrentChar();
-    console.log('data: ', data);
-    data
-      ? this.initAreaList(data?.province?.province_id, data?.city?.city_id, data?.district?.district_id)
-      : this.fetchProvinces();
+    this.fetchProvinces().then(() => {
+      if (data) {
+        this.initAreaList(data?.province?.province_id, data?.city?.city_id, data?.district?.district_id);
+      }
+    });
   }
 
   submit() {
@@ -103,39 +115,45 @@ export class AddressFormComponent implements OnInit {
   }
 
   countCurrentChar() {
-    const subscription = this.fg.controls.address.valueChanges;
+    const subscription = this.fg.controls.address_detail.valueChanges;
     subscription.subscribe((res) => {
       this.currentChar = this.gs.countChar(res);
     });
   }
 
-  initAreaList(idProvince, idCity, idDistrict) {
+  async initAreaList(idProvince, idCity, idDistrict) {
     const controls = this.fg.controls;
-    this.fetchProvinces();
     controls.province_id.setValue(idProvince);
-    this.fetchCities(idProvince);
-    controls.city_id.setValue(idCity);
-    controls.city_id.enable();
-    this.fetchDistricts(idCity);
-    controls.district_id.setValue(idDistrict);
-    controls.district_id.enable();
     this.fg.updateValueAndValidity();
+    this.fetchCities(idProvince)
+      .then(() => {
+        controls.city_id.setValue(idCity);
+        controls.city_id.enable();
+        this.fg.updateValueAndValidity();
+      })
+      .then(() => {
+        this.fetchDistricts(idCity).then(() => {
+          controls.district_id.setValue(idDistrict);
+          controls.district_id.enable();
+          this.fg.updateValueAndValidity();
+        });
+      });
   }
 
-  fetchProvinces() {
-    this.addressSrv.getProvinces().then((res) => {
+  async fetchProvinces() {
+    await this.addressSrv.getProvinces().then((res) => {
       this.provinceList = res;
     });
   }
 
-  fetchCities(provinceId) {
-    this.addressSrv.getCities(provinceId).then((res) => {
+  async fetchCities(provinceId) {
+    await this.addressSrv.getCities(provinceId).then((res) => {
       this.cityList = res;
     });
   }
 
-  fetchDistricts(cityId) {
-    this.addressSrv.getDistricts(cityId).then((res) => {
+  async fetchDistricts(cityId) {
+    await this.addressSrv.getDistricts(cityId).then((res) => {
       this.districtList = res;
     });
   }

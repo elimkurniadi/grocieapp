@@ -138,6 +138,17 @@
   "CHOOSE_LOCATION": "Pilih Lokasi",
   "SELECT": "Pilih",
   "YOUR_QR_CODE": "Kode QR Anda",
-  "UPDATE_ADDRESS": "Update Adress",
-  "SHARE_MY_APP": "Share My App"
+  "UPDATE_ADDRESS": "Ubah Alamat",
+  "SHARE_MY_APP": "Bagikan Aplikasi Saya",
+  "PROFILE_PICTURE": "Gambar Profil",
+  "CHANGE": "Ubah",
+  "SELECT_IMAGE_SOURCE": "Pilih Sumber Gambar",
+  "CHOOSE_FROM_GALLERY": "Ambil dari Album",
+  "TAKE_A_PHOTO": "Ambil Foto",
+  "RECEIVER_NAME": "Nama Penerima",
+  "RECEIVER_NAME_PLACEHOLDER": "Nama Penerima Anda",
+  "SET_DEFAULT": "Tetapkan Default",
+  "DEFAULT_ADDRESS": "Alamat Default",
+  "SELECT_ADDRESS": "Pilih Alamat",
+  "DELETE_ADDRESS_CONFIRM": "Apakah Anda yakin ingin menghapus alamat ini?"
 }

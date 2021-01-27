@@ -5,6 +5,9 @@ import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { GlobalService, RxValidatorService } from '@shared/services';
 import { UserService } from '@shared/services/modules';
+import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-profile',
@@ -13,6 +16,11 @@ import { UserService } from '@shared/services/modules';
 })
 export class EditProfilePage implements OnInit {
   fg: FormGroup;
+  imagePickerOptions = {
+    maximumImagesCount: 1,
+    quality: 50,
+  };
+  selectedImage: any = null;
 
   constructor(
     private validatorSrv: RxValidatorService,
@@ -20,7 +28,10 @@ export class EditProfilePage implements OnInit {
     private router: Router,
     private gs: GlobalService,
     private translateSrv: TranslateService,
-    private userSrv: UserService
+    private userSrv: UserService,
+    private camera: Camera,
+    private file: File,
+    private actionSheetCtrl: ActionSheetController
   ) {
     this.userSrv.getProfile().then((res) => {
       this.initProfileForm(res);
@@ -30,8 +41,12 @@ export class EditProfilePage implements OnInit {
   ngOnInit() {}
 
   initProfileForm(user) {
+    this.selectedImage = user?.profile_picture
+      ? user?.profile_picture
+      : 'https://via.placeholder.com/35.png?text=LOGO+Placeholder';
     this.validatorSrv.validatorErrorMessage();
     this.fg = this.fb.group({
+      profile_picture: [user?.profile_picture ? user?.profile_picture : null],
       full_name: [user?.full_name, [RxwebValidators.required()]],
       email: [user?.email, [RxwebValidators.required(), RxwebValidators.email()]],
       phone: [
@@ -57,5 +72,48 @@ export class EditProfilePage implements OnInit {
 
   getDirtyValues() {
     return this.gs.getChangedFormProperties(this.fg);
+  }
+
+  async showActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: `${this.translateSrv.get('SELECT_IMAGE_SOURCE')}`,
+      buttons: [
+        {
+          text: `${this.translateSrv.get('CHOOSE_FROM_GALLERY')}`,
+          handler: () => {
+            this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+          },
+        },
+        {
+          text: `${this.translateSrv.get('TAKE_A_PHOTO')}`,
+          handler: () => {
+            this.pickImage(this.camera.PictureSourceType.CAMERA);
+          },
+        },
+      ],
+    });
+
+    await actionSheet.present();
+  }
+
+  pickImage(type) {
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: type,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+      const image = `data:image/jpeg;base64,${imageData}`;
+      this.setImageToForm(image);
+    });
+  }
+
+  setImageToForm(image) {
+    this.selectedImage = image;
+    this.fg.controls.profile_picture.patchValue(image);
+    this.fg.controls.profile_picture.markAsDirty();
   }
 }

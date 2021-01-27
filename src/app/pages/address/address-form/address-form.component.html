@@ -13,23 +13,63 @@
       <ion-col size="12">
         <form [formGroup]="fg" *ngIf="fg">
           <ion-item lines="none" class="form-group">
-            <ion-label position="stacked">{{ 'DELIVERY_ADDRESS' | translate }}</ion-label>
-            <ion-input class="default-theme" placeholder="{{ 'PIN_LOCATION' | translate }}" type="text"> </ion-input>
+            <ion-label position="stacked">{{ 'RECEIVER_NAME' | translate }}</ion-label>
+            <ion-input
+              class="default-theme"
+              placeholder="{{ 'RECEIVER_NAME_PLACEHOLDER' | translate }}"
+              type="text"
+              formControlName="receiver_name"
+            >
+            </ion-input>
+            <small *ngIf="fg.controls.receiver_name.dirty">
+              {{ fg.controls.receiver_name.errors?.required?.message }}
+            </small>
           </ion-item>
+
+          <ion-item lines="none" class="form-group">
+            <ion-label position="stacked">{{ 'PHONE_NUMBER' | translate }}</ion-label>
+            <ion-input
+              class="default-theme"
+              placeholder="{{ 'PHONE_NUMBER_PLACEHOLDER' | translate }}"
+              type="tel"
+              formControlName="phone"
+            ></ion-input>
+            <small *ngIf="fg.controls.phone.dirty"
+              >{{ fg.controls.phone.errors?.required?.message }} {{ fg.controls.phone.errors?.numeric?.message }}
+              {{ fg.controls.phone.errors?.minLength?.message }}
+              {{ fg.controls.phone.errors?.maxLength?.message }}</small
+            >
+          </ion-item>
+
+          <ion-row class="ion-align-items-center ion-padding">
+            <ion-col size="6" class="ion-no-padding">
+              <ion-text size="small"
+                ><small>{{ 'DELIVERY_ADDRESS' | translate }}</small></ion-text
+              >
+            </ion-col>
+            <ion-col size="6" class="ion-no-padding ion-text-right">
+              <ion-button fill="outline" shape="round" size="small" color="secondary">
+                {{ 'PIN_LOCATION' | translate }}
+              </ion-button>
+            </ion-col>
+            <ion-col size="12" class="ion-no-padding">
+              <small>{{ fg.value.address }}</small>
+            </ion-col>
+          </ion-row>
 
           <ion-item lines="none" class="form-group">
             <ion-label position="stacked">{{ 'ADDRESS_DETAIL' | translate }}</ion-label>
             <ion-textarea
               placeholder="{{ 'ADDRESS_DETAIL_PLACEHOLDER' | translate }}"
-              formControlName="address"
+              formControlName="address_detail"
               rows="6"
             ></ion-textarea>
             <ion-row class="ion-no-padding">
               <ion-col size="6" class="ion-no-padding">
-                <small *ngIf="fg.controls.address.dirty"
-                  >{{ fg.controls.address.errors?.required?.message }}
-                  {{ fg.controls.address.errors?.minLength?.message }}
-                  {{ fg.controls.address.errors?.maxLength?.message }}</small
+                <small *ngIf="fg.controls.address_detail.dirty"
+                  >{{ fg.controls.address_detail.errors?.required?.message }}
+                  {{ fg.controls.address_detail.errors?.minLength?.message }}
+                  {{ fg.controls.address_detail.errors?.maxLength?.message }}</small
                 >
               </ion-col>
               <ion-col size="6" class="ion-no-padding ion-text-right">
