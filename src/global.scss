@@ -34,6 +34,13 @@
 }
 
 .form-group {
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+  }
+  ion-label {
+    font-weight: bold;
+  }
   ion-input.default-theme,
   ion-textarea,
   ion-select,
@@ -47,6 +54,13 @@
     .native-input::placeholder {
       color: #d7dde0;
     }
+  }
+  ion-icon {
+    position: absolute;
+    // background: var(--ion-color-light);
+    right: 1.3em;
+    bottom: 0.2em;
+    z-index: 1000;
   }
 
   ion-textarea,
@@ -83,12 +97,13 @@
       }
     }
   }
-  small {
-    color: var(--ion-color-danger);
-  }
 
   .count {
     color: var(--ion-color-medium);
+  }
+
+  small {
+    color: var(--ion-color-danger);
   }
 }
 

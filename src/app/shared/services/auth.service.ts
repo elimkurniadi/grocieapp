@@ -8,6 +8,7 @@ import { ApiService } from './core/api.service';
 import { Response } from '@shared/models';
 
 import { Plugins } from '@capacitor/core';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,7 +17,8 @@ export class AuthService {
     private jwtHelper: JwtHelperService,
     private cache: CacheService,
     private gs: GlobalService,
-    private api: ApiService
+    private api: ApiService,
+    private router: Router
   ) {
     this.checkToken();
   }
@@ -111,5 +113,11 @@ export class AuthService {
   loginByToken(token) {
     const decoded = this.jwtHelper.decodeToken(token);
     this.cache.setCurrentUser(decoded, token);
+  }
+
+  logout() {
+    this.cache.removeCurrentUser().then(() => {
+      this.router.navigateByUrl('/login', { replaceUrl: true });
+    });
   }
 }

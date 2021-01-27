@@ -9,9 +9,10 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 import { ProfilePage } from './profile.page';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { SharedModule } from '@shared/shared.module';
+import { OtpModule } from '@shared/common/otp/otp.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, ProfilePageRoutingModule, SharedModule],
+  imports: [CommonModule, FormsModule, IonicModule, ProfilePageRoutingModule, SharedModule, OtpModule],
   declarations: [ProfilePage],
   providers: [AppVersion],
 })

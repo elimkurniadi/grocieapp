@@ -28,8 +28,8 @@ export class CacheService {
     this.currentUser.token = token;
   }
 
-  removeCurrentUser() {
+  async removeCurrentUser() {
     this.currentUser = null;
-    this.removeToken();
+    await this.removeToken();
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
+import { AuthService } from '@shared/services';
 import { BrowserService } from '@shared/services/browser.service';
 import { UserService } from '@shared/services/modules';
 
@@ -23,7 +24,8 @@ export class ProfilePage implements OnInit {
     private appVersion: AppVersion,
     private router: Router,
     private browserSrv: BrowserService,
-    private userSrv: UserService
+    private userSrv: UserService,
+    private authSrv: AuthService
   ) {
     this.getAppVersion();
     this.setupLanguage();
@@ -120,5 +122,9 @@ export class ProfilePage implements OnInit {
           event.target.complete();
         }
       });
+  }
+
+  logout() {
+    this.authSrv.logout();
   }
 }
