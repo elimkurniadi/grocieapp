@@ -12,11 +12,14 @@
 
 <ion-content>
   <ion-list class="ion-padding">
-    <ion-item class="favorite-item ion-margin-bottom" *ngFor="let item of [1, 2, 3]">
-      <ion-label>Shopping List</ion-label>
-      <ion-text slot="end" class="ion-text-right text-see-list link" [routerLink]="['/favorite', item, 'detail']">{{
-        'SEE_LIST' | translate
-      }}</ion-text>
+    <ion-item class="favorite-item ion-margin-bottom" *ngFor="let item of favorites">
+      <ion-label>{{ item.name }}</ion-label>
+      <ion-text
+        slot="end"
+        class="ion-text-right text-see-list link"
+        [routerLink]="['/favorite', item.favourite_group_id, 'detail']"
+        >{{ 'SEE_LIST' | translate }}</ion-text
+      >
     </ion-item>
   </ion-list>
 </ion-content>

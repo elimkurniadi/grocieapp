@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Favorite, Response } from '@shared/models';
+import { ToastService } from '@shared/services';
+import { FavoriteService } from '@shared/services/modules';
 import { FavoriteNewComponent } from '../favorite-new/favorite-new.component';
 
 @Component({
@@ -8,9 +11,17 @@ import { FavoriteNewComponent } from '../favorite-new/favorite-new.component';
   styleUrls: ['./favorite-list.component.scss'],
 })
 export class FavoriteListComponent implements OnInit {
-  constructor(private modalCtrl: ModalController) {}
+  favorites: Favorite[];
 
-  ngOnInit() {}
+  constructor(
+    private modalCtrl: ModalController,
+    private favoriteSrv: FavoriteService,
+    private toastSrv: ToastService
+  ) {}
+
+  ngOnInit() {
+    this.getFavorites();
+  }
 
   async addToList() {
     const modal = await this.modalCtrl.create({
@@ -19,9 +30,22 @@ export class FavoriteListComponent implements OnInit {
     });
 
     modal.onDidDismiss().then(() => {
-      // Refresh data
+      this.getFavorites();
     });
 
     return await modal.present();
+  }
+
+  getFavorites() {
+    this.favoriteSrv
+      .getList()
+      .then((res: Response) => {
+        const favorites = res.response as Favorite[];
+        this.favorites = favorites;
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
   }
 }
