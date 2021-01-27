@@ -16,6 +16,9 @@ import * as moment from 'moment';
 export class RegisterPage implements OnInit, OnDestroy {
   fg: FormGroup;
   currDate = moment(new Date()).format('YYYY-MM-DD');
+  passwordIsShow = false;
+  confPasswordIsShow = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,

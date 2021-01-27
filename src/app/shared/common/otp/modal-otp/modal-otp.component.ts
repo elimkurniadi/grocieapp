@@ -68,15 +68,9 @@ export class ModalOtpComponent implements OnInit {
   }
 
   verifyOtp() {
-    // POST VERIFY EMAIL IF SUCCESS  OPEN MODAL SUCCESS
-    this.userSrv
-      .verifyEmail(this.otpValue)
-      .then(() => {
-        this.showSuccessOtpModal();
-      })
-      .catch(() => {
-        this.toastSrv.show(`${this.translateSrv.get('OTP_FAILED')}`);
-      });
+    // POST AND CALL SHOWSUCCESSOTPMODAL FUNCTION
+
+    this.showSuccessOtpModal();
   }
 
   onOtpChange(event) {

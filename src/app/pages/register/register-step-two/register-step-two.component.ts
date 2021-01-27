@@ -48,9 +48,20 @@ export class RegisterStepTwoComponent implements OnInit {
   initRegisterFormStepTwo() {
     this.validatorSrv.validatorErrorMessage();
     this.fg = this.fb.group({
+      receiver_name: [this.prefixFormValue?.full_name, RxwebValidators.required()],
+      phone: [
+        this.prefixFormValue?.phone,
+        [
+          RxwebValidators.required(),
+          RxwebValidators.numeric(),
+          RxwebValidators.minLength({ value: 7, message: `${this.translateSrv.get('VALIDATOR_MIN')} 7` }),
+          RxwebValidators.maxLength({ value: 15, message: `${this.translateSrv.get('VALIDATOR_MAX')} 15` }),
+        ],
+      ],
       latitude: ['-6.598574', [RxwebValidators.required(), RxwebValidators.latitude()]],
       longitude: ['106.807496', [RxwebValidators.required(), RxwebValidators.longitude()]],
-      address: [
+      address: ['-', [RxwebValidators.required()]],
+      address_detail: [
         null,
         [
           RxwebValidators.required(),
@@ -73,8 +84,7 @@ export class RegisterStepTwoComponent implements OnInit {
     if (this.fg.valid) {
       const value = this.combineFormValues();
       this.userSrv.register(value).then(() => {
-        this.router.navigateByUrl('/tabs', { replaceUrl: true });
-        this.showAlertVerifyEmail();
+        this.showModalOtp();
       });
     }
   }
@@ -87,28 +97,9 @@ export class RegisterStepTwoComponent implements OnInit {
   }
 
   countCurrentChar() {
-    const subscription = this.fg.controls.address.valueChanges;
+    const subscription = this.fg.controls.address_detail.valueChanges;
     subscription.subscribe((res) => {
       this.currentChar = this.gs.countChar(res);
-    });
-  }
-
-  showAlertVerifyEmail() {
-    this.alertSrv.presentAlert({
-      header: `${this.translateSrv.get('VERIFY_EMAIL_HEADER')}`,
-      message: `${this.translateSrv.get('VERIFY_EMAIL_BODY')}`,
-      buttons: [
-        {
-          text: `${this.translateSrv.get('SKIP')}`,
-          role: 'cancel',
-        },
-        {
-          text: `${this.translateSrv.get('VERIFY')}`,
-          handler: () => {
-            this.showModalOtp();
-          },
-        },
-      ],
     });
   }
 

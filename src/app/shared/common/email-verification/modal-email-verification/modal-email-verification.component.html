@@ -5,7 +5,7 @@
         <ion-icon name="close-outline" size="large"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{ 'VERIFY_PHONE_NUMBER' | translate }}</ion-title>
+    <ion-title>{{ 'VERIFY_EMAIL' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,12 +15,12 @@
       <ion-col size="12" class="ion-text-center">
         <ion-text color="primary">
           <span
-            ><b>{{ 'PHONE_NUMBER_VERIFIED' | translate }}</b></span
+            ><b>{{ 'EMAIL_VERIFICATION_SENT' | translate }}</b></span
           >
         </ion-text>
         <br />
         <ion-text color="medium">
-          <small>{{ 'WELCOME_KLIKGO' | translate }}</small>
+          <small>{{ 'EMAIL_VERIFICATION_WORDING' | translate }}</small>
         </ion-text>
       </ion-col>
     </ion-row>
@@ -31,7 +31,9 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" shape="round" color="success" (click)="dismiss()"> Ok </ion-button>
+        <ion-button expand="block" shape="round" color="success" (click)="dismiss()">
+          {{ 'BACK_HOME' | translate }}
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

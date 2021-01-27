@@ -6,10 +6,11 @@ import { IonicModule } from '@ionic/angular';
 import { SharedModule } from '@shared/shared.module';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { FormsModule } from '@angular/forms';
+import { EmailVerificationModule } from '../email-verification/email-verification.module';
 
 @NgModule({
   declarations: [ModalOtpComponent, ModalSuccessComponent],
-  imports: [CommonModule, IonicModule.forRoot(), SharedModule, NgOtpInputModule, FormsModule],
+  imports: [CommonModule, IonicModule.forRoot(), SharedModule, NgOtpInputModule, FormsModule, EmailVerificationModule],
   exports: [ModalOtpComponent, ModalSuccessComponent],
 })
 export class OtpModule {}
