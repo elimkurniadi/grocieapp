@@ -8,3 +8,4 @@ export * from './category';
 export * from './product';
 export * from './bundling';
 export * from './brand';
+export * from './favorite';
