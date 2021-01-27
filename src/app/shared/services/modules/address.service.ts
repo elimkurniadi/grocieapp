@@ -8,6 +8,83 @@ import { ApiService } from '../core/api.service';
 export class AddressService {
   constructor(private api: ApiService, private gs: GlobalService) {}
 
+  getAddress(id: number = null): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const path = id ? `address/${id}` : 'address';
+      const subscription = this.api.getData(`${path}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          const response = id ? res?.response : res?.response?.rows;
+          resolve(response);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  createAddress(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.postData('address', data);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          resolve(true);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  putAddress(data, id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.putData(`address/${id}`, data);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          resolve(true);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  deleteAddress(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.deleteData(`address/${id}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          resolve(true);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  setDefaultAddress(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.putData(`address/set_default/${id}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
   getProvinces(): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData('address/province');

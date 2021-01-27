@@ -1,30 +1,61 @@
-<ng-container *ngFor="let address of addressList; let i = index">
-  <ion-card class="ion-border ion-no-margin ion-margin-bottom" (click)="onAddressClick(i)">
+<ng-container *ngFor="let address of addressList">
+  <ion-card
+    class="ion-border ion-no-margin ion-margin-bottom card-address"
+    (click)="onAddressClick(address?.address_id, $event)"
+  >
+    <ion-card-header class="ion-no-margin ion-text-right">
+      <ion-icon
+        name="close-outline"
+        color="dark"
+        *ngIf="!isSelectMode && !address?.is_default"
+        (click)="showAlertDelete(address?.address_id, $event)"
+      ></ion-icon>
+    </ion-card-header>
     <ion-card-content>
       <ion-row>
         <ion-col size="12">
-          <span
-            ><b>{{ address.title }}</b></span
-          >
+          <ion-text color="dark">
+            <span
+              ><b>{{ address?.address_name }}</b></span
+            >
+          </ion-text>
           <br />
-          <span>{{ address?.address }}</span>
+          <span>{{ address?.address_detail }}</span>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col size="12">
-          <span
-            ><b>{{ 'ADDRESS_DETAIL' | translate }}</b></span
-          >
+          <ion-text color="dark">
+            <span
+              ><b>{{ address?.receiver_name }}</b></span
+            >
+          </ion-text>
           <br />
-          <small>{{ address?.detail }}</small>
+          <small>{{ address?.phone }}</small>
         </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="showButton">
+      <ion-row>
         <ion-col size="12">
-          <ion-button expand="block" [disabled]="address?.selected" (click)="onUseAddress(i, $event)">
-            {{ address?.selected ? ('SELECTED' | translate) : ('USE_ADDRESS' | translate) }}
+          <ion-button
+            expand="block"
+            shape="round"
+            color="primary"
+            fill="outline"
+            size="small"
+            [disabled]="address?.is_default"
+            (click)="onUseAddress(address, $event)"
+          >
+            {{
+              isSelectMode
+                ? address?.is_default
+                  ? ('SELECTED' | translate)
+                  : ('SELECT_ADDRESS' | translate)
+                : address?.is_default
+                ? ('DEFAULT_ADDRESS' | translate)
+                : ('SET_DEFAULT' | translate)
+            }}
           </ion-button>
         </ion-col>
       </ion-row>

@@ -240,3 +240,22 @@ ion-searchbar {
 .ion-no-margin-bottom {
   margin-bottom: 0;
 }
+
+.rounded {
+  border-radius: 50%;
+}
+
+.bg-white {
+  background-color: white !important;
+}
+
+.divider {
+  height: 10px;
+  background-color: #eeeeee;
+}
+
+.alert-wrapper {
+  .alert-radio-group {
+    border: none;
+  }
+}

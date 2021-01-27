@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { BrowserService } from '@shared/services/browser.service';
+import { UserService } from '@shared/services/modules';
 
 @Component({
   selector: 'app-profile',
@@ -15,12 +16,14 @@ export class ProfilePage implements OnInit {
   currentLang = null;
   langList = null;
   currentVersion = null;
+  userData: any = null;
 
   constructor(
     private translateSrv: TranslateService,
     private appVersion: AppVersion,
     private router: Router,
-    private browserSrv: BrowserService
+    private browserSrv: BrowserService,
+    private userSrv: UserService
   ) {
     this.getAppVersion();
     this.setupLanguage();
@@ -28,6 +31,10 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {}
+
+  ionViewWillEnter() {
+    this.fetchUserData();
+  }
 
   initMenuList() {
     this.menuList = [
@@ -42,13 +49,13 @@ export class ProfilePage implements OnInit {
         url: null,
       },
       {
-        title: `${this.translateSrv.get('ARTICLE')}`,
-        route: '/article',
+        title: `${this.translateSrv.get('LANGUAGE')}`,
+        route: null,
         url: null,
       },
       {
-        title: `${this.translateSrv.get('LANGUAGE')}`,
-        route: null,
+        title: `${this.translateSrv.get('SHARE_MY_APP')}`,
+        route: '/',
         url: null,
       },
       {
@@ -97,5 +104,21 @@ export class ProfilePage implements OnInit {
     } else {
       return;
     }
+  }
+
+  fetchUserData(event = null) {
+    this.userSrv
+      .getProfile()
+      .then((res) => {
+        this.userData = res;
+        if (event) {
+          event.target.complete();
+        }
+      })
+      .catch(() => {
+        if (event) {
+          event.target.complete();
+        }
+      });
   }
 }

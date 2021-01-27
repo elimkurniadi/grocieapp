@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { GlobalService, RxValidatorService } from '@shared/services';
@@ -14,10 +15,11 @@ import { AddressService } from '@shared/services/modules/address.service';
 export class AddressFormComponent implements OnInit {
   fg: FormGroup;
   addressData = null;
-  currentChar = null;
+  currentChar = 0;
   provinceList: any[] = null;
   cityList: any[] = null;
   districtList: any[] = null;
+  addressId: any = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -25,7 +27,8 @@ export class AddressFormComponent implements OnInit {
     private fb: FormBuilder,
     private translateSrv: TranslateService,
     private gs: GlobalService,
-    private addressSrv: AddressService
+    private addressSrv: AddressService,
+    private navCtrl: NavController
   ) {
     this.observerParam();
   }
@@ -35,77 +38,122 @@ export class AddressFormComponent implements OnInit {
   observerParam() {
     this.activatedRoute.params.subscribe((param) => {
       const id = +param?.id;
-      if (id) {
-        // FETCH ADDRESS DETAIL AND PASS TO INIT FORM ARGUMENT
-      } else {
-        // INIT FORM WITHOUT ARGUMENT
-      }
+      this.addressId = id;
+      this.addressId ? this.fetchAddressDetail(this.addressId) : this.initAddressForm();
+    });
+  }
 
-      this.initAddressForm();
+  fetchAddressDetail(id) {
+    this.addressSrv.getAddress(id).then((res) => {
+      this.addressData = res;
+      this.initAddressForm(this.addressData);
     });
   }
 
   initAddressForm(data = null) {
     this.validatorSrv.validatorErrorMessage();
     this.fg = this.fb.group({
-      latitude: [data?.latitude, [RxwebValidators.required(), RxwebValidators.latitude()]],
-      longitude: [data?.longitude, [RxwebValidators.required(), RxwebValidators.longitude()]],
-      address: [
-        data?.address,
+      receiver_name: [data?.receiver_name ? data?.receiver_name : null, RxwebValidators.required()],
+      phone: [
+        data?.phone ? data?.phone : null,
+        [
+          RxwebValidators.required(),
+          RxwebValidators.numeric(),
+          RxwebValidators.minLength({ value: 7, message: `${this.translateSrv.get('VALIDATOR_MIN')} 7` }),
+          RxwebValidators.maxLength({ value: 15, message: `${this.translateSrv.get('VALIDATOR_MAX')} 15` }),
+        ],
+      ],
+      latitude: [
+        data?.latitude ? data?.latitude : '-6.598574',
+        [RxwebValidators.required(), RxwebValidators.latitude()],
+      ],
+      longitude: [
+        data?.longitude ? data?.longitude : '106.807496',
+        [RxwebValidators.required(), RxwebValidators.longitude()],
+      ],
+      address: [data?.address ? data?.address : '-', [RxwebValidators.required()]],
+      address_detail: [
+        data?.address_detail ? data?.address_detail : null,
         [
           RxwebValidators.required(),
           RxwebValidators.minLength({ value: 8, message: `${this.translateSrv.get('VALIDATOR_MIN')} 8` }),
           RxwebValidators.maxLength({ value: 100, message: `${this.translateSrv.get('VALIDATOR_MAX')} 100` }),
         ],
       ],
-      province_id: [data?.province_id, [RxwebValidators.required()]],
+      province_id: [data?.province?.province_id, [RxwebValidators.required()]],
       city_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       postal_code: [data?.postal_code, [RxwebValidators.required(), RxwebValidators.numeric()]],
       address_name: [data?.address_name, [RxwebValidators.required()]],
     });
 
-    data ? this.initAreaList(data?.province_id, data?.city_id, data?.district_id) : this.fetchProvinces();
+    this.countCurrentChar();
+    this.fetchProvinces().then(() => {
+      if (data) {
+        this.initAreaList(data?.province?.province_id, data?.city?.city_id, data?.district?.district_id);
+      }
+    });
   }
 
   submit() {
     if (this.fg.valid) {
+      this.addressId ? this.updateAddress(this.fg, this.addressId) : this.addAddress(this.fg.value);
     }
   }
 
-  countCurrentChate() {
-    const subscription = this.fg.controls.address.valueChanges;
+  addAddress(data) {
+    this.addressSrv.createAddress(data).then(() => {
+      this.navCtrl.back();
+    });
+  }
+
+  updateAddress(data, id) {
+    const dirtyValue = this.gs.getChangedFormProperties(data);
+    this.addressSrv.putAddress(dirtyValue, id).then(() => {
+      this.navCtrl.back();
+    });
+  }
+
+  countCurrentChar() {
+    const subscription = this.fg.controls.address_detail.valueChanges;
     subscription.subscribe((res) => {
       this.currentChar = this.gs.countChar(res);
     });
   }
 
-  initAreaList(idProvince, idCity, idDistrict) {
+  async initAreaList(idProvince, idCity, idDistrict) {
     const controls = this.fg.controls;
-    this.fetchProvinces();
     controls.province_id.setValue(idProvince);
-    this.fetchCities(idProvince);
-    controls.city_id.setValue(idCity);
-    controls.city_id.enable();
-    this.fetchDistricts(idCity);
-    controls.district_id.setValue(idDistrict);
-    controls.district_id.enable();
+    this.fg.updateValueAndValidity();
+    this.fetchCities(idProvince)
+      .then(() => {
+        controls.city_id.setValue(idCity);
+        controls.city_id.enable();
+        this.fg.updateValueAndValidity();
+      })
+      .then(() => {
+        this.fetchDistricts(idCity).then(() => {
+          controls.district_id.setValue(idDistrict);
+          controls.district_id.enable();
+          this.fg.updateValueAndValidity();
+        });
+      });
   }
 
-  fetchProvinces() {
-    this.addressSrv.getProvinces().then((res) => {
+  async fetchProvinces() {
+    await this.addressSrv.getProvinces().then((res) => {
       this.provinceList = res;
     });
   }
 
-  fetchCities(provinceId) {
-    this.addressSrv.getCities(provinceId).then((res) => {
+  async fetchCities(provinceId) {
+    await this.addressSrv.getCities(provinceId).then((res) => {
       this.cityList = res;
     });
   }
 
-  fetchDistricts(cityId) {
-    this.addressSrv.getDistricts(cityId).then((res) => {
+  async fetchDistricts(cityId) {
+    await this.addressSrv.getDistricts(cityId).then((res) => {
       this.districtList = res;
     });
   }

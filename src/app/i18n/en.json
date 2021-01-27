@@ -136,5 +136,19 @@
   "USE_ADDRESS": "Use Address",
   "SELECTED": "Selected",
   "CHOOSE_LOCATION": "Choose Location",
-  "SELECT": "Select"
+  "SELECT": "Select",
+  "YOUR_QR_CODE": "Your QR Code",
+  "UPDATE_ADDRESS": "Update Adress",
+  "SHARE_MY_APP": "Share My App",
+  "PROFILE_PICTURE": "Profile Picture",
+  "CHANGE": "Change",
+  "SELECT_IMAGE_SOURCE": "Select Image Source",
+  "CHOOSE_FROM_GALLERY": "Choose from Gallery",
+  "TAKE_A_PHOTO": "Take a Photo",
+  "RECEIVER_NAME": "Receiver Name",
+  "RECEIVER_NAME_PLACEHOLDER": "Your Receiver Name",
+  "SET_DEFAULT": "Set as Default",
+  "DEFAULT_ADDRESS": "Default Address",
+  "SELECT_ADDRESS": "Select Address",
+  "DELETE_ADDRESS_CONFIRM": "Are you sure you want to delete this address?"
 }

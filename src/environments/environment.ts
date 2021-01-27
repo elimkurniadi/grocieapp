@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   ssl: false,
-  api_url: 'http://141.136.47.72:8010/api/user/',
+  api_url: 'https://api-dev.myklikgo.com/api/user/',
 };
 
 /*

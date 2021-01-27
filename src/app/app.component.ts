@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { environment } from '@env/environment';
 import { HTTP } from '@ionic-native/http/ngx';
-import { GlobalService } from '@shared/services';
+import { AuthService, GlobalService } from '@shared/services';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +19,10 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private httpSSL: HTTP,
-    private gs: GlobalService
+    private gs: GlobalService,
+    private authSrv: AuthService
   ) {
+    this.authSrv.checkToken();
     this.initializeApp();
   }
 
