@@ -14,11 +14,13 @@ export class ItemListComponent implements OnInit {
   constructor(private cartSrv: CartService) {}
 
   ngOnInit() {
-    this.calculateEachProductPrice().then(() => {
-      this.cartSrv.calculateSumPrice(this.cartData).then((res) => {
-        this.totalPrice = res;
+    if (this.cartData) {
+      this.calculateEachProductPrice().then(() => {
+        this.cartSrv.calculateSumPrice(this.cartData).then((res) => {
+          this.totalPrice = res;
+        });
       });
-    });
+    }
   }
 
   async calculateEachProductPrice() {

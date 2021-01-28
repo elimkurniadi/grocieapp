@@ -37,4 +37,19 @@ export class ProductService {
       );
     });
   }
+
+  getProductDetail(id: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData(`product/${id}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res) => {
+          resolve(res?.response);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }

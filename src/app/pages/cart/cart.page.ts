@@ -7,47 +7,36 @@ import { CartService } from '@shared/services/modules/cart.service';
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage implements OnInit {
-  cartList = [
-    {
-      product: {
-        product_thumbnail: 'https://via.placeholder.com/200.png',
-        product_price: 18000,
-        product_unit: 'kg',
-        product_title: 'Wortel Merah',
-        product_description: 'Wombo ahoy',
-      },
-      price: null,
-      quantity: 1,
-    },
-    {
-      product: {
-        product_thumbnail: 'https://via.placeholder.com/200.png',
-        product_price: 20000,
-        product_unit: 'kg',
-        product_title: 'Wortel Merah Premium',
-        product_description: 'Wombo ahoy Premium super top',
-      },
-      price: null,
-      quantity: 2,
-    },
-  ];
+  cartList: any[] = null;
   totalPrice = 0;
 
   constructor(private cartSrv: CartService) {}
 
   ngOnInit() {}
 
-  ionViewDidEnter() {
-    this.initTotalPrice();
+  ionViewWillEnter() {
+    this.fetchCartList();
   }
 
   initTotalPrice() {
     this.cartSrv.calculateSumPrice(this.cartList).then((res) => {
       this.totalPrice = res;
+      console.log('this.totalPrice : ', this.totalPrice);
     });
   }
 
   updateTotalPrice(value) {
     this.totalPrice = value;
+  }
+
+  fetchCartList() {
+    this.cartSrv.getCartList().then((res) => {
+      res.forEach((element) => {
+        const localSubTotalPrice = element?.quantity * +element?.product?.primary_price;
+        Object.assign(element, { local_subtotal_price: localSubTotalPrice });
+      });
+      this.cartList = res;
+      this.initTotalPrice();
+    });
   }
 }

@@ -1,42 +1,41 @@
 <ng-container *ngFor="let cart of cartData; let i = index">
-  <ion-row class="ion-justify-content-center ion-align-items-center ion-padding-bottom">
+  <ion-row class="ion-align-items-center ion-justify-content-center ion-margin-vertical">
     <ion-col size="1.5">
-      <img [src]="cart?.product?.product_thumbnail" alt="product_thumbnail" />
+      <img [src]="cart?.product?.image_url" alt="product_image" />
     </ion-col>
-    <ion-col size="4.5">
-      <ion-row class="ion-no-margin ion-no-padding">
-        <ion-col size="12" class="ion-no-padding ellipsis-one-line">
-          <span
-            ><b>{{ cart?.product?.product_title }}</b></span
-          >
-        </ion-col>
-        <ion-col size="12" class="ion-no-padding ellipsis-one-line">
-          <small>{{ cart?.product?.product_description }}</small>
-        </ion-col>
+    <ion-col size="10.5">
+      <ion-row class="ion-no-padding">
         <ion-col size="12" class="ion-no-padding">
           <span
-            ><b>Rp. {{ cart?.product?.product_price | number }}</b> /{{ cart?.product?.product_unit }}</span
+            ><b>{{ cart?.product?.name }}</b></span
           >
         </ion-col>
       </ion-row>
-    </ion-col>
-    <ion-col size="3" class="ion-text-center">
-      <ion-row>
-        <ion-col size="4" *ngIf="showSubstract">
-          <ion-icon name="remove-circle-outline" (click)="updateQuantity(false, i)"></ion-icon
-        ></ion-col>
-        <ion-col [size]="showSubstract ? 4 : 12" class="ion-text-center">
-          <span>{{ cart?.quantity | number }}</span>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col size="5" class="ion-no-padding">
+          <ion-text color="medium">
+            <small>{{ cart?.product?.unit_value }} {{ cart?.product?.unit?.name }}</small>
+          </ion-text>
+          <br />
+          <ion-text color="dark">
+            <span>Rp. {{ cart?.product?.primary_price | number }} / <small>pcs</small></span>
+          </ion-text>
         </ion-col>
-        <ion-col size="4" *ngIf="showSubstract">
-          <ion-icon name="add-circle-outline" (click)="updateQuantity(true, i)"></ion-icon>
+        <ion-col size="3" class="ion-no-padding ion-text-center">
+          <ion-row>
+            <ion-col size="4"><ion-icon name="remove-circle-outline" size="small"></ion-icon></ion-col>
+            <ion-col size="4">{{ cart?.quantity }}</ion-col>
+            <ion-col size="4"><ion-icon name="add-circle-outline" size="small"></ion-icon></ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="4" class="ion-no-padding ion-text-right">
+          <ion-text color="dark">
+            <span
+              ><b>Rp. {{ cart?.local_subtotal_price | number }}</b></span
+            >
+          </ion-text>
         </ion-col>
       </ion-row>
-    </ion-col>
-    <ion-col size="3">
-      <span
-        ><b>Rp. {{ cart?.price | number }}</b></span
-      >
     </ion-col>
   </ion-row>
 </ng-container>
