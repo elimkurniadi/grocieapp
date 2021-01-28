@@ -23,4 +23,19 @@ export class FavoriteService {
       );
     });
   }
+
+  addData(body?: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.postData('favourite_group', body);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }

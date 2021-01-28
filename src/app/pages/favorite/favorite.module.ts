@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +13,7 @@ import { FavoriteDetailComponent } from './favorite-detail/favorite-detail.compo
 import { FavoriteNewComponent } from './favorite-new/favorite-new.component';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, FavoritePageRoutingModule, SharedModule],
+  imports: [CommonModule, FormsModule, IonicModule, FavoritePageRoutingModule, SharedModule, ReactiveFormsModule],
   declarations: [FavoritePage, FavoriteListComponent, FavoriteDetailComponent, FavoriteNewComponent],
   exports: [FavoriteNewComponent],
 })
