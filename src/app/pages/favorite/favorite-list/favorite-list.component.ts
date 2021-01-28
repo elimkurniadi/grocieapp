@@ -29,8 +29,11 @@ export class FavoriteListComponent implements OnInit {
       cssClass: 'modal-add-favorite',
     });
 
-    modal.onDidDismiss().then(() => {
-      this.getFavorites();
+    modal.onDidDismiss().then((res: any) => {
+      const data = res.data;
+      if (data.success) {
+        this.getFavorites();
+      }
     });
 
     return await modal.present();
