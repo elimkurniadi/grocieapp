@@ -2,37 +2,48 @@
   <ion-toolbar>
     <ion-buttons slot="start" mode="md">
       <ion-back-button defaultHref="/tabs/favorite"></ion-back-button>
-      <ion-title> {{ favorite?.title }} </ion-title>
+      <ion-title> {{ favorite?.name }} </ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list class="ion-padding">
-    <ion-item lines="none" *ngFor="let item of [1, 2, 3]">
-      <ion-checkbox slot="start" class="product-checkbox"></ion-checkbox>
+    <ion-item lines="none" *ngFor="let item of productFavorites; let i = index">
+      <ion-checkbox
+        slot="start"
+        class="product-checkbox"
+        [ngModel]="item?.selected"
+        (ngModelChange)="toggleSelect(i)"
+        [ngModelOptions]="{ standalone: true }"
+      ></ion-checkbox>
       <ion-thumbnail class="thumb-product" slot="start">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+        <img [src]="item?.product?.image_url" class="product-img full-width" *ngIf="item?.product?.image_url" />
+        <img
+          src="https://via.placeholder.com/200.png"
+          class="product-img full-width"
+          *ngIf="!item?.product?.image_url"
+        />
       </ion-thumbnail>
       <ion-grid class="ion-align-self-start">
         <ion-row>
           <ion-col size="12" class="truncate">
-            <ion-text class="product-name">Alpulkat Mentega Super</ion-text>
+            <ion-text class="product-name">{{ item?.product?.name }}</ion-text>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="6">
-            <ion-text class="product-variant">70-150g/pcs</ion-text>
+            <ion-text class="product-variant">{{ item?.product?.weight }}g/pcs</ion-text>
           </ion-col>
           <ion-col size="6" class="ion-text-right">
-            <ion-text class="product-price">Rp. 18.000</ion-text>
+            <ion-text class="product-price">Rp. {{ item?.product?.primary_price | number: '1.0-0':'id' }}</ion-text>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
             <ion-text class="product-price-with-unit">
-              Rp. 18.000
-              <span class="product-unit">/kg</span>
+              Rp. {{ item?.product?.primary_price | number: '1.0-0':'id' }}
+              <span class="product-unit">/{{ item?.product?.unit?.name }}</span>
             </ion-text>
           </ion-col>
         </ion-row>
@@ -44,10 +55,20 @@
 <ion-footer>
   <ion-row>
     <ion-col class="ion-align-self-center">
-      <ion-text> {{ 'TOTAL_ITEMS' | translate }} (0) </ion-text>
+      <ion-text class="ion-padding-start total-item">
+        {{ 'TOTAL_ITEMS' | translate }} ({{ totalSelectedItem }})
+      </ion-text>
     </ion-col>
     <ion-col class="ion-text-right">
-      <ion-button> {{ 'ADD_TO_CART' | translate }} </ion-button>
+      <ion-button
+        [disabled]="totalSelectedItem == 0"
+        [color]="totalSelectedItem == 0 ? 'light' : 'success'"
+        shape="round"
+      >
+        <ion-text class="btn-action">
+          {{ 'ADD_TO_CART' | translate }}
+        </ion-text>
+      </ion-button>
     </ion-col>
   </ion-row>
 </ion-footer>

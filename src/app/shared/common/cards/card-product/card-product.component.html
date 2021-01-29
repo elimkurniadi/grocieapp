@@ -15,11 +15,11 @@
 
       <ion-col size="12">
         <p class="product-size">{{ product?.weight }}gr/pcs</p>
-        <p class="product-price" [ngClass]="{ 'price-linethrough': product?.discounted_price }">
-          Rp {{ product?.price | number: '1.0-0':'id' }}
+        <p class="product-price" [ngClass]="{ 'price-linethrough': product?.secondary_price }">
+          Rp {{ product?.primary_price | number: '1.0-0':'id' }}
         </p>
-        <p class="product-final-price" *ngIf="product?.discounted_price">
-          Rp {{ product?.discounted_price | number: '1.0-0':'id' }} <span> /pcs</span>
+        <p class="product-final-price" *ngIf="product?.secondary_price">
+          Rp {{ product?.secondary_price | number: '1.0-0':'id' }} <span> /pcs</span>
         </p>
       </ion-col>
     </ion-row>
