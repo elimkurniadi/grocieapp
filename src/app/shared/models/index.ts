@@ -9,3 +9,5 @@ export * from './product';
 export * from './bundling';
 export * from './brand';
 export * from './favorite';
+export * from './product_favorite';
+export * from './unit';
