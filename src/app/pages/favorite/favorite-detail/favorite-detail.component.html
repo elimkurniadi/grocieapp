@@ -56,14 +56,15 @@
   <ion-row>
     <ion-col class="ion-align-self-center">
       <ion-text class="ion-padding-start total-item">
-        {{ 'TOTAL_ITEMS' | translate }} ({{ totalSelectedItem }})
+        {{ 'TOTAL_ITEMS' | translate }} ({{ selectedItem.length }})
       </ion-text>
     </ion-col>
     <ion-col class="ion-text-right">
       <ion-button
-        [disabled]="totalSelectedItem == 0"
-        [color]="totalSelectedItem == 0 ? 'light' : 'success'"
+        [disabled]="!selectedItem.length"
+        [color]="!selectedItem.length ? 'light' : 'success'"
         shape="round"
+        (click)="addToCart()"
       >
         <ion-text class="btn-action">
           {{ 'ADD_TO_CART' | translate }}

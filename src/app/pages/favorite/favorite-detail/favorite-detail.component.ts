@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Favorite, ProductFavorite, Response } from '@shared/models';
 import { ToastService } from '@shared/services';
 import { FavoriteService } from '@shared/services/modules';
@@ -14,9 +14,14 @@ export class FavoriteDetailComponent implements OnInit {
   id: string;
   productFavorites: ProductFavorite[];
   favorite: Favorite;
-  totalSelectedItem = 0;
+  selectedItem = [];
 
-  constructor(private route: ActivatedRoute, private favoriteSrv: FavoriteService, private toastSrv: ToastService) {
+  constructor(
+    private route: ActivatedRoute,
+    private favoriteSrv: FavoriteService,
+    private toastSrv: ToastService,
+    private router: Router
+  ) {
     this.route.params.subscribe((param) => {
       if (param.id !== null) {
         this.id = param.id;
@@ -72,7 +77,25 @@ export class FavoriteDetailComponent implements OnInit {
         return product.selected;
       });
 
-      this.totalSelectedItem = productSelected.length;
+      this.selectedItem = productSelected;
     }
+  }
+
+  addToCart() {
+    const favoriteIds = this.selectedItem.map((item: ProductFavorite) => parseInt(item.favourite_id, 10));
+    const body = {
+      favourite_group_id: this.id,
+      favourite_id: favoriteIds,
+    };
+
+    this.favoriteSrv
+      .addToCart(body)
+      .then((res: Response) => {
+        this.router.navigate(['/tabs', 'cart']);
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
   }
 }

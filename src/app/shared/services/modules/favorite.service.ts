@@ -39,6 +39,21 @@ export class FavoriteService {
     });
   }
 
+  addToCart(body?: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.postData('cart/favourite', body);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
   getDetail(id: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData(`favourite_group/${id}`);
@@ -53,6 +68,7 @@ export class FavoriteService {
       );
     });
   }
+
   getProductList(id: string, ordering?: Sort): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData('favourite', null, ordering, { favourite_group_id: id });
