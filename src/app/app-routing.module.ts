@@ -53,6 +53,10 @@ const routes: Routes = [
     path: 'bundling',
     loadChildren: () => import('./pages/bundling/bundling.module').then( m => m.BundlingPageModule)
   },
+  {
+    path: 'brand',
+    loadChildren: () => import('./pages/brand/brand.module').then( m => m.BrandPageModule)
+  },
 
 ];
 
