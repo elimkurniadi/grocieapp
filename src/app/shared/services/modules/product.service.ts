@@ -37,4 +37,19 @@ export class ProductService {
       );
     });
   }
+
+  getListByBrand(brandId: string, pagination?: Page, ordering?: Sort): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData(`product/brand/${brandId}`, pagination, ordering);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: ResponsePagination) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }
