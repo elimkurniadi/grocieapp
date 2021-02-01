@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Brand, Product } from '@shared/models';
 
 @Component({
   selector: 'app-product-search-with-keyword',
@@ -8,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class ProductSearchWithKeywordComponent implements OnInit {
   @Input() keyword: string;
+  @Input() products: Product[];
+  @Input() brands: Brand[];
 
   constructor(private router: Router) {}
 

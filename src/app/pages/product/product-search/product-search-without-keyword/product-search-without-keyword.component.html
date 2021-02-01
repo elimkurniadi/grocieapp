@@ -1,31 +1,36 @@
-<ion-row class="ion-padding-vertical">
+<ion-row class="ion-padding-vertical" *ngIf="recentSearches && recentSearches.length">
   <ion-col size="7" class="ion-padding-start">
     <ion-text class="search-title"> {{ 'RECENT_SEARCHES' | translate }}</ion-text>
   </ion-col>
   <ion-col size="5" class="ion-padding-end ion-text-right">
-    <ion-text class="clear-recent-search">{{ 'CLEAR_RECENT' | translate }}</ion-text>
+    <ion-text class="clear-recent-search" (click)="removeAllRecent()">{{ 'CLEAR_RECENT' | translate }}</ion-text>
   </ion-col>
   <ion-col size="12">
-    <ion-row *ngFor="let item of [1, 2, 3]" class="padding-item-recent">
+    <ion-row *ngFor="let item of recentSearches | slice: 0:3; let i = index" class="padding-item-recent">
       <ion-col size="1" class="ion-padding-start">
         <ion-icon name="time-outline" class="icon-recent-search"></ion-icon>
       </ion-col>
       <ion-col size="9">
-        <ion-label class="text-recent-search"> Hand Sanitizer</ion-label>
+        <ion-label class="text-recent-search" (click)="setKeyword(item)"> {{ item }}</ion-label>
       </ion-col>
       <ion-col size="2" class="ion-text-center">
-        <ion-icon name="close-outline" class="icon-recent-search"></ion-icon
+        <ion-icon name="close-outline" class="icon-recent-search" (click)="removeItem(i)"></ion-icon
       ></ion-col>
     </ion-row>
   </ion-col>
 </ion-row>
-<ion-row class="ion-padding-bottom">
+<ion-row class="ion-padding-bottom" *ngIf="categories && categories.length">
   <ion-col size="12" class="ion-padding-horizontal">
     <ion-text class="search-title"> {{ 'SEARCH_BY_CATEGORY' | translate }}</ion-text>
   </ion-col>
   <ion-col size="12" class="padding-category">
-    <ion-chip color="medium" outline="true" *ngFor="let item of [1, 2, 3, 4, 5, 6]">
-      <ion-label color="dark">Fruit</ion-label>
+    <ion-chip
+      color="medium"
+      outline="true"
+      *ngFor="let item of categories"
+      (click)="goToProductByCategory(item?.category_id)"
+    >
+      <ion-label color="dark">{{ item?.name }}</ion-label>
     </ion-chip>
   </ion-col>
 </ion-row>
@@ -39,11 +44,11 @@
   </ion-col>
 </ion-row>
 
-<ion-row>
+<ion-row *ngIf="brands && brands.length">
   <ion-col size="12" class="ion-padding-horizontal">
     <ion-text class="search-title"> {{ 'FEATURED_BRAND' | translate }}</ion-text>
   </ion-col>
   <ion-col size="12">
-    <app-slide-brand></app-slide-brand>
+    <app-slide-brand [brands]="brands"></app-slide-brand>
   </ion-col>
 </ion-row>

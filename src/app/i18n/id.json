@@ -109,7 +109,7 @@
   "SUCCESS_ADD_FAVORITE": "Berhasil menambahkan favorit",
   "SUCCESS_REMOVE_FAVORITE": "Berhasil melepas favorit",
   "SUCCESS_ADD_TO_CART": "Berhasil dimasukkan ke keranjang",
-  "MY_CART":"Keranjang Saya",
+  "MY_CART": "Keranjang Saya",
   "CHECKOUT": "Checkout",
   "TOTAL_PRICE": "Total Harga",
   "NEW_LIST": "Daftar Baru",
@@ -152,11 +152,13 @@
   "SELECT_ADDRESS": "Pilih Alamat",
   "DELETE_ADDRESS_CONFIRM": "Apakah Anda yakin ingin menghapus alamat ini?",
   "PERSONAL_INFORMATION": "Informasi Data Diri",
-  "DELIVERY_INFORMATION" : "Informasi Pengiriman",
-  "VERIFY_PHONE_NUMBER" : "Verifikasi Nomor Ponsel",
+  "DELIVERY_INFORMATION": "Informasi Pengiriman",
+  "VERIFY_PHONE_NUMBER": "Verifikasi Nomor Ponsel",
   "PHONE_NUMBER_VERIFIED": "Nomor Ponsel Anda Telah Terverifikasi",
   "WELCOME_KLIKGO": "Selamat Datang di KlikGo!",
   "VERIFY_EMAIL": "Verifikasi Email",
   "EMAIL_VERIFICATION_SENT": "Email verifikasi terkirim!",
-  "EMAIL_VERIFICATION_WORDING": "Kami telah mengiriman pesan verifikasi ke email Anda. Silahkan cek email Anda"
+  "EMAIL_VERIFICATION_WORDING": "Kami telah mengiriman pesan verifikasi ke email Anda. Silahkan cek email Anda",
+  "SEARCH": "Pencarian",
+  "SEARCH_RESULT": "Hasil Pencarian"
 }

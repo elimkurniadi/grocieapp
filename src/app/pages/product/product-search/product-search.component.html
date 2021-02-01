@@ -1,5 +1,11 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
+    <ion-buttons mode="md" class="ion-text-center">
+      <ion-back-button defaultHref="/tabs/home" icon="chevron-back-outline"> </ion-back-button>
+      <ion-title class="header-title center-with-back">{{ 'SEARCH' | translate }}</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
     <div class="ion-padding-start">
       <ion-searchbar
         class="custom-search"
@@ -19,7 +25,16 @@
 
 <ion-content [fullscreen]="true">
   <ion-grid class="ion-no-padding">
-    <app-product-search-without-keyword *ngIf="!keyword"></app-product-search-without-keyword>
-    <app-product-search-with-keyword *ngIf="keyword" [keyword]="keyword"></app-product-search-with-keyword>
+    <app-product-search-without-keyword
+      *ngIf="!keyword"
+      [recentSearches]="recentSearches"
+      (assignKeyword)="assignKeyword($event)"
+    ></app-product-search-without-keyword>
+    <app-product-search-with-keyword
+      *ngIf="keyword"
+      [keyword]="keyword"
+      [products]="products"
+      [brands]="brands"
+    ></app-product-search-with-keyword>
   </ion-grid>
 </ion-content>

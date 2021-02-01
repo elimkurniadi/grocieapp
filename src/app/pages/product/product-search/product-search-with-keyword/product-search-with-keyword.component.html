@@ -8,7 +8,7 @@
     </ion-text>
   </ion-col>
   <ion-col size="12">
-    <app-slide-product></app-slide-product>
+    <app-slide-product [products]="products"></app-slide-product>
   </ion-col>
 </ion-row>
 
@@ -17,6 +17,6 @@
     <ion-text class="search-title"> {{ 'RELATED_BRAND' | translate }}</ion-text>
   </ion-col>
   <ion-col size="12">
-    <app-slide-brand></app-slide-brand>
+    <app-slide-brand [brands]="brands"></app-slide-brand>
   </ion-col>
 </ion-row>

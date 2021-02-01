@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Response, Sort } from '@shared/models';
+import { Page, Response, Sort } from '@shared/models';
 import { ApiService } from '../core/api.service';
 import { GlobalService } from '../global.service';
 
@@ -8,6 +8,21 @@ import { GlobalService } from '../global.service';
 })
 export class BrandService {
   constructor(private api: ApiService, private gs: GlobalService) {}
+
+  getList(pagination?: Page, ordering?: Sort): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData('brand', pagination, ordering);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 
   getFeaturedList(ordering?: Sort): Promise<any> {
     return new Promise((resolve, reject) => {
