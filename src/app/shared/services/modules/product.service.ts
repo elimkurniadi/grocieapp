@@ -37,7 +37,6 @@ export class ProductService {
       );
     });
   }
-
   getProductDetail(id: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData(`product/${id}`);
@@ -53,13 +52,28 @@ export class ProductService {
     });
   }
 
-  getFeaturedProduct(pagination: Page = null, ordering: Sort = null): Promise<any> {
+  getFeaturedProduct(pagination: Page = null, order: Sort = null): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData('product/featured', pagination, ordering);
+      const subscription = this.api.getData('product/featured', pagination, order);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res) => {
           resolve(res?.response?.rows);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  getListByBrand(brandId: string, pagination?: Page, ordering?: Sort): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData(`product/brand/${brandId}`, pagination, ordering);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: ResponsePagination) => {
+          resolve(res);
         },
         (err) => {
           reject(err);

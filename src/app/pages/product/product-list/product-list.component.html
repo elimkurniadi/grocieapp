@@ -28,7 +28,7 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <ion-grid class="ion-no-padding">
-    <ion-row class="ion-no-padding" *ngIf="!search">
+    <ion-row class="ion-no-padding" *ngIf="!search && category">
       <ion-col class="ion-no-padding">
         <img [src]="category?.image_url" class="full-width img-header" />
       </ion-col>

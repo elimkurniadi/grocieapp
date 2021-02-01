@@ -14,6 +14,7 @@ export class ProductListComponent implements OnInit {
   title: string;
   search: string;
   categoryId: string;
+  brandId: string;
   category: Category;
   products: Product[];
 
@@ -38,22 +39,18 @@ export class ProductListComponent implements OnInit {
     private toastSrv: ToastService
   ) {
     this.route.queryParams.subscribe((param) => {
-      if (param.search !== null && param.search !== '') {
-        this.search = param.search;
-      } else {
-        this.search = '';
-      }
-
-      if (param.cat_id !== null && param.cat_id !== '') {
-        this.categoryId = param.cat_id;
-      }
+      this.setKeyword(param);
+      this.setCategoryId(param);
+      this.setBrand(param);
     });
   }
 
   ngOnInit() {
-    if (this.categoryId) {
+    if (this.categoryId && this.categoryId !== null) {
       this.getCategory();
-      this.getProduct();
+      this.assignProductList('category');
+    } else if (this.brandId && this.brandId !== null) {
+      this.assignProductList('brand');
     }
   }
 
@@ -75,9 +72,16 @@ export class ProductListComponent implements OnInit {
       });
   }
 
-  getProduct() {
-    this.productSrv
-      .getListByCategory(this.categoryId)
+  getProductList(type: string) {
+    if (type === 'category') {
+      return this.productSrv.getListByCategory(this.categoryId);
+    } else {
+      return this.productSrv.getListByBrand(this.brandId);
+    }
+  }
+
+  assignProductList(type: string) {
+    this.getProductList(type)
       .then((res: ResponsePagination) => {
         const products = res.response.rows as Product[];
         this.products = products;
@@ -86,5 +90,31 @@ export class ProductListComponent implements OnInit {
         const error = err.error.error;
         this.toastSrv.show(error.message);
       });
+  }
+
+  setKeyword(param: any) {
+    if (param.search !== null && param.search !== '') {
+      this.search = param.search;
+    } else {
+      this.search = '';
+    }
+  }
+
+  setCategoryId(param: any) {
+    if (param.cat_id !== null && param.cat_id !== '') {
+      this.categoryId = param.cat_id;
+    } else {
+      this.categoryId = null;
+    }
+  }
+
+  setBrand(param: any) {
+    if (param.brand_id !== null && param.brand_id !== '') {
+      this.brandId = param.brand_id;
+      this.title = param.brand_name;
+    } else {
+      this.brandId = null;
+      this.title = null;
+    }
   }
 }
