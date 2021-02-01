@@ -10,6 +10,7 @@ import { AddressPage } from './address.page';
 import { AddressFormComponent } from './address-form/address-form.component';
 import { CardModule } from '@shared/common/cards/card.module';
 import { SharedModule } from '@shared/shared.module';
+import { ModalPinLocationModule } from '@shared/common/modal-pin-location/modal-pin-location.module';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { SharedModule } from '@shared/shared.module';
     CardModule,
     SharedModule,
     ReactiveFormsModule,
+    ModalPinLocationModule,
   ],
   declarations: [AddressPage, AddressFormComponent],
 })

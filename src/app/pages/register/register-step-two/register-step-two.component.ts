@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
+import { ModalPinLocationComponent } from '@shared/common/modal-pin-location/modal-pin-location.component';
 import { ModalOtpComponent } from '@shared/common/otp/modal-otp/modal-otp.component';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { GlobalService, RxValidatorService } from '@shared/services';
@@ -30,7 +31,6 @@ export class RegisterStepTwoComponent implements OnInit {
     private userSrv: UserService,
     private translateSrv: TranslateService,
     private gs: GlobalService,
-    private alertSrv: AlertService,
     private modalCtrl: ModalController,
     private addressSrv: AddressService
   ) {
@@ -144,5 +144,17 @@ export class RegisterStepTwoComponent implements OnInit {
       controls.district_id.enable();
       this.fetchDistricts(event);
     }
+  }
+
+  async presentModalPinLocation() {
+    const modal = await this.modalCtrl.create({
+      component: ModalPinLocationComponent,
+    });
+
+    modal.onWillDismiss().then(() => {
+      // CHANGE THE LONGLAT FORM VALUE
+    });
+
+    return await modal.present();
   }
 }
