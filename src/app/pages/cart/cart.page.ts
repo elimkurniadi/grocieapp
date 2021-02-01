@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '@shared/services/modules/cart.service';
+import { ProductService } from '@shared/services/modules/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -8,14 +9,22 @@ import { CartService } from '@shared/services/modules/cart.service';
 })
 export class CartPage implements OnInit {
   cartList: any[] = null;
+  relatedProductList: any[] = null;
   totalPrice = 0;
 
-  constructor(private cartSrv: CartService) {}
+  constructor(private cartSrv: CartService, private productSrv: ProductService) {}
 
   ngOnInit() {}
 
   ionViewWillEnter() {
     this.fetchCartList();
+    this.fetchRelatedProductList();
+  }
+
+  pullToRefresh(event) {
+    this.fetchCartList();
+    this.fetchRelatedProductList();
+    event.target.complete();
   }
 
   initTotalPrice() {
@@ -37,6 +46,12 @@ export class CartPage implements OnInit {
       });
       this.cartList = res;
       this.initTotalPrice();
+    });
+  }
+
+  fetchRelatedProductList() {
+    this.productSrv.getFeaturedProduct(null, null).then((res) => {
+      this.relatedProductList = res;
     });
   }
 }

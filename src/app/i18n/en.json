@@ -158,5 +158,12 @@
   "WELCOME_KLIKGO": "Welcome to KlikGo!",
   "VERIFY_EMAIL": "Verify Email",
   "EMAIL_VERIFICATION_SENT": "Email verification sent!",
-  "EMAIL_VERIFICATION_WORDING": "We send you a verification message to your email. Please check your email"
+  "EMAIL_VERIFICATION_WORDING": "We send you a verification message to your email. Please check your email",
+  "REMOVE_CART_ITEM_CONFIRM": "Are you sure you want to remove this item from cart?",
+  "SEARCH": "Search",
+  "SIZE": "Size",
+  "PRIMARY": "Primary",
+  "EDIT_ADDRESS": "Edit Address",
+  "DELETE_ADDRESS": "Delete Address",
+  "MY_ORDERS": "My Orders"
 }

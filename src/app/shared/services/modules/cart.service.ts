@@ -46,4 +46,34 @@ export class CartService {
       );
     });
   }
+
+  updateCartQuantity(id, qty): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.putData(`cart/quantity/${id}`, { quantity: qty });
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res) => {
+          resolve(res?.response);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  deleteCartItem(cartId): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.deleteData(`cart/${cartId}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }

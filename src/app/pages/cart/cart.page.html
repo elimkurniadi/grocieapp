@@ -5,10 +5,22 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="pullToRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
     <ion-row class="ion-justify-content-between">
       <ion-col size="12">
-        <app-item-list [cartData]="cartList" (quantityChange)="updateTotalPrice($event)"></app-item-list>
+        <app-item-list
+          [cartData]="cartList"
+          (afterDeleteItem)="fetchCartList()"
+          (quantityChange)="updateTotalPrice($event)"
+        ></app-item-list>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-top">
+      <ion-col size="12">
+        <app-slide-product [products]="relatedProductList"></app-slide-product>
       </ion-col>
     </ion-row>
   </ion-grid>

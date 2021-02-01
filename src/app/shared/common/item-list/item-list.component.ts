@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TranslateService } from '@shared/pipes/translate/translate.service';
+import { AlertService } from '@shared/services/alert.service';
 import { CartService } from '@shared/services/modules/cart.service';
 
 @Component({
@@ -10,8 +12,10 @@ export class ItemListComponent implements OnInit {
   @Input() cartData = null;
   @Input() showSubstract = true;
   @Output() quantityChange = new EventEmitter();
+  @Output() afterDeleteItem = new EventEmitter();
   totalPrice = 0;
-  constructor(private cartSrv: CartService) {}
+
+  constructor(private cartSrv: CartService, private alertSrv: AlertService, private translateSrv: TranslateService) {}
 
   ngOnInit() {
     if (this.cartData) {
@@ -37,16 +41,45 @@ export class ItemListComponent implements OnInit {
     });
   }
 
-  updateQuantity(isIncrement, index) {
+  updateQuantity(index) {
     const listByIndex = this.cartData[index];
-    listByIndex.quantity = isIncrement
-      ? listByIndex.quantity + 1
-      : listByIndex.quantity > 1
-      ? listByIndex.quantity - 1
-      : 1;
-    listByIndex.price = listByIndex.product.product_price * listByIndex.quantity;
-    this.calculateTotalPrice().then(() => {
-      this.quantityChange.emit(this.totalPrice);
+    const currentQty = listByIndex?.quantity;
+    this.cartSrv.updateCartQuantity(listByIndex?.cart_id, currentQty).then((res) => {
+      listByIndex.quantity = res;
+      listByIndex.local_subtotal_price = +listByIndex?.product?.primary_price * +res;
+      this.calculateTotalPrice().then(() => {
+        this.quantityChange.emit(this.totalPrice);
+      });
+    });
+  }
+
+  updateLocalQuantity(index, isIncrement) {
+    const listByIndex = this.cartData[index];
+    const currentQty = isIncrement ? listByIndex?.quantity + 1 : listByIndex?.quantity - 1;
+    currentQty === 0 ? this.showAlertRemoveItem(this.cartData[index]?.cart_id) : (listByIndex.quantity = currentQty);
+  }
+
+  showAlertRemoveItem(cartId) {
+    this.alertSrv.presentAlert({
+      message: `${this.translateSrv.get('REMOVE_CART_ITEM_CONFIRM')}`,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.removeItemFromCart(cartId);
+          },
+        },
+        {
+          text: `${this.translateSrv.get('CANCEL')}`,
+          role: 'cancel',
+        },
+      ],
+    });
+  }
+
+  removeItemFromCart(cartId) {
+    this.cartSrv.deleteCartItem(cartId).then(() => {
+      this.afterDeleteItem.emit();
     });
   }
 }

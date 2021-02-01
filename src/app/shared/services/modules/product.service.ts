@@ -52,4 +52,19 @@ export class ProductService {
       );
     });
   }
+
+  getFeaturedProduct(pagination: Page = null, ordering: Sort = null): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData('product/featured', pagination, ordering);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res) => {
+          resolve(res?.response?.rows);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }

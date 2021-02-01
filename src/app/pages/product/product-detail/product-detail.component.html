@@ -1,11 +1,11 @@
-<ion-header class="ion-no-border product-detail-upper">
+<ion-header class="ion-no-border ion-margin-top product-detail-upper">
   <ion-toolbar mode="ios">
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
         <ion-icon name="chevron-back-outline" slot="icon-only" color="dark"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{ productData?.name }}</ion-title>
+    <ion-searchbar placeholder="{{ 'SEARCH' | translate }}" [routerLink]="['/product/search']"></ion-searchbar>
   </ion-toolbar>
   <ion-row>
     <ion-col size="12" class="ion-no-padding ion-text-center">
@@ -18,24 +18,38 @@
   <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
     <ion-row class="ion-justify-content-between">
       <ion-col size="12">
-        <ion-row class="ion-align-items-center">
+        <ion-row class="ion-align-items-center ion-justify-content-center">
           <ion-col size="11" class="ion-no-padding">
-            <h4>{{ productData?.name }}</h4>
+            <ion-text *ngIf="productData?.secondary_price">
+              <small class="strike-through">Rp. {{ productData?.secondary_price | number }}</small
+              ><br />
+            </ion-text>
+            <ion-text color="secondary">
+              <b>Rp. {{ productData?.primary_price | number }}</b>
+            </ion-text>
           </ion-col>
           <ion-col size="1" class="ion-no-padding ion-text-right">
             <ion-icon name="list-outline" (click)="ctaFavorite()"></ion-icon>
           </ion-col>
         </ion-row>
 
-        <ion-row class="ion-align-items-center">
+        <ion-row>
           <ion-col size="12" class="ion-no-padding">
-            <ion-text color="medium">{{ productData?.weight }}/{{ productData?.unit }}</ion-text>
+            <span
+              ><b>{{ productData?.name }}</b></span
+            >
           </ion-col>
         </ion-row>
 
         <ion-row class="ion-align-items-center ion-justify-content-center">
           <ion-col size="6" class="ion-no-padding">
-            <h4>Rp. {{ productData?.price | number }}</h4>
+            <div>
+              <ion-text *ngIf="productData?.brand">
+                <small>{{ productData?.brand?.name }}</small>
+                <br />
+              </ion-text>
+              <small>{{ 'SIZE' | translate }}: {{ productData?.weight }}</small>
+            </div>
           </ion-col>
           <ion-col size="6" class="ion-no-padding ion-text-right">
             <ion-button color="primary" size="small" shape="round" (click)="addItemToCart()">
