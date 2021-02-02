@@ -163,5 +163,12 @@
   "SEARCH_RESULT": "Hasil Pencarian",
   "PRICE": "Harga",
   "HIGHEST": "Tertinggi",
-  "LOWEST": "Terendah"
+  "LOWEST": "Terendah",
+  "TOTAL_ITEMS": "Total Items",
+  "REMOVE_CART_ITEM_CONFIRM": "Apakah Anda yakin ingin menghapus barang ini dari keranjang?",
+  "SIZE": "Ukuran",
+  "PRIMARY": "Utama",
+  "EDIT_ADDRESS": "Ubah Alamat",
+  "DELETE_ADDRESS": "Hapus Address",
+  "MY_ORDERS": "Pesanan Saya"
 }

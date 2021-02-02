@@ -163,5 +163,12 @@
   "SEARCH_RESULT": "Search Result",
   "PRICE": "Price",
   "HIGHEST": "Highest",
-  "LOWEST": "Lowest"
+  "LOWEST": "Lowest",
+  "TOTAL_ITEMS": "Total Items",
+  "REMOVE_CART_ITEM_CONFIRM": "Are you sure you want to remove this item from cart?",
+  "SIZE": "Size",
+  "PRIMARY": "Primary",
+  "EDIT_ADDRESS": "Edit Address",
+  "DELETE_ADDRESS": "Delete Address",
+  "MY_ORDERS": "My Orders"
 }

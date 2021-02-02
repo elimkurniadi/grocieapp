@@ -1,61 +1,60 @@
 <ng-container *ngFor="let address of addressList">
-  <ion-card
-    class="ion-border ion-no-margin ion-margin-bottom card-address"
-    (click)="onAddressClick(address?.address_id, $event)"
-  >
-    <ion-card-header class="ion-no-margin ion-text-right">
-      <ion-icon
-        name="close-outline"
-        color="dark"
-        *ngIf="!isSelectMode && !address?.is_default"
-        (click)="showAlertDelete(address?.address_id, $event)"
-      ></ion-icon>
-    </ion-card-header>
+  <ion-card class="ion-border ion-no-margin ion-margin-bottom card-address">
     <ion-card-content>
-      <ion-row>
-        <ion-col size="12">
-          <ion-text color="dark">
-            <span
-              ><b>{{ address?.address_name }}</b></span
-            >
-          </ion-text>
-          <br />
-          <span>{{ address?.address_detail }}</span>
+      <ion-row class="ion-align-items-center">
+        <ion-col [size]="address?.is_default ? '8' : '12'" class="ion-no-padding">
+          <span
+            ><b>{{ address?.address_name }}</b></span
+          >
+        </ion-col>
+        <ion-col size="4" class="ion-text-right ion-no-padding" *ngIf="address?.is_default">
+          <ion-chip color="secondary" size="small">
+            <small>{{ isSelectMode ? ('SELECTED' | translate) : ('PRIMARY' | translate) }}</small>
+          </ion-chip>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <ion-col size="12">
-          <ion-text color="dark">
-            <span
-              ><b>{{ address?.receiver_name }}</b></span
-            >
+        <ion-col size="12" class="ion-no-padding">
+          <ion-text color="secondary" size="large">
+            <h3>{{ address?.receiver_name }}</h3>
           </ion-text>
-          <br />
-          <small>{{ address?.phone }}</small>
+        </ion-col>
+        <ion-col size="12" class="ion-no-padding">
+          <ion-text color="medium">
+            <small>{{ address?.phone }}</small>
+          </ion-text>
+        </ion-col>
+        <ion-col size="12" class="ion-no-padding">
+          <ion-text color="medium">
+            <small>{{ address?.address }}</small>
+          </ion-text>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <ion-col size="12">
+        <ion-col size="12" *ngIf="!isSelectMode">
           <ion-button
             expand="block"
-            shape="round"
-            color="primary"
             fill="outline"
+            shape="round"
+            color="secondary"
             size="small"
-            [disabled]="address?.is_default"
-            (click)="onUseAddress(address, $event)"
+            [routerLink]="['/address/form', address.address_id]"
           >
-            {{
-              isSelectMode
-                ? address?.is_default
-                  ? ('SELECTED' | translate)
-                  : ('SELECT_ADDRESS' | translate)
-                : address?.is_default
-                ? ('DEFAULT_ADDRESS' | translate)
-                : ('SET_DEFAULT' | translate)
-            }}
+            {{ 'EDIT_ADDRESS' | translate }}
+          </ion-button>
+        </ion-col>
+        <ion-col size="12" *ngIf="!address?.is_default">
+          <ion-button
+            expand="block"
+            fill="outline"
+            shape="round"
+            color="secondary"
+            size="small"
+            (click)="setAsDefaultAddress(address?.address_id)"
+          >
+            {{ isSelectMode ? ('USE_ADDRESS' | translate) : ('SET_DEFAULT' | translate) }}
           </ion-button>
         </ion-col>
       </ion-row>
