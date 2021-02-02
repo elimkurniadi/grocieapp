@@ -15,10 +15,13 @@ export class CardProductComponent implements OnInit {
 
   ngOnInit() {}
 
-  async addToFavorite() {
+  async addToFavorite(productId: string) {
     const modal = await this.modalCtrl.create({
       component: ModalAddToFavoriteComponent,
       cssClass: 'modal-add-to-favorite',
+      componentProps: {
+        productId,
+      },
     });
 
     modal.onDidDismiss().then(() => {
