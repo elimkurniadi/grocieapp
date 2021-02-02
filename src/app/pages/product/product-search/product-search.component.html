@@ -15,7 +15,7 @@
       ></ion-searchbar>
     </div>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="showFilter()">
         <ion-icon name="funnel" slot="start" class="header-action-size"></ion-icon>
         <ion-text class="header-action-size"> {{ 'FILTER' | translate }} </ion-text>
       </ion-button>

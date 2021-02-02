@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalFilterProductComponent } from '@shared/common/modals/modal-filter-product/modal-filter-product.component';
 import { Brand, Page, Product, Response, ResponsePagination } from '@shared/models';
 import { CacheService, ToastService } from '@shared/services';
 import { BrandService } from '@shared/services/modules';
@@ -20,7 +22,8 @@ export class ProductSearchComponent implements OnInit {
     private productSrv: ProductService,
     private brandSrv: BrandService,
     private toastSrv: ToastService,
-    private cache: CacheService
+    private cache: CacheService,
+    private modalCtrl: ModalController
   ) {
     this.page = {
       row: 10,
@@ -101,5 +104,18 @@ export class ProductSearchComponent implements OnInit {
 
       this.cache.setRecentSearch(this.recentSearches);
     });
+  }
+
+  async showFilter() {
+    const modal = await this.modalCtrl.create({
+      component: ModalFilterProductComponent,
+      cssClass: 'modal-filter-product',
+    });
+
+    modal.onDidDismiss().then(() => {
+      // Refresh data
+    });
+
+    return await modal.present();
   }
 }

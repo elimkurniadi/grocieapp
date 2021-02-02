@@ -160,5 +160,8 @@
   "EMAIL_VERIFICATION_SENT": "Email verification sent!",
   "EMAIL_VERIFICATION_WORDING": "We send you a verification message to your email. Please check your email",
   "SEARCH": "Search",
-  "SEARCH_RESULT": "Search Result"
+  "SEARCH_RESULT": "Search Result",
+  "PRICE": "Price",
+  "HIGHEST": "Highest",
+  "LOWEST": "Lowest"
 }
