@@ -15,9 +15,16 @@
     <ion-row class="ion-no-padding">
       <ion-col class="ion-no-padding">
         <ion-list class="ion-no-padding">
-          <ion-item lines="none" class="ion-no-padding" *ngFor="let item of [1, 2, 3]">
-            <ion-checkbox slot="start" class="favorite-checkbox"></ion-checkbox>
-            <ion-label class="favorite-name"> My Shopping List</ion-label>
+          <ion-item lines="none" class="ion-no-padding" *ngFor="let item of favorites">
+            <ion-checkbox
+              slot="start"
+              class="favorite-checkbox"
+              color="success"
+              [disabled]="favoriteAdded && favoriteAdded.includes(item.favourite_group_id)"
+              [(ngModel)]="item.is_product_added"
+              [ngModelOptions]="{ standalone: true }"
+            ></ion-checkbox>
+            <ion-label class="favorite-name"> {{ item.name }}</ion-label>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -28,7 +35,7 @@
 <ion-footer class="ion-no-border">
   <ion-row class="ion-padding-horizontal">
     <ion-col class="ion-padding-bottom">
-      <ion-button expand="full" (click)="dismiss()">
+      <ion-button expand="full" (click)="addProductToFavorite()" color="success" shape="round">
         {{ 'ADD' | translate }}
       </ion-button>
     </ion-col>

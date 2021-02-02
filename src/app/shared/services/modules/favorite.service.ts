@@ -24,9 +24,39 @@ export class FavoriteService {
     });
   }
 
+  getListByProduct(productId: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData(`favourite_group/product/${productId}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
   addData(body?: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.postData('favourite_group', body);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  addToFavorite(body?: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.postData('favourite', body);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: Response) => {
