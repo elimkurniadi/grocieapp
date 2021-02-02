@@ -51,6 +51,8 @@ export class ProductListComponent implements OnInit {
       this.assignProductList('category');
     } else if (this.brandId && this.brandId !== null) {
       this.assignProductList('brand');
+    } else if (this.search && this.search !== null) {
+      this.assignProductList('keyword');
     }
   }
 
@@ -73,9 +75,12 @@ export class ProductListComponent implements OnInit {
   }
 
   getProductList(type: string) {
-    if (type === 'category') {
+    if (type === 'keyword') {
+      return this.productSrv.getListByKeyword(this.search);
+    } else if (type === 'category') {
       return this.productSrv.getListByCategory(this.categoryId);
-    } else {
+    }
+    {
       return this.productSrv.getListByBrand(this.brandId);
     }
   }
@@ -96,7 +101,7 @@ export class ProductListComponent implements OnInit {
     if (param.search !== null && param.search !== '') {
       this.search = param.search;
     } else {
-      this.search = '';
+      this.search = null;
     }
   }
 

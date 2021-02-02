@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 })
 export class CacheService {
   private tokenKey = 'klikgo-mobile-token';
+  private recentKey = 'recent-search';
   currentUser: any;
 
   constructor(private storage: Storage) {}
@@ -31,5 +32,17 @@ export class CacheService {
   async removeCurrentUser() {
     this.currentUser = null;
     await this.removeToken();
+  }
+
+  setRecentSearch(data: any) {
+    return this.storage.set(this.recentKey, data);
+  }
+
+  getRecentSearch() {
+    return this.storage.get(this.recentKey);
+  }
+
+  removeRecentSearch() {
+    return this.storage.remove(this.recentKey);
   }
 }
