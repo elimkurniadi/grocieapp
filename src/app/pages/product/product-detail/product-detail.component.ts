@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
+import { CartService } from '@shared/services/modules';
+import { ProductService } from '@shared/services/modules/product.service';
 import { ToastService } from '@shared/services/toast.service';
 
 @Component({
@@ -8,8 +12,20 @@ import { ToastService } from '@shared/services/toast.service';
   styleUrls: ['./product-detail.component.scss'],
 })
 export class ProductDetailComponent implements OnInit {
-  constructor(private translateSrv: TranslateService, private toastSrv: ToastService) {}
   isFavorite = false;
+  productData: any = null;
+  productId: number = null;
+
+  constructor(
+    private translateSrv: TranslateService,
+    private toastSrv: ToastService,
+    private productSrv: ProductService,
+    private activatedRoute: ActivatedRoute,
+    private navCtrl: NavController,
+    private cartSrv: CartService
+  ) {
+    this.observeParam();
+  }
 
   ngOnInit() {}
 
@@ -21,8 +37,28 @@ export class ProductDetailComponent implements OnInit {
     this.toastSrv.show(message);
   }
 
-  addToCart() {
-    const message = this.translateSrv.get('SUCCESS_ADD_TO_CART');
-    this.toastSrv.show(message);
+  observeParam() {
+    this.activatedRoute.params.subscribe((param) => {
+      const id = param?.id;
+      this.productId = id;
+      this.fetchProductDetail(this.productId);
+    });
+  }
+
+  fetchProductDetail(id) {
+    this.productSrv.getProductDetail(id).then((res) => {
+      this.productData = res;
+    });
+  }
+
+  goBack() {
+    this.navCtrl.back();
+  }
+
+  addItemToCart() {
+    this.cartSrv.addToCart(this.productId).then((res) => {
+      console.log('res: ', res);
+      this.toastSrv.show(`${this.translateSrv.get('SUCCESS_ADD_TO_CART')}`);
+    });
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '@shared/services/modules/cart.service';
+import { ProductService } from '@shared/services/modules/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -7,47 +8,50 @@ import { CartService } from '@shared/services/modules/cart.service';
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage implements OnInit {
-  cartList = [
-    {
-      product: {
-        product_thumbnail: 'https://via.placeholder.com/200.png',
-        product_price: 18000,
-        product_unit: 'kg',
-        product_title: 'Wortel Merah',
-        product_description: 'Wombo ahoy',
-      },
-      price: null,
-      quantity: 1,
-    },
-    {
-      product: {
-        product_thumbnail: 'https://via.placeholder.com/200.png',
-        product_price: 20000,
-        product_unit: 'kg',
-        product_title: 'Wortel Merah Premium',
-        product_description: 'Wombo ahoy Premium super top',
-      },
-      price: null,
-      quantity: 2,
-    },
-  ];
+  cartList: any[] = null;
+  relatedProductList: any[] = null;
   totalPrice = 0;
 
-  constructor(private cartSrv: CartService) {}
+  constructor(private cartSrv: CartService, private productSrv: ProductService) {}
 
   ngOnInit() {}
 
-  ionViewDidEnter() {
-    this.initTotalPrice();
+  ionViewWillEnter() {
+    this.fetchCartList();
+    this.fetchRelatedProductList();
+  }
+
+  pullToRefresh(event) {
+    this.fetchCartList();
+    this.fetchRelatedProductList();
+    event.target.complete();
   }
 
   initTotalPrice() {
     this.cartSrv.calculateSumPrice(this.cartList).then((res) => {
       this.totalPrice = res;
+      console.log('this.totalPrice : ', this.totalPrice);
     });
   }
 
   updateTotalPrice(value) {
     this.totalPrice = value;
+  }
+
+  fetchCartList() {
+    this.cartSrv.getCartList().then((res) => {
+      res.forEach((element) => {
+        const localSubTotalPrice = element?.quantity * +element?.product?.primary_price;
+        Object.assign(element, { local_subtotal_price: localSubTotalPrice });
+      });
+      this.cartList = res;
+      this.initTotalPrice();
+    });
+  }
+
+  fetchRelatedProductList() {
+    this.productSrv.getFeaturedProduct(null, null).then((res) => {
+      this.relatedProductList = res;
+    });
   }
 }

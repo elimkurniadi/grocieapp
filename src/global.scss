@@ -274,3 +274,8 @@ ion-searchbar {
     border: none;
   }
 }
+
+.strike-through {
+  text-decoration: line-through;
+  color: var(--ion-color-danger);
+}

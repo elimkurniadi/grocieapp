@@ -159,5 +159,12 @@
   "VERIFY_EMAIL": "Verifikasi Email",
   "EMAIL_VERIFICATION_SENT": "Email verifikasi terkirim!",
   "EMAIL_VERIFICATION_WORDING": "Kami telah mengiriman pesan verifikasi ke email Anda. Silahkan cek email Anda",
-  "TOTAL_ITEMS": "Total Items"
+  "TOTAL_ITEMS": "Total Items",
+  "REMOVE_CART_ITEM_CONFIRM": "Apakah Anda yakin ingin menghapus barang ini dari keranjang?",
+  "SEARCH": "Cari",
+  "SIZE": "Ukuran",
+  "PRIMARY": "Utama",
+  "EDIT_ADDRESS": "Ubah Alamat",
+  "DELETE_ADDRESS": "Hapus Address",
+  "MY_ORDERS": "Pesanan Saya"
 }

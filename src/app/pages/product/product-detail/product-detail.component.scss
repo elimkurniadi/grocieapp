@@ -1,7 +1,7 @@
 .product-detail-upper {
-  ion-buttons {
-    z-index: 100;
-    position: absolute;
-    top: 0;
+  .img-product {
+    max-height: 200px;
+    object-fit: cover;
+    object-position: center;
   }
 }

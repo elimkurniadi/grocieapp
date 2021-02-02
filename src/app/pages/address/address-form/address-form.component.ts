@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
+import { ModalPinLocationComponent } from '@shared/common/modal-pin-location/modal-pin-location.component';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { GlobalService, RxValidatorService } from '@shared/services';
+import { AlertService } from '@shared/services/alert.service';
 import { AddressService } from '@shared/services/modules/address.service';
 
 @Component({
@@ -28,7 +30,9 @@ export class AddressFormComponent implements OnInit {
     private translateSrv: TranslateService,
     private gs: GlobalService,
     private addressSrv: AddressService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private alertSrv: AlertService,
+    private modalCtrl: ModalController
   ) {
     this.observerParam();
   }
@@ -174,5 +178,41 @@ export class AddressFormComponent implements OnInit {
       controls.district_id.enable();
       this.fetchDistricts(event);
     }
+  }
+
+  confirmDeleteAddress() {
+    this.alertSrv.presentAlert({
+      message: `${this.translateSrv.get('DELETE_ADDRESS_CONFIRM')}`,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.deleteAddress();
+          },
+        },
+        {
+          text: `${this.translateSrv.get('CANCEL')}`,
+          role: 'cancel',
+        },
+      ],
+    });
+  }
+
+  deleteAddress() {
+    this.addressSrv.deleteAddress(this.addressId).then(() => {
+      this.navCtrl.back();
+    });
+  }
+
+  async presentModalPinLocation() {
+    const modal = await this.modalCtrl.create({
+      component: ModalPinLocationComponent,
+    });
+
+    modal.onWillDismiss().then(() => {
+      // CHANGE THE LONG LAT FORM VALUE
+    });
+
+    return await modal.present();
   }
 }

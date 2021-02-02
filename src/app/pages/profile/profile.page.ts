@@ -41,6 +41,11 @@ export class ProfilePage implements OnInit {
   initMenuList() {
     this.menuList = [
       {
+        title: `${this.translateSrv.get('MY_ORDERS')}`,
+        route: '/orders',
+        url: null,
+      },
+      {
         title: `${this.translateSrv.get('EDIT_PROFILE')}`,
         route: '/profile/edit',
         url: null,

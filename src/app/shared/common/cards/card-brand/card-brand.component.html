@@ -1,5 +1,5 @@
 <ion-row>
-  <ion-col class="ion-text-center ion-padding-vertical">
+  <ion-col class="ion-text-center ion-padding-vertical" (click)="goToProductByBrand(brand)">
     <ion-row>
       <ion-col size="12">
         <img [src]="brand.image_url" class="brand-icon" *ngIf="brand.image_url" />
