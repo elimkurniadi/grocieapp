@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { ModalFilterProductComponent } from '@shared/common/modals/modal-filter-product/modal-filter-product.component';
+import { ModalSortProductComponent } from '@shared/common/modals/modal-sort-product/modal-sort-product.component';
 import { Bundling, Page, Product, Response, ResponsePagination } from '@shared/models';
 import { ToastService } from '@shared/services';
 import { BundlingService } from '@shared/services/modules';
@@ -22,7 +25,8 @@ export class BundlingDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private bundlingSrv: BundlingService,
     private productSrv: ProductService,
-    private toastSrv: ToastService
+    private toastSrv: ToastService,
+    private modalCtrl: ModalController
   ) {
     this.route.params.subscribe((param) => {
       if (param.id !== null) {
@@ -89,5 +93,31 @@ export class BundlingDetailComponent implements OnInit {
         this.getProduct();
       }
     }, 500);
+  }
+
+  async showFilter() {
+    const modal = await this.modalCtrl.create({
+      component: ModalFilterProductComponent,
+      cssClass: 'modal-filter-product',
+    });
+
+    modal.onDidDismiss().then(() => {
+      // Refresh data
+    });
+
+    return await modal.present();
+  }
+
+  async showSort() {
+    const modal = await this.modalCtrl.create({
+      component: ModalSortProductComponent,
+      cssClass: 'modal-sort-product',
+    });
+
+    modal.onDidDismiss().then(() => {
+      // Refresh data
+    });
+
+    return await modal.present();
   }
 }

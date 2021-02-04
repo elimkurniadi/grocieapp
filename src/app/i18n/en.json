@@ -170,5 +170,8 @@
   "PRIMARY": "Primary",
   "EDIT_ADDRESS": "Edit Address",
   "DELETE_ADDRESS": "Delete Address",
-  "MY_ORDERS": "My Orders"
+  "MY_ORDERS": "My Orders",
+  "POPULARITY": "Popularity",
+  "LOWEST_TO_HIGHEST_PRICE": "Lowest to Highest Price",
+  "HIGHEST_TO_LOWEST_PRICE": "Highest to Lowest Price"
 }

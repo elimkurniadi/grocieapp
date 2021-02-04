@@ -1,0 +1,20 @@
+.divider {
+  height: 1px;
+  background-color: lightgray;
+  margin-top: 10px;
+}
+
+.filter-title {
+  color: var(--ion-color-primary);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.sort-label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.sort-radio {
+  margin-right: 12px;
+}
