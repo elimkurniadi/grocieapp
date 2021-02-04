@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { ModalFilterProductComponent } from '@shared/common/modals/modal-filter-product/modal-filter-product.component';
+import { ModalSortProductComponent } from '@shared/common/modals/modal-sort-product/modal-sort-product.component';
 import { Category, Product, Response, ResponsePagination } from '@shared/models';
 import { ToastService } from '@shared/services';
 import { CategoryService } from '@shared/services/modules';
@@ -18,25 +21,13 @@ export class ProductListComponent implements OnInit {
   category: Category;
   products: Product[];
 
-  banners = [
-    {
-      source: 'https://via.placeholder.com/360x203.png?text=Promotional+Banner',
-    },
-
-    {
-      source: 'https://via.placeholder.com/360x203.png?text=Promotional+Banner',
-    },
-    {
-      source: null,
-    },
-  ];
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private categorySrv: CategoryService,
     private productSrv: ProductService,
-    private toastSrv: ToastService
+    private toastSrv: ToastService,
+    private modalCtrl: ModalController
   ) {
     this.route.queryParams.subscribe((param) => {
       this.setKeyword(param);
@@ -121,5 +112,31 @@ export class ProductListComponent implements OnInit {
       this.brandId = null;
       this.title = null;
     }
+  }
+
+  async showFilter() {
+    const modal = await this.modalCtrl.create({
+      component: ModalFilterProductComponent,
+      cssClass: 'modal-filter-product',
+    });
+
+    modal.onDidDismiss().then(() => {
+      // Refresh data
+    });
+
+    return await modal.present();
+  }
+
+  async showSort() {
+    const modal = await this.modalCtrl.create({
+      component: ModalSortProductComponent,
+      cssClass: 'modal-sort-product',
+    });
+
+    modal.onDidDismiss().then(() => {
+      // Refresh data
+    });
+
+    return await modal.present();
   }
 }

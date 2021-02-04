@@ -7,10 +7,23 @@ import { SharedModule } from '@shared/shared.module';
 import { ModalLocationComponent } from './modal-location/modal-location.component';
 import { ModalFilterProductComponent } from './modal-filter-product/modal-filter-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalSortProductComponent } from './modal-sort-product/modal-sort-product.component';
 
 @NgModule({
-  declarations: [ModalInfoComponent, ModalAddToFavoriteComponent, ModalLocationComponent, ModalFilterProductComponent],
+  declarations: [
+    ModalInfoComponent,
+    ModalAddToFavoriteComponent,
+    ModalLocationComponent,
+    ModalFilterProductComponent,
+    ModalSortProductComponent,
+  ],
   imports: [CommonModule, IonicModule.forRoot(), SharedModule, FormsModule, ReactiveFormsModule],
-  exports: [ModalInfoComponent, ModalAddToFavoriteComponent, ModalLocationComponent, ModalFilterProductComponent],
+  exports: [
+    ModalInfoComponent,
+    ModalAddToFavoriteComponent,
+    ModalLocationComponent,
+    ModalFilterProductComponent,
+    ModalSortProductComponent,
+  ],
 })
 export class ModalsModule {}

@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-grid class="ion-padding-horizontal">
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-no-padding">
+        <ion-row class="ion-no-padding">
+          <ion-col class="ion-no-padding ion-padding-top">
+            <ion-text class="filter-title"> {{ 'SORT' | translate }}</ion-text> <br />
+          </ion-col>
+          <ion-col class="ion-text-right ion-no-padding-end">
+            <ion-icon name="close" color="light" (click)="dismiss()"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <div class="divider"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content>
+  <ion-list class="ion-no-padding">
+    <ion-radio-group [(ngModel)]="option">
+      <ion-item class="ion-padding-end" lines="none" *ngFor="let item of radioOptions">
+        <ion-label class="sort-label">{{ item.label }}</ion-label>
+        <ion-radio slot="start" [value]="item.value" color="success" class="sort-radio"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-row class="ion-padding-horizontal">
+    <ion-col class="ion-padding-bottom">
+      <ion-button expand="full" shape="round" color="success" (click)="dismiss()">
+        {{ 'APPLY' | translate }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

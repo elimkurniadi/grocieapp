@@ -170,5 +170,8 @@
   "PRIMARY": "Utama",
   "EDIT_ADDRESS": "Ubah Alamat",
   "DELETE_ADDRESS": "Hapus Address",
-  "MY_ORDERS": "Pesanan Saya"
+  "MY_ORDERS": "Pesanan Saya",
+  "POPULARITY": "Popularitas",
+  "LOWEST_TO_HIGHEST_PRICE": "Harga Terendah",
+  "HIGHEST_TO_LOWEST_PRICE": "Harga Tertinggi"
 }
