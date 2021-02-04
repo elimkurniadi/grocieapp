@@ -82,6 +82,21 @@ export class ProductService {
     });
   }
 
+  getRelated(keyword: string, pagination?: Page, ordering?: Sort): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData(`product/search/related/${keyword}`, pagination, ordering);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: ResponsePagination) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
   getListByKeyword(keyword: string, pagination?: Page, ordering?: Sort): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData(`product/search/${keyword}`, pagination, ordering);
