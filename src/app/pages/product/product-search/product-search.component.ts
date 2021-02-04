@@ -51,13 +51,12 @@ export class ProductSearchComponent implements OnInit {
 
   assignKeyword(keyword: string) {
     this.keyword = keyword;
-
     this.fetchData();
   }
 
   getProduct() {
     this.productSrv
-      .getListByKeyword(this.keyword, this.page)
+      .getRelated(this.keyword, this.page)
       .then((res: ResponsePagination) => {
         this.saveRecentSearch();
         const products = res.response.rows as Product[];
@@ -71,10 +70,10 @@ export class ProductSearchComponent implements OnInit {
 
   getBrand() {
     this.brandSrv
-      .getList(this.page)
-      .then((res: Response) => {
+      .getRelated(this.keyword, this.page)
+      .then((res: ResponsePagination) => {
         this.saveRecentSearch();
-        const brands = res.response as Brand[];
+        const brands = res.response.rows as Brand[];
         this.brands = brands;
       })
       .catch((err) => {
