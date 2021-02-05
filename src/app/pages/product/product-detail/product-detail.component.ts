@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
+import { ModalAddToFavoriteComponent } from '@shared/common/modals/modal-add-to-favorite/modal-add-to-favorite.component';
+import { Page, Product, ResponsePagination } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { CartService, ProductService } from '@shared/services/modules';
 import { ToastService } from '@shared/services/toast.service';
@@ -14,6 +16,9 @@ export class ProductDetailComponent implements OnInit {
   isFavorite = false;
   productData: any = null;
   productId: number = null;
+  page: Page;
+
+  products: Product[];
 
   constructor(
     private translateSrv: TranslateService,
@@ -21,20 +26,18 @@ export class ProductDetailComponent implements OnInit {
     private productSrv: ProductService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
-    private cartSrv: CartService
+    private cartSrv: CartService,
+    private modalCtrl: ModalController
   ) {
     this.observeParam();
+
+    this.page = {
+      row: 8,
+      page: 1,
+    };
   }
 
   ngOnInit() {}
-
-  ctaFavorite() {
-    this.isFavorite = !this.isFavorite;
-    const message = this.isFavorite
-      ? this.translateSrv.get('SUCCESS_ADD_FAVORITE')
-      : this.translateSrv.get('SUCCESS_REMOVE_FAVORITE');
-    this.toastSrv.show(message);
-  }
 
   observeParam() {
     this.activatedRoute.params.subscribe((param) => {
@@ -47,6 +50,7 @@ export class ProductDetailComponent implements OnInit {
   fetchProductDetail(id) {
     this.productSrv.getProductDetail(id).then((res) => {
       this.productData = res;
+      this.getRelatedProduct();
     });
   }
 
@@ -59,5 +63,34 @@ export class ProductDetailComponent implements OnInit {
       console.log('res: ', res);
       this.toastSrv.show(`${this.translateSrv.get('SUCCESS_ADD_TO_CART')}`);
     });
+  }
+
+  getRelatedProduct() {
+    this.productSrv
+      .getRelated(this.productData?.name, this.page)
+      .then((res: ResponsePagination) => {
+        const products = res.response.rows as Product[];
+        this.products = products;
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
+  }
+
+  async addToFavorite() {
+    const modal = await this.modalCtrl.create({
+      component: ModalAddToFavoriteComponent,
+      cssClass: 'modal-add-to-favorite',
+      componentProps: {
+        productId: this.productId,
+      },
+    });
+
+    modal.onDidDismiss().then(() => {
+      // Refresh data
+    });
+
+    return await modal.present();
   }
 }
