@@ -2,6 +2,10 @@ import { Unit } from './unit';
 
 export interface Product {
   product_id?: number;
+  brand? : {
+    brand_id : string,
+    name: string
+  },
   name?: string;
   description?: string;
   weight?: string;

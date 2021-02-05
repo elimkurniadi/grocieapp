@@ -5,27 +5,35 @@
   </ion-card-header>
 
   <ion-card-content class="ion-no-padding ion-text-left">
-    <ion-row>
-      <ion-col size="10" class="truncate">
-        <p class="product-price" *ngIf="product?.secondary_price" [ngClass]="{ 'price-linethrough': product?.secondary_price }">
-          Rp {{ product?.secondary_price | number: '1.0-0':'id' }}
-        </p>
-      </ion-col>
-      <ion-col size="2" class="ion-text-right">
-        <ion-icon name="list" (click)="addToFavorite(product?.product_id)"></ion-icon>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <p class="product-final-price">
-          Rp {{ product?.primary_price | number: '1.0-0':'id' }} <span> /pcs</span>
-        </p>
+    <ion-row class="ion-align-self-center">
+      <ion-col size="12" class="product-brand truncate">
+        {{ product?.brand?.name || '&nbsp;'}}
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
         <ion-text class="product-name">{{ product?.name | titlecase }} </ion-text>
-        <p class="product-size">Size: {{ product?.weight }} gr</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="10">
+        <p class="product-size">Size: {{ product?.weight }} {{product?.unit?.name}}</p>
+      </ion-col>
+      <ion-col size="2" class="ion-text-right">
+        <ion-icon name="list" color="primary" (click)="addToFavorite(product?.product_id)"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col [style.visibility]="product?.secondary_price ? 'unset' : 'hidden' ">
+        <ion-badge style="font-size:10px;--color: white;background-color: #f8a345;">{{ ((product?.secondary_price - product?.primary_price) / product?.secondary_price) * 100 | number:'1.0-0'}} %</ion-badge>
+        <span class="product-price price-linethrough">
+          Rp {{ product?.secondary_price| number: '1.0-0' }}
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <p class="product-final-price">Rp {{ product?.primary_price | number: '1.0-0':'id' }} <span></span></p>
       </ion-col>
     </ion-row>
   </ion-card-content>

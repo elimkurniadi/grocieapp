@@ -12,13 +12,11 @@ export class TabsPage implements OnInit {
       label: 'Store',
       route: 'home',
     },
-
     {
       icon: 'heart-outline',
       label: 'Favorites',
       route: 'favorite',
     },
-
     {
       icon: 'cart-outline',
       label: 'My Cart',
