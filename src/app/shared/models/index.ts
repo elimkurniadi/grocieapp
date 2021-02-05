@@ -11,3 +11,4 @@ export * from './brand';
 export * from './favorite';
 export * from './product_favorite';
 export * from './unit';
+export * from './setting';
