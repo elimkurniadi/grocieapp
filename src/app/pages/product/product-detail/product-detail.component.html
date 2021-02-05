@@ -29,7 +29,7 @@
             </ion-text>
           </ion-col>
           <ion-col size="1" class="ion-no-padding ion-text-right">
-            <ion-icon name="list-outline" (click)="ctaFavorite()"></ion-icon>
+            <ion-icon name="list-outline" (click)="addToFavorite()"></ion-icon>
           </ion-col>
         </ion-row>
 
@@ -71,7 +71,9 @@
       <ion-col size="12">
         <h5>{{ 'RELATED_PRODUCT' | translate }}</h5>
       </ion-col>
-      <ion-col size="12"><app-slide-product></app-slide-product></ion-col>
+      <ion-col size="12">
+        <app-slide-product [products]="products"></app-slide-product>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
