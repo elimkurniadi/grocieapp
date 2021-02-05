@@ -40,6 +40,11 @@ export class HomePage implements OnInit {
     this.router.navigate(['/product', 'search']);
   }
 
+  scanQR() {
+    // Scan barcode and QR function should be inserted here.
+    console.log('Test logging QR code');
+  }
+
   async changeLocation() {
     const modal = await this.modalCtrl.create({
       component: ModalLocationComponent,

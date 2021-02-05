@@ -26,11 +26,10 @@ export class TabsPage implements OnInit {
     },
 
     {
-      icon: 'notifications-outline',
-      label: 'Notification',
+      icon: 'chatbubbles-outline',
+      label: 'Chat',
       route: 'notification',
     },
-
     {
       icon: 'person-outline',
       label: 'Profile',
