@@ -8,3 +8,4 @@ export * from './user.service';
 export * from './brand.service';
 export * from './favorite.service';
 export * from './setting.service';
+export * from './product.service';

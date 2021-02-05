@@ -5,8 +5,7 @@ import { ModalFilterProductComponent } from '@shared/common/modals/modal-filter-
 import { ModalSortProductComponent } from '@shared/common/modals/modal-sort-product/modal-sort-product.component';
 import { Bundling, Page, Product, Response, ResponsePagination } from '@shared/models';
 import { ToastService } from '@shared/services';
-import { BundlingService } from '@shared/services/modules';
-import { ProductService } from '@shared/services/modules/product.service';
+import { BundlingService, ProductService } from '@shared/services/modules';
 
 @Component({
   selector: 'app-bundling-detail',

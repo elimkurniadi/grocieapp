@@ -5,8 +5,7 @@ import { ModalFilterProductComponent } from '@shared/common/modals/modal-filter-
 import { ModalSortProductComponent } from '@shared/common/modals/modal-sort-product/modal-sort-product.component';
 import { Category, Product, Response, ResponsePagination } from '@shared/models';
 import { ToastService } from '@shared/services';
-import { CategoryService } from '@shared/services/modules';
-import { ProductService } from '@shared/services/modules/product.service';
+import { CategoryService, ProductService } from '@shared/services/modules';
 
 @Component({
   selector: 'app-product-list',

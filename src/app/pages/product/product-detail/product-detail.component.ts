@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
-import { CartService } from '@shared/services/modules';
-import { ProductService } from '@shared/services/modules/product.service';
+import { CartService, ProductService } from '@shared/services/modules';
 import { ToastService } from '@shared/services/toast.service';
 
 @Component({
