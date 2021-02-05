@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Brand, Category } from '@shared/models';
+import { Brand, Category, Page, Product, ResponsePagination } from '@shared/models';
 import { CacheService, ToastService } from '@shared/services';
-import { BrandService, CategoryService } from '@shared/services/modules';
+import { BrandService, CategoryService, ProductService } from '@shared/services/modules';
 
 @Component({
   selector: 'app-product-search-without-keyword',
@@ -15,18 +15,27 @@ export class ProductSearchWithoutKeywordComponent implements OnInit {
 
   categories: Category[];
   brands: Brand[];
+  products: Product[];
+  page: Page;
 
   constructor(
     private categorySrv: CategoryService,
     private brandSrv: BrandService,
+    private productSrv: ProductService,
     private toastSrv: ToastService,
     private cache: CacheService,
     private router: Router
-  ) {}
+  ) {
+    this.page = {
+      row: 10,
+      page: 1,
+    };
+  }
 
   ngOnInit() {
     this.getCategory();
     this.getFeaturedBrand();
+    this.getPopularProduct();
   }
 
   setKeyword(keyword: string) {
@@ -56,6 +65,19 @@ export class ProductSearchWithoutKeywordComponent implements OnInit {
       .then((res) => {
         const brands = res.response as Brand[];
         this.brands = brands;
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
+  }
+
+  getPopularProduct() {
+    this.productSrv
+      .getPopular(this.page)
+      .then((res: ResponsePagination) => {
+        const products = res.response.rows as Product[];
+        this.products = products;
       })
       .catch((err) => {
         const error = err.error.error;

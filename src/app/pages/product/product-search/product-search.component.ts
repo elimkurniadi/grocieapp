@@ -3,8 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ModalFilterProductComponent } from '@shared/common/modals/modal-filter-product/modal-filter-product.component';
 import { Brand, Page, Product, Response, ResponsePagination } from '@shared/models';
 import { CacheService, ToastService } from '@shared/services';
-import { BrandService } from '@shared/services/modules';
-import { ProductService } from '@shared/services/modules/product.service';
+import { BrandService, ProductService } from '@shared/services/modules';
 
 @Component({
   selector: 'app-product-search',

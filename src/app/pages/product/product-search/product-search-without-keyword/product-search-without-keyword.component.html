@@ -35,12 +35,12 @@
   </ion-col>
 </ion-row>
 
-<ion-row class="ion-padding-bottom">
+<ion-row class="ion-padding-bottom" *ngIf="products && products.length">
   <ion-col size="12" class="ion-padding-horizontal">
     <ion-text class="search-title"> {{ 'POPULAR_SEARCHES' | translate }}</ion-text>
   </ion-col>
   <ion-col size="12">
-    <app-slide-product></app-slide-product>
+    <app-slide-product [products]="products"></app-slide-product>
   </ion-col>
 </ion-row>
 
