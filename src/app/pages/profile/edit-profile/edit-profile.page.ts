@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
-import { GlobalService, RxValidatorService } from '@shared/services';
+import { GlobalService, RxValidatorService, ToastService } from '@shared/services';
 import { UserService } from '@shared/services/modules';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -31,7 +31,8 @@ export class EditProfilePage implements OnInit {
     private userSrv: UserService,
     private camera: Camera,
     private file: File,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private toastSrv: ToastService
   ) {
     this.userSrv.getProfile().then((res) => {
       this.initProfileForm(res);
@@ -63,11 +64,28 @@ export class EditProfilePage implements OnInit {
 
   updateProfile() {
     if (this.fg.valid) {
+      delete this.fg.value.profile_picture;
       const data = this.getDirtyValues();
       this.userSrv.updateProfile(data).then(() => {
         this.router.navigate(['/tabs/profile']);
       });
     }
+  }
+
+  updateProfilePicture(image: any) {
+    const data = {
+      image,
+    };
+
+    this.userSrv
+      .updateProfilePicture(data)
+      .then((res) => {
+        // this.router.navigate(['/tabs/profile']);
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
   }
 
   getDirtyValues() {
@@ -108,9 +126,28 @@ export class EditProfilePage implements OnInit {
     this.camera.getPicture(options).then((imageData) => {
       const image = `data:image/jpeg;base64,${imageData}`;
       this.setImageToForm(image);
+
+      this.getBlobFile(image).then((data) => {
+        this.updateProfilePicture(data);
+      });
     });
   }
 
+  getBlobFile(imgpath) {
+    return new Promise((resolve, reject) => {
+      fetch(imgpath)
+        .then((res) => res.blob())
+        .then(
+          (data) => {
+            const file = new Blob([data], { type: 'image/jpeg' });
+            resolve(file);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+    });
+  }
   setImageToForm(image) {
     this.selectedImage = image;
     this.fg.controls.profile_picture.patchValue(image);
