@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-row>
       <ion-col size="4" size-md="3" class="ion-no-padding-bottom ion-padding-horizontal ion-padding-top">
-        <img src="https://via.placeholder.com/35.png?text=LOGO+Placeholder" />
+        <img src="assets/images/app-logo.svg" />
       </ion-col>
       <ion-col size="8" size-md="9" class="ion-text-right ion-no-padding-bottom">
         <ion-row>
@@ -10,9 +10,9 @@
             >{{'STORE_LOCATION' | translate}}</ion-col
           >
           <ion-col size="12" class="ion-padding-end" (click)="changeLocation()">
-            <ion-row class="ion-no-padding">
+            <ion-row class="ion-no-padding ion-align-items-center location-text">
               <ion-col size="4" size-sm class="ion-no-padding">
-                <ion-icon name="location"></ion-icon>
+                <ion-icon name="location" style="vertical-align: middle;"></ion-icon>
               </ion-col>
               <ion-col size="8" size-sm size-md="5" size-lg="4" class="ion-no-padding truncate">
                 <ion-text class="location-text">Hypermart Gading Serpong - Boulevard</ion-text>
@@ -22,12 +22,18 @@
         </ion-row>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size="10.5" class="ion-padding-horizontal" (click)="searchProduct()">
-        <ion-searchbar class="custom-search" mode="ios" disabled></ion-searchbar>
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="9.4" (click)="searchProduct()">
+        <ion-searchbar class="custom-search" mode="ios"></ion-searchbar>
+        <div class="ion-no-padding ion-align-self-center ion-text-center scan-icon-container" (click)="scanQR();$event.stopPropagation();">
+          <ion-icon name="qr-code-outline" color="primary" class="scan-icon"></ion-icon>
+        </div>
       </ion-col>
-      <ion-col size="1.5" class="ion-no-padding ion-align-self-center ion-text-center">
-        <ion-icon name="notifications" class="notif-icon"></ion-icon>
+      <ion-col size="1.3" class="ion-no-padding ion-align-self-center ion-text-center">
+        <ion-icon name="notifications" color="primary" class="notif-icon" [routerLink]="['/tabs/notification/list']"></ion-icon>
+      </ion-col>
+      <ion-col size="1.3" class="ion-no-padding ion-align-self-center ion-text-center">
+        <ion-icon name="mail" color="primary" class="notif-icon"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-toolbar>
