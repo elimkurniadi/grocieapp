@@ -204,7 +204,7 @@ ion-searchbar.custom-search {
   position: absolute;
   top: 19px;
   height: 25px;
-  right: 16px; 
+  right: 16px;
   .scan-icon {
     font-size: 25px;
     height: 100%;
@@ -345,4 +345,10 @@ ion-searchbar {
 .strike-through {
   text-decoration: line-through;
   color: var(--ion-color-danger);
+}
+
+.profile-img {
+  object-fit: cover;
+  width: 35px;
+  height: 35px;
 }

@@ -11,7 +11,18 @@
   <ion-grid class="ion-no-padding">
     <ion-row class="ion-padding-horizontal ion-padding-bottom ion-align-items-center bg-white">
       <ion-col size="2">
-        <img width="80%" class="rounded" src="https://via.placeholder.com/35.png?text=LOGO+Placeholder" />
+        <img
+          width="80%"
+          class="rounded profile-img"
+          src="https://via.placeholder.com/35.png?text=LOGO+Placeholder"
+          *ngIf="!userData?.profile_picture"
+        />
+        <img
+          width="80%"
+          class="rounded profile-img"
+          [src]="userData?.profile_picture"
+          *ngIf="userData?.profile_picture"
+        />
       </ion-col>
       <ion-col size="7">
         <ion-row>
