@@ -1,30 +1,31 @@
 <ion-header class="ion-no-border">
   <ion-toolbar mode="ios">
     <ion-buttons slot="start" mode="md">
-      <ion-back-button></ion-back-button>
+      <ion-back-button icon="chevron-back"></ion-back-button>
     </ion-buttons>
     <ion-title>{{'REGISTER' | translate}}</ion-title>
   </ion-toolbar>
   <ion-row class="ion-padding-horizontal">
     <ion-col size="12" class="ion-padding">
       <ion-row>
-        <ion-col size="5.5" class="ion-text-center stepper"><small> {{'STEP' | translate}} 1 </small></ion-col>
+        <ion-col size="5.5" class="ion-text-center stepper">
+          <small color="primary">{{'STEP' | translate}} 1 </small>
+        </ion-col>
         <ion-col size="1"> &nbsp; </ion-col>
         <ion-col size="5.5" class="ion-text-center stepper stepper-inactive">
           <small>{{'STEP' | translate}} 2</small>
         </ion-col>
       </ion-row>
     </ion-col>
-
-    <ion-col size="12" class="ion-padding-horizontal">
-      <span><b>{{'PERSONAL_INFORMATION' | translate}}</b></span>
-    </ion-col>
   </ion-row>
 </ion-header>
 
 <ion-content>
-  <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
+  <ion-grid class="ion-padding-horizontal h-100">
     <ion-row class="ion-justify-content-between">
+      <ion-col size="12" class="ion-padding-horizontal">
+        <span><b>{{'PERSONAL_INFORMATION' | translate}}</b></span>
+      </ion-col>
       <ion-col size="12" class="ion-padding-horizontal">
         <form [formGroup]="fg">
           <div class="form-group">
@@ -48,6 +49,7 @@
                 placeholder="{{'YOUR_EMAIL_ADDRESS' | translate}}"
                 type="email"
                 formControlName="email"
+                style="--placeholder-color: blue !important"
               ></ion-input>
             </ion-item>
             <small *ngIf="fg.controls.email.dirty">

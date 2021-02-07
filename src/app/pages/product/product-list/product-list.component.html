@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar *ngIf="search">
     <ion-buttons mode="md" class="ion-text-center">
-      <ion-back-button defaultHref="/product/search" icon="chevron-back-outline"> </ion-back-button>
+      <ion-back-button icon="chevron-back" defaultHref="/product/search" icon="chevron-back-outline"> </ion-back-button>
       <ion-title class="header-title center-with-back">{{ 'SEARCH_RESULT' | translate }}</ion-title>
     </ion-buttons>
   </ion-toolbar>
@@ -12,7 +12,7 @@
   </ion-toolbar>
   <ion-toolbar *ngIf="!search">
     <ion-buttons slot="start" mode="md">
-      <ion-back-button defaultHref="/tabs/home"> </ion-back-button>
+      <ion-back-button icon="chevron-back" defaultHref="/tabs/home"> </ion-back-button>
       <ion-title class="header-title center-with-back">{{ title }}</ion-title>
     </ion-buttons>
     <ion-buttons slot="end">
