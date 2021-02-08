@@ -60,7 +60,6 @@ export class ProductDetailComponent implements OnInit {
 
   addItemToCart() {
     this.cartSrv.addToCart(this.productId).then((res) => {
-      console.log('res: ', res);
       this.toastSrv.show(`${this.translateSrv.get('SUCCESS_ADD_TO_CART')}`);
     });
   }

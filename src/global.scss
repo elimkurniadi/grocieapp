@@ -389,4 +389,9 @@ ion-searchbar {
     text-decoration: none;
     cursor: pointer;
   }
+  
+.profile-img {
+  object-fit: cover;
+  width: 35px;
+  height: 35px;
 }

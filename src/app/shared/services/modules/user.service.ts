@@ -91,4 +91,19 @@ export class UserService {
       );
     });
   }
+
+  updateProfilePicture(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.putData('profile/change_profile_picture', data, true);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          res.code === 200 ? resolve(true) : reject(false);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }
