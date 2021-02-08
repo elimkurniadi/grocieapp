@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border ion-margin-top product-detail-upper">
+<ion-header [translucent]="true" class="ion-no-border ion-margin-top">
   <ion-toolbar mode="ios">
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
@@ -7,16 +7,16 @@
     </ion-buttons>
     <ion-searchbar placeholder="{{ 'SEARCH' | translate }}" [routerLink]="['/product/search']"></ion-searchbar>
   </ion-toolbar>
-  <ion-row>
-    <ion-col size="12" class="ion-no-padding ion-text-center">
-      <img class="img-product" [src]="productData?.image_url" />
-    </ion-col>
-  </ion-row>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
-    <ion-row class="ion-justify-content-between">
+  <ion-grid class="ion-margin-top ion-no-padding h-100">
+    <ion-row>
+      <ion-col size="12" class="ion-no-padding ion-text-center">
+        <img class="img-product" [src]="productData?.image_url" />
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-between ion-padding-horizontal">
       <ion-col size="12">
         <ion-row class="ion-align-items-center ion-justify-content-center">
           <ion-col size="11" class="ion-no-padding">
@@ -60,16 +60,20 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class="ion-justify-content-between">
+    <div class="divider ion-margin-vertical"></div>
+
+    <ion-row class="ion-justify-content-between ion-padding-horizontal">
       <ion-col size="12">
-        <h5>{{ 'DESCRIPTION' | translate }}</h5>
-        <p [innerHTML]="productData?.description"></p>
+        <ion-text class="text-desc-label">{{ 'DESCRIPTION' | translate }}</ion-text>
+        <p [innerHTML]="productData?.description" class="text-desc"></p>
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <div class="divider"></div>
+
+    <ion-row class="ion-padding-horizontal">
       <ion-col size="12">
-        <h5>{{ 'RELATED_PRODUCT' | translate }}</h5>
+        <ion-text class="text-desc-label">{{ 'RELATED_PRODUCT' | translate }}</ion-text>
       </ion-col>
       <ion-col size="12">
         <app-slide-product [products]="products"></app-slide-product>

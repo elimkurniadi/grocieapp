@@ -1,7 +1,22 @@
-.product-detail-upper {
-  .img-product {
-    max-height: 200px;
-    object-fit: cover;
-    object-position: center;
+.img-product {
+  max-height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+ion-header {
+  border: unset !important;
+}
+
+.text-desc {
+  font-size: 12px;
+  line-height: 1.2;
+  color: #454545;
+  &-label {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.17;
+    letter-spacing: normal;
+    color: #454545;
   }
 }
