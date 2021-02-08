@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar mode="ios">
     <ion-buttons slot="start" mode="md">
-      <ion-back-button defaultHref="/login"> </ion-back-button>
-      <ion-title>Login</ion-title>
+      <ion-back-button icon="chevron-back" defaultHref="/login"> </ion-back-button>
     </ion-buttons>
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +13,7 @@
       <ion-col size="12" class="ion-no-padding">
         <form (ngSubmit)="login()" #loginForm="ngForm" [formGroup]="fg">
           <ion-item lines="none" class="form-group">
-            <ion-label position="stacked">Email</ion-label>
+            <ion-label position="stacked">E-mail Address</ion-label>
             <ion-input
               class="default-theme"
               formControlName="email"
@@ -36,9 +36,9 @@
       </ion-col>
     </ion-row>
     <ion-row class="ion-padding">
-      <ion-col class="padding-forgot-pass">
-        <ion-text class="login-redirect-text ion-padding-top" [routerLink]="['/change-password']"
-          >{{ 'FORGOT_PASSWORD' | translate }}
+      <ion-col>
+        <ion-text class="login-redirect-text ion-padding-top" color="limegreen" [routerLink]="['/change-password']"
+          ><b>{{ 'FORGOT_PASSWORD' | translate }}</b>
         </ion-text>
       </ion-col>
       <ion-col class="ion-text-right">
@@ -54,7 +54,7 @@
 <ion-footer class="ion-no-border">
   <ion-row class="ion-padding-bottom">
     <ion-col class="ion-padding">
-      <ion-button expand="full" (click)="loginForm.ngSubmit.emit()"> {{ 'LOGIN' | translate }}</ion-button>
+      <ion-button class="login-button" expand="block" color="limegreen" (click)="loginForm.ngSubmit.emit()"> {{ 'LOGIN' | translate }}</ion-button>
     </ion-col>
   </ion-row>
 </ion-footer>

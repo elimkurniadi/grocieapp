@@ -47,6 +47,9 @@
   ion-label {
     font-weight: bold;
   }
+  ion-input.has-focus{
+    outline: auto 1px #99cc33 !important;
+  }
   ion-input.default-theme,
   ion-textarea,
   ion-select,
@@ -114,11 +117,15 @@
 }
 
 .stepper {
-  border-bottom: 3px solid var(--ion-color-primary);
+  border-bottom: 4px solid var(--ion-color-primary);
   &-inactive {
-    border-bottom: 3px solid black;
-    filter: opacity(0.5) !important;
+    border-bottom: 4px solid #e5e5e5;
+    color: #e5e5e5;
   }
+}
+
+ion-title {
+  font-weight: 600 !important;
 }
 
 .modal-info .modal-wrapper {
@@ -196,10 +203,12 @@ ion-searchbar.custom-search {
 
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  padding-left: 24px;
+  padding-left: 16px;
   color: #707070;
   font-size: 12px;
+  opacity: 1;
 }
+
 .scan-icon-container {
   position: absolute;
   top: 19px;
@@ -210,12 +219,34 @@ ion-searchbar.custom-search {
     height: 100%;
   }
 }
+
 .ion-no-padding-bottom {
   padding-bottom: 0;
 }
 
 .ion-no-padding-end {
   padding-right: 0;
+}
+
+ion-button {
+  --border-radius: 20px !important;
+  text-transform: capitalize;
+  &.social-media-login {
+    --box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
+    --background: #ffffff;
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.17;
+    letter-spacing: normal;
+    color: #353535;
+  }
+}
+
+ion-input{
+  font-size: 13px !important;
+  line-height: 1.17;
+  color: #454545 i !important;
 }
 
 ion-slide.full-width {
@@ -347,6 +378,18 @@ ion-searchbar {
   color: var(--ion-color-danger);
 }
 
+.login-redirect-text {
+  font-size: 12px;
+  &:focus {
+    outline: 0;
+  }
+  .link {
+    font-weight: 600;
+    color: #0f447a;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
 .profile-img {
   object-fit: cover;
   width: 35px;
