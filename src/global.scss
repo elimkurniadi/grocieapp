@@ -47,7 +47,7 @@
   ion-label {
     font-weight: bold;
   }
-  ion-input.has-focus{
+  ion-input.has-focus {
     outline: auto 1px #99cc33 !important;
   }
   ion-input.default-theme,
@@ -243,7 +243,7 @@ ion-button {
   }
 }
 
-ion-input{
+ion-input {
   font-size: 13px !important;
   line-height: 1.17;
   color: #454545 i !important;
@@ -389,9 +389,10 @@ ion-searchbar {
     text-decoration: none;
     cursor: pointer;
   }
-  
-.profile-img {
-  object-fit: cover;
-  width: 35px;
-  height: 35px;
+
+  .profile-img {
+    object-fit: cover;
+    width: 35px;
+    height: 35px;
+  }
 }
