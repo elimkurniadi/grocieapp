@@ -57,6 +57,10 @@ const routes: Routes = [
     path: 'brand',
     loadChildren: () => import('./pages/brand/brand.module').then( m => m.BrandPageModule)
   },
+  {
+    path: 'voucher',
+    loadChildren: () => import('./pages/voucher/voucher.module').then( m => m.VoucherPageModule)
+  },
 
 ];
 

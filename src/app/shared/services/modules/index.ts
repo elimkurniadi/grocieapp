@@ -9,3 +9,4 @@ export * from './brand.service';
 export * from './favorite.service';
 export * from './setting.service';
 export * from './product.service';
+export * from './voucher.service';
