@@ -174,5 +174,9 @@
   "MY_ORDERS": "My Orders",
   "POPULARITY": "Popularity",
   "LOWEST_TO_HIGHEST_PRICE": "Lowest to Highest Price",
-  "HIGHEST_TO_LOWEST_PRICE": "Highest to Lowest Price"
+  "HIGHEST_TO_LOWEST_PRICE": "Highest to Lowest Price",
+  "VOUCHER_LIST": "Voucher List",
+  "VALID_UNTIL": "Valid until",
+  "VOUCHER_CODE": "Voucher Code",
+  "VALIDITY": "Validity"
 }

@@ -110,8 +110,9 @@
                 <span>{{'VOUCHER' |translate}}</span>
               </ion-col>
               <ion-col size="6" class="ion-text-right">
-                <span>
-                  <b> {{'USE_VOUCHER' | translate}} </b>
+                <span [routerLink]="['/voucher']" class="link">
+                  <b *ngIf="!voucher || !voucher?.voucher_code"> {{'USE_VOUCHER' | translate}} </b>
+                  <b *ngIf="voucher?.voucher_code"> {{ voucher?.voucher_code}}</b>
                 </span>
               </ion-col>
               <ion-col size="6">
