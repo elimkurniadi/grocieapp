@@ -178,5 +178,7 @@
   "VOUCHER_LIST": "Voucher List",
   "VALID_UNTIL": "Valid until",
   "VOUCHER_CODE": "Voucher Code",
-  "VALIDITY": "Validity"
+  "VALIDITY": "Validity",
+  "SHARE_MESSAGE": "Copy the link below and share KlikGO with your friends!",
+  "COPIED_SUCCESS": "Copied successfully"
 }

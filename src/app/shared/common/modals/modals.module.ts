@@ -9,6 +9,7 @@ import { ModalFilterProductComponent } from './modal-filter-product/modal-filter
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalSortProductComponent } from './modal-sort-product/modal-sort-product.component';
 import { ModalSettingComponent } from './modal-setting/modal-setting.component';
+import { ModalShareAppComponent } from './modal-share-app/modal-share-app.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ModalSettingComponent } from './modal-setting/modal-setting.component';
     ModalFilterProductComponent,
     ModalSortProductComponent,
     ModalSettingComponent,
+    ModalShareAppComponent,
   ],
   imports: [CommonModule, IonicModule.forRoot(), SharedModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -27,6 +29,7 @@ import { ModalSettingComponent } from './modal-setting/modal-setting.component';
     ModalFilterProductComponent,
     ModalSortProductComponent,
     ModalSettingComponent,
+    ModalShareAppComponent,
   ],
 })
 export class ModalsModule {}
