@@ -168,6 +168,14 @@ ion-title {
   border-radius: 0.5em;
 }
 
+.modal-share-app .modal-wrapper {
+  height: 40%;
+  width: 80%;
+  position: absolute;
+  display: block;
+  border-radius: 0.5em;
+}
+
 .font-md {
   font-size: 13px;
 }
@@ -389,10 +397,10 @@ ion-searchbar {
     text-decoration: none;
     cursor: pointer;
   }
+}
 
-  .profile-img {
-    object-fit: cover;
-    width: 35px;
-    height: 35px;
-  }
+.profile-img {
+  object-fit: cover;
+  width: 35px;
+  height: 35px;
 }
