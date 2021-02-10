@@ -45,23 +45,23 @@ const routes: Routes = [
   {
     path: 'checkout',
     loadChildren: () => import('./pages/checkout/checkout.module').then((m) => m.CheckoutPageModule),
-  },  {
+  },
+  {
     path: 'address',
-    loadChildren: () => import('./pages/address/address.module').then( m => m.AddressPageModule)
+    loadChildren: () => import('./pages/address/address.module').then((m) => m.AddressPageModule),
   },
   {
     path: 'bundling',
-    loadChildren: () => import('./pages/bundling/bundling.module').then( m => m.BundlingPageModule)
+    loadChildren: () => import('./pages/bundling/bundling.module').then((m) => m.BundlingPageModule),
   },
   {
     path: 'brand',
-    loadChildren: () => import('./pages/brand/brand.module').then( m => m.BrandPageModule)
+    loadChildren: () => import('./pages/brand/brand.module').then((m) => m.BrandPageModule),
   },
   {
     path: 'voucher',
-    loadChildren: () => import('./pages/voucher/voucher.module').then( m => m.VoucherPageModule)
+    loadChildren: () => import('./pages/voucher/voucher.module').then((m) => m.VoucherPageModule),
   },
-
 ];
 
 @NgModule({
