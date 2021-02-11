@@ -8,11 +8,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="ion-padding-horizontal h-100">
+  <ion-grid class="ion-padding h-100">
     <ion-row class="ion-justify-content-between">
       <ion-col size="12" class="ion-no-padding">
         <form [formGroup]="fg" *ngIf="fg">
-          <ion-row class="ion-padding ion-align-items-center bg-white">
+          <ion-row class="ion-align-items-center bg-white">
             <ion-col size="2" class="ion-no-padding">
               <img width="80%" class="rounded profile-img" [src]="selectedImage" />
             </ion-col>
@@ -86,7 +86,7 @@
 
     </ion-row>
     <ion-row>
-      <ion-col size="12" [routerLink]="['/change-password']" style="margin-top:12px;margin-left:12px">
+      <ion-col size="12" class="ion-no-padding" [routerLink]="['/change-password']" style="margin-top:12px;">
         <ion-text style="line-height: 16px" class="section-see-all">
           <b>{{ 'CHANGE_PASSWORD' | translate }}</b>
         </ion-text>

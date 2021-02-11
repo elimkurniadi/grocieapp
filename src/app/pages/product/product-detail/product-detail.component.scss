@@ -33,14 +33,14 @@ ion-header {
   &-name {
     font-size: 18px;
     font-weight: 700;
-    line-height: 1.07;
+    line-height: 1;
     letter-spacing: normal;
     color: #454545;
     text-transform: capitalize;
   }
   &-size {
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 1.5;
     color: #454545;
     width: 95px;
@@ -62,7 +62,7 @@ ion-header {
     font-size: 14px;
     width: 95px;
     font-weight: 700;
-    line-height: 3.4;
+    line-height: 2;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -73,4 +73,32 @@ ion-header {
 
 .price-linethrough {
   text-decoration: line-through;
+}
+
+.scan-icon-container {
+  position: absolute;
+  top: 6px;
+  height: 25px;
+  right: 16px;
+  .scan-icon {
+    font-size: 25px;
+    height: 100%;
+  }
+}
+
+ion-searchbar.custom-search {
+  height: 36px;
+  padding: 12px !important;
+
+  .searchbar-input-container input {
+  padding-left: 30px !important;
+    border: solid 0.5px #e5e5e5 !important;
+    border-radius: 5px;
+    background-color: white;
+  }
+
+  // ion-icon {
+  //   right: 16px !important;
+  //   left: auto !important;
+  // }
 }

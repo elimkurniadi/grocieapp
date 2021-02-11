@@ -1,18 +1,21 @@
-<ion-card class="ion-no-border">
+<ion-card class="ion-no-border" style="margin-left: 0px; margin-right: 0px">
   <ion-card-header class="ion-no-padding link" [routerLink]="['/product/detail', product?.product_id]">
     <img [src]="product?.image_url" class="product-img full-width" *ngIf="product?.image_url" />
     <img src="https://via.placeholder.com/200.png" class="product-img full-width" *ngIf="!product?.image_url" />
   </ion-card-header>
 
   <ion-card-content class="ion-no-padding ion-text-left">
-    <ion-row class="ion-align-self-center">
+    <!-- <ion-row class="ion-align-self-center">
       <ion-col size="12" class="product-brand truncate">
         {{ product?.brand?.name || '&nbsp;' }}
       </ion-col>
-    </ion-row>
+    </ion-row> -->
     <ion-row>
       <ion-col class="height-ellipsis">
-        <ion-text class="product-name">{{ product?.name | titlecase }} </ion-text>
+        <ion-text class="product-name">{{ product?.name | titlecase }} </ion-text><br/>
+        <ion-text class="product-brand truncate">
+          {{ product?.brand?.name || '&nbsp;' }}
+        </ion-text>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -20,7 +23,11 @@
         <p class="product-size">Size: {{ product?.weight }} {{ product?.unit?.name }}</p>
       </ion-col>
       <ion-col size="2" class="ion-text-right">
-        <ion-icon src="assets/images/add-favorite.svg" color="primary" (click)="addToFavorite(product?.product_id)"></ion-icon>
+        <ion-icon
+          src="assets/images/add-favorite.svg"
+          color="primary"
+          (click)="addToFavorite(product?.product_id)"
+        ></ion-icon>
       </ion-col>
     </ion-row>
     <ion-row>

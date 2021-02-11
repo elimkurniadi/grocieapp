@@ -1,16 +1,16 @@
 <ng-container *ngFor="let cart of cartData; let i = index">
   <ion-row class="ion-align-items-center ion-justify-content-center ion-margin-vertical">
-    <ion-col size="1.5">
+    <ion-col size="2">
       <img
         [routerLink]="['/product/detail', cart?.product?.product_id]"
         [src]="cart?.product?.image_url"
         alt="product_image"
       />
     </ion-col>
-    <ion-col size="10.5">
+    <ion-col size="10">
       <ion-row class="ion-no-padding">
         <ion-col size="12" class="ion-no-padding">
-          <span
+          <span class="product-name"
             ><b>{{ cart?.product?.name }}</b></span
           >
         </ion-col>
@@ -18,16 +18,18 @@
       <ion-row class="ion-align-items-center ion-justify-content-center">
         <ion-col [size]="showSubstract ? '4' : '6'" class="ion-no-padding">
           <ion-text color="medium">
-            <small>{{ cart?.product?.brand?.name }}</small> <br />
-            <small>{{ 'SIZE' | translate }}: {{ cart?.product?.weight }}</small>
+            <span class="product-brand">{{ cart?.product?.brand?.name }}</span> <br />
+            <span class="product-size"
+              >{{ 'SIZE' | translate }}: {{ cart?.product?.weight }} {{ cart?.product?.unit?.name }}</span
+            >
           </ion-text>
           <br />
           <ion-text color="dark">
-            <span>Rp. {{ cart?.product?.primary_price | number }}</span>
+            <span class="product-final-price">Rp. {{ cart?.product?.primary_price | number }}</span>
           </ion-text>
         </ion-col>
         <ion-col size="4" class="ion-no-padding ion-text-center" *ngIf="showSubstract">
-          <ion-row>
+          <ion-row class="ion-align-items-center">
             <ion-col size="4">
               <ion-icon
                 name="remove-circle-outline"

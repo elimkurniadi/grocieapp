@@ -5,7 +5,16 @@
         <ion-icon name="chevron-back-outline" slot="icon-only" color="dark"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-searchbar placeholder="{{ 'SEARCH' | translate }}" [routerLink]="['/product/search']"></ion-searchbar>
+    <!-- <ion-searchbar class="custom-search" placeholder="{{ 'SEARCH' | translate }}" [routerLink]="['/product/search']"></ion-searchbar> -->
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding" size="12">
+        <ion-searchbar class="custom-search" mode="ios" placeholder="{{ 'SEARCH' | translate }}" [routerLink]="['/product/search']"></ion-searchbar>
+        <div class="ion-no-padding ion-align-self-center ion-text-center scan-icon-container" (click)="scanQR();$event.stopPropagation();">
+          <ion-icon name="qr-code-outline" color="primary" class="scan-icon"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+
   </ion-toolbar>
 </ion-header>
 
