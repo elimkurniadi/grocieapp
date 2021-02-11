@@ -9,6 +9,7 @@ import { CardCategoryComponent } from './card-category/card-category.component';
 import { RouterModule } from '@angular/router';
 import { ModalsModule } from '../modals/modals.module';
 import { CardAddressComponent } from './card-address/card-address.component';
+import { CardVoucherComponent } from './card-voucher/card-voucher.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CardAddressComponent } from './card-address/card-address.component';
     CardArticleComponent,
     CardCategoryComponent,
     CardAddressComponent,
+    CardVoucherComponent,
   ],
   imports: [CommonModule, IonicModule.forRoot(), SharedModule, RouterModule, ModalsModule],
   exports: [
@@ -25,6 +27,7 @@ import { CardAddressComponent } from './card-address/card-address.component';
     CardArticleComponent,
     CardCategoryComponent,
     CardAddressComponent,
+    CardVoucherComponent,
   ],
 })
 export class CardModule {}

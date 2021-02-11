@@ -1,0 +1,43 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons mode="md" class="ion-text-center">
+      <ion-back-button defaultHref="/checkout" icon="chevron-back-outline"> </ion-back-button>
+      <ion-title class="header-title center-with-back">{{ voucher?.voucher_code }}</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding">
+        <img src="https://via.placeholder.com/200.png" class="full-width img-header" *ngIf="!voucher?.image_url" />
+        <img [src]="voucher?.image_url" class="full-width img-header" *ngIf="voucher?.image_url" />
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-horizontal ion-padding-top">
+      <ion-col size="6">{{ 'VOUCHER_CODE' | translate }}</ion-col>
+      <ion-col size="6" class="ion-text-right"> {{ voucher?.voucher_code }}</ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-horizontal ion-padding-top">
+      <ion-col size="3">{{ 'VALIDITY' | translate }}</ion-col>
+      <ion-col size="9" class="ion-text-right">
+        {{ voucher?.start_date | date: 'longDate' }} to {{ voucher?.end_date | date: 'longDate' }}</ion-col
+      >
+    </ion-row>
+    <ion-row class="ion-padding-horizontal ion-padding-top">
+      <ion-col size="12">
+        <p>{{ 'DESCRIPTION' | translate }}</p>
+        <small [innerHTML]="voucher?.description"></small>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-row class="ion-padding">
+    <ion-col class="ion-text-center">
+      <ion-text class="btn-use-voucher" (click)="useVoucher()">
+        {{ 'USE_VOUCHER' | translate }}
+      </ion-text>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -173,5 +173,15 @@
   "MY_ORDERS": "Pesanan Saya",
   "POPULARITY": "Popularitas",
   "LOWEST_TO_HIGHEST_PRICE": "Harga Terendah",
-  "HIGHEST_TO_LOWEST_PRICE": "Harga Tertinggi"
+  "HIGHEST_TO_LOWEST_PRICE": "Harga Tertinggi",
+  "VOUCHER_LIST": "Daftar Voucher",
+  "VALID_UNTIL": "Berlaku hingga",
+  "VOUCHER_CODE": "Kode Voucher",
+  "VALIDITY": "Masa Berlaku",
+  "SHARE_MESSAGE": "Salin tautan di bawah dan bagikan KlikGO dengan teman-teman Anda!",
+  "COPIED_SUCCESS": "Berhasil disalin",
+  "CHAT": "Chat",
+  "CHAT_SUBTITLE": "Ngobrol dengan Layanan Pelanggan kami melalui WhatsApp!",
+  "CHAT_MESSAGE": "Jika Anda memiliki pertanyaan tentang KilkGo, Anda dapat mengklik tautan di bawah ini dan mengobrol dengan layanan pelanggan kami.",
+  "CHAT_VIA_WHATSAPP": "Chat Via Whatsapp"
 }

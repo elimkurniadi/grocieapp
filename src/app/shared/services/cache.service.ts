@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 export class CacheService {
   private tokenKey = 'klikgo-mobile-token';
   private recentKey = 'recent-search';
+  private voucherKey = 'voucher-id';
   currentUser: any;
 
   constructor(private storage: Storage) {}
@@ -44,5 +45,16 @@ export class CacheService {
 
   removeRecentSearch() {
     return this.storage.remove(this.recentKey);
+  }
+  setVoucher(data: any) {
+    return this.storage.set(this.voucherKey, data);
+  }
+
+  getVoucher() {
+    return this.storage.get(this.voucherKey);
+  }
+
+  removeVoucher() {
+    return this.storage.remove(this.voucherKey);
   }
 }

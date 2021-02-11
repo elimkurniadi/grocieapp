@@ -175,5 +175,15 @@
   "MY_ORDERS": "My Orders",
   "POPULARITY": "Popularity",
   "LOWEST_TO_HIGHEST_PRICE": "Lowest to Highest Price",
-  "HIGHEST_TO_LOWEST_PRICE": "Highest to Lowest Price"
+  "HIGHEST_TO_LOWEST_PRICE": "Highest to Lowest Price",
+  "VOUCHER_LIST": "Voucher List",
+  "VALID_UNTIL": "Valid until",
+  "VOUCHER_CODE": "Voucher Code",
+  "VALIDITY": "Validity",
+  "SHARE_MESSAGE": "Copy the link below and share KlikGO with your friends!",
+  "COPIED_SUCCESS": "Copied successfully",
+  "CHAT": "Chat",
+  "CHAT_SUBTITLE": "Chat with our Customer Service via WhatsApp!",
+  "CHAT_MESSAGE": "If you have any questions regarding KilkGo, you can click the link below and chat with our customer service.",
+  "CHAT_VIA_WHATSAPP": "Chat Via Whatsapp"
 }
