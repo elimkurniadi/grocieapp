@@ -71,7 +71,7 @@ export class ApiService {
       retryWhen(
         genericRetryStrategy({
           scalingDuration: 5000,
-          excludedStatusCodes: [400, 422, 404, 500],
+          excludedStatusCodes: [400, 422, 404, 600],
         })
       ),
       catchError((err) => {

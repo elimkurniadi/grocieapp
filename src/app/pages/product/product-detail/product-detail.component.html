@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-grid class="ion-margin-top ion-no-padding h-100">
     <ion-row>
       <ion-col size="12" class="ion-no-padding ion-text-center">
@@ -18,7 +18,29 @@
     </ion-row>
     <ion-row class="ion-justify-content-between ion-padding-horizontal">
       <ion-col size="12">
-        <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-row>
+          <ion-col size="12" class="ion-no-padding">
+            <span class="product-name">
+              {{ productData?.name }}
+            </span>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="6" class="ion-no-padding">
+              <ion-text class="product-brand" *ngIf="productData?.brand">
+                {{ productData?.brand?.name }}
+                <br />
+              </ion-text>
+              <span class="product-size">Size: {{ productData?.weight }} {{ productData?.unit?.name }}</span>
+          </ion-col>
+          <!-- <ion-col size="6" class="ion-no-padding ion-text-right">
+            <ion-button color="primary" size="small" shape="round" (click)="addItemToCart()">
+              {{ 'ADD_TO_CART' | translate }}
+            </ion-button>
+          </ion-col> -->
+        </ion-row>
+        <!-- <ion-row class="ion-align-items-center ion-justify-content-center">
           <ion-col size="11" class="ion-no-padding">
             <ion-text *ngIf="productData?.secondary_price">
               <small class="strike-through">Rp. {{ productData?.secondary_price | number }}</small
@@ -31,30 +53,21 @@
           <ion-col size="1" class="ion-no-padding ion-text-right">
             <ion-icon name="list-outline" (click)="addToFavorite()"></ion-icon>
           </ion-col>
-        </ion-row>
-
+        </ion-row> -->
         <ion-row>
-          <ion-col size="12" class="ion-no-padding">
-            <span
-              ><b>{{ productData?.name }}</b></span
-            >
+          <ion-col [style.visibility]="productData?.secondary_price ? 'unset' : 'hidden' ">
+            <ion-badge style="font-size:12px;--color: white;background-color: #f8a345;margin-right:8px">{{ ((productData?.secondary_price - productData?.primary_price) / productData?.secondary_price) * 100 | number:'1.0-0'}} %</ion-badge>
+            <span class="product-price price-linethrough">
+              Rp {{ productData?.secondary_price| number: '1.0-0' }}
+            </span>
           </ion-col>
         </ion-row>
-
-        <ion-row class="ion-align-items-center ion-justify-content-center">
-          <ion-col size="6" class="ion-no-padding">
-            <div>
-              <ion-text *ngIf="productData?.brand">
-                <small>{{ productData?.brand?.name }}</small>
-                <br />
-              </ion-text>
-              <small>{{ 'SIZE' | translate }}: {{ productData?.weight }}</small>
-            </div>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="11">
+            <span class="product-final-price">Rp {{ productData?.primary_price | number: '1.0-0':'id' }} </span>
           </ion-col>
-          <ion-col size="6" class="ion-no-padding ion-text-right">
-            <ion-button color="primary" size="small" shape="round" (click)="addItemToCart()">
-              {{ 'ADD_TO_CART' | translate }}
-            </ion-button>
+          <ion-col size="1" class="ion-no-padding ion-text-right">
+            <ion-icon color="primary" style="font-size: 28px;" src="assets/images/add-favorite.svg" (click)="addToFavorite()"></ion-icon>
           </ion-col>
         </ion-row>
       </ion-col>
@@ -81,3 +94,9 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer>
+  <ion-button class="ion-no-margin" color="success" expand="full" (click)="addItemToCart()">
+    {{ 'ADD_TO_CART' | translate }}
+  </ion-button>
+</ion-footer>

@@ -133,7 +133,7 @@ ion-header {
 }
 
 ion-title {
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 }
 
 ion-item {
@@ -249,7 +249,7 @@ ion-button {
     --background: #ffffff;
 
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.17;
     letter-spacing: normal;
     color: #353535;
@@ -279,14 +279,14 @@ ion-slide.full-width {
 .section {
   &-title {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.21;
     letter-spacing: normal;
     color: #0f447a;
   }
   &-see-all {
     font-size: 9px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.25;
     color: #99cc33;
     border: 1px solid #99cc33;
@@ -304,7 +304,7 @@ ion-slide.full-width {
 .category {
   &-name {
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.2;
     color: #353535;
   }
@@ -393,13 +393,22 @@ ion-searchbar {
   color: var(--ion-color-danger);
 }
 
+.height-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  height: 42px;
+}
+
 .login-redirect-text {
   font-size: 12px;
   &:focus {
     outline: 0;
   }
   .link {
-    font-weight: 600;
+    font-weight: 700;
     color: #0f447a;
     text-decoration: none;
     cursor: pointer;
