@@ -36,7 +36,7 @@ export class TabsPage implements OnInit {
       icon: 'chatbubbles-outline',
       icon_active: 'chatbubbles',
       label: 'Chat',
-      route: 'notification',
+      route: 'chat',
       selected: '',
     },
     {

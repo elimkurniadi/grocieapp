@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { ModalController } from '@ionic/angular';
 import { ModalSettingComponent } from '@shared/common/modals/modal-setting/modal-setting.component';
+import { ModalShareAppComponent } from '@shared/common/modals/modal-share-app/modal-share-app.component';
 import { Response, Setting } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { AuthService, ToastService } from '@shared/services';
@@ -68,8 +69,8 @@ export class ProfilePage implements OnInit {
       },
       {
         title: `${this.translateSrv.get('SHARE_MY_APP')}`,
-        route: '/',
-        url: null,
+        route: null,
+        modal: 'share',
       },
       {
         title: `${this.translateSrv.get('PRIVACY_POLICY')}`,
@@ -126,6 +127,8 @@ export class ProfilePage implements OnInit {
       this.showTnc();
     } else if (modal === 'privacy_policy') {
       this.showPrivacyPolicy();
+    } else if (modal === 'share') {
+      this.showShareAppModal();
     } else {
       return;
     }
@@ -182,6 +185,15 @@ export class ProfilePage implements OnInit {
         title: data.name,
         content: data.content,
       },
+    });
+
+    return await modal.present();
+  }
+
+  async showShareAppModal() {
+    const modal = await this.modalCtrl.create({
+      component: ModalShareAppComponent,
+      cssClass: 'modal-share-app',
     });
 
     return await modal.present();

@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/cart/cart.module').then((m) => m.CartPageModule),
       },
       {
+        path: 'chat',
+        loadChildren: () => import('../pages/chat/chat.module').then((m) => m.ChatPageModule),
+      },
+      {
         path: 'notification',
         loadChildren: () => import('../pages/notification/notification.module').then((m) => m.NotificationPageModule),
       },

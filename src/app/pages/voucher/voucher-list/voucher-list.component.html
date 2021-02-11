@@ -1,0 +1,28 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons mode="md" class="ion-text-center">
+      <ion-back-button defaultHref="/checkout" icon="chevron-back-outline"> </ion-back-button>
+      <ion-title class="header-title center-with-back">{{ 'VOUCHER_LIST' | translate }}</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+      class="custom-search"
+      mode="ios"
+      (ionChange)="searchVoucher($event)"
+      debounce="1000"
+      value="{{ code }}"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-row class="ion-padding-horizontal">
+    <ion-col size="12" *ngFor="let item of vouchers">
+      <app-card-voucher [voucher]="item"></app-card-voucher>
+    </ion-col>
+  </ion-row>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreVoucher($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"> </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

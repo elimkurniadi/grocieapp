@@ -29,7 +29,6 @@ export class CartPage implements OnInit {
   initTotalPrice() {
     this.cartSrv.calculateSumPrice(this.cartList).then((res) => {
       this.totalPrice = res;
-      console.log('this.totalPrice : ', this.totalPrice);
     });
   }
 
