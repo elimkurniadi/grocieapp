@@ -1,6 +1,6 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar mode="ios">
-    <ion-title> {{ 'NOTIFICATION' | translate }} </ion-title>
+    <ion-title> {{ 'INBOX' | translate }} </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,7 +9,7 @@
     <ion-row
       *ngFor="let item of [1, 2, 3, 4, 5]"
       class="ion-padding-bottom link"
-      [routerLink]="['/notification', item, 'detail']"
+      [routerLink]="['/inbox', item, 'detail']"
     >
       <ion-col size="3" class="ion-align-self-center">
         <ion-thumbnail class="thumb-notif">

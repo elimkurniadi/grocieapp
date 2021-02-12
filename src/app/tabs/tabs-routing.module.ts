@@ -29,6 +29,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/notification/notification.module').then((m) => m.NotificationPageModule),
       },
       {
+        path: 'inbox',
+        loadChildren: () => import('../pages/inbox/inbox.module').then((m) => m.InboxPageModule),
+      },
+      {
         path: 'profile',
         loadChildren: () => import('../pages/profile/profile.module').then((m) => m.ProfilePageModule),
       },
