@@ -62,6 +62,14 @@ const routes: Routes = [
     path: 'voucher',
     loadChildren: () => import('./pages/voucher/voucher.module').then((m) => m.VoucherPageModule),
   },
+  {
+    path: 'notification',
+    loadChildren: () => import('./pages/notification/notification.module').then((m) => m.NotificationPageModule),
+  },
+  {
+    path: 'inbox',
+    loadChildren: () => import('./pages/inbox/inbox.module').then((m) => m.InboxPageModule),
+  },
 ];
 
 @NgModule({
