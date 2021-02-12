@@ -31,8 +31,8 @@
         <img [src]="category?.image_url" class="full-width img-header" />
       </ion-col>
     </ion-row>
-    <ion-row class="ion-padding-horizontal" *ngIf="products && products.length">
-      <ion-col size="4" *ngFor="let item of products">
+    <ion-row *ngIf="products && products.length">
+      <ion-col class="ion-padding-horizontal" size="4" *ngFor="let item of products">
         <app-card-product [product]="item"></app-card-product>
       </ion-col>
     </ion-row>

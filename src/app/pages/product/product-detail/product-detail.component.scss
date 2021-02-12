@@ -89,6 +89,7 @@ ion-header {
 ion-searchbar.custom-search {
   height: 36px;
   padding: 12px !important;
+  margin-top: -1px;
 
   .searchbar-input-container input {
   padding-left: 30px !important;
