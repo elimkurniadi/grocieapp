@@ -49,6 +49,7 @@ export class AddressFormComponent implements OnInit {
 
   fetchAddressDetail(id) {
     this.addressSrv.getAddress(id).then((res) => {
+      console.log("ADDRESS DATA", res);
       this.addressData = res;
       this.initAddressForm(this.addressData);
     });

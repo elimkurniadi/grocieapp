@@ -34,8 +34,8 @@ export class ProductListComponent implements OnInit {
       this.setBrand(param);
     });
   }
-
-  ngOnInit() {
+  
+  ionViewWillEnter(){
     if (this.categoryId && this.categoryId !== null) {
       this.getCategory();
       this.assignProductList('category');
@@ -44,6 +44,10 @@ export class ProductListComponent implements OnInit {
     } else if (this.search && this.search !== null) {
       this.assignProductList('keyword');
     }
+  }
+
+  ngOnInit() {
+
   }
 
   searchProduct() {

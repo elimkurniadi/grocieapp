@@ -1,39 +1,49 @@
-<ion-card class="ion-no-border">
+<ion-card class="ion-no-border" style="margin-left: 0px; margin-right: 0px">
   <ion-card-header class="ion-no-padding link" [routerLink]="['/product/detail', product?.product_id]">
     <img [src]="product?.image_url" class="product-img full-width" *ngIf="product?.image_url" />
     <img src="https://via.placeholder.com/200.png" class="product-img full-width" *ngIf="!product?.image_url" />
   </ion-card-header>
 
   <ion-card-content class="ion-no-padding ion-text-left">
-    <ion-row class="ion-align-self-center">
+    <!-- <ion-row class="ion-align-self-center">
       <ion-col size="12" class="product-brand truncate">
-        {{ product?.brand?.name || '&nbsp;'}}
+        {{ product?.brand?.name || '&nbsp;' }}
       </ion-col>
-    </ion-row>
+    </ion-row> -->
     <ion-row>
-      <ion-col>
-        <ion-text class="product-name">{{ product?.name | titlecase }} </ion-text>
+      <ion-col class="height-ellipsis">
+        <ion-text class="product-name">{{ product?.name | titlecase }} </ion-text><br/>
+        <ion-text class="product-brand truncate">
+          {{ product?.brand?.name || '&nbsp;' }}
+        </ion-text>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="10">
-        <p class="product-size">Size: {{ product?.weight }} {{product?.unit?.name}}</p>
+        <p class="product-size">Size: {{ product?.weight }} {{ product?.unit?.name }}</p>
       </ion-col>
       <ion-col size="2" class="ion-text-right">
-        <ion-icon name="list" color="primary" (click)="addToFavorite(product?.product_id)"></ion-icon>
+        <ion-icon
+          src="assets/images/add-favorite.svg"
+          color="primary"
+          (click)="addToFavorite(product?.product_id)"
+        ></ion-icon>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col [style.visibility]="product?.secondary_price ? 'unset' : 'hidden' ">
-        <ion-badge style="font-size:10px;--color: white;background-color: #f8a345;">{{ ((product?.secondary_price - product?.primary_price) / product?.secondary_price) * 100 | number:'1.0-0'}} %</ion-badge>
-        <span class="product-price price-linethrough">
-          Rp {{ product?.secondary_price| number: '1.0-0' }}
-        </span>
+      <ion-col [style.visibility]="product?.secondary_price ? 'unset' : 'hidden'">
+        <ion-badge style="font-size: 10px; --color: white; background-color: #f8a345"
+          >{{
+            ((product?.secondary_price - product?.primary_price) / product?.secondary_price) * 100 | number: '1.0-0'
+          }}
+          %</ion-badge
+        >
+        <span class="product-price price-linethrough"> Rp {{ product?.secondary_price | number: '1.0-0' }} </span>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <p class="product-final-price">Rp {{ product?.primary_price | number: '1.0-0':'id' }} <span></span></p>
+        <span class="product-final-price">Rp {{ product?.primary_price | number: '1.0-0':'id' }} </span>
       </ion-col>
     </ion-row>
   </ion-card-content>

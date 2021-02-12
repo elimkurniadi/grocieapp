@@ -8,11 +8,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="ion-padding-horizontal h-100">
+  <ion-grid class="ion-padding h-100">
     <ion-row class="ion-justify-content-between">
       <ion-col size="12" class="ion-no-padding">
         <form [formGroup]="fg" *ngIf="fg">
-          <ion-row class="ion-padding ion-align-items-center bg-white">
+          <ion-row class="ion-align-items-center bg-white">
             <ion-col size="2" class="ion-no-padding">
               <img width="80%" class="rounded profile-img" [src]="selectedImage" />
             </ion-col>
@@ -23,17 +23,20 @@
                 </ion-col>
               </ion-row>
             </ion-col>
-            <ion-col size="3" class="ion-no-padding">
+            <!-- <ion-col size="3" class="ion-no-padding">
               <ion-button
                 expand="block"
-                fill="solid"
-                shape="round"
+                fill="outline"
                 color="success"
                 size="small"
                 (click)="showActionSheet()"
+                class="btn-edit-profile"
               >
                 {{'CHANGE' | translate}}
               </ion-button>
+            </ion-col> -->
+            <ion-col size="3" class="ion-text-right" (click)="showActionSheet()">
+              <ion-text style="line-height: 16px" class="section-see-all"><b>{{ 'CHANGE' | translate }}</b></ion-text>
             </ion-col>
           </ion-row>
 
@@ -77,10 +80,16 @@
         </form>
       </ion-col>
 
-      <ion-col size="12" class="ion-padding">
-        <ion-button [routerLink]="['/change-password']" expand="block" shape="round" fill="outline" color="success">
+      <!-- <ion-button expand="block" shape="round" fill="outline" color="success">
           {{'CHANGE_PASSWORD' | translate}}
-        </ion-button>
+        </ion-button> -->
+
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-no-padding" [routerLink]="['/change-password']" style="margin-top:12px;">
+        <ion-text style="line-height: 16px" class="section-see-all">
+          <b>{{ 'CHANGE_PASSWORD' | translate }}</b>
+        </ion-text>
       </ion-col>
     </ion-row>
   </ion-grid>

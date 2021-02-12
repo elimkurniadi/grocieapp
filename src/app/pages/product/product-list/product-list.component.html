@@ -1,20 +1,22 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar *ngIf="search">
+  <ion-toolbar *ngIf="search" mode="ios">
     <ion-buttons mode="md" class="ion-text-center">
       <ion-back-button icon="chevron-back" defaultHref="/product/search" icon="chevron-back-outline"> </ion-back-button>
-      <ion-title class="header-title center-with-back">{{ 'SEARCH_RESULT' | translate }}</ion-title>
     </ion-buttons>
+    <ion-title class="header-title center-with-back">{{ 'SEARCH_RESULT' | translate }}</ion-title>
   </ion-toolbar>
-  <ion-toolbar *ngIf="search">
+  
+  <ion-toolbar *ngIf="search" mode="ios">
     <div (click)="searchProduct()" class="ion-padding-start">
       <ion-searchbar class="custom-search" mode="ios" disabled [value]="search"></ion-searchbar>
     </div>
   </ion-toolbar>
-  <ion-toolbar *ngIf="!search">
+
+  <ion-toolbar *ngIf="!search" mode="ios">
     <ion-buttons slot="start" mode="md">
       <ion-back-button icon="chevron-back" defaultHref="/tabs/home"> </ion-back-button>
-      <ion-title class="header-title center-with-back">{{ title }}</ion-title>
     </ion-buttons>
+    <ion-title>{{ title | titlecase }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="searchProduct()">
         <ion-icon name="search" class="header-action-size"></ion-icon>
@@ -29,8 +31,8 @@
         <img [src]="category?.image_url" class="full-width img-header" />
       </ion-col>
     </ion-row>
-    <ion-row class="padding-product" *ngIf="products && products.length">
-      <ion-col size="4" *ngFor="let item of products">
+    <ion-row *ngIf="products && products.length">
+      <ion-col class="ion-padding-horizontal" size="4" *ngFor="let item of products">
         <app-card-product [product]="item"></app-card-product>
       </ion-col>
     </ion-row>

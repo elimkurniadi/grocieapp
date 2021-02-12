@@ -1,7 +1,7 @@
 .product {
   &-brand {
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 2.17;
     letter-spacing: normal;
     color: #707070;
@@ -9,7 +9,7 @@
   }
   &-name {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.07;
     letter-spacing: normal;
     color: #454545;
@@ -24,9 +24,20 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  &-price {
+    font-size: 10px;
+    width: 95px;
+    font-weight: 700;
+    line-height: 3.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: super;
+    color: #f8a345;
+  }
   &-final-price {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.3;
     color: #99cc33;
     width: 95px;
@@ -40,18 +51,6 @@
   width: 200px;
   height: 80px;
   object-fit: contain;
-}
-
-.product-price {
-  font-size: 10px;
-  width: 95px;
-  font-weight: 600;
-  line-height: 3.4;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: super;
-  color: #f8a345;
 }
 
 .price-linethrough {

@@ -31,12 +31,20 @@
   font-family: 'Metropolis';
 }
 
+:host {
+  --background-focused: unset;
+}
+
 .h-100 {
   height: 100%;
 }
 
 .h-30 {
   height: 30%;
+}
+
+ion-header {
+  border-bottom: 8px solid #f5f5f5;
 }
 
 .form-group {
@@ -125,7 +133,14 @@
 }
 
 ion-title {
-  font-weight: 600 !important;
+  font-weight: 700 !important;
+  color: #353535;
+}
+
+ion-item {
+  ion-icon {
+    --detail-icon-font-size: 16px !important;
+  }
 }
 
 .modal-info .modal-wrapper {
@@ -197,10 +212,11 @@ ion-searchbar.custom-search {
   padding-right: 5px;
 
   .searchbar-input-container input {
-    padding-left: 15px !important;
+    padding-left: 30px !important;
     border: solid 0.5px #e5e5e5 !important;
     border-radius: 5px;
     background-color: white;
+    font-size: 13px !important;
   }
 
   // ion-icon {
@@ -211,7 +227,6 @@ ion-searchbar.custom-search {
 
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  padding-left: 16px;
   color: #707070;
   font-size: 12px;
   opacity: 1;
@@ -244,7 +259,7 @@ ion-button {
     --background: #ffffff;
 
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.17;
     letter-spacing: normal;
     color: #353535;
@@ -274,14 +289,14 @@ ion-slide.full-width {
 .section {
   &-title {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.21;
     letter-spacing: normal;
     color: #0f447a;
   }
   &-see-all {
     font-size: 9px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.25;
     color: #99cc33;
     border: 1px solid #99cc33;
@@ -299,7 +314,7 @@ ion-slide.full-width {
 .category {
   &-name {
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.2;
     color: #353535;
   }
@@ -315,7 +330,7 @@ ion-card.ion-no-border {
 }
 
 .slide-product .swiper-slide:nth-child(1) {
-  margin-left: 20px;
+  margin-left: 16px;
 }
 /* .slide-product .swiper-slide:nth-child(1) {
   padding-left: 0;
@@ -371,8 +386,10 @@ ion-searchbar {
 }
 
 .divider {
-  height: 10px;
-  background-color: #eeeeee;
+  height: 8px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background-color: #f5f5f5;
 }
 
 .alert-wrapper {
@@ -386,13 +403,22 @@ ion-searchbar {
   color: var(--ion-color-danger);
 }
 
+.height-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  height: 66px;
+}
+
 .login-redirect-text {
   font-size: 12px;
   &:focus {
     outline: 0;
   }
   .link {
-    font-weight: 600;
+    font-weight: 700;
     color: #0f447a;
     text-decoration: none;
     cursor: pointer;

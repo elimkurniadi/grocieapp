@@ -3,21 +3,21 @@
     <ion-card-content>
       <ion-row class="ion-align-items-center">
         <ion-col [size]="address?.is_default ? '8' : '12'" class="ion-no-padding">
-          <span
-            ><b>{{ address?.address_name }}</b></span
-          >
+          <span class="text-address-name">
+            <b>{{ address?.address_name }}</b>
+          </span>
         </ion-col>
         <ion-col size="4" class="ion-text-right ion-no-padding" *ngIf="address?.is_default">
-          <ion-chip color="secondary" size="small">
+          <ion-text size="small" class="text-chip">
             <small>{{ isSelectMode ? ('SELECTED' | translate) : ('PRIMARY' | translate) }}</small>
-          </ion-chip>
+          </ion-text>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col size="12" class="ion-no-padding">
-          <ion-text color="secondary" size="large">
-            <h3>{{ address?.receiver_name }}</h3>
+          <ion-text color="primary" size="large" class="text-receiver-name">
+            {{ address?.receiver_name }}
           </ion-text>
         </ion-col>
         <ion-col size="12" class="ion-no-padding">
@@ -33,24 +33,22 @@
       </ion-row>
 
       <ion-row>
-        <ion-col size="12" *ngIf="!isSelectMode">
+        <ion-col size="12" *ngIf="!isSelectMode" class="ion-no-padding">
           <ion-button
             expand="block"
             fill="outline"
-            shape="round"
-            color="secondary"
+            color="primary"
             size="small"
             [routerLink]="['/address/form', address.address_id]"
           >
             {{ 'EDIT_ADDRESS' | translate }}
           </ion-button>
         </ion-col>
-        <ion-col size="12" *ngIf="!address?.is_default">
+        <ion-col size="12" *ngIf="!address?.is_default" class="ion-no-padding">
           <ion-button
             expand="block"
             fill="outline"
-            shape="round"
-            color="secondary"
+            color="primary"
             size="small"
             (click)="setAsDefaultAddress(address?.address_id)"
           >

@@ -39,6 +39,11 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit() {}
 
+  scanQR() {
+    // Scan barcode and QR function should be inserted here.
+    console.log('Test logging QR code');
+  }
+
   observeParam() {
     this.activatedRoute.params.subscribe((param) => {
       const id = param?.id;
@@ -55,7 +60,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   goBack() {
-    this.navCtrl.back();
+    this.navCtrl.pop();
   }
 
   addItemToCart() {

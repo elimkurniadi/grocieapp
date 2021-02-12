@@ -1,7 +1,7 @@
-<ion-tabs>
+<ion-tabs #tabs (ionTabsDidChange)="setCurrentTab()">
   <ion-tab-bar slot="bottom">
     <ion-tab-button *ngFor="let menu of menus" [tab]="menu.route">
-      <ion-icon [name]="menu.icon"></ion-icon>
+      <ion-icon [name]="menu?.selected"></ion-icon>
       <ion-label>{{menu.label}}</ion-label>
     </ion-tab-button>
   </ion-tab-bar>

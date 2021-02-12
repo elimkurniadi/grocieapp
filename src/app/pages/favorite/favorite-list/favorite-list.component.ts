@@ -31,7 +31,7 @@ export class FavoriteListComponent implements OnInit {
 
     modal.onDidDismiss().then((res: any) => {
       const data = res.data;
-      if (data.success) {
+      if (data?.success) {
         this.getFavorites();
       }
     });

@@ -91,7 +91,7 @@ export class BundlingDetailComponent implements OnInit {
       } else {
         this.getProduct();
       }
-    }, 500);
+    }, 600);
   }
 
   async showFilter() {

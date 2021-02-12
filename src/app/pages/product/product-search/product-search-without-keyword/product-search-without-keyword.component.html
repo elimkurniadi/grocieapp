@@ -1,5 +1,5 @@
-<ion-row class="ion-padding-vertical" *ngIf="recentSearches && recentSearches.length">
-  <ion-col size="7" class="ion-padding-start">
+<ion-row class="ion-padding-vertical ion-align-items-center" *ngIf="recentSearches && recentSearches.length">
+  <ion-col size="7" class="ion-padding-start padding-category" style="padding-top:0px">
     <ion-text class="search-title"> {{ 'RECENT_SEARCHES' | translate }}</ion-text>
   </ion-col>
   <ion-col size="5" class="ion-padding-end ion-text-right">
@@ -8,10 +8,10 @@
   <ion-col size="12">
     <ion-row *ngFor="let item of recentSearches | slice: 0:3; let i = index" class="padding-item-recent">
       <ion-col size="1" class="ion-padding-start">
-        <ion-icon name="time-outline" class="icon-recent-search"></ion-icon>
+        <ion-icon name="time-outline" color="medium" class="icon-recent-search"></ion-icon>
       </ion-col>
       <ion-col size="9">
-        <ion-label class="text-recent-search" (click)="setKeyword(item)"> {{ item }}</ion-label>
+        <ion-label color="limegreen" class="text-recent-search" (click)="setKeyword(item)"> {{ item }}</ion-label>
       </ion-col>
       <ion-col size="2" class="ion-text-center">
         <ion-icon name="close-outline" class="icon-recent-search" (click)="removeItem(i)"></ion-icon
@@ -25,12 +25,11 @@
   </ion-col>
   <ion-col size="12" class="padding-category">
     <ion-chip
-      color="medium"
-      outline="true"
+      style="border: 1px solid #99cc33; background: white; text-transform: capitalize"
       *ngFor="let item of categories"
       (click)="goToProductByCategory(item?.category_id)"
     >
-      <ion-label color="dark">{{ item?.name }}</ion-label>
+      <ion-label color="limegreen">{{ item?.name }}</ion-label>
     </ion-chip>
   </ion-col>
 </ion-row>
