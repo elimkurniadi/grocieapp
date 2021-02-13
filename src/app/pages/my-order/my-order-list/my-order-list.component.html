@@ -1,0 +1,42 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons mode="md" class="ion-text-center">
+      <ion-back-button defaultHref="/tabs/profile" icon="chevron-back-outline"> </ion-back-button>
+      <ion-title class="header-title center-with-back">{{ 'MY_ORDER' | translate }}</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-segment (ionChange)="segmentChanged($event)" [value]="segmentValue">
+    <ion-segment-button value="ongoing">
+      <ion-label>{{ 'ON_GOING' | translate }}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="history">
+      <ion-label>{{ 'HISTORY' | translate }}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-slides class="slide-order" #slider (ionSlideWillChange)="slideChanged()">
+    <ion-slide>
+      <ion-content>
+        <ion-grid>
+          <ion-row *ngFor="let item of [1, 2, 3]">
+            <ion-col>
+              <app-card-order></app-card-order>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+    </ion-slide>
+    <ion-slide>
+      <ion-content>
+        <ion-grid>
+          <ion-row *ngFor="let item of [1, 2, 3]">
+            <ion-col>
+              <app-card-order></app-card-order>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

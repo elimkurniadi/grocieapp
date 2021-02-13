@@ -7,7 +7,6 @@ import { IonTabs } from '@ionic/angular';
   styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage implements OnInit {
-
   @ViewChild('tabs', { static: false }) tabs: IonTabs;
   selectedTab;
   menus = [
@@ -23,7 +22,7 @@ export class TabsPage implements OnInit {
       icon_active: 'heart',
       label: 'Favorites',
       route: 'favorite',
-      selected: ''
+      selected: '',
     },
     {
       icon: 'cart-outline',
@@ -56,13 +55,13 @@ export class TabsPage implements OnInit {
 
   setCurrentTab() {
     this.initMenuIcon();
-    const idx = this.menus.find(menu => menu.route == this.tabs.getSelected());
+    const idx = this.menus.find((menu) => menu.route === this.tabs.getSelected());
     idx.selected = idx.icon_active;
   }
 
   initMenuIcon() {
-    this.menus.forEach(element => {
-      Object.assign(element, {selected : element.icon})
+    this.menus.forEach((element) => {
+      Object.assign(element, { selected: element.icon });
     });
   }
 }

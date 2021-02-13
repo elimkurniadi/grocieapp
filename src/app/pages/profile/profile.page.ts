@@ -49,7 +49,7 @@ export class ProfilePage implements OnInit {
     this.menuList = [
       {
         title: `${this.translateSrv.get('MY_ORDERS')}`,
-        route: '/orders',
+        route: '/my-order',
         url: null,
       },
       {
