@@ -183,5 +183,15 @@
   "CHAT": "Chat",
   "CHAT_SUBTITLE": "Ngobrol dengan Layanan Pelanggan kami melalui WhatsApp!",
   "CHAT_MESSAGE": "Jika Anda memiliki pertanyaan tentang KilkGo, Anda dapat mengklik tautan di bawah ini dan mengobrol dengan layanan pelanggan kami.",
-  "CHAT_VIA_WHATSAPP": "Chat Via Whatsapp"
+  "CHAT_VIA_WHATSAPP": "Chat Via Whatsapp",
+  "MY_ORDER": "Order Saya",
+  "ON_GOING": "Saat Ini",
+  "HISTORY": "Riwayat",
+  "ORDER_ID": "ID Order",
+  "ORDER_DATE": "Tanggal Order",
+  "ORDER_STATUS": "Status Order",
+  "PAYMENT_METHOD": "Cara Bayar",
+  "TOTAL_PAYMENT": "Total Bayar",
+  "SEE_DETAIL": "Lihat Detail",
+  "ORDER_ARRIVED": "Pesanan Tiba"
 }
