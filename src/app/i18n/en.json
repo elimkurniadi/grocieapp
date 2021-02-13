@@ -196,5 +196,6 @@
   "PAYMENT_METHOD": "Payment Method",
   "TOTAL_PAYMENT": "Total Payment",
   "SEE_DETAIL": "See Detail",
-  "ORDER_ARRIVED": "Order Arrived"
+  "ORDER_ARRIVED": "Order Arrived",
+  "ORDER_ARRIVED_MESSAGE": "Have you received your order?"
 }

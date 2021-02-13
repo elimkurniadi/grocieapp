@@ -193,5 +193,6 @@
   "PAYMENT_METHOD": "Cara Bayar",
   "TOTAL_PAYMENT": "Total Bayar",
   "SEE_DETAIL": "Lihat Detail",
-  "ORDER_ARRIVED": "Pesanan Tiba"
+  "ORDER_ARRIVED": "Pesanan Tiba",
+  "ORDER_ARRIVED_MESSAGE": "Apakah Anda sudah menerima pesanan Anda?"
 }

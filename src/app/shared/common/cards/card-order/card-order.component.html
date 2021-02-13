@@ -60,6 +60,7 @@
           shape="round"
           color="success"
           class="btn-action"
+          (click)="presentConfirmModal(order)"
           *ngIf="order?.order_status == 'in_process'"
         >
           {{ 'ORDER_ARRIVED' | translate }}
