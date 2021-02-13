@@ -10,9 +10,10 @@ import { MyOrderPage } from './my-order.page';
 import { SharedModule } from '@shared/shared.module';
 import { MyOrderListComponent } from './my-order-list/my-order-list.component';
 import { CardModule } from '@shared/common/cards/card.module';
+import { ModalsModule } from '@shared/common/modals/modals.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, MyOrderPageRoutingModule, SharedModule, CardModule],
+  imports: [CommonModule, FormsModule, IonicModule, MyOrderPageRoutingModule, SharedModule, CardModule, ModalsModule],
   declarations: [MyOrderPage, MyOrderListComponent],
 })
 export class MyOrderPageModule {}
