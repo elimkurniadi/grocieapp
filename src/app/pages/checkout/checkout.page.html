@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar mode="ios">
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" mode="md">
       <ion-back-button icon="chevron-back"></ion-back-button>
     </ion-buttons>
     <ion-title>{{'CHECKOUT' | translate}}</ion-title>
@@ -8,120 +8,156 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
-    <ion-row class="ion-justify-content-between">
+  <ion-grid class="ion-margin-top h-100">
+    <ion-row class="ion-padding-bottom ion-padding-horizontal">
       <ion-col size="12">
-        <ion-row class="ion-align-items-center">
-          <ion-col size="6"
-            ><span><b>{{'DELIVERY_LOCATION' | translate}}</b></span></ion-col
-          >
-          <ion-col size="6" class="ion-text-right">
-            <small [routerLink]="['/address']" [queryParams]="{mode: 'select'}"
-              ><b>{{"CHANGE_DELIVERY_LOCATION" | translate}}</b></small
-            >
-          </ion-col>
-          <ion-col size="12">
-            <ion-text color="medium">
-              <span>Jl. In Aja dulu no. 666</span>
-            </ion-text>
-          </ion-col>
-        </ion-row>
+        <span><b>{{'DELIVERY_INFORMATION' | translate}}</b></span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="6">
+        <span class="text-address-info">{{'RECEIVER_NAME' | translate }}</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right">
+        <span class="text-address-info">{{ defaultAddress?.receiver_name }}</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="6">
+        <span class="text-address-info">{{'PHONE_NUMBER' | translate }}</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right">
+        <span class="text-address-info">{{ defaultAddress?.phone }}</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-padding-horizontal">
+      <ion-col size="6"><span class="text-address-info">{{'DELIVERY_LOCATION' | translate}}</span></ion-col>
+      <ion-col size="6" class="ion-text-right">
+        <small [routerLink]="['/address']" [queryParams]="{mode: 'select'}"
+          >{{"CHANGE_DELIVERY_LOCATION" | translate}}</small
+        >
+      </ion-col>
+      <ion-col size="12">
+        <ion-text color="medium">
+          <span class="text-address-detail">Jl. In Aja dulu no. 666</span>
+        </ion-text>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="ion-padding-vertical">
-          <ion-col size="12">
-            <span><b>{{'LOCATION_DETAIL' | translate}}</b></span>
-          </ion-col>
-          <ion-col size="12" class="ion-no-padding">
-            <ion-item lines="none" class="form-group">
-              <ion-textarea rows="3" placeholder="{{'LOCATION_DETAIL_PLACEHOLDER' | translate}}"></ion-textarea>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+    <ion-row class="ion-padding">
+      <ion-col size="12">
+        <span><b>{{'DELIVERY_NOTES' | translate}}</b></span>
+      </ion-col>
+      <ion-col size="12" class="ion-no-padding">
+        <ion-item lines="none" class="form-group">
+          <ion-textarea rows="3" placeholder="{{'LOCATION_DETAIL_PLACEHOLDER' | translate}}"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-        <ion-row>
-          <ion-col size="12"
-            ><span><b>{{'DELIVERY_TIME' | translate}}</b></span></ion-col
-          >
-          <ion-col size="12">
-            <fieldset class="radio-wrapper">
-              <div>
-                <input class="radio-input" type="radio" name="delivery_time" [value]="false" />
-                <label class="radio-label">{{'DELIVER_NOW' | translate}}</label>
-              </div>
-              <div>
-                <ion-row class="ion-align-items-center">
-                  <ion-col size="6" class="ion-no-padding">
-                    <input class="radio-input" type="radio" name="delivery_time" [value]="true" />
-                    <label class="radio-label">{{'SCHEDULE_FOR_LATER' | translate}}</label>
-                  </ion-col>
-                  <ion-col size="6" class="ion-text-right">
-                    <ion-button expand="block" color="primary" (click)="scheduleDatepicker.open()">
-                      {{selectedDate ? selectedDate : ('SELECT_DATE' | translate)}}
-                    </ion-button>
-                    <ion-datetime
-                      #scheduleDatepicker
-                      class="ion-hide"
-                      displayFormat="D MMMM YYYY"
-                      pickerFormat="D MMMM YYYY"
-                      [min]="currDate"
-                      (ionChange)="onDateSelect($event.detail.value)"
-                    ></ion-datetime>
-                  </ion-col>
-                </ion-row>
-              </div>
-            </fieldset>
-          </ion-col>
-
-          <ion-col size="3" *ngFor="let time of timeList;let i = index">
-            <ion-chip
-              [color]="time.selected ? 'primary': 'secondary'"
-              [outline]="!time?.selected"
-              [disabled]="!selectedDate"
-              (click)="onTimeSelect(i)"
-            >
-              <small>{{time?.time}}</small>
-            </ion-chip>
-          </ion-col>
-        </ion-row>
-
-        <ion-row class="ion-padding-vertical">
-          <ion-col size="12">
-            <app-item-list [showSubstract]="false" [cartData]="cartList"></app-item-list>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col size="12">
-            <span>
-              <b> {{'PAYMENT_SUMMARY' | translate}} </b>
-            </span>
-          </ion-col>
-          <ion-col size="12">
-            <ion-row>
-              <ion-col size="6">
-                <span>{{'SUBTOTAL' |translate}}</span>
-              </ion-col>
-              <ion-col size="6" class="ion-text-right"> Rp. 50,000 </ion-col>
-              <ion-col size="6">
-                <span>{{'SERVICE_FEE' |translate}}</span>
-              </ion-col>
-              <ion-col size="6" class="ion-text-right"> Rp. 50,000 </ion-col>
-              <ion-col size="6">
-                <span>{{'VOUCHER' |translate}}</span>
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="12"
+        ><span><b>{{'DELIVERY_TIME' | translate}}</b></span></ion-col
+      >
+      <ion-col size="12">
+        <fieldset class="radio-wrapper">
+          <div>
+            <input class="radio-input" type="radio" name="delivery_time" [value]="false" />
+            <label class="radio-label">{{'DELIVER_NOW' | translate}}</label>
+          </div>
+          <div>
+            <ion-row class="ion-align-items-center">
+              <ion-col size="6" class="ion-no-padding">
+                <input class="radio-input" type="radio" name="delivery_time" [value]="true" />
+                <label class="radio-label">{{'SCHEDULE_FOR_LATER' | translate}}</label>
               </ion-col>
               <ion-col size="6" class="ion-text-right">
-                <span [routerLink]="['/voucher']" class="link">
-                  <b *ngIf="!voucher || !voucher?.voucher_code"> {{'USE_VOUCHER' | translate}} </b>
-                  <b *ngIf="voucher?.voucher_code"> {{ voucher?.voucher_code}}</b>
-                </span>
+                <ion-button
+                  expand="block"
+                  fill="outline"
+                  size="small"
+                  color="medium"
+                  (click)="scheduleDatepicker.open()"
+                >
+                  {{selectedDate ? (selectedDate | date:'longDate') : ('SELECT_DATE' | translate)}}
+                </ion-button>
+                <ion-datetime
+                  #scheduleDatepicker
+                  class="ion-hide"
+                  displayFormat="D MMMM YYYY"
+                  pickerFormat="D MMMM YYYY"
+                  [min]="currDate"
+                  (ionChange)="onDateSelect($event.detail.value)"
+                ></ion-datetime>
               </ion-col>
-              <ion-col size="6">
-                <span>{{'DELIVERY_FEE' |translate}}</span>
-              </ion-col>
-              <ion-col size="6" class="ion-text-right"> Rp. 50,000 </ion-col>
             </ion-row>
-          </ion-col>
-        </ion-row>
+          </div>
+        </fieldset>
+      </ion-col>
+
+      <ion-col size="3" *ngFor="let time of timeList;let i = index">
+        <ion-chip
+          [color]="time.selected ? 'primary': 'secondary'"
+          [outline]="!time?.selected"
+          [disabled]="!selectedDate"
+          (click)="onTimeSelect(i)"
+        >
+          <span>{{time?.time}}</span>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+
+    <div class="divider"></div>
+
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="12">
+        <span><b>{{'ORDER_DETAIL' | translate}}</b></span>
+      </ion-col>
+      <ion-col size="12">
+        <app-item-list [showSubstract]="false" [cartData]="cartList"></app-item-list>
+      </ion-col>
+    </ion-row>
+
+    <div class="divider"></div>
+
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="12">
+        <span>
+          <b> {{'PAYMENT_SUMMARY' | translate}} </b>
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="6">
+        <span class="text-payment-info">{{'SUBTOTAL' | translate}}</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right text-payment-price"> Rp. 50,000 </ion-col>
+      <ion-col size="6">
+        <span class="text-payment-info">{{'SERVICE_FEE' |translate}}</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right text-payment-price"> Rp. 50,000 </ion-col>
+      <ion-col size="6">
+        <span class="text-payment-info">{{'DELIVERY_FEE' |translate}}</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right text-payment-price"> Rp. 50,000 </ion-col>
+    </ion-row>
+
+    <div class="divider"></div>
+
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="12">
+        <span>
+          <b> {{'VOUCHER' | translate}} </b>
+        </span>
+      </ion-col>
+      <ion-col size="6">
+        <span class="text-payment-info">{{'SELECT_VOUCHER' |translate}}</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right">
+        <div [routerLink]="['/voucher']" class="link">
+          <small *ngIf="!voucher || !voucher?.voucher_code"> {{'USE_VOUCHER' | translate}} </small>
+          <span class="used-voucher" *ngIf="voucher?.voucher_code"> {{ voucher?.voucher_code | uppercase }}</span>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -131,7 +167,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button expand="block"> {{'PROCEED_TO_PAYMENT' | translate}} </ion-button>
+        <ion-button expand="block" color="limegreen"> {{'PROCEED_TO_PAYMENT' | translate}} </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

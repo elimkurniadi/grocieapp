@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cart, Response, Voucher } from '@shared/models';
 import { CacheService, ToastService } from '@shared/services';
-import { CartService, VoucherService } from '@shared/services/modules';
+import { AddressService, CartService, VoucherService } from '@shared/services/modules';
 import * as moment from 'moment';
 
 @Component({
@@ -11,6 +11,7 @@ import * as moment from 'moment';
   styleUrls: ['./checkout.page.scss'],
 })
 export class CheckoutPage implements OnInit {
+  defaultAddress;
   cartList: Cart[];
   totalPrice = 0;
   currDate = moment(new Date()).format('YYYY-MM-DD');
@@ -41,7 +42,8 @@ export class CheckoutPage implements OnInit {
     private voucherSrv: VoucherService,
     private toastSrv: ToastService,
     private cache: CacheService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private addressSrv: AddressService
   ) {
     this.route.queryParams.subscribe((param) => {
       this.getVoucher();
@@ -50,6 +52,10 @@ export class CheckoutPage implements OnInit {
 
   ngOnInit() {
     this.fetchCartList();
+  }
+
+  ionViewDidEnter() {
+    this.fetchAddressList();
   }
 
   onDateSelect(value) {
@@ -76,6 +82,13 @@ export class CheckoutPage implements OnInit {
       this.cartList = res;
       this.initTotalPrice();
     });
+  }
+
+  fetchAddressList() {
+    this.addressSrv.getAddress().then((res) => {
+      console.log('GET ADDRESS RESULT', res);
+      this.defaultAddress = res[0];
+    })
   }
 
   initTotalPrice() {
