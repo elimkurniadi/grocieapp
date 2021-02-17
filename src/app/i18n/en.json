@@ -207,5 +207,9 @@
   "DISCOUNT": "Discount",
   "RECIPIENT_ADDRESS": "Recipient Address",
   "ESTIMATED_ARRIVAL": "Estimated Arrival",
-  "UPLOAD_PAYMENT_PROOF": "Upload Payment Proof"
+  "UPLOAD_PAYMENT_PROOF": "Upload Payment Proof",
+  "PAY_METHOD": "Pay Method",
+  "ONLINE_BANK": "Online Bank",
+  "CASH_ON_DELIVERY": "Cash On Delivery (COD)",
+  "MANUAL_BANK_TRANSFER": "Manual Bank Transfer"
 }

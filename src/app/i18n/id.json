@@ -204,5 +204,9 @@
   "DISCOUNT": "Diskon",
   "RECIPIENT_ADDRESS": "Alamat Penerima",
   "ESTIMATED_ARRIVAL": "Estimasi Sampai",
-  "UPLOAD_PAYMENT_PROOF": "Upload Bukti Pembayaran"
+  "UPLOAD_PAYMENT_PROOF": "Upload Bukti Pembayaran",
+  "PAY_METHOD": "Metode Bayar",
+  "ONLINE_BANK": "Online Bank",
+  "CASH_ON_DELIVERY": "Cash On Delivery (COD)",
+  "MANUAL_BANK_TRANSFER": "Manual Bank Transfer"
 }

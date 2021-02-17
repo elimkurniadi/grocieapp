@@ -1,0 +1,50 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons mode="md" class="ion-text-center">
+      <ion-back-button defaultHref="/checkout" icon="chevron-back-outline"> </ion-back-button>
+      <ion-title class="header-title center-with-back">{{ 'PAYMENT' | translate }}</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-row class="ion-padding-horizontal">
+    <ion-col size="12">
+      <ion-text>
+        {{ 'TOTAL_PAYMENT' | translate }}
+      </ion-text>
+    </ion-col>
+    <ion-col size="12">
+      <ion-text> Rp. 76.700 </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-radio-group>
+      <ion-list-header>
+        <ion-label> {{ 'PAY_METHOD' | translate }} </ion-label>
+      </ion-list-header>
+
+      <ion-item lines="none">
+        <ion-label>{{ 'ONLINE_BANK' | translate }}</ion-label>
+        <ion-radio value="online_bank" slot="start" color="success"></ion-radio>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>{{ 'CASH_ON_DELIVERY' | translate }}</ion-label>
+        <ion-radio value="cod" slot="start" color="success"></ion-radio>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>{{ 'MANUAL_BANK_TRANSFER' | translate }}</ion-label>
+        <ion-radio value="manual_bank" slot="start" color="success"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-row class="ion-padding">
+    <ion-col>
+      <ion-button color="success" expand="block" shape="round">
+        {{ 'NEXT' | translate }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
