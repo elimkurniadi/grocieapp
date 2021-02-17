@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '@shared/models/category';
-import { ToastService } from '@shared/services';
+import { GlobalService, ToastService } from '@shared/services';
 import { CategoryService } from '@shared/services/modules/category.service';
 
 @Component({
@@ -9,8 +9,8 @@ import { CategoryService } from '@shared/services/modules/category.service';
   styleUrls: ['./home-categories.component.scss'],
 })
 export class HomeCategoriesComponent implements OnInit {
-  categories: Category[];
-  constructor(private toastSrv: ToastService, private categorySrv: CategoryService) {}
+  categoriesChunk: any[];
+  constructor(private gs: GlobalService, private toastSrv: ToastService, private categorySrv: CategoryService) {}
 
   ngOnInit() {
     this.getCategory();
@@ -21,7 +21,7 @@ export class HomeCategoriesComponent implements OnInit {
       .getList()
       .then((res) => {
         const categories = res.response as Category[];
-        this.categories = categories;
+        this.categoriesChunk = this.gs.chunk(categories, 8);
       })
       .catch((err) => {
         const error = err.error.error;
