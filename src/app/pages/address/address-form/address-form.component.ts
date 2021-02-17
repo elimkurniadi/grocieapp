@@ -35,6 +35,7 @@ export class AddressFormComponent implements OnInit {
     private modalCtrl: ModalController
   ) {
     this.observerParam();
+    this.fetchProvinces();
   }
 
   ngOnInit() {}
@@ -49,7 +50,6 @@ export class AddressFormComponent implements OnInit {
 
   fetchAddressDetail(id) {
     this.addressSrv.getAddress(id).then((res) => {
-      console.log("ADDRESS DATA", res);
       this.addressData = res;
       this.initAddressForm(this.addressData);
     });
@@ -93,11 +93,11 @@ export class AddressFormComponent implements OnInit {
     });
 
     this.countCurrentChar();
-    this.fetchProvinces().then(() => {
-      if (data) {
+    if (data) {
+      setTimeout(() => {
         this.initAreaList(data?.province?.province_id, data?.city?.city_id, data?.district?.district_id);
-      }
-    });
+      }, 1000);
+    }
   }
 
   submit() {
@@ -126,7 +126,7 @@ export class AddressFormComponent implements OnInit {
     });
   }
 
-  async initAreaList(idProvince, idCity, idDistrict) {
+  initAreaList(idProvince, idCity, idDistrict) {
     const controls = this.fg.controls;
     controls.province_id.setValue(idProvince);
     this.fg.updateValueAndValidity();
