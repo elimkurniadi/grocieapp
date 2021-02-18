@@ -1,0 +1,27 @@
+.img-header {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+  }
+  
+  .line-clamp-article {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .article-title {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .article-desc {
+    font-size: 12px;
+  }
+  
+  .article-readmore {
+    font-size: 12px;
+    font-weight: bold;
+  }
+  

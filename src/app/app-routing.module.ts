@@ -69,9 +69,14 @@ const routes: Routes = [
   {
     path: 'inbox',
     loadChildren: () => import('./pages/inbox/inbox.module').then((m) => m.InboxPageModule),
-  },  {
+  },
+  {
     path: 'my-order',
     loadChildren: () => import('./pages/my-order/my-order.module').then( m => m.MyOrderPageModule)
+  },
+  {
+    path: 'article',
+    loadChildren: () => import('./pages/article/article.module').then( m => m.ArticlePageModule)
   },
 
 ];
