@@ -1,0 +1,252 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons mode="md" class="ion-text-center">
+      <ion-back-button defaultHref="/my-order" icon="chevron-back-outline"> </ion-back-button>
+      <ion-title class="header-title center-with-back">{{ 'ORDER_DETAIL' | translate }}</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <ion-row>
+        <ion-col class="ion-text-left">
+          <ion-text class="order-label">
+            {{ 'ORDER_ID' | translate }}
+          </ion-text>
+          <br />
+          <ion-text class="order-value">
+            {{ order?.order_id }}
+          </ion-text>
+        </ion-col>
+        <ion-col class="ion-text-right">
+          <ion-text class="order-label">
+            {{ 'ORDER_DATE' | translate }}
+          </ion-text>
+          <br />
+          <ion-text class="order-value">
+            {{ order?.order_date | date: 'd MMM yyyy HH:mm' }}
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-text-left">
+          <ion-text class="order-label">
+            {{ 'ORDER_STATUS' | translate }}
+          </ion-text>
+          <br />
+          <ion-text class="order-value">
+            {{ order?.order_status_name }}
+          </ion-text>
+        </ion-col>
+        <ion-col class="ion-text-right">
+          <ion-text class="order-label">
+            {{ 'TOTAL_PAYMENT' | translate }}
+          </ion-text>
+          <br />
+          <ion-text class="order-value" color="success"> Rp {{ order?.total_payment | number: '1.0-0' }} </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="2.4" class="padding-status-col">
+          <div class="status-bg success center">
+            <img src="assets/images/ic_waiting_for_payment.svg" class="status-img" />
+          </div>
+
+          <div class="status-line-right success"></div>
+        </ion-col>
+        <ion-col size="2.4" class="padding-status-col">
+          <div class="status-line success"></div>
+
+          <div class="status-bg center">
+            <img src="assets/images/ic_waiting_for_confirm.svg" class="status-img" />
+          </div>
+
+          <div class="status-line-right"></div>
+        </ion-col>
+        <ion-col size="2.4" class="padding-status-col">
+          <div class="status-line"></div>
+
+          <div class="status-bg center">
+            <img src="assets/images/ic_waiting_for_payment.svg" class="status-img" />
+          </div>
+
+          <div class="status-line-right"></div>
+        </ion-col>
+        <ion-col size="2.4" class="padding-status-col">
+          <div class="status-line"></div>
+
+          <div class="status-bg center">
+            <img src="assets/images/ic_order_sent.svg" class="status-img" />
+          </div>
+
+          <div class="status-line-right"></div>
+        </ion-col>
+        <ion-col size="2.4" class="padding-status-col">
+          <div class="status-line"></div>
+
+          <div class="status-bg center">
+            <img src="assets/images/ic_completed.svg" class="status-img" />
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="2.4" class="padding-status-col ion-text-center">
+          <ion-text class="order-status">
+            {{ 'WAITING_FOR_PAYMENT' | translate }}
+          </ion-text>
+        </ion-col>
+        <ion-col size="2.4" class="padding-status-col ion-text-center">
+          <ion-text class="order-status">
+            {{ 'WAITING_FOR_CONFIRMATION' | translate }}
+          </ion-text>
+        </ion-col>
+        <ion-col size="2.4" class="padding-status-col ion-text-center">
+          <ion-text class="order-status">
+            {{ 'ORDER_IN_PROCESS' | translate }}
+          </ion-text>
+        </ion-col>
+        <ion-col size="2.4" class="padding-status-col ion-text-center">
+          <ion-text class="order-status">
+            {{ 'ORDER_SENT' | translate }}
+          </ion-text>
+        </ion-col>
+        <ion-col size="2.4" class="padding-status-col ion-text-center">
+          <ion-text class="order-status">
+            {{ 'ORDER_COMPLETED' | translate }}
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="5">
+          <ion-text>
+            {{ 'PAYMENT_METHOD' | translate }}
+          </ion-text>
+        </ion-col>
+        <ion-col size="7" class="ion-text-right">
+          <ion-text>
+            {{ order?.order_payment_method }}
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-text> {{ 'ORDER_DETAIL' | translate }}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <app-item-list [showSubstract]="false" [cartData]="itemList"></app-item-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-text class="summary-label">
+            {{ 'SUBTOTAL' | translate }}
+          </ion-text>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <ion-text class="summary-value"> Rp. 56.700 </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-text class="summary-label">
+            {{ 'SERVICE_FEE' | translate }}
+          </ion-text>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <ion-text class="summary-value"> Rp. 0 </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-text class="summary-label">
+            {{ 'DELIVERY_FEE' | translate }}
+          </ion-text>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <ion-text class="summary-value"> Rp. 20.000 </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-text class="summary-label">
+            {{ 'DISCOUNT' | translate }}
+          </ion-text>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <ion-text color="success" class="summary-value"> -Rp. 6.700 </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-text class="summary-label">
+            {{ 'TOTAL_PAYMENT' | translate }}
+          </ion-text>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <ion-text class="summary-value"> Rp. 70.000 </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            {{ 'RECIPIENT_ADDRESS' | translate }}
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text> Name </ion-text>
+          <br />
+
+          <ion-text> Address </ion-text>
+          <br />
+
+          <ion-text> Phone </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            {{ 'ESTIMATED_ARRIVAL' | translate }}
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            {{ order?.order_date | date: 'EEEE, d MMM yyyy' }}
+          </ion-text>
+          <br />
+          <ion-text> 12:00 - 14:00 </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-row class="ion-padding">
+    <ion-col>
+      <ion-button color="success" shape="round" expand="block">
+        {{ 'UPLOAD_PAYMENT_PROOF' | translate }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

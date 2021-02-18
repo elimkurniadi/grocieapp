@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cart, Response, Voucher } from '@shared/models';
 import { CacheService, ToastService } from '@shared/services';
 import { CartService, VoucherService } from '@shared/services/modules';
@@ -41,7 +41,8 @@ export class CheckoutPage implements OnInit {
     private voucherSrv: VoucherService,
     private toastSrv: ToastService,
     private cache: CacheService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.route.queryParams.subscribe((param) => {
       this.getVoucher();
@@ -100,5 +101,9 @@ export class CheckoutPage implements OnInit {
           });
       }
     });
+  }
+
+  pay() {
+    this.router.navigate(['/payment']);
   }
 }

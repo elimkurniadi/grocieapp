@@ -46,6 +46,16 @@ export class GlobalService {
     return charLength;
   }
 
+  chunk(array: any[], size: number) {
+    const chunkedArr = [];
+    const copied = [...array];
+    const numOfChild = Math.ceil(copied.length / size);
+    for (let i = 0; i < numOfChild; i++) {
+      chunkedArr.push(copied.splice(0, size));
+    }
+    return chunkedArr;
+  }
+
   getChangedFormProperties(form: any) {
     const dirtyValues = {};
     Object.keys(form.controls).forEach((key) => {
