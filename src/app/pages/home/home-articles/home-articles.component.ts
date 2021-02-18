@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Article } from '@shared/models/article';
+import { ArticleService } from '@shared/services/modules/article.service';
 
 @Component({
   selector: 'app-home-articles',
@@ -7,8 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeArticlesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private articleSrv : ArticleService) { }
 
-  ngOnInit() {}
+  articles;
+
+  ionViewDidEnter() {
+    console.log("suk eko");
+  }
+  
+  ngOnInit() {
+    console.log("suk eko #2");
+    this.articleSrv.getArticle().then(res => {
+      const articles = res.response as Article[];
+      this.articles = articles;
+    })
+  }
 
 }

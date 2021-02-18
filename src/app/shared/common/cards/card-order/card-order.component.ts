@@ -30,7 +30,6 @@ export class CardOrderComponent implements OnInit {
       componentProps: {
         title: this.translate.get('ORDER_ARRIVED'),
         message: this.translate.get('ORDER_ARRIVED_MESSAGE'),
-        action: () => this.confirmArrived(),
       },
     });
 
@@ -38,14 +37,18 @@ export class CardOrderComponent implements OnInit {
       const data = res.data;
 
       if (data && data.confirm) {
-        this.confirmArrived();
+        this.confirmArrived(order?.order_id);
       }
     });
 
     return await modal.present();
   }
 
-  confirmArrived() {
+  goToDetail(orderId: any) {
+    this.router.navigate(['/my-order', orderId, 'detail']);
+  }
+
+  confirmArrived(orderId: any) {
     this.router.navigate(['/tabs', 'profile']);
   }
 }

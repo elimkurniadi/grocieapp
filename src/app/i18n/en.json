@@ -136,6 +136,7 @@
   "PROCEED_TO_PAYMENT": "Proceed to Payment",
   "ADD_NEW_ADDRESS": "Add New Address",
   "USE_ADDRESS": "Use Address",
+  "ARTICLE_TITLE": "KlikGO Article",
   "SELECTED": "Selected",
   "CHOOSE_LOCATION": "Choose Location",
   "SELECT": "Select",
@@ -200,5 +201,19 @@
   "TOTAL_PAYMENT": "Total Payment",
   "SEE_DETAIL": "See Detail",
   "ORDER_ARRIVED": "Order Arrived",
-  "ORDER_ARRIVED_MESSAGE": "Have you received your order?"
+  "ORDER_ARRIVED_MESSAGE": "Have you received your order?",
+  "ORDER_DETAIL": "Order Detail",
+  "WAITING_FOR_PAYMENT": "Waiting for Payment",
+  "WAITING_FOR_CONFIRMATION": "Waiting for Confirmation",
+  "ORDER_IN_PROCESS": "Order In Process",
+  "ORDER_SENT": "Order Sent",
+  "ORDER_COMPLETED": "Order Completed",
+  "DISCOUNT": "Discount",
+  "RECIPIENT_ADDRESS": "Recipient Address",
+  "ESTIMATED_ARRIVAL": "Estimated Arrival",
+  "UPLOAD_PAYMENT_PROOF": "Upload Payment Proof",
+  "PAY_METHOD": "Pay Method",
+  "ONLINE_BANK": "Online Bank",
+  "CASH_ON_DELIVERY": "Cash On Delivery (COD)",
+  "MANUAL_BANK_TRANSFER": "Manual Bank Transfer"
 }

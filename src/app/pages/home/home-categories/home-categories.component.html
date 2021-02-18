@@ -3,8 +3,14 @@
     <ion-text class="section-title">{{ 'CATEGORIES' | translate }}</ion-text>
   </ion-col>
 </ion-row>
-<ion-row class="ion-no-padding">
-  <ion-col class="ion-no-padding" size="3" *ngFor="let item of categories">
-    <app-card-category [category]="item"></app-card-category>
-  </ion-col>
-</ion-row>
+<ion-slides pager>
+  <ion-slide *ngFor="let categories of categoriesChunk">
+    <ion-grid>
+      <ion-row class="ion-no-padding">
+        <ion-col class="ion-no-padding" size="3" *ngFor="let item of categories">
+          <app-card-category [category]="item"></app-card-category>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-slide>
+</ion-slides>
