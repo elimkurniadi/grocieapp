@@ -2,7 +2,7 @@
   <ion-col size="8">
     <ion-text class="section-title">{{ 'KLIKGO_ARTICLE' | translate }}</ion-text>
   </ion-col>
-  <ion-col size="4" class="ion-text-right">
+  <ion-col size="4" class="ion-text-right" [routerLink]="['/article/list']">
     <ion-text class="section-see-all">{{ 'SEE_ALL' | translate }}</ion-text>
   </ion-col>
   <ion-col size="12" class="ion-padding-top">
@@ -10,7 +10,7 @@
   </ion-col>
 </ion-row>
 <ion-row class="ion-padding-horizontal">
-  <ion-col size="12" *ngFor="let item of [1, 2, 3]">
-    <app-card-article></app-card-article>
-  </ion-col>
+  <ion-col size="12" *ngFor="let article of articles">
+    <app-card-article [article]="article"></app-card-article>
+  </ion-col> 
 </ion-row>
