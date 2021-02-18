@@ -3,7 +3,7 @@
   height: 82px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  object-fit: fill;
+  object-fit: cover;
   // border-radius: 8px;
 }
 
@@ -16,6 +16,12 @@
   border: 1px solid var(--ion-color-primary);
   padding: 4px 12px;
   border-radius: 13px;
-  margin: 14px 14px;
-  font-size: 8px;
+  font-size: 10px;
+}
+
+.text-voucher-code {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #454545;
 }

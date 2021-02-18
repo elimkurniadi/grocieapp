@@ -10,7 +10,7 @@ export class AddressService {
 
   getAddress(id: number = null): Promise<any> {
     return new Promise((resolve, reject) => {
-      const path = id ? `address/${id}` : 'address';
+      const path = id ? `address/${id}` : 'address?order_by=is_default&order_type=DESC';
       const subscription = this.api.getData(`${path}`);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(

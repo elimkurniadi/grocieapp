@@ -5,7 +5,7 @@
   margin-top: 0.5em;
   div {
     margin: auto;
-    padding-bottom: 1em;
+    // padding-bottom: 1em;
 
     .radio-label {
       display: inline-block;
@@ -21,9 +21,54 @@
   }
 }
 small {
-  color: var(--ion-color-danger);
+  color: var(--ion-color-primary);
+  padding: 4px 12px;
+  border-radius: 13px;
+  border: solid 1px var(--ion-color-primary);
+  background-color: #ffffff;
+  font-size: 11px;
 }
 
 .count {
   color: var(--ion-color-medium);
+}
+
+.text{
+  &-address-info {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.17;
+    color: #353535;
+  }
+  &-address-detail {
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #353535;
+  }
+  &-payment-info {
+    font-size: 14px;
+    line-height: 1.17;
+    letter-spacing: normal;
+    color: #353535;
+  }
+  &-payment-price {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.17;
+    color: #353535;
+  }
+}
+
+.used-voucher {
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  color: #454545;
+  border: none;
 }
