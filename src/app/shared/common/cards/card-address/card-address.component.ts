@@ -18,9 +18,9 @@ export class CardAddressComponent implements OnInit {
     private addressSrv: AddressService,
     private toast: ToastService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onUseAddress(data, event) {
     event.stopPropagation();
@@ -30,13 +30,14 @@ export class CardAddressComponent implements OnInit {
   }
 
   setAsDefaultAddress(id) {
-    this.addressSrv.setDefaultAddress(id).then((res) => {
-      if (this.isSelectMode) {
-        this.router.navigate(['/checkout'], { queryParams: { address_id: id }, replaceUrl: true });
-      } else {
+    if (this.isSelectMode) {
+      this.router.navigate(['/checkout'], { queryParams: { address_id: id }, replaceUrl: true });
+    } else {
+      this.addressSrv.setDefaultAddress(id).then((res) => {
         this.toast.show(res?.response);
         this.action.emit();
-      }
-    });
+      });
+    }
+
   }
 }

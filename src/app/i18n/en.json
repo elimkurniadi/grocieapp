@@ -216,5 +216,6 @@
   "PAY_METHOD": "Pay Method",
   "ONLINE_BANK": "Online Bank",
   "CASH_ON_DELIVERY": "Cash On Delivery (COD)",
-  "MANUAL_BANK_TRANSFER": "Manual Bank Transfer"
+  "MANUAL_BANK_TRANSFER": "Manual Bank Transfer",
+  "PAYMENT": "Payment"
 }
