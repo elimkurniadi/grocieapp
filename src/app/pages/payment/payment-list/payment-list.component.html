@@ -18,7 +18,7 @@
     </ion-col>
   </ion-row>
   <ion-list>
-    <ion-radio-group>
+    <ion-radio-group [(ngModel)]="paymentMethod">
       <ion-list-header>
         <ion-label> {{ 'PAY_METHOD' | translate }} </ion-label>
       </ion-list-header>
@@ -42,7 +42,7 @@
 <ion-footer class="ion-no-border">
   <ion-row class="ion-padding">
     <ion-col>
-      <ion-button color="success" expand="block" shape="round">
+      <ion-button color="success" expand="block" shape="round" (click)="next()">
         {{ 'NEXT' | translate }}
       </ion-button>
     </ion-col>
