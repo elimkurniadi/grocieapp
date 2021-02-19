@@ -216,7 +216,7 @@
   "ONLINE_BANK": "Online Bank",
   "CASH_ON_DELIVERY": "Cash On Delivery (COD)",
   "MANUAL_BANK_TRANSFER": "Manual Bank Transfer",
-  "PAYMENT": "Payment"
+  "PAYMENT": "Payment",
   "COD": "Cash On Delivery",
   "PAY": "Pay",
   "COD_MESSAGE": "Please fill in the exact amount of cash you'll provide"
