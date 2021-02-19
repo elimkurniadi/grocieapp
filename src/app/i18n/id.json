@@ -208,5 +208,8 @@
   "PAY_METHOD": "Metode Bayar",
   "ONLINE_BANK": "Online Bank",
   "CASH_ON_DELIVERY": "Cash On Delivery (COD)",
-  "MANUAL_BANK_TRANSFER": "Manual Bank Transfer"
+  "MANUAL_BANK_TRANSFER": "Manual Bank Transfer",
+  "COD": "Cash On Delivery",
+  "PAY": "Bayar",
+  "COD_MESSAGE": "Harap isi jumlah persis uang tunai yang akan Anda berikan"
 }

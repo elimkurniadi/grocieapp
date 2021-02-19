@@ -203,7 +203,6 @@
   "SEE_DETAIL": "See Detail",
   "ORDER_ARRIVED": "Order Arrived",
   "ORDER_ARRIVED_MESSAGE": "Have you received your order?",
-  "ORDER_DETAIL": "Order Detail",
   "WAITING_FOR_PAYMENT": "Waiting for Payment",
   "WAITING_FOR_CONFIRMATION": "Waiting for Confirmation",
   "ORDER_IN_PROCESS": "Order In Process",
@@ -218,4 +217,7 @@
   "CASH_ON_DELIVERY": "Cash On Delivery (COD)",
   "MANUAL_BANK_TRANSFER": "Manual Bank Transfer",
   "PAYMENT": "Payment"
+  "COD": "Cash On Delivery",
+  "PAY": "Pay",
+  "COD_MESSAGE": "Please fill in the exact amount of cash you'll provide"
 }
