@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Article } from '@shared/models/article';
 
 @Component({
   selector: 'app-article-detail',
@@ -7,16 +8,16 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./article-detail.component.scss'],
 })
 export class ArticleDetailComponent implements OnInit {
+  @Input() article: Article;
+  @Input() redirectBack = '/article';
 
-  constructor(private modalCtrl: ModalController) { }
-  article
+  constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {
     console.log(this.article);
   }
-  
+
   goBack() {
     this.modalCtrl.dismiss();
   }
-
 }
