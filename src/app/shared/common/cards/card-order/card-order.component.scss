@@ -1,12 +1,33 @@
 .order-label {
   font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #353535;
 }
 
 .order-value {
-  font-weight: 600;
   font-size: 12px;
+  font-weight: 600;
+  line-height: 1.17;
+  letter-spacing: normal;
+  color: #353535;
+
+  &.price {
+    color: #99cc33;
+  }
 }
 
 .btn-action {
   text-transform: capitalize;
+}
+
+ion-button {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
 }

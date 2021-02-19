@@ -56,7 +56,9 @@ export class TabsPage implements OnInit {
   setCurrentTab() {
     this.initMenuIcon();
     const idx = this.menus.find((menu) => menu.route === this.tabs.getSelected());
-    idx.selected = idx.icon_active;
+    if(idx) {
+      idx.selected = idx.icon_active;
+    }
   }
 
   initMenuIcon() {

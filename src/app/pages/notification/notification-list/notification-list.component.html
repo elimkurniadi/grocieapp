@@ -1,5 +1,8 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md" class="title">
+      <ion-back-button icon="chevron-back" defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
     <ion-title> {{ 'NOTIFICATION' | translate }} </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -11,12 +14,12 @@
       class="ion-padding-bottom link"
       [routerLink]="['/notification', item, 'detail']"
     >
-      <ion-col size="3" class="ion-align-self-center">
+      <ion-col size="2" class="ion-align-self-center">
         <ion-thumbnail class="thumb-notif">
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+          <img src="assets/images/notif-logo.svg" />
         </ion-thumbnail>
       </ion-col>
-      <ion-col size="9">
+      <ion-col size="10">
         <ion-row>
           <ion-col size="12" class="ion-no-padding">
             <ion-text class="notif-title"> Grocery shopping save IDR 120k off!</ion-text>

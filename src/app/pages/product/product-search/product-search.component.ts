@@ -54,8 +54,9 @@ export class ProductSearchComponent implements OnInit {
   }
 
   getProduct() {
+    // modify
     this.productSrv
-      .getRelated(this.keyword, this.page)
+      .getListByKeyword(this.keyword, this.page)
       .then((res: ResponsePagination) => {
         this.saveRecentSearch();
         const products = res.response.rows as Product[];

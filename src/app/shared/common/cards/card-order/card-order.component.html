@@ -47,7 +47,7 @@
           {{ 'TOTAL_PAYMENT' | translate }}
         </ion-text>
         <br />
-        <ion-text class="order-value" color="success"> Rp {{ order?.total_payment | number: '1.0-0' }} </ion-text>
+        <ion-text class="order-value price"> Rp {{ order?.total_payment | number: '1.0-0' }} </ion-text>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -66,6 +66,7 @@
           shape="round"
           color="success"
           class="btn-action"
+          fill="outline"
           (click)="presentConfirmModal(order)"
           *ngIf="order?.order_status == 'in_process'"
         >
