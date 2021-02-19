@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ToastService } from '@shared/services';
 import { AddressService } from '@shared/services/modules';
@@ -12,7 +13,12 @@ export class CardAddressComponent implements OnInit {
   @Input() addressList = null;
   @Input() isSelectMode = true;
   @Output() action = new EventEmitter();
-  constructor(private navCtrl: NavController, private addressSrv: AddressService, private toast: ToastService) {}
+  constructor(
+    private navCtrl: NavController,
+    private addressSrv: AddressService,
+    private toast: ToastService,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
 
@@ -25,8 +31,12 @@ export class CardAddressComponent implements OnInit {
 
   setAsDefaultAddress(id) {
     this.addressSrv.setDefaultAddress(id).then((res) => {
-      this.toast.show(res?.response);
-      this.isSelectMode ? this.navCtrl.back() : this.action.emit();
+      if (this.isSelectMode) {
+        this.router.navigate(['/checkout'], { queryParams: { address_id: id }, replaceUrl: true });
+      } else {
+        this.toast.show(res?.response);
+        this.action.emit();
+      }
     });
   }
 }
