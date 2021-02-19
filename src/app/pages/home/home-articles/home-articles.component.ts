@@ -8,21 +8,16 @@ import { ArticleService } from '@shared/services/modules/article.service';
   styleUrls: ['./home-articles.component.scss'],
 })
 export class HomeArticlesComponent implements OnInit {
-
-  constructor(private articleSrv : ArticleService) { }
+  constructor(private articleSrv: ArticleService) {}
 
   articles;
 
-  ionViewDidEnter() {
-    console.log("suk eko");
-  }
-  
+  ionViewDidEnter() {}
+
   ngOnInit() {
-    console.log("suk eko #2");
-    this.articleSrv.getArticle().then(res => {
+    this.articleSrv.getArticle().then((res) => {
       const articles = res.response as Article[];
       this.articles = articles;
-    })
+    });
   }
-
 }

@@ -10,29 +10,25 @@ import { ArticleDetailComponent } from '../article-detail/article-detail.compone
   styleUrls: ['./article-list.component.scss'],
 })
 export class ArticleListComponent implements OnInit {
-
-  constructor(private articleSrv:ArticleService, private modalCtrl: ModalController) { }
+  constructor(private articleSrv: ArticleService, private modalCtrl: ModalController) {}
 
   articles;
 
   ngOnInit() {
-    this.articleSrv.getArticle().then(res => {
-      console.log('TEST', res);
+    this.articleSrv.getArticle().then((res) => {
       const articles = res.response as Article[];
       this.articles = articles;
-    })
+    });
   }
 
   async goToNewsDetail(news) {
-    console.log('NEWS', news);
     const modal = await this.modalCtrl.create({
       component: ArticleDetailComponent,
-      componentProps : {
-        article: news
-      }
+      componentProps: {
+        article: news,
+      },
     });
 
     return await modal.present();
   }
-
 }
