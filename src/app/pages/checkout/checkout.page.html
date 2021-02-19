@@ -39,7 +39,7 @@
       </ion-col>
       <ion-col size="12">
         <ion-text color="medium">
-          <span class="text-address-detail">Jl. In Aja dulu no. 666</span>
+          <span class="text-address-detail">{{ defaultAddress?.address_detail }}</span>
         </ion-text>
       </ion-col>
     </ion-row>
@@ -123,6 +123,25 @@
     <ion-row class="ion-padding-horizontal">
       <ion-col size="12">
         <span>
+          <b> {{'VOUCHER' | translate}} </b>
+        </span>
+      </ion-col>
+      <ion-col size="6">
+        <span class="text-payment-info">{{'SELECT_VOUCHER' |translate}}</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right">
+        <div [routerLink]="['/voucher']" class="link">
+          <small *ngIf="!voucher || !voucher?.voucher_code"> {{'USE_VOUCHER' | translate}} </small>
+          <span class="used-voucher" *ngIf="voucher?.voucher_code"> {{ voucher?.voucher_code | uppercase }}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <div class="divider"></div>
+
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="12">
+        <span>
           <b> {{'PAYMENT_SUMMARY' | translate}} </b>
         </span>
       </ion-col>
@@ -142,24 +161,7 @@
       <ion-col size="6" class="ion-text-right text-payment-price"> Rp. 50,000 </ion-col>
     </ion-row>
 
-    <div class="divider"></div>
 
-    <ion-row class="ion-padding-horizontal">
-      <ion-col size="12">
-        <span>
-          <b> {{'VOUCHER' | translate}} </b>
-        </span>
-      </ion-col>
-      <ion-col size="6">
-        <span class="text-payment-info">{{'SELECT_VOUCHER' |translate}}</span>
-      </ion-col>
-      <ion-col size="6" class="ion-text-right">
-        <div [routerLink]="['/voucher']" class="link">
-          <small *ngIf="!voucher || !voucher?.voucher_code"> {{'USE_VOUCHER' | translate}} </small>
-          <span class="used-voucher" *ngIf="voucher?.voucher_code"> {{ voucher?.voucher_code | uppercase }}</span>
-        </div>
-      </ion-col>
-    </ion-row>
   </ion-grid>
 </ion-content>
 

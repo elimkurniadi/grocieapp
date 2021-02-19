@@ -51,10 +51,17 @@
             ></ion-col>
           </ion-row>
         </ion-col>
-        <ion-col [size]="showSubstract ? '4' : '6'" class="ion-no-padding ion-text-right">
+        <ion-col [size]="showSubstract ? '4' : '6'" class="ion-no-padding ion-text-right" *ngIf="showSubstract">
           <ion-text color="dark">
             <span
               ><b>Rp. {{ cart?.local_subtotal_price | number }}</b></span
+            >
+          </ion-text>
+        </ion-col>
+        <ion-col [size]="showSubstract ? '4' : '6'" class="ion-no-padding ion-text-right" *ngIf="!showSubstract">
+          <ion-text color="dark">
+            <span
+              >x <b>{{ cart?.quantity }}</b></span
             >
           </ion-text>
         </ion-col>

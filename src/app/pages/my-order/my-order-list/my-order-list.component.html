@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-segment (ionChange)="segmentChanged($event)" [value]="segmentValue">
+  <ion-segment color="primary" (ionChange)="segmentChanged($event)" [value]="segmentValue">
     <ion-segment-button value="ongoing">
       <ion-label>{{ 'ON_GOING' | translate }}</ion-label>
     </ion-segment-button>
