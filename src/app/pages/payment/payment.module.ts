@@ -10,9 +10,10 @@ import { PaymentPage } from './payment.page';
 import { PaymentListComponent } from './payment-list/payment-list.component';
 import { SharedModule } from '@shared/shared.module';
 import { PaymentCodComponent } from './payment-cod/payment-cod.component';
+import { PaymentInstructionComponent } from './payment-instruction/payment-instruction.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, PaymentPageRoutingModule, SharedModule, ReactiveFormsModule],
-  declarations: [PaymentPage, PaymentListComponent, PaymentCodComponent],
+  declarations: [PaymentPage, PaymentListComponent, PaymentCodComponent, PaymentInstructionComponent],
 })
 export class PaymentPageModule {}

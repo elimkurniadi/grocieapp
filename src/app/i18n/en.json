@@ -220,5 +220,6 @@
   "COD": "Cash On Delivery",
   "PAY": "Pay",
   "COD_MESSAGE": "Please fill in the exact amount of cash you'll provide",
-  "SELECT_ALL": "Select All"
+  "SELECT_ALL": "Select All",
+  "HOW_TO_PAY": "How To Pay"
 }
