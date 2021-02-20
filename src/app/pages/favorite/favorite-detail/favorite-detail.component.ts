@@ -15,6 +15,7 @@ export class FavoriteDetailComponent implements OnInit {
   productFavorites: ProductFavorite[];
   favorite: Favorite;
   selectedItem = [];
+  selectAll = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -68,6 +69,15 @@ export class FavoriteDetailComponent implements OnInit {
   toggleSelect(index: any) {
     this.productFavorites[index].selected = !this.productFavorites[index].selected;
 
+    this.calculateSelectedItem();
+  }
+
+  toggleSelectAll() {
+    const selected = !this.selectAll;
+    this.productFavorites.forEach((product) => {
+      product.selected = selected;
+    });
+    this.selectAll = selected;
     this.calculateSelectedItem();
   }
 
