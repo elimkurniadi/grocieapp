@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment-instruction',
@@ -6,11 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payment-instruction.component.scss'],
 })
 export class PaymentInstructionComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
   pay() {
     console.log('paid');
+    this.router.navigate(['/payment', 'proof']);
   }
 }
