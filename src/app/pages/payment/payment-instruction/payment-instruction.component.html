@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons mode="md" class="ion-text-center">
       <ion-back-button defaultHref="/payment" icon="chevron-back-outline"> </ion-back-button>
-      <ion-title class="header-title center-with-back">{{ 'COD' | translate }}</ion-title>
+      <ion-title class="header-title center-with-back">{{ 'MANUAL_BANK_TRANSFER' | translate }}</ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -20,29 +20,17 @@
   <div class="divider"></div>
   <ion-row class="ion-padding-horizontal">
     <ion-col size="12">
-      <ion-text class="text-cod">
-        {{ 'CASH_ON_DELIVERY' | translate }}
+      <ion-text class="text-title">
+        {{ 'HOW_TO_PAY' | translate }}
+      </ion-text>
+    </ion-col>
+    <ion-col size="12" class="ion-padding-vertical">
+      <ion-text class="text-subtitle">
+        {{ 'MANUAL_BANK_TRANSFER' | translate }}
       </ion-text>
     </ion-col>
     <ion-col size="12">
-      <ion-text class="text-cod-message">
-        {{ 'COD_MESSAGE' | translate }}
-      </ion-text>
-    </ion-col>
-  </ion-row>
-  <ion-row class="ion-padding-horizontal">
-    <ion-col size="12">
-      <form (ngSubmit)="pay()" #codForm="ngForm" [formGroup]="fg">
-        <ion-item lines="none" class="form-group">
-          <ion-input
-            class="default-theme"
-            formControlName="amount"
-            placeholder="Rp. 000.000"
-            class="ion-text-right"
-          ></ion-input>
-          <small *ngIf="fg.controls.amount.dirty">{{ fg.controls.amount.errors?.required?.message }}</small>
-        </ion-item>
-      </form>
+      <ion-text class="text-content"> Lorem Ipsum dolor sir amet </ion-text>
     </ion-col>
   </ion-row>
 </ion-content>
@@ -50,7 +38,7 @@
 <ion-footer class="ion-no-border">
   <ion-row class="ion-padding">
     <ion-col>
-      <ion-button color="success" expand="block" shape="round" (click)="codForm.ngSubmit.emit()">
+      <ion-button color="success" expand="block" shape="round" (click)="pay()">
         {{ 'PAY' | translate }}
       </ion-button>
     </ion-col>

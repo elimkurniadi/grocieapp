@@ -212,5 +212,6 @@
   "COD": "Cash On Delivery",
   "PAY": "Bayar",
   "COD_MESSAGE": "Harap isi jumlah persis uang tunai yang akan Anda berikan",
-  "SELECT_ALL": "Pilih Semua"
+  "SELECT_ALL": "Pilih Semua",
+  "HOW_TO_PAY": "Cara Bayar"
 }
