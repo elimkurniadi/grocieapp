@@ -1,14 +1,12 @@
 <ion-row *ngIf="cartData?.length <= 0">
-  <ion-col class="ion-text-center product-name">
-    Cart is empty
-  </ion-col>
+  <ion-col class="ion-text-center product-name"> Cart is empty </ion-col>
 </ion-row>
-<ng-container *ngFor="let cart of (cartData?.product ? cartData.product : cartData) ; let i = index">
+<ng-container *ngFor="let cart of cartData; let i = index">
   <ion-row class="ion-align-items-center ion-justify-content-center ion-margin-vertical">
     <ion-col size="2">
       <img
-        [routerLink]="['/product/detail', cart?.product?.product_id]"
-        [src]="cart?.product?.image_url"
+        [routerLink]="['/product/detail', cart?.product?.product_id || cart?.product_id]"
+        [src]="cart?.product?.image_url || cart?.image_url"
         alt="product_image"
       />
     </ion-col>
@@ -16,21 +14,24 @@
       <ion-row class="ion-no-padding">
         <ion-col size="12" class="ion-no-padding">
           <span class="product-name"
-            ><b>{{ cart?.name }}</b></span
+            ><b>{{ cart?.product?.name || cart?.name }}</b></span
           >
         </ion-col>
       </ion-row>
       <ion-row class="ion-align-items-center ion-justify-content-center">
         <ion-col [size]="showSubstract ? '4' : '6'" class="ion-no-padding">
           <ion-text color="medium">
-            <span class="product-brand">{{ cart?.product?.brand?.name }}</span> <br />
-            <span class="product-size"
-              >{{ 'SIZE' | translate }}: {{ cart?.product?.weight }} {{ cart?.product?.unit?.name }}</span
+            <span class="product-brand">{{ cart?.product?.brand?.name || cart?.brand?.name }}</span> <br />
+            <span class="product-price">
+              {{ cart?.product?.secondary_price || cart?.secondary_price | currency: 'Rp. ' }}</span
             >
           </ion-text>
+          <ng-container> </ng-container>
           <br />
           <ion-text color="dark">
-            <span class="product-final-price">Rp. {{ cart?.product?.primary_price | number }}</span>
+            <span class="product-final-price"
+              >Rp. {{ cart?.product?.primary_price || cart?.primary_price | number }}</span
+            >
           </ion-text>
         </ion-col>
         <ion-col size="4" class="ion-no-padding ion-text-center" *ngIf="showSubstract">
@@ -59,14 +60,14 @@
         <ion-col [size]="showSubstract ? '4' : '6'" class="ion-no-padding ion-text-right" *ngIf="showSubstract">
           <ion-text color="dark">
             <span
-              ><b>Rp. {{ cart?.local_subtotal_price | number }}</b></span
+              ><b>Rp. {{ cart?.local_subtotal_price || cart?.local_subtotal_price | number }}</b></span
             >
           </ion-text>
         </ion-col>
         <ion-col [size]="showSubstract ? '4' : '6'" class="ion-no-padding ion-text-right" *ngIf="!showSubstract">
           <ion-text color="dark">
             <span
-              >x <b>{{ cart?.quantity }}</b></span
+              >x <b>{{ cart?.quantity || cart?.transaction_products?.quantity }}</b></span
             >
           </ion-text>
         </ion-col>

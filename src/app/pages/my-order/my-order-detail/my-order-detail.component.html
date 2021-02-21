@@ -90,9 +90,7 @@
             <img src="assets/images/ic_completed.svg" class="status-img" />
           </div>
         </ion-col> -->
-        <ion-col size="2.4" class="padding-status-col" *ngFor="let status of transactionStatus">
-
-        </ion-col>
+        <ion-col size="2.4" class="padding-status-col" *ngFor="let status of transactionStatus"> </ion-col>
       </ion-row>
 
       <ion-row>
@@ -165,17 +163,17 @@
           </ion-text>
         </ion-col>
         <ion-col size="6" class="ion-text-right">
-          <ion-text class="summary-value"> Rp. 56.700 </ion-text>
+          <ion-text class="summary-value"> Rp. {{ order?.original_price | number }} </ion-text>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="+order?.service_fee > 0">
         <ion-col size="6">
           <ion-text class="summary-label">
             {{ 'SERVICE_FEE' | translate }}
           </ion-text>
         </ion-col>
         <ion-col size="6" class="ion-text-right">
-          <ion-text class="summary-value"> Rp. 0 </ion-text>
+          <ion-text class="summary-value"> Rp. {{ order?.service_fee | number }} </ion-text>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -185,17 +183,17 @@
           </ion-text>
         </ion-col>
         <ion-col size="6" class="ion-text-right">
-          <ion-text class="summary-value"> Rp. 20.000 </ion-text>
+          <ion-text class="summary-value"> {{ order?.delivery_fee | currency: 'Rp. ' }} </ion-text>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="+order?.voucher_discount > 0">
         <ion-col size="6">
           <ion-text class="summary-label">
             {{ 'DISCOUNT' | translate }}
           </ion-text>
         </ion-col>
         <ion-col size="6" class="ion-text-right">
-          <ion-text color="success" class="summary-value"> -Rp. 6.700 </ion-text>
+          <ion-text color="success" class="summary-value">{{ order?.voucher_discount | number }} </ion-text>
         </ion-col>
       </ion-row>
       <ion-row>
