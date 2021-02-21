@@ -254,6 +254,10 @@ ion-searchbar.custom-search {
   padding-bottom: 0;
 }
 
+.ion-no-padding-top {
+  padding-top: 0;
+}
+
 .ion-no-padding-end {
   padding-right: 0;
 }
@@ -338,6 +342,10 @@ img.full-width {
 
 ion-card.ion-no-border {
   box-shadow: none !important;
+}
+
+.modal-confirm {
+  color: #99cc33 !important;
 }
 
 .slide-product .swiper-slide:nth-child(1) {

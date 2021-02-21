@@ -17,13 +17,14 @@
       </ion-row>
       <ion-row class="ion-align-items-center ion-justify-content-center">
         <ion-col [size]="showSubstract ? '4' : '6'" class="ion-no-padding">
-          <ion-text color="medium">
-            <span class="product-brand">{{ cart?.product?.brand?.name }}</span> <br />
-            <span class="product-size"
-              >{{ 'SIZE' | translate }}: {{ cart?.product?.weight }} {{ cart?.product?.unit?.name }}</span
-            >
-          </ion-text>
-          <br />
+          <div>
+            <ion-text color="medium">
+              <!-- <span class="product-brand">{{ cart?.product?.brand?.name || cart?.brand?.name }}</span> <br /> -->
+              <span class="product-price striketrough">
+                {{ cart?.product?.secondary_price || cart?.secondary_price | currency: 'Rp. ':'symbol':'1.0-0' }}</span
+              >
+            </ion-text>
+          </div>
           <ion-text color="dark">
             <span class="product-final-price">Rp. {{ cart?.product?.primary_price | number }}</span>
           </ion-text>

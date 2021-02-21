@@ -6,16 +6,24 @@
 
 <ion-content>
   <ion-list class="ion-padding">
-    <ion-item lines="none" class="favorite-item ion-margin-bottom" *ngFor="let item of favorites">
-      <ion-label class="favorite-name">{{ item.name }}</ion-label>
-      <ion-text
-        slot="end"
-        class="ion-text-right text-see-list link"
-        [routerLink]="['/favorite', item.favourite_group_id, 'detail']"
-        ><b>{{ 'SEE_LIST' | translate }}</b></ion-text
-      >
-    </ion-item>
+    <ion-item-sliding *ngFor="let item of favorites" class="ion-margin-bottom">
+
+      <ion-item lines="none" class="favorite-item">
+        <ion-label class="favorite-name">{{ item.name }}</ion-label>
+        <ion-text
+          slot="end"
+          class="ion-text-right text-see-list link"
+          [routerLink]="['/favorite', item.favourite_group_id, 'detail']"
+          ><b>{{ 'SEE_LIST' | translate }}</b></ion-text
+        >
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option style="font-weight: 600;text-transform: capitalize;border-radius: 5px;" color="danger" (click)="delete(item)">Delete</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
   </ion-list>
+
 </ion-content>
 
 <ion-footer class="ion-no-border">

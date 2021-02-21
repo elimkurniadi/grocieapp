@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Favorite, ProductFavorite, Response } from '@shared/models';
 import { ToastService } from '@shared/services';
 import { FavoriteService } from '@shared/services/modules';
@@ -21,7 +22,8 @@ export class FavoriteDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private favoriteSrv: FavoriteService,
     private toastSrv: ToastService,
-    private router: Router
+    private router: Router,
+    private alertCtrl: AlertController
   ) {
     this.route.params.subscribe((param) => {
       if (param.id !== null) {
@@ -73,7 +75,7 @@ export class FavoriteDetailComponent implements OnInit {
   }
 
   toggleSelectAll() {
-    const selected = !this.selectAll;
+    const selected = true;
     this.productFavorites.forEach((product) => {
       product.selected = selected;
     });
@@ -107,5 +109,39 @@ export class FavoriteDetailComponent implements OnInit {
         const error = err.error.error;
         this.toastSrv.show(error.message);
       });
+  }
+
+  delete(item) {
+    console.log(item);
+    this.presentAlertConfirm(item);
+  }
+
+  async presentAlertConfirm(item) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Delete Item',
+      message: 'Are you sure you want to delete' + '<strong> ' + item?.product?.name + '</strong> ?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'modal-confirm',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Yes',
+          cssClass: 'modal-confirm',
+          handler: () => {
+            this.favoriteSrv.deleteFavoriteItem(item.favourite_id).then(res =>{
+              console.log(res);
+              this.getProductList();
+            })
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }
