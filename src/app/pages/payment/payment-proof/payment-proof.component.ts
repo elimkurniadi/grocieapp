@@ -4,7 +4,9 @@ import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { GlobalService, RxValidatorService } from '@shared/services';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
+import { PaymentProofSuccessComponent } from '../payment-proof-success/payment-proof-success.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment-proof',
@@ -21,7 +23,9 @@ export class PaymentProofComponent implements OnInit {
     private translate: TranslateService,
     private actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    private gs: GlobalService
+    private gs: GlobalService,
+    private router: Router,
+    private modalCtrl: ModalController
   ) {
     this.buildPaymentForm();
   }
@@ -102,5 +106,17 @@ export class PaymentProofComponent implements OnInit {
 
   submit() {
     console.log('submitted');
+    this.paymentSentModal();
+  }
+  async paymentSentModal() {
+    const modal = await this.modalCtrl.create({
+      component: PaymentProofSuccessComponent,
+    });
+
+    modal.onDidDismiss().then((res: any) => {
+      this.router.navigate(['/tabs', 'home']);
+    });
+
+    return await modal.present();
   }
 }

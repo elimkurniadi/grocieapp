@@ -12,6 +12,7 @@ import { SharedModule } from '@shared/shared.module';
 import { PaymentCodComponent } from './payment-cod/payment-cod.component';
 import { PaymentInstructionComponent } from './payment-instruction/payment-instruction.component';
 import { PaymentProofComponent } from './payment-proof/payment-proof.component';
+import { PaymentProofSuccessComponent } from './payment-proof-success/payment-proof-success.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, PaymentPageRoutingModule, SharedModule, ReactiveFormsModule],
@@ -21,6 +22,8 @@ import { PaymentProofComponent } from './payment-proof/payment-proof.component';
     PaymentCodComponent,
     PaymentInstructionComponent,
     PaymentProofComponent,
+    PaymentProofSuccessComponent,
   ],
+  exports: [PaymentProofSuccessComponent],
 })
 export class PaymentPageModule {}

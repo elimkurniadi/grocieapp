@@ -221,5 +221,8 @@
   "PAY": "Pay",
   "COD_MESSAGE": "Please fill in the exact amount of cash you'll provide",
   "SELECT_ALL": "Select All",
-  "HOW_TO_PAY": "How To Pay"
+  "HOW_TO_PAY": "How To Pay",
+  "PAYMENT_PROOF_SENT": "Payment Proof Sent",
+  "PAYMENT_PROOF_TITLE": "Please Wait",
+  "PAYMENT_PROOF_MESSAGE": "Please wait, your payment is being reviewed."
 }
