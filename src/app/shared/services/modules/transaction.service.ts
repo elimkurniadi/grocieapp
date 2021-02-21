@@ -39,9 +39,9 @@ export class TransactionService {
     });
   }
 
-  getTransactionStatus(pagination?: Page, ordering?: Sort): Promise<any> {
+  getTransactionStatus(id: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData(`transaction/transaction_status`, pagination, ordering);
+      const subscription = this.api.getData(`transaction/transaction_status?transaction_id=${id}`);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: ResponsePagination) => {

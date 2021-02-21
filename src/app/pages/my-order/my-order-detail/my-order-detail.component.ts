@@ -27,7 +27,6 @@ export class MyOrderDetailComponent implements OnInit {
   ngOnInit() {
     // this.fetchCartList();
     this.observeParam();
-    this.fetchTransactionStatus();
   }
 
   observeParam() {
@@ -36,6 +35,7 @@ export class MyOrderDetailComponent implements OnInit {
       console.log("parameter", id);
       // this.productId = id;
       this.fetchTransactionDetail(id);
+      this.fetchTransactionStatus(id);
     });
   }
 
@@ -64,8 +64,8 @@ export class MyOrderDetailComponent implements OnInit {
     })
   }
 
-  fetchTransactionStatus () {
-    this.transactionSrv.getTransactionStatus().then(data => {
+  fetchTransactionStatus(id) {
+    this.transactionSrv.getTransactionStatus(id).then(data => {
       console.log('BERHASIL HORE #2', data);
       this.transactionStatus = data;
     })

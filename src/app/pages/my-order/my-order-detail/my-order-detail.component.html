@@ -49,6 +49,8 @@
         </ion-col>
       </ion-row>
       <ion-row>
+
+
         <!-- <ion-col size="2.4" class="padding-status-col">
           <div class="status-bg success center">
             <img src="assets/images/ic_waiting_for_payment.svg" class="status-img" />
@@ -56,6 +58,7 @@
 
           <div class="status-line-right success"></div>
         </ion-col>
+        
         <ion-col size="2.4" class="padding-status-col">
           <div class="status-line success"></div>
 
@@ -90,7 +93,17 @@
             <img src="assets/images/ic_completed.svg" class="status-img" />
           </div>
         </ion-col> -->
-        <ion-col size="2.4" class="padding-status-col" *ngFor="let status of transactionStatus"> </ion-col>
+
+        
+        <ion-col size="2.4" class="padding-status-col" *ngFor="let status of transactionStatus">
+          <div class="status-line"></div>
+
+          <div class="status-bg center">
+            <img src="{{ 'assets/images/' + status?.name + '.svg' }}" class="status-img" />
+          </div>
+
+          <div class="status-line-right"></div>
+        </ion-col>
       </ion-row>
 
       <ion-row>
