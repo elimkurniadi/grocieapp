@@ -7,7 +7,7 @@
         </ion-text>
         <br />
         <ion-text class="order-value">
-          {{ order?.order_id }}
+          {{ order?.transaction_code }}
         </ion-text>
       </ion-col>
       <ion-col class="ion-text-right">
@@ -16,7 +16,7 @@
         </ion-text>
         <br />
         <ion-text class="order-value">
-          {{ order?.order_date | date: 'd MMM yyyy HH:mm' }}
+          {{ order?.created_at | date: 'd MMM yyyy HH:mm' }}
         </ion-text>
       </ion-col>
     </ion-row>
@@ -28,7 +28,7 @@
         </ion-text>
         <br />
         <ion-text class="order-value">
-          {{ order?.order_status_name }}
+          {{ order?.transaction_status?.name | translate }}
         </ion-text>
       </ion-col>
       <ion-col class="ion-text-right">
@@ -37,7 +37,7 @@
         </ion-text>
         <br />
         <ion-text class="order-value">
-          {{ order?.order_payment_method }}
+          {{ order?.payment_method?.name }}
         </ion-text>
       </ion-col>
     </ion-row>
@@ -47,7 +47,7 @@
           {{ 'TOTAL_PAYMENT' | translate }}
         </ion-text>
         <br />
-        <ion-text class="order-value price"> Rp {{ order?.total_payment | number: '1.0-0' }} </ion-text>
+        <ion-text class="order-value price"> Rp {{ order?.total_price | number: '1.0-0' }} </ion-text>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -57,7 +57,7 @@
           shape="round"
           color="success"
           class="btn-action"
-          (click)="goToDetail(order?.order_id)"
+          (click)="goToDetail(order?.transaction_id)"
         >
           {{ 'SEE_DETAIL' | translate }}
         </ion-button>
@@ -68,7 +68,7 @@
           class="btn-action"
           fill="outline"
           (click)="presentConfirmModal(order)"
-          *ngIf="order?.order_status == 'in_process'"
+          *ngIf="order?.transaction_status?.name == 'on process'"
         >
           {{ 'ORDER_ARRIVED' | translate }}
         </ion-button>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { AlertService } from '@shared/services/alert.service';
 import { CartService } from '@shared/services/modules/cart.service';
@@ -8,7 +8,7 @@ import { CartService } from '@shared/services/modules/cart.service';
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.scss'],
 })
-export class ItemListComponent implements OnInit {
+export class ItemListComponent implements OnInit, AfterViewInit {
   @Input() cartData = null;
   @Input() showSubstract = true;
   @Output() quantityChange = new EventEmitter();
@@ -18,6 +18,7 @@ export class ItemListComponent implements OnInit {
   constructor(private cartSrv: CartService, private alertSrv: AlertService, private translateSrv: TranslateService) {}
 
   ngOnInit() {
+    console.log('TESTING', this.cartData);
     if (this.cartData) {
       this.calculateEachProductPrice().then(() => {
         this.cartSrv.calculateSumPrice(this.cartData).then((res) => {
@@ -25,6 +26,14 @@ export class ItemListComponent implements OnInit {
         });
       });
     }
+  }
+
+  ionViewDidEnter() {
+    console.log('TESTING', this.cartData);
+  }
+
+  ngAfterViewInit() {
+    console.log('TESTING #2', this.cartData);
   }
 
   async calculateEachProductPrice() {

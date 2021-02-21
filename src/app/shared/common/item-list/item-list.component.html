@@ -1,4 +1,9 @@
-<ng-container *ngFor="let cart of cartData; let i = index">
+<ion-row *ngIf="cartData?.length <= 0">
+  <ion-col class="ion-text-center product-name">
+    Cart is empty
+  </ion-col>
+</ion-row>
+<ng-container *ngFor="let cart of (cartData?.product ? cartData.product : cartData) ; let i = index">
   <ion-row class="ion-align-items-center ion-justify-content-center ion-margin-vertical">
     <ion-col size="2">
       <img
@@ -11,7 +16,7 @@
       <ion-row class="ion-no-padding">
         <ion-col size="12" class="ion-no-padding">
           <span class="product-name"
-            ><b>{{ cart?.product?.name }}</b></span
+            ><b>{{ cart?.name }}</b></span
           >
         </ion-col>
       </ion-row>

@@ -38,6 +38,7 @@ export class CartPage implements OnInit {
 
   fetchCartList() {
     this.cartSrv.getCartList().then((res) => {
+      console.log('RETURN MY CART', res);
       res.forEach((element) => {
         const localSubTotalPrice = element?.quantity * +element?.product?.primary_price;
         Object.assign(element, { local_subtotal_price: localSubTotalPrice });

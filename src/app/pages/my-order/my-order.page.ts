@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TransactionService } from '@shared/services/modules';
 
 @Component({
   selector: 'app-my-order',
@@ -10,6 +11,7 @@ export class MyOrderPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

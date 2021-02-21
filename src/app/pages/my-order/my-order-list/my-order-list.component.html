@@ -19,9 +19,9 @@
     <ion-slide>
       <ion-content>
         <ion-grid>
-          <ion-row *ngFor="let item of [1, 2, 3]">
+          <ion-row *ngFor="let order of orders">
             <ion-col>
-              <app-card-order></app-card-order>
+              <app-card-order [order]="order"></app-card-order>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -30,7 +30,7 @@
     <ion-slide>
       <ion-content>
         <ion-grid>
-          <ion-row *ngFor="let item of [1, 2, 3]">
+          <ion-row *ngFor="let order of completedOrders">
             <ion-col>
               <app-card-order></app-card-order>
             </ion-col>

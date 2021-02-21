@@ -203,9 +203,9 @@
   "SEE_DETAIL": "See Detail",
   "ORDER_ARRIVED": "Order Arrived",
   "ORDER_ARRIVED_MESSAGE": "Have you received your order?",
-  "WAITING_FOR_PAYMENT": "Waiting for Payment",
+  "WAITING_PAYMENT": "Waiting for Payment",
   "WAITING_FOR_CONFIRMATION": "Waiting for Confirmation",
-  "ORDER_IN_PROCESS": "Order In Process",
+  "ON_PROCESS": "Order In Process",
   "ORDER_SENT": "Order Sent",
   "ORDER_COMPLETED": "Order Completed",
   "DISCOUNT": "Discount",
@@ -220,5 +220,6 @@
   "COD": "Cash On Delivery",
   "PAY": "Pay",
   "COD_MESSAGE": "Please fill in the exact amount of cash you'll provide",
-  "SELECT_ALL": "Select All"
+  "SELECT_ALL": "Select All",
+  "IN_PROCESS": "Order In Process"
 }

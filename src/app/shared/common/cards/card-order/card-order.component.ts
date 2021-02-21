@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ModalConfirmationComponent } from '@shared/common/modals/modal-confirmation/modal-confirmation.component';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
+import { TransactionService } from '@shared/services/modules';
 
 @Component({
   selector: 'app-card-order',
@@ -11,17 +12,25 @@ import { TranslateService } from '@shared/pipes/translate/translate.service';
 })
 export class CardOrderComponent implements OnInit {
   @Input() order = {
-    order_id: 'AHS - 70009876543',
-    order_status: 'in_process',
+    transaction_code: 'AHS - 70009876543',
+    transaction_id: 'AHS - 70009876543',
+    payment_method : {
+      name: 'Virtual account'
+    },
+    transaction_status: {
+      name: 'IN_PROCESS'
+    },
     order_status_name: 'Order In Process',
-    order_date: new Date(),
+    created_at: new Date(),
     order_payment_method: 'Manual Bank Transfer',
-    total_payment: '70000',
+    total_price: '70000',
   };
 
-  constructor(private modalCtrl: ModalController, private translate: TranslateService, private router: Router) {}
+  constructor(private modalCtrl: ModalController, private translate: TranslateService, private router: Router, private transactionSrv: TransactionService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("ISI DARI ORDER GUYS", this.order);
+  }
 
   async presentConfirmModal(order: any) {
     const modal = await this.modalCtrl.create({
@@ -37,7 +46,7 @@ export class CardOrderComponent implements OnInit {
       const data = res.data;
 
       if (data && data.confirm) {
-        this.confirmArrived(order?.order_id);
+        this.confirmArrived(order?.transaction_id);
       }
     });
 

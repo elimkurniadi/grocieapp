@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Cart } from '@shared/models';
-import { CartService } from '@shared/services/modules';
+import { CartService, TransactionService } from '@shared/services/modules';
 
 @Component({
   selector: 'app-my-order-detail',
@@ -10,21 +11,34 @@ import { CartService } from '@shared/services/modules';
 export class MyOrderDetailComponent implements OnInit {
   itemList: Cart[];
   totalPrice = 0;
+  order;
+  transactionStatus;
+  // order = {
+  //   transaction_id: 'AHS - 70009876543',
+  //   transaction_status: 'in_process',
+  //   transaction_status_name: 'Order In Process',
+  //   created_at: new Date(),
+  //   order_payment_method: 'Manual Bank Transfer',
+  //   total_price: '70000',
+  // };
 
-  order = {
-    order_id: 'AHS - 70009876543',
-    order_status: 'in_process',
-    order_status_name: 'Order In Process',
-    order_date: new Date(),
-    order_payment_method: 'Manual Bank Transfer',
-    total_payment: '70000',
-  };
-
-  constructor(private cartSrv: CartService) {}
+  constructor(private cartSrv: CartService, private transactionSrv:TransactionService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    this.fetchCartList();
+    // this.fetchCartList();
+    this.observeParam();
+    this.fetchTransactionStatus();
   }
+
+  observeParam() {
+    this.activatedRoute.params.subscribe((param) => {
+      const id = param?.id;
+      console.log("parameter", id);
+      // this.productId = id;
+      this.fetchTransactionDetail(id);
+    });
+  }
+
 
   fetchCartList() {
     this.cartSrv.getCartList().then((res) => {
@@ -41,5 +55,19 @@ export class MyOrderDetailComponent implements OnInit {
     this.cartSrv.calculateSumPrice(this.itemList).then((res) => {
       this.totalPrice = res;
     });
+  }
+
+  fetchTransactionDetail(id) {
+    this.transactionSrv.getTransactionDetail(id).then(data => {
+      console.log('BERHASIL HORE', data);
+      this.order = data;
+    })
+  }
+
+  fetchTransactionStatus () {
+    this.transactionSrv.getTransactionStatus().then(data => {
+      console.log('BERHASIL HORE #2', data);
+      this.transactionStatus = data;
+    })
   }
 }
