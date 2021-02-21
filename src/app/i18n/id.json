@@ -213,5 +213,8 @@
   "PAY": "Bayar",
   "COD_MESSAGE": "Harap isi jumlah persis uang tunai yang akan Anda berikan",
   "SELECT_ALL": "Pilih Semua",
-  "HOW_TO_PAY": "Cara Bayar"
+  "HOW_TO_PAY": "Cara Bayar",
+  "PAYMENT_PROOF_SENT": "Bukti Pembayaran Dikirim",
+  "PAYMENT_PROOF_TITLE": "Mohon tunggu",
+  "PAYMENT_PROOF_MESSAGE": "Harap tunggu, pembayaran Anda sedang ditinjau."
 }
