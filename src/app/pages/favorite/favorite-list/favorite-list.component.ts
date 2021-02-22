@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Favorite, Response } from '@shared/models';
 import { ToastService } from '@shared/services';
 import { FavoriteService } from '@shared/services/modules';
@@ -16,7 +16,8 @@ export class FavoriteListComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private favoriteSrv: FavoriteService,
-    private toastSrv: ToastService
+    private toastSrv: ToastService,
+    private alertCtrl: AlertController
   ) {}
 
   ngOnInit() {
@@ -50,5 +51,35 @@ export class FavoriteListComponent implements OnInit {
         const error = err.error.error;
         this.toastSrv.show(error.message);
       });
+  }
+
+  delete(item) {
+    console.log(item);
+    this.presentAlertConfirm(item);
+  }
+
+  async presentAlertConfirm(item) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Delete List',
+      message: 'Are you sure you want to delete' + '<strong> ' + item.name + '</strong> ?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'modal-confirm'
+        }, {
+          text: 'Yes',
+          cssClass: 'modal-confirm',
+          handler: () => {
+            this.favoriteSrv.deleteFavoriteList(item.favourite_group_id).then(res => {
+              this.getFavorites();
+            })
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

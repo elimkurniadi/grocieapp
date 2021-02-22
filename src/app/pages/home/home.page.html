@@ -23,7 +23,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="9.4" (click)="searchProduct()">
+      <ion-col size="10" (click)="searchProduct()">
         <ion-searchbar class="custom-search" mode="ios"></ion-searchbar>
         <div
           class="ion-no-padding ion-align-self-center ion-text-center scan-icon-container"
@@ -32,16 +32,13 @@
           <ion-icon name="qr-code-outline" color="primary" class="scan-icon"></ion-icon>
         </div>
       </ion-col>
-      <ion-col size="1.3" class="ion-no-padding ion-align-self-center ion-text-center">
+      <ion-col size="2" class="ion-no-padding ion-align-self-center ion-text-center">
         <ion-icon
           name="notifications"
           color="primary"
           class="notif-icon link"
           [routerLink]="['/tabs', 'notification']"
         ></ion-icon>
-      </ion-col>
-      <ion-col size="1.3" class="ion-no-padding ion-align-self-center ion-text-center">
-        <ion-icon name="mail" color="primary" class="notif-icon link" [routerLink]="['/tabs','inbox']"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-toolbar>
