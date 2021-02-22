@@ -8,25 +8,45 @@
   <ion-list class="ion-padding">
     <ion-item lines="none" class="favorite-item ion-margin-bottom" *ngFor="let item of favorites">
       <ion-label class="favorite-name">{{ item.name }}</ion-label>
-      <ion-text
-        slot="end"
-        class="ion-text-right text-see-list link"
-        [routerLink]="['/favorite', item.favourite_group_id, 'detail']"
-        ><b>{{ 'SEE_LIST' | translate }}</b></ion-text
-      >
+      <ion-text slot="end" class="ion-text-right text-see-list link"
+        [routerLink]="['/favorite', item.favourite_group_id, 'detail']"><b>{{ 'SEE_LIST' | translate }}</b></ion-text>
     </ion-item>
   </ion-list>
-</ion-content>
 
-<ion-footer class="ion-no-border">
-  <ion-row class="ion-padding-vertical">
-    <ion-col class="ion-text-center">
-      <ion-text class="add-favorite" (click)="addToList()">
-        <ion-icon name="add-outline" style="vertical-align: middle;"></ion-icon>
-        <ion-text>
-          {{ 'ADD_NEW_LIST' | translate }}
+  <ion-grid *ngIf="favorites?.length <= 0" class="ion-text-center ion-padding ion-margin">
+    <ion-row>
+      <ion-col>
+        <img src="assets/images/empty-favorite.svg">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="text-empty-title ion-margin-vertical">
+          You have no favorites
+        </div>
+        <ion-text class="text-empty-desc">
+          Start by creating a favorite list and fill it with things you love!
         </ion-text>
-      </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-row class="ion-text-center">
+    <ion-col>
+      <ion-button fill="outline" color="primary" size="small" (click)="addToList()">
+        <ion-icon slot="start"  name="add-outline"></ion-icon>
+         <strong>{{ 'ADD_NEW_LIST' | translate }}</strong>
+      </ion-button>
     </ion-col>
   </ion-row>
-</ion-footer>
+</ion-content>
+
+<!-- <ion-footer class="ion-no-border">
+  <ion-row>
+    <ion-col class="ion-text-center">
+      <ion-button fill="outline" color="primary" size="small" (click)="addToList()">
+        <ion-icon slot="start"  name="add-outline"></ion-icon>
+         <strong>{{ 'ADD_NEW_LIST' | translate }}</strong>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer> -->

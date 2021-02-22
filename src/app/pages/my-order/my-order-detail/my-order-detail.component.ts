@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cart } from '@shared/models';
 import { CartService, TransactionService } from '@shared/services/modules';
 
@@ -22,7 +22,7 @@ export class MyOrderDetailComponent implements OnInit {
   //   total_price: '70000',
   // };
 
-  constructor(private cartSrv: CartService, private transactionSrv:TransactionService, private activatedRoute: ActivatedRoute) {}
+  constructor(private cartSrv: CartService, private transactionSrv:TransactionService, private activatedRoute: ActivatedRoute, private router:Router) {}
 
   ngOnInit() {
     // this.fetchCartList();
@@ -69,5 +69,9 @@ export class MyOrderDetailComponent implements OnInit {
       console.log('BERHASIL HORE #2', data);
       this.transactionStatus = data;
     })
+  }
+
+  uploadProof() {
+    this.router.navigate(['/payment', 'proof']);
   }
 }

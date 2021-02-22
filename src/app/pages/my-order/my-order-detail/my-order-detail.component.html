@@ -2,8 +2,8 @@
   <ion-toolbar mode="ios">
     <ion-buttons mode="md" class="ion-text-center">
       <ion-back-button defaultHref="/my-order" icon="chevron-back-outline"> </ion-back-button>
-      <ion-title class="header-title center-with-back">{{ 'ORDER_DETAIL' | translate }}</ion-title>
     </ion-buttons>
+    <ion-title>{{ 'ORDER_DETAIL' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
@@ -95,20 +95,20 @@
         </ion-col> -->
 
         
-        <ion-col size="2.4" class="padding-status-col" *ngFor="let status of transactionStatus">
-          <div class="status-line"></div>
-
+        <ion-col size="2.4" class="padding-status-col" *ngFor="let status of transactionStatus; let i = index">
+          <div [ngClass]="{'status-line' : i!=0 }"></div>
+          <!-- [ngClass]="{'status-line-right': i == 0 && i == transactionStatus.length - 1}" -->
           <div class="status-bg center">
             <img src="{{ 'assets/images/' + status?.name + '.svg' }}" class="status-img" />
           </div>
 
-          <div class="status-line-right"></div>
+          <div [ngClass]="{'status-line-right': i != transactionStatus.length - 1}"></div>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col size="2.4" class="padding-status-col ion-text-center" *ngFor="let status of transactionStatus">
-          <ion-text class="order-status">
+          <ion-text class="order-status" [ngClass]="{'green': status?.active}">
             {{ status?.name | translate }}
           </ion-text>
         </ion-col>
@@ -169,9 +169,10 @@
           <app-item-list [showSubstract]="false" [cartData]="order?.products"></app-item-list>
         </ion-col>
       </ion-row>
+      <div class="divider"></div>
       <ion-row>
         <ion-col size="6">
-          <ion-text class="summary-label">
+          <ion-text class="summary-label black">
             {{ 'SUBTOTAL' | translate }}
           </ion-text>
         </ion-col>
@@ -196,27 +197,38 @@
           </ion-text>
         </ion-col>
         <ion-col size="6" class="ion-text-right">
-          <ion-text class="summary-value"> {{ order?.delivery_fee | currency: 'Rp. ' }} </ion-text>
+          <ion-text class="summary-value"> {{ order?.delivery_fee | currency: 'Rp. ':'symbol':'1.0-0' }} </ion-text>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="+order?.voucher_discount > 0">
+      <!-- <ion-row *ngIf="+order?.product_discount > 0">
         <ion-col size="6">
-          <ion-text class="summary-label">
+          <ion-text color="success" class="summary-label green">
             {{ 'DISCOUNT' | translate }}
           </ion-text>
         </ion-col>
         <ion-col size="6" class="ion-text-right">
-          <ion-text color="success" class="summary-value">{{ order?.voucher_discount | number }} </ion-text>
+          <ion-text color="success" class="summary-value green">- {{ order?.product_discount | currency: 'Rp. ':'symbol':'1.0-0' }} </ion-text>
+        </ion-col>
+      </ion-row> -->
+      <ion-row *ngIf="+order?.voucher_discount > 0 || +order?.product_discount > 0 ">
+        <ion-col size="6">
+          <ion-text class="summary-label green">
+            {{ 'DISCOUNT' | translate }}
+          </ion-text>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <ion-text color="success" class="summary-value green">- {{ order?.voucher_discount + order?.product_discount | currency: 'Rp. ':'symbol':'1.0-0' }} </ion-text>
         </ion-col>
       </ion-row>
+      <div class="divider"></div>
       <ion-row>
         <ion-col size="6">
-          <ion-text class="summary-label">
+          <ion-text class="text-address-info">
             {{ 'TOTAL_PAYMENT' | translate }}
           </ion-text>
         </ion-col>
         <ion-col size="6" class="ion-text-right">
-          <ion-text class="summary-value">{{ order?.original_price | currency: 'Rp. ':'symbol':'1.0-0' }}</ion-text>
+          <ion-text class="summary-value large">{{ order?.total_price | currency: 'Rp. ':'symbol':'1.0-0' }}</ion-text>
         </ion-col>
       </ion-row>
     </ion-card-content>
@@ -261,7 +273,7 @@
 
   <ion-row class="ion-padding">
     <ion-col>
-      <ion-button color="success" shape="round" expand="block">
+      <ion-button color="success" shape="round" expand="block" (click)="uploadProof()">
         {{ 'UPLOAD_PAYMENT_PROOF' | translate }}
       </ion-button>
     </ion-col>

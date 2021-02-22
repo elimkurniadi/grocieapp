@@ -1,9 +1,23 @@
 .section-description {
-    font-size: 12px;
-    font-weight: 600;
-    color: #353535;
+  font-size: 12px;
+  font-weight: 600;
+  color: #353535;
 }
 
 .slide-product .swiper-slide:nth-child(1) {
-    margin-left: 0px !important;
-  }
+  margin-left: 0px !important;
+}
+
+
+.text-empty-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.21;
+  color: var(--ion-color-primary);
+}
+
+.text-empty-desc {
+  font-size: 14px;
+  line-height: 1.33;
+  color: #707070;
+}

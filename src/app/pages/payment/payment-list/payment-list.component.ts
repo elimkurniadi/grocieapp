@@ -28,6 +28,8 @@ export class PaymentListComponent implements OnInit {
       this.payOrder();
     } else if (this.paymentMethod === 'cod') {
       this.router.navigate(['/payment', 'cod']);
+    } else if (this.paymentMethod === 'manual_bank') {
+      this.router.navigate(['/payment', 'instruction']);
     }
   }
 

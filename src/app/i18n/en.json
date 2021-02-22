@@ -217,10 +217,14 @@
   "CASH_ON_DELIVERY": "Cash On Delivery (COD)",
   "MANUAL_BANK_TRANSFER": "Manual Bank Transfer",
   "PAYMENT": "Payment",
-  "SENT": "Order Sent",
+  "SENT": "Delivering your Order",
   "COD": "Cash On Delivery",
   "PAY": "Pay",
   "COD_MESSAGE": "Please fill in the exact amount of cash you'll provide",
   "SELECT_ALL": "Select All",
-  "IN_PROCESS": "Order In Process"
+  "IN_PROCESS": "Order In Process",
+  "HOW_TO_PAY": "How To Pay",
+  "PAYMENT_PROOF_SENT": "Payment Proof Sent",
+  "PAYMENT_PROOF_TITLE": "Please Wait",
+  "PAYMENT_PROOF_MESSAGE": "Please wait, your payment is being reviewed."
 }

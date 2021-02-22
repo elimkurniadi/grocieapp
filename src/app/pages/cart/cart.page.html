@@ -8,7 +8,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="pullToRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-grid class="ion-margin-top ion-no-padding h-100">
+  <ion-grid class="ion-margin-top ion-no-padding h-100" *ngIf="cartList?.length > 0">
     <ion-row class="ion-padding-horizontal ion-justify-content-between">
       <ion-col size="12">
         <app-item-list
@@ -30,9 +30,35 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-grid *ngIf="cartList?.length <= 0" class="ion-text-center ion-padding ion-margin">
+    <ion-row>
+      <ion-col>
+        <img src="assets/images/empty-cart.svg">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="text-empty-title ion-margin-vertical">
+          Start adding things to your cart!
+        </div>
+        <ion-text class="text-empty-desc">
+          You're cart is still empty. Start shopping and add things to your cart!
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button fill="outline" color="primary">
+          <strong>
+            Start Shopping
+          </strong>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
-<ion-footer class="ion-padding-horizontal">
+<ion-footer class="ion-padding-horizontal" *ngIf="cartList?.length > 0" >
   <ion-toolbar mode="md">
     <ion-grid>
       <ion-row class="ion-justify-content-center">

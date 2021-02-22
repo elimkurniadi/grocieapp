@@ -66,6 +66,35 @@
   color: #353535;
 }
 
+.summary{
+  &-label {
+    font-size: 14px;
+    line-height: 1.17;
+    color: #707070;
+    &.black {
+      color: #353535;
+      &.strong {
+        font-weight: 600;
+      }
+    }
+  }
+
+  &-value {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.17;
+    color: #353535;
+    &.large {
+      font-size:16px;
+    }
+  }
+}
+
+.green {
+  filter: brightness(0%) saturate(100%) invert(90%) sepia(32%) saturate(973%) hue-rotate(22deg) brightness(83%) contrast(90%);
+  color: #99cc33 !important;
+}
+
 .address-label {
   font-size: 10px;
   font-weight: normal;
@@ -77,7 +106,7 @@
 }
 
 .order-value {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.17;
   letter-spacing: normal;
@@ -102,13 +131,13 @@ ion-button {
 }
 
 .order-status {
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 600;
   color: #353535;
 }
 
 .order-delivery-date {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.33;
   color: #353535;
@@ -142,4 +171,10 @@ ion-button {
     line-height: 1.17;
     color: #353535;
   }
+}
+
+.divider {
+  border: solid 0.5px #e5e5e5;
+  height: 2px;
+  margin-top: 0px;
 }
