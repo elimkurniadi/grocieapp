@@ -39,6 +39,9 @@
     text-overflow: ellipsis;
     vertical-align: super;
     color: #f8a345;
+    &.strikethrough {
+      text-decoration: line-through;
+    }
   }
   &-final-price {
     font-size: 14px;
