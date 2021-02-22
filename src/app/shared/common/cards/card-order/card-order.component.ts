@@ -29,7 +29,6 @@ export class CardOrderComponent implements OnInit {
   constructor(private modalCtrl: ModalController, private translate: TranslateService, private router: Router, private transactionSrv: TransactionService) {}
 
   ngOnInit() {
-    console.log("ISI DARI ORDER GUYS", this.order);
   }
 
   async presentConfirmModal(order: any) {

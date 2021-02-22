@@ -54,11 +54,9 @@ export class CheckoutPage implements OnInit {
   }
 
   observeQueryParam() {
-    console.log("OBSERVE KOK");
     this.route.queryParams.subscribe((param) => {
       this.getVoucher();
       if (param.address_id) {
-        console.log('param?.address_id: ', param?.address_id);
         // FETCH ADDRESS DETAIL HERE
         this.addressSrv.getAddress(param?.address_id).then(address => {
           this.defaultAddress = address;
@@ -100,7 +98,6 @@ export class CheckoutPage implements OnInit {
 
   fetchAddressList() {
     this.addressSrv.getAddress().then((res) => {
-      console.log('GET ADDRESS RESULT', res);
       this.defaultAddress = res[0];
     });
   }

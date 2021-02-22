@@ -32,7 +32,6 @@ export class MyOrderDetailComponent implements OnInit {
   observeParam() {
     this.activatedRoute.params.subscribe((param) => {
       const id = param?.id;
-      console.log("parameter", id);
       // this.productId = id;
       this.fetchTransactionDetail(id);
       this.fetchTransactionStatus(id);
@@ -59,14 +58,12 @@ export class MyOrderDetailComponent implements OnInit {
 
   fetchTransactionDetail(id) {
     this.transactionSrv.getTransactionDetail(id).then(data => {
-      console.log('BERHASIL HORE', data);
       this.order = data;
     })
   }
 
   fetchTransactionStatus(id) {
     this.transactionSrv.getTransactionStatus(id).then(data => {
-      console.log('BERHASIL HORE #2', data);
       this.transactionStatus = data;
     })
   }

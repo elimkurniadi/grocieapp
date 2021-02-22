@@ -42,14 +42,12 @@ export class MyOrderListComponent implements OnInit {
 
   getTransactionList() {
     this.transactionSrv.getTransaction().then(res => {
-      console.log("TESTING", res);
       this.orders = res.response.rows;
     })
   }
 
   getTransactionCompletedList() {
     this.transactionSrv.getTransactionHistory().then(res => {
-      console.log("TESTING", res);
       this.completedOrders = res.response.rows;
     })
   }

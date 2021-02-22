@@ -26,11 +26,7 @@ export class ItemListComponent implements OnInit {
       });
     }
   }
-
-  ionViewDidEnter() {
-    console.log('TESTING', this.cartData);
-  }
-
+  
   async calculateEachProductPrice() {
     const list = this.cartData;
     await list.forEach((element) => {
