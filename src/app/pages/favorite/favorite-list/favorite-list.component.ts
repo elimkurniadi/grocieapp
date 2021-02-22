@@ -67,10 +67,7 @@ export class FavoriteListComponent implements OnInit {
         {
           text: 'No',
           role: 'cancel',
-          cssClass: 'modal-confirm',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
+          cssClass: 'modal-confirm'
         }, {
           text: 'Yes',
           cssClass: 'modal-confirm',

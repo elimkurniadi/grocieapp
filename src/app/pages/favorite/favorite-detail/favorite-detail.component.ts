@@ -26,7 +26,7 @@ export class FavoriteDetailComponent implements OnInit {
     private alertCtrl: AlertController
   ) {
     this.route.params.subscribe((param) => {
-      if (param.id !== null) {
+      if (param.id) {
         this.id = param.id;
       }
     });
@@ -61,7 +61,7 @@ export class FavoriteDetailComponent implements OnInit {
         });
 
         this.productFavorites = productFavorites;
-      })
+    })
       .catch((err) => {
         const error = err.error.error;
         this.toastSrv.show(error.message);
@@ -75,11 +75,10 @@ export class FavoriteDetailComponent implements OnInit {
   }
 
   toggleSelectAll() {
-    const selected = true;
     this.productFavorites.forEach((product) => {
-      product.selected = selected;
+      product.selected = true;
     });
-    this.selectAll = selected;
+    this.selectAll = true;
     this.calculateSelectedItem();
   }
 
@@ -126,9 +125,6 @@ export class FavoriteDetailComponent implements OnInit {
           text: 'No',
           role: 'cancel',
           cssClass: 'modal-confirm',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
         }, {
           text: 'Yes',
           cssClass: 'modal-confirm',
