@@ -14,7 +14,6 @@ export class ArticleDetailComponent implements OnInit {
   constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {
-    console.log(this.article);
   }
 
   goBack() {

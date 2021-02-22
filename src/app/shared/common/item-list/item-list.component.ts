@@ -26,7 +26,7 @@ export class ItemListComponent implements OnInit {
       });
     }
   }
-
+  
   async calculateEachProductPrice() {
     const list = this.cartData;
     await list.forEach((element) => {
