@@ -1,4 +1,4 @@
-<ion-card class="ion-no-border" style="margin-left: 0px; margin-right: 0px">
+<ion-card class="ion-no-border" style="margin-left: 0px; margin-right: 0px" [ngClass]="{'disabled': product?.stock <= 0}">
   <ion-card-header class="ion-no-padding link" [routerLink]="['/product/detail', product?.product_id]">
     <img [src]="product?.image_url" class="product-img full-width" *ngIf="product?.image_url" />
     <img src="https://via.placeholder.com/200.png" class="product-img full-width" *ngIf="!product?.image_url" />
@@ -47,4 +47,7 @@
       </ion-col>
     </ion-row>
   </ion-card-content>
+  <div class="out-of-stock" *ngIf="product?.stock == 0">
+    Out of stock
+  </div>
 </ion-card>

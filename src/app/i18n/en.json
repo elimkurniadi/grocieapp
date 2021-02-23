@@ -226,5 +226,6 @@
   "HOW_TO_PAY": "How To Pay",
   "PAYMENT_PROOF_SENT": "Payment Proof Sent",
   "PAYMENT_PROOF_TITLE": "Please Wait",
-  "PAYMENT_PROOF_MESSAGE": "Please wait, your payment is being reviewed."
+  "PAYMENT_PROOF_MESSAGE": "Please wait, your payment is being reviewed.",
+  "ACTIVITY" : "Activity"
 }
