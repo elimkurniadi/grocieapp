@@ -24,6 +24,9 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+
 registerLocaleData(localeId, 'id');
 
 // Sentry.init({
@@ -70,6 +73,8 @@ export class SentryErrorHandler implements ErrorHandler {
     AndroidPermissions,
     Camera,
     File,
+    Geolocation,
+    NativeGeocoder,
   ],
   bootstrap: [AppComponent],
 })
