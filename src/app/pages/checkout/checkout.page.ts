@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Cart, Response, Voucher } from '@shared/models';
+import { Cart, PaymentSummary, Response, Voucher } from '@shared/models';
 import { CacheService, ToastService } from '@shared/services';
-import { AddressService, CartService, VoucherService } from '@shared/services/modules';
+import { AddressService, CartService, CheckoutService, VoucherService } from '@shared/services/modules';
 import * as moment from 'moment';
 
 @Component({
@@ -14,23 +14,29 @@ export class CheckoutPage implements OnInit {
   defaultAddress;
   cartList: Cart[];
   totalPrice = 0;
-  currDate = moment(new Date()).format('YYYY-MM-DD');
+  paymentSummary: PaymentSummary;
+  currDate: any = moment(new Date());
+  maxCurrDate: any = moment(new Date()).set({ hour: 18, minute: 0 });
   selectedDate = null;
+  canDeliverNow: boolean;
+  deliveryNow: boolean;
+  notes: string;
+
   timeList = [
     {
       time: '10:00 - 12:00',
       selected: false,
     },
     {
-      time: '10:00 - 12:00',
+      time: '12:00 - 14:00',
       selected: false,
     },
     {
-      time: '10:00 - 12:00',
+      time: '14:00 - 16:00',
       selected: false,
     },
     {
-      time: '10:00 - 12:00',
+      time: '16:00 - 18:00',
       selected: false,
     },
   ];
@@ -44,13 +50,23 @@ export class CheckoutPage implements OnInit {
     private cache: CacheService,
     private route: ActivatedRoute,
     private addressSrv: AddressService,
+    private checkoutSrv: CheckoutService,
     private router: Router
   ) {
     this.observeQueryParam();
   }
 
   ngOnInit() {
+    this.canDeliverNow = true;
+    this.deliveryNow = true;
+
     this.fetchCartList();
+    if (this.currDate > this.maxCurrDate) {
+      // this.canDeliverNow = false;
+      this.deliveryNow = false;
+      const currDate = this.currDate.add(1, 'days').format('YYYY-MM-DD');
+      this.currDate = currDate;
+    }
   }
 
   observeQueryParam() {
@@ -58,17 +74,16 @@ export class CheckoutPage implements OnInit {
       this.getVoucher();
       if (param.address_id) {
         // FETCH ADDRESS DETAIL HERE
-        this.addressSrv.getAddress(param?.address_id).then(address => {
+        this.addressSrv.getAddress(param?.address_id).then((address) => {
           this.defaultAddress = address;
-        })
-      }else {
+        });
+      } else {
         this.fetchAddressList();
       }
     });
   }
 
-  ionViewDidEnter() {
-  }
+  ionViewDidEnter() {}
 
   onDateSelect(value) {
     this.selectedDate = moment(value).format('YYYY-MM-DD');
@@ -92,7 +107,6 @@ export class CheckoutPage implements OnInit {
         Object.assign(element, { local_subtotal_price: localSubTotalPrice });
       });
       this.cartList = res;
-      this.initTotalPrice();
     });
   }
 
@@ -102,16 +116,22 @@ export class CheckoutPage implements OnInit {
     });
   }
 
-  initTotalPrice() {
-    this.cartSrv.calculateSumPrice(this.cartList).then((res) => {
-      this.totalPrice = res;
+  getPriceSummary() {
+    const filter = {};
+    if (this.voucher && (this.voucher?.voucher_code !== '' || this.voucher?.voucher_code !== null)) {
+      filter['voucher_code'] = this.voucher.voucher_code;
+    }
+
+    this.checkoutSrv.calculatePrice(filter).then((res: Response) => {
+      const result = res.response as PaymentSummary;
+      this.paymentSummary = result;
     });
   }
 
   getVoucher() {
-    this.cache.getVoucher().then((voucherId) => {
+    this.cache.getVoucher().then(async (voucherId) => {
       if (voucherId !== null && voucherId !== '') {
-        this.voucherSrv
+        await this.voucherSrv
           .getDetail(voucherId)
           .then((res: Response) => {
             const voucher = res.response as Voucher;
@@ -123,10 +143,26 @@ export class CheckoutPage implements OnInit {
             this.toastSrv.show(error.message);
           });
       }
+
+      this.getPriceSummary();
     });
   }
 
+  removeVoucher() {
+    this.cache.removeVoucher();
+  }
+
+  radioChanged(value: any) {
+    this.deliveryNow = value === 'deliver_now';
+  }
   pay() {
-    this.router.navigate(['/payment']);
+    const queryParams = { address_id: this.defaultAddress.address_id, is_now: this.deliveryNow, notes: this.notes };
+    if (this.voucher && this.voucher.quota > 0) {
+      queryParams['voucher_code'] = this.voucher.voucher_code;
+    }
+
+    this.router.navigate(['/payment'], {
+      queryParams,
+    });
   }
 }

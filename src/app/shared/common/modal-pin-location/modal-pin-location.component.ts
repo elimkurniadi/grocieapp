@@ -42,8 +42,8 @@ export class ModalPinLocationComponent implements OnInit {
 
   async initMap() {
     await this.geolocation.getCurrentPosition().then((res) => {
-      const latitude = this.latitude !== '' || this.latitude !== null ? this.latitude : res.coords.latitude;
-      const longitude = this.longitude !== '' || this.longitude !== null ? this.longitude : res.coords.longitude;
+      const latitude = this.latitude !== '' && this.latitude !== null ? this.latitude : res.coords.latitude;
+      const longitude = this.longitude !== '' && this.longitude !== null ? this.longitude : res.coords.longitude;
 
       const longLat = new google.maps.LatLng(latitude, longitude);
       const mapOptions = {

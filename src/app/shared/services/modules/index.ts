@@ -11,3 +11,4 @@ export * from './setting.service';
 export * from './product.service';
 export * from './voucher.service';
 export * from './transaction.service';
+export * from './checkout.service';
