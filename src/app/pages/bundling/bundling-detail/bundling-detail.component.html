@@ -47,20 +47,17 @@
   </ion-infinite-scroll>
 </ion-content>
 
-<ion-footer>
-  <ion-row class="padding-footer">
-    <ion-col size="5.5" class="ion-text-center">
+<ion-footer style="padding: 6px">
+  <ion-row class="ion-align-items-center">
+    <ion-col size="6" class="ion-text-center" style="border-right: 1px solid #99cc33">
       <ion-text color="success" (click)="showSort()">
         <ion-icon name="funnel"></ion-icon>
         {{ 'SORT' | translate }}
       </ion-text>
     </ion-col>
-    <ion-col size="1" class="ion-text-center">
-      <ion-text color="success" class="divider"> </ion-text>
-    </ion-col>
-    <ion-col size="5.5" class="ion-text-center">
+    <ion-col size="6" class="ion-text-center" style="border-left: 1px solid #99cc33">
       <ion-text color="success" (click)="showFilter()">
-        <ion-icon name="funnel"></ion-icon>
+        <ion-icon name="filter"></ion-icon>
         {{ 'FILTER' | translate }}
       </ion-text>
     </ion-col>

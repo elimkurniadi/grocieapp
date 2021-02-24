@@ -1,4 +1,5 @@
-<ion-card class="ion-no-border" style="margin-left: 0px; margin-right: 0px" [ngClass]="{'disabled': product?.stock <= 0}">
+<ion-card class="ion-no-border" style="margin-left: 0px; margin-right: 0px"
+  [ngClass]="{'disabled': product?.stock <= 0}">
   <ion-card-header class="ion-no-padding link" [routerLink]="['/product/detail', product?.product_id]">
     <img [src]="product?.image_url" class="product-img full-width" *ngIf="product?.image_url" />
     <img src="https://via.placeholder.com/200.png" class="product-img full-width" *ngIf="!product?.image_url" />
@@ -12,10 +13,7 @@
     </ion-row> -->
     <ion-row>
       <ion-col class="height-ellipsis">
-        <ion-text class="product-name">{{ product?.name | titlecase }} </ion-text><br/>
-        <ion-text class="product-brand truncate">
-          {{ product?.brand?.name || '&nbsp;' }}
-        </ion-text>
+        <ion-text class="product-name">{{ product?.name | titlecase }} </ion-text>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -23,21 +21,17 @@
         <p class="product-size">Size: {{ product?.weight }} {{ product?.unit?.name }}</p>
       </ion-col>
       <ion-col size="2" class="ion-text-right">
-        <ion-icon
-          src="assets/images/add-favorite.svg"
-          color="primary"
-          (click)="addToFavorite(product?.product_id)"
-        ></ion-icon>
+        <ion-icon src="assets/images/add-favorite.svg" color="primary" (click)="addToFavorite(product?.product_id)">
+        </ion-icon>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col [style.visibility]="product?.secondary_price ? 'unset' : 'hidden'">
-        <ion-badge style="font-size: 10px; --color: white; background-color: #f8a345"
-          >{{
+        <ion-badge style="font-size: 10px; --color: white; background-color: #f8a345">{{
             ((product?.secondary_price - product?.primary_price) / product?.secondary_price) * 100 | number: '1.0-0'
           }}
-          %</ion-badge
-        >
+          %
+        </ion-badge>
         <span class="product-price price-linethrough"> Rp {{ product?.secondary_price | number: '1.0-0' }} </span>
       </ion-col>
     </ion-row>

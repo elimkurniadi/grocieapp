@@ -8,7 +8,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="pullToRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-grid class="ion-margin-top ion-no-padding h-100" *ngIf="cartList?.length > 0">
+  <ion-grid class="ion-no-padding h-100" *ngIf="cartList?.length > 0">
     <ion-row class="ion-padding-horizontal ion-justify-content-between">
       <ion-col size="12">
         <app-item-list
@@ -60,13 +60,13 @@
 
 <ion-footer class="ion-padding-horizontal" *ngIf="cartList?.length > 0" >
   <ion-toolbar mode="md">
-    <ion-grid>
-      <ion-row class="ion-justify-content-center">
-        <ion-col size="6">
+    <ion-grid class="ion-no-padding">
+      <ion-row class="ion-justify-content-center ion-no-padding">
+        <ion-col size="6" class="ion-no-padding">
           <span>{{'TOTAL_PRICE' | translate}}</span> <br />
           <span><b>Rp. {{totalPrice | number}}</b></span>
         </ion-col>
-        <ion-col size="6" class="ion-text-right" [routerLink]="['/checkout']">
+        <ion-col size="6" class="ion-text-right ion-no-padding" [routerLink]="['/checkout']">
           <ion-button color="limegreen" size="small"> {{'CHECKOUT' | translate}} </ion-button>
         </ion-col>
       </ion-row>

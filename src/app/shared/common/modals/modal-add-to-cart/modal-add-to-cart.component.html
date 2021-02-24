@@ -1,0 +1,21 @@
+<ion-row>
+  <ion-col class="ion-text-right">
+    <ion-button size="small" fill="clear" color="medium" (click)="dismiss('exit')">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>
+  </ion-col>
+</ion-row>
+<ion-row class="ion-text-center">
+  <ion-col>
+    <ion-text>
+      Item has been added to cart
+    </ion-text>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <ion-button shape="round" color="success" expand="full" (click)="dismiss('cart')">
+      <b>{{ 'CHECK_CART' | translate }}</b>
+    </ion-button>
+  </ion-col>
+</ion-row>

@@ -17,9 +17,9 @@ export class CartService {
     return sum;
   }
 
-  addToCart(productId): Promise<any> {
+  addToCart(productId, qty = 0): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.postData('cart', { product_id: productId });
+      const subscription = this.api.postData('cart', { product_id: productId, quantity : qty });
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res) => {
