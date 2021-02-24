@@ -56,3 +56,21 @@
 .price-linethrough {
   text-decoration: line-through;
 }
+
+.disabled {
+  filter: grayscale(0.8);
+  opacity: 0.8;
+
+  &>.out-of-stock {
+    position: absolute;
+    font-weight: 600;
+    top: 0;
+    border-radius: 15px;
+    background-color: #b4b4b4;
+    padding: 3px 6px;
+    color: white;
+    left: 0;
+    right: 0;
+    top: 30px;
+  }
+}

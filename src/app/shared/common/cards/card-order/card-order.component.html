@@ -68,7 +68,7 @@
           class="btn-action"
           fill="outline"
           (click)="presentConfirmModal(order)"
-          *ngIf="order?.transaction_status?.name === 'on process'"
+          *ngIf="order?.transaction_status?.transaction_status_id === 3"
         >
           {{ 'ORDER_ARRIVED' | translate }}
         </ion-button>

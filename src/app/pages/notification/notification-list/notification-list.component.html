@@ -3,35 +3,79 @@
     <ion-buttons slot="start" mode="md" class="title">
       <ion-back-button icon="chevron-back" defaultHref="/tabs/home"></ion-back-button>
     </ion-buttons>
-    <ion-title> {{ 'NOTIFICATION' | translate }} </ion-title>
+    <ion-title> {{ 'ACTIVITY' | translate }} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row
-      *ngFor="let item of [1, 2, 3, 4, 5]"
-      class="ion-padding-bottom link"
-      [routerLink]="['/notification', item, 'detail']"
-    >
-      <ion-col size="2" class="ion-align-self-center">
-        <ion-thumbnail class="thumb-notif">
-          <img src="assets/images/notif-logo.svg" />
-        </ion-thumbnail>
-      </ion-col>
-      <ion-col size="10">
-        <ion-row>
-          <ion-col size="12" class="ion-no-padding">
-            <ion-text class="notif-title"> Grocery shopping save IDR 120k off!</ion-text>
-          </ion-col>
-          <ion-col size="12" class="ion-no-padding truncate">
-            <ion-text class="notif-desc"> Everything 20% off! Save up to 120k by shopping with us </ion-text>
-          </ion-col>
-          <ion-col size="12" class="ion-no-padding">
-            <ion-text class="notif-time"> {{ currentDate | date: 'medium' }}</ion-text>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-segment color="primary" (ionChange)="segmentChanged($event)" [value]="segmentValue">
+    <ion-segment-button value="inbox">
+      <ion-label>{{ 'INBOX' | translate }}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="notification">
+      <ion-label>{{ 'NOTIFICATION' | translate }}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-slides class="slide-order" #slider (ionSlideWillChange)="slideChanged()">
+    <ion-slide>
+      <ion-content>
+        <ion-grid>
+          <ion-row
+            *ngFor="let item of [1, 2, 3, 4, 5]"
+            class="ion-padding-bottom link ion-text-left"
+            [routerLink]="['/notification', item, 'detail']"
+          >
+            <ion-col size="2" class="ion-align-self-center">
+              <ion-thumbnail class="thumb-notif">
+                <img src="assets/images/inbox-logo.svg" />
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="10">
+              <ion-row>
+                <ion-col size="12" class="ion-no-padding">
+                  <ion-text class="notif-title"> Grocery shopping save IDR 120k off!</ion-text>
+                </ion-col>
+                <ion-col size="12" class="ion-no-padding truncate">
+                  <ion-text class="notif-desc"> Everything 20% off! Save up to 120k by shopping with us </ion-text>
+                </ion-col>
+                <ion-col size="12" class="ion-no-padding">
+                  <ion-text class="notif-time"> {{ currentDate | date: 'medium' }}</ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+    </ion-slide>
+    <ion-slide>
+      <ion-content>
+        <ion-grid>
+          <ion-row
+            *ngFor="let item of [1, 2, 3, 4, 5]"
+            class="ion-padding-bottom link ion-text-left"
+            [routerLink]="['/notification', item, 'detail']"
+          >
+            <ion-col size="2" class="ion-align-self-center">
+              <ion-thumbnail class="thumb-notif">
+                <img src="assets/images/notif-logo.svg" />
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="10">
+              <ion-row>
+                <ion-col size="12" class="ion-no-padding">
+                  <ion-text class="notif-title"> Grocery shopping save IDR 120k off!</ion-text>
+                </ion-col>
+                <ion-col size="12" class="ion-no-padding truncate">
+                  <ion-text class="notif-desc"> Everything 20% off! Save up to 120k by shopping with us </ion-text>
+                </ion-col>
+                <ion-col size="12" class="ion-no-padding">
+                  <ion-text class="notif-time"> {{ currentDate | date: 'medium' }}</ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
