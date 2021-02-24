@@ -1,19 +1,28 @@
-<ion-header class="ion-no-border" [translucent]="true">
-  <ion-toolbar mode="ios">
-    <ion-button (click)="dismiss()" slot="end" fill="clear">
-      <ion-icon slot="icon-only" name="close-outline" color="dark"></ion-icon>
-    </ion-button>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-grid class="h-100">
-    <ion-row>
-      <ion-col size="12">MAP </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
+  <ion-icon name="chevron-back-outline" (click)="dismiss()" class="back-button"></ion-icon>
 
+  <div class="map-wrapper">
+    <div #map id="map"></div>
+  </div>
+
+  <ion-card class="address-info">
+    <ion-card-content>
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col size="2">
+          <ion-icon name="location-outline" color="primary"></ion-icon>
+        </ion-col>
+        <ion-col size="10">
+          <span>{{ geoAddressData?.formatted_address }}~</span>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button (click)="pinLocation()" expand="block" shape="round" color="success" class="btn-pin">
+    {{ 'PIN_LOCATION' | translate }}
+  </ion-button>
+</ion-content>
+<!--
 <ion-footer class="ion-no-border ion-padding-horizontal">
   <ion-toolbar mode="ios">
     <ion-row>
@@ -39,4 +48,4 @@
       </ion-col>
     </ion-row>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

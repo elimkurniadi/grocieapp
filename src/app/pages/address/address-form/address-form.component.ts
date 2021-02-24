@@ -68,14 +68,8 @@ export class AddressFormComponent implements OnInit {
           RxwebValidators.maxLength({ value: 15, message: `${this.translateSrv.get('VALIDATOR_MAX')} 15` }),
         ],
       ],
-      latitude: [
-        data?.latitude ? data?.latitude : '-6.598574',
-        [RxwebValidators.required(), RxwebValidators.latitude()],
-      ],
-      longitude: [
-        data?.longitude ? data?.longitude : '106.807496',
-        [RxwebValidators.required(), RxwebValidators.longitude()],
-      ],
+      latitude: [data?.latitude, [RxwebValidators.required(), RxwebValidators.latitude()]],
+      longitude: [data?.longitude, [RxwebValidators.required(), RxwebValidators.longitude()]],
       address: [data?.address ? data?.address : '-', [RxwebValidators.required()]],
       address_detail: [
         data?.address_detail ? data?.address_detail : null,
@@ -208,10 +202,21 @@ export class AddressFormComponent implements OnInit {
   async presentModalPinLocation() {
     const modal = await this.modalCtrl.create({
       component: ModalPinLocationComponent,
+      componentProps: {
+        longitude: this.fg.value.longitude,
+        latitude: this.fg.value.latitude,
+      },
     });
 
-    modal.onWillDismiss().then(() => {
-      // CHANGE THE LONG LAT FORM VALUE
+    modal.onWillDismiss().then((res) => {
+      const data = res.data;
+      if (data) {
+        const controls = this.fg.controls;
+        controls.longitude.setValue(data.longitude);
+        controls.latitude.setValue(data.latitude);
+        controls.longitude.markAsDirty();
+        controls.latitude.markAsDirty();
+      }
     });
 
     return await modal.present();

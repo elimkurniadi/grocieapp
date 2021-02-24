@@ -449,3 +449,8 @@ ion-searchbar {
   width: 35px;
   height: 35px;
 }
+
+ion-toolbar.transparent {
+  --background: transparent;
+  --ion-color-base: transparent !important;
+}
