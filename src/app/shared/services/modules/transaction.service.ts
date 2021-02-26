@@ -83,4 +83,19 @@ export class TransactionService {
       );
     });
   }
+
+  getPaymentMethod(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData(`transaction/payment_method`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }

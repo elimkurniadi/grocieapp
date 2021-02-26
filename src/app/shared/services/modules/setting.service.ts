@@ -37,4 +37,19 @@ export class SettingService {
       );
     });
   }
+
+  getDeliveryTime(filter?: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData('setting/delivery_time', null, null, filter);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }

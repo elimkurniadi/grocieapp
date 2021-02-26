@@ -50,7 +50,11 @@
       </ion-col>
       <ion-col size="12" class="ion-no-padding">
         <ion-item lines="none" class="form-group">
-          <ion-textarea rows="3" placeholder="{{'LOCATION_DETAIL_PLACEHOLDER' | translate}}"></ion-textarea>
+          <ion-textarea
+            rows="3"
+            placeholder="{{'LOCATION_DETAIL_PLACEHOLDER' | translate}}"
+            [(ngModel)]="notes"
+          ></ion-textarea>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -62,13 +66,28 @@
       <ion-col size="12">
         <fieldset class="radio-wrapper">
           <div>
-            <input class="radio-input" type="radio" name="delivery_time" [value]="false" />
+            <input
+              class="radio-input"
+              type="radio"
+              name="delivery_time"
+              [value]="false"
+              [disabled]="!canDeliverNow"
+              (change)="radioChanged('deliver_now')"
+              [checked]="canDeliverNow"
+            />
             <label class="radio-label">{{'DELIVER_NOW' | translate}}</label>
           </div>
           <div>
             <ion-row class="ion-align-items-center">
               <ion-col size="6" class="ion-no-padding">
-                <input class="radio-input" type="radio" name="delivery_time" [value]="true" />
+                <input
+                  class="radio-input"
+                  type="radio"
+                  name="delivery_time"
+                  [value]="true"
+                  (change)="radioChanged('deliver_later')"
+                  [checked]="!canDeliverNow"
+                />
                 <label class="radio-label">{{'SCHEDULE_FOR_LATER' | translate}}</label>
               </ion-col>
               <ion-col size="6" class="ion-text-right">
@@ -87,6 +106,7 @@
                   displayFormat="D MMMM YYYY"
                   pickerFormat="D MMMM YYYY"
                   [min]="currDate"
+                  [ngModel]="selectedDate"
                   (ionChange)="onDateSelect($event.detail.value)"
                 ></ion-datetime>
               </ion-col>
@@ -97,12 +117,12 @@
 
       <ion-col size="3" *ngFor="let time of timeList;let i = index">
         <ion-chip
-          [color]="time.selected ? 'primary': 'secondary'"
+          [color]="time.selected ? 'success': 'light'"
           [outline]="!time?.selected"
-          [disabled]="!selectedDate"
+          [disabled]="(!selectedDate || !time?.active) || deliveryNow"
           (click)="onTimeSelect(i)"
         >
-          <span>{{time?.time}}</span>
+          <span>{{time?.text}}</span>
         </ion-chip>
       </ion-col>
     </ion-row>
@@ -115,6 +135,41 @@
       </ion-col>
       <ion-col size="12">
         <app-item-list [showSubstract]="false" [cartData]="cartList"></app-item-list>
+      </ion-col>
+    </ion-row>
+    <div class="divider"></div>
+
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="12">
+        <span>
+          <b> {{'PAYMENT_SUMMARY' | translate}} </b>
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="6">
+        <span class="text-payment-info">{{'SUBTOTAL' | translate}}</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right text-payment-price">
+        Rp. {{ paymentSummary?.raw_price | number: '1.0-0':'id' }}
+      </ion-col>
+      <ion-col size="6">
+        <span class="text-payment-info">{{'SERVICE_FEE' |translate}}</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right text-payment-price">
+        Rp. {{ paymentSummary?.service_fee | number: '1.0-0':'id' }}
+      </ion-col>
+      <ion-col size="6">
+        <span class="text-payment-info">{{'DELIVERY_FEE' |translate}}</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right text-payment-price">
+        Rp. {{ paymentSummary?.delivery_fee | number: '1.0-0':'id' }}
+      </ion-col>
+      <ion-col size="6">
+        <span class="text-payment-info">{{'DISCOUNT' |translate}}</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right text-payment-price" *ngIf="paymentSummary?.discount > 0">
+        Rp. {{ paymentSummary?.discount | number: '1.0-0':'id' }}
       </ion-col>
     </ion-row>
 
@@ -130,38 +185,28 @@
         <span class="text-payment-info">{{'SELECT_VOUCHER' |translate}}</span>
       </ion-col>
       <ion-col size="6" class="ion-text-right">
-        <div [routerLink]="['/voucher']" class="link">
+        <ion-icon name="checkmark-outline" *ngIf="voucher && voucher?.quota > 0"></ion-icon>
+        <ion-icon name="alert-outline" *ngIf=" voucher && voucher?.quota <= 0"></ion-icon>
+
+        <span [routerLink]="['/voucher']" class="link">
           <small *ngIf="!voucher || !voucher?.voucher_code"> {{'USE_VOUCHER' | translate}} </small>
-          <span class="used-voucher" *ngIf="voucher?.voucher_code"> {{ voucher?.voucher_code | uppercase }}</span>
-        </div>
+          <span class="used-voucher" *ngIf="voucher?.voucher_code"> {{ voucher?.voucher_code | uppercase }} </span>
+        </span>
+
+        <ion-icon name="close-outline" *ngIf="voucher && voucher?.voucher_code" (click)="removeVoucher()"></ion-icon>
       </ion-col>
     </ion-row>
 
     <div class="divider"></div>
 
     <ion-row class="ion-padding-horizontal">
-      <ion-col size="12">
-        <span>
-          <b> {{'PAYMENT_SUMMARY' | translate}} </b>
-        </span>
+      <ion-col size="6">
+        <span class="text-payment-info">{{'TOTAL_PAYMENT' |translate}}</span>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right text-payment-price">
+        Rp. {{ paymentSummary?.final_price | number: '1.0-0':'id' }}
       </ion-col>
     </ion-row>
-    <ion-row class="ion-padding-horizontal">
-      <ion-col size="6">
-        <span class="text-payment-info">{{'SUBTOTAL' | translate}}</span>
-      </ion-col>
-      <ion-col size="6" class="ion-text-right text-payment-price"> Rp. 50,000 </ion-col>
-      <ion-col size="6">
-        <span class="text-payment-info">{{'SERVICE_FEE' |translate}}</span>
-      </ion-col>
-      <ion-col size="6" class="ion-text-right text-payment-price"> Rp. 50,000 </ion-col>
-      <ion-col size="6">
-        <span class="text-payment-info">{{'DELIVERY_FEE' |translate}}</span>
-      </ion-col>
-      <ion-col size="6" class="ion-text-right text-payment-price"> Rp. 50,000 </ion-col>
-    </ion-row>
-
-
   </ion-grid>
 </ion-content>
 
