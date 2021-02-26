@@ -20,10 +20,13 @@
 
 <ion-content>
   <ion-grid class="ion-margin-top ion-no-padding h-100">
-    <ion-row>
+    <ion-row [ngClass]="{'disabled' : productData?.stock == 0}">
       <ion-col size="12" class="ion-no-padding ion-text-center">
         <img class="img-product" [src]="productData?.image_url" />
       </ion-col>
+      <div class="out-of-stock" *ngIf="productData?.stock == 0">
+        Out of stock
+      </div>
     </ion-row>
     <ion-row class="ion-justify-content-between ion-padding-horizontal">
       <ion-col size="12">
@@ -105,7 +108,36 @@
 </ion-content>
 
 <ion-footer>
-  <ion-button class="ion-no-margin" color="success" expand="full" (click)="addItemToCart()">
-    {{ 'ADD_TO_CART' | translate }}
-  </ion-button>
+  <ion-row class="ion-align-items-center">
+    <ion-col size="4" class="ion-text-center">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="4">
+          <ion-icon name="remove-outline" size="small" color="limegreen"
+            (click)="updateLocalQuantity(false)" [ngClass]="{'disabled' : qty < 1}"></ion-icon>
+        </ion-col>
+        <ion-col size="4" style="border: solid 2px #e2e2e2">{{ qty }}</ion-col>
+        <ion-col size="4">
+          <ion-icon name="add-outline" size="small"
+            (click)="updateLocalQuantity(true)"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="8">
+      <ion-button shape="round" color="success" expand="full" (click)="addItemToCart()" [ngClass]="{'disabled' : qty < 1 || productData?.stock == 0}">
+        {{ 'ADD_TO_CART' | translate }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-footer>
+
+
+<!-- <ion-row>
+  <ion-col>
+    <ion-text>
+      Item has been added to cart
+    </ion-text>
+    <ion-button shape="round" color="success" expand="full">
+      {{ 'CHECK_CART' | translate }}
+    </ion-button>
+  </ion-col>
+</ion-row> -->

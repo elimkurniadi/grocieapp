@@ -213,10 +213,13 @@
   "PAY": "Bayar",
   "COD_MESSAGE": "Harap isi jumlah persis uang tunai yang akan Anda berikan",
   "SELECT_ALL": "Pilih Semua",
+  "IN_PROCESS": "Pesanan dalam Proses",
   "HOW_TO_PAY": "Cara Bayar",
   "PAYMENT_PROOF_SENT": "Bukti Pembayaran Dikirim",
   "PAYMENT_PROOF_TITLE": "Mohon tunggu",
   "PAYMENT_PROOF_MESSAGE": "Harap tunggu, pembayaran Anda sedang ditinjau.",
   "SELECT_TIME_FIRST": "Pilih waktu dulu",
-  "VOUCHER_LIMIT": "Voucher tidak dapat digunakan. Silakan baca syarat dan ketentuan atau coba kode voucher lain"
+  "VOUCHER_LIMIT": "Voucher tidak dapat digunakan. Silakan baca syarat dan ketentuan atau coba kode voucher lain",
+  "ACTIVITY": "Aktifitas",
+  "CHECK_CART": "Periksa Keranjang"
 }

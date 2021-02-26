@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
+import { ModalAddToCartComponent } from '@shared/common/modals/modal-add-to-cart/modal-add-to-cart.component';
 import { ModalAddToFavoriteComponent } from '@shared/common/modals/modal-add-to-favorite/modal-add-to-favorite.component';
 import { Page, Product, ResponsePagination } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
@@ -17,6 +18,7 @@ export class ProductDetailComponent implements OnInit {
   productData: any = null;
   productId: number = null;
   page: Page;
+  qty = 0;
 
   products: Product[];
 
@@ -27,7 +29,8 @@ export class ProductDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private cartSrv: CartService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private router: Router
   ) {
     this.observeParam();
 
@@ -37,7 +40,9 @@ export class ProductDetailComponent implements OnInit {
     };
   }
 
-  ngOnInit() {}
+  ngOnInit() { 
+
+  }
 
   scanQR() {
     // Scan barcode and QR function should be inserted here.
@@ -54,8 +59,12 @@ export class ProductDetailComponent implements OnInit {
 
   fetchProductDetail(id) {
     this.productSrv.getProductDetail(id).then((res) => {
+      console.log('RES', res);
       this.productData = res;
       this.getRelatedProduct();
+
+      if(this.productData?.stock > 0)
+        this.qty = 1;
     });
   }
 
@@ -64,9 +73,34 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addItemToCart() {
-    this.cartSrv.addToCart(this.productId).then((res) => {
-      this.toastSrv.show(`${this.translateSrv.get('SUCCESS_ADD_TO_CART')}`);
+    if (this.qty > 0) {
+      this.cartSrv.addToCart(this.productId, this.qty).then((res) => {
+        // this.toastSrv.show(`${this.translateSrv.get('SUCCESS_ADD_TO_CART')}`);
+
+        // Ini untuk recheck qty
+        // this.fetchProductDetail(this.productId);
+
+        this.presentModal();
+      });
+    } else {
+
+    }
+  }
+
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: ModalAddToCartComponent,
+      cssClass: 'my-custom-class'
     });
+
+    modal.onDidDismiss().then((data) => {
+      console.log(data);
+      if(data?.data === 'cart') {
+        this.navCtrl.navigateRoot('/tabs/cart');
+      }
+    })
+
+    return await modal.present();
   }
 
   getRelatedProduct() {
@@ -80,6 +114,17 @@ export class ProductDetailComponent implements OnInit {
         const error = err.error.error;
         this.toastSrv.show(error.message);
       });
+  }
+
+  updateLocalQuantity(increment) {
+    if (increment) {
+      if (this.qty < this.productData?.stock)
+        this.qty += 1;
+    } else {
+      if (this.qty > 0) {
+        this.qty -= 1;
+      }
+    }
   }
 
   async addToFavorite() {

@@ -85,10 +85,11 @@
   "RECENT_SEARCHES": "Recent Searches",
   "CLEAR_RECENT": "Clear Recent",
   "FILTER": "Filter",
-  "SORT": "Sort",
+  "SORT": "Sort by",
   "INBOX": "Inbox",
   "RELATED_ITEMS": "Related Items",
   "RELATED_BRAND": "Related Brand",
+  "PRICE_RANGE": "Price Range",
   "MY_PROFILE": "My Profile",
   "VIEW_QR": "View QR",
   "EDIT_PROFILE": "Edit Profile",
@@ -228,5 +229,7 @@
   "PAYMENT_PROOF_TITLE": "Please Wait",
   "PAYMENT_PROOF_MESSAGE": "Please wait, your payment is being reviewed.",
   "SELECT_TIME_FIRST": "Choose the time first",
-  "VOUCHER_LIMIT": "The voucher cannot be used. Please read the terms and conditions or try another voucher code"
+  "VOUCHER_LIMIT": "The voucher cannot be used. Please read the terms and conditions or try another voucher code",
+  "ACTIVITY": "Activity",
+  "CHECK_CART": "Check Cart"
 }

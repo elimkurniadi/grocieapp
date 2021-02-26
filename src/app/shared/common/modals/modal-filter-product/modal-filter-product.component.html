@@ -20,21 +20,23 @@
     <ion-row class="ion-no-padding">
       <ion-col class="ion-no-padding">
         <ion-text class="filter-label">
-          {{ 'PRICE' | translate }}
+          <b>{{ 'PRICE_RANGE' | translate }}</b><br/>
+          <span>Type in your preferred price range</span>
         </ion-text>
       </ion-col>
     </ion-row>
     <ion-row class="ion-no-padding">
-      <ion-col size="6" class="ion-no-padding">
-        <ion-item>
-          <ion-input placeholder="{{ 'LOWEST' | translate }}" type="number"></ion-input>
+      <ion-col size="5.5" class="ion-no-padding">
+        <ion-item style="--padding-start:0px">
+          <ion-input placeholder="{{ 'LOWEST' | translate }}" type="number" style="--padding-bottom:0px"></ion-input>
         </ion-item>
       </ion-col>
-    </ion-row>
-    <ion-row class="ion-no-padding">
-      <ion-col size="6" class="ion-no-padding">
-        <ion-item>
-          <ion-input placeholder="{{ 'HIGHEST' | translate }}" type="number"></ion-input>
+      <ion-col size="1">
+
+      </ion-col>
+      <ion-col size="5.5" class="ion-no-padding">
+        <ion-item style="--padding-start:0px">
+          <ion-input placeholder="{{ 'HIGHEST' | translate }}" type="number" style="--padding-bottom:0px"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>

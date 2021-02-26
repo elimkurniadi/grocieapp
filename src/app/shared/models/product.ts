@@ -6,6 +6,7 @@ export interface Product {
     brand_id : string,
     name: string
   },
+  stock?: number;
   name?: string;
   description?: string;
   weight?: string;

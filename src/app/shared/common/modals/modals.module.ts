@@ -11,11 +11,13 @@ import { ModalSortProductComponent } from './modal-sort-product/modal-sort-produ
 import { ModalSettingComponent } from './modal-setting/modal-setting.component';
 import { ModalShareAppComponent } from './modal-share-app/modal-share-app.component';
 import { ModalConfirmationComponent } from './modal-confirmation/modal-confirmation.component';
+import { ModalAddToCartComponent } from './modal-add-to-cart/modal-add-to-cart.component';
 
 @NgModule({
   declarations: [
     ModalInfoComponent,
     ModalAddToFavoriteComponent,
+    ModalAddToCartComponent,
     ModalLocationComponent,
     ModalFilterProductComponent,
     ModalSortProductComponent,
@@ -27,6 +29,7 @@ import { ModalConfirmationComponent } from './modal-confirmation/modal-confirmat
   exports: [
     ModalInfoComponent,
     ModalAddToFavoriteComponent,
+    ModalAddToCartComponent,
     ModalLocationComponent,
     ModalFilterProductComponent,
     ModalSortProductComponent,

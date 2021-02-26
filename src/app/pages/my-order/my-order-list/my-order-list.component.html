@@ -32,7 +32,7 @@
         <ion-grid>
           <ion-row *ngFor="let order of completedOrders">
             <ion-col>
-              <app-card-order></app-card-order>
+              <app-card-order [order]="order"></app-card-order>
             </ion-col>
           </ion-row>
         </ion-grid>
