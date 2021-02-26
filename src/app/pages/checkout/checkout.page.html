@@ -106,6 +106,7 @@
                   displayFormat="D MMMM YYYY"
                   pickerFormat="D MMMM YYYY"
                   [min]="currDate"
+                  [ngModel]="selectedDate"
                   (ionChange)="onDateSelect($event.detail.value)"
                 ></ion-datetime>
               </ion-col>
@@ -116,12 +117,12 @@
 
       <ion-col size="3" *ngFor="let time of timeList;let i = index">
         <ion-chip
-          [color]="time.selected ? 'success': 'secondary'"
+          [color]="time.selected ? 'success': 'light'"
           [outline]="!time?.selected"
-          [disabled]="!selectedDate"
+          [disabled]="(!selectedDate || !time?.active) || deliveryNow"
           (click)="onTimeSelect(i)"
         >
-          <span>{{time?.time}}</span>
+          <span>{{time?.text}}</span>
         </ion-chip>
       </ion-col>
     </ion-row>

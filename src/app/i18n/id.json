@@ -216,5 +216,7 @@
   "HOW_TO_PAY": "Cara Bayar",
   "PAYMENT_PROOF_SENT": "Bukti Pembayaran Dikirim",
   "PAYMENT_PROOF_TITLE": "Mohon tunggu",
-  "PAYMENT_PROOF_MESSAGE": "Harap tunggu, pembayaran Anda sedang ditinjau."
+  "PAYMENT_PROOF_MESSAGE": "Harap tunggu, pembayaran Anda sedang ditinjau.",
+  "SELECT_TIME_FIRST": "Pilih waktu dulu",
+  "VOUCHER_LIMIT": "Voucher tidak dapat digunakan. Silakan baca syarat dan ketentuan atau coba kode voucher lain"
 }

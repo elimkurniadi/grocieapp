@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Cart, PaymentSummary, Response, Voucher } from '@shared/models';
+import { Cart, DeliveryTime, PaymentSummary, Response, Voucher } from '@shared/models';
+import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { CacheService, ToastService } from '@shared/services';
-import { AddressService, CartService, CheckoutService, VoucherService } from '@shared/services/modules';
+import { AddressService, CartService, CheckoutService, SettingService, VoucherService } from '@shared/services/modules';
 import * as moment from 'moment';
 
 @Component({
@@ -18,28 +19,12 @@ export class CheckoutPage implements OnInit {
   currDate: any = moment(new Date());
   maxCurrDate: any = moment(new Date()).set({ hour: 18, minute: 0 });
   selectedDate = null;
+  deliveryDate: any;
   canDeliverNow: boolean;
   deliveryNow: boolean;
   notes: string;
 
-  timeList = [
-    {
-      time: '10:00 - 12:00',
-      selected: false,
-    },
-    {
-      time: '12:00 - 14:00',
-      selected: false,
-    },
-    {
-      time: '14:00 - 16:00',
-      selected: false,
-    },
-    {
-      time: '16:00 - 18:00',
-      selected: false,
-    },
-  ];
+  timeList: DeliveryTime[];
 
   voucher: Voucher;
 
@@ -51,7 +36,9 @@ export class CheckoutPage implements OnInit {
     private route: ActivatedRoute,
     private addressSrv: AddressService,
     private checkoutSrv: CheckoutService,
-    private router: Router
+    private settingSrv: SettingService,
+    private router: Router,
+    private translate: TranslateService
   ) {
     this.observeQueryParam();
   }
@@ -59,14 +46,19 @@ export class CheckoutPage implements OnInit {
   ngOnInit() {
     this.canDeliverNow = true;
     this.deliveryNow = true;
-
+    this.selectedDate = moment(new Date()).format();
     this.fetchCartList();
     if (this.currDate > this.maxCurrDate) {
-      // this.canDeliverNow = false;
+      this.canDeliverNow = false;
       this.deliveryNow = false;
       const currDate = this.currDate.add(1, 'days').format('YYYY-MM-DD');
       this.currDate = currDate;
+    } else {
+      const currDate = this.currDate.format('YYYY-MM-DD');
+      this.currDate = currDate;
     }
+
+    this.getDeliveryTime();
   }
 
   observeQueryParam() {
@@ -87,6 +79,8 @@ export class CheckoutPage implements OnInit {
 
   onDateSelect(value) {
     this.selectedDate = moment(value).format('YYYY-MM-DD');
+
+    this.getDeliveryTime();
   }
 
   onTimeSelect(idx) {
@@ -137,6 +131,8 @@ export class CheckoutPage implements OnInit {
             const voucher = res.response as Voucher;
 
             this.voucher = voucher;
+
+            this.showAlertVoucherLimit();
           })
           .catch((err) => {
             const error = err.error.error;
@@ -148,21 +144,63 @@ export class CheckoutPage implements OnInit {
     });
   }
 
+  showAlertVoucherLimit() {
+    if (this.voucher.quota < 0) {
+      const errMsg = this.translate.get('VOUCHER_LIMIT');
+      this.toastSrv.show(errMsg);
+    }
+  }
+
   removeVoucher() {
     this.cache.removeVoucher();
+  }
+
+  getDeliveryTime() {
+    const params = {
+      date: moment(this.selectedDate).format('YYYY-MM-DD'),
+    };
+
+    this.settingSrv
+      .getDeliveryTime(params)
+      .then((res: Response) => {
+        const times = res.response as DeliveryTime[];
+        times.forEach((time) => {
+          time.selected = false;
+        });
+
+        this.timeList = times;
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
   }
 
   radioChanged(value: any) {
     this.deliveryNow = value === 'deliver_now';
   }
   pay() {
-    const queryParams = { address_id: this.defaultAddress.address_id, is_now: this.deliveryNow, notes: this.notes };
-    if (this.voucher && this.voucher.quota > 0) {
-      queryParams['voucher_code'] = this.voucher.voucher_code;
-    }
-
-    this.router.navigate(['/payment'], {
-      queryParams,
+    const timeSelected = this.timeList.filter((time) => {
+      return time.selected;
     });
+
+    if (!this.deliveryNow && !timeSelected.length) {
+      const errMsg = this.translate.get('SELECT_TIME_FIRST');
+      this.toastSrv.show(errMsg);
+    } else {
+      const queryParams = { address_id: this.defaultAddress.address_id, is_now: this.deliveryNow, notes: this.notes };
+      if (this.voucher && this.voucher.quota > 0) {
+        queryParams['voucher_code'] = this.voucher.voucher_code;
+      }
+
+      if (!this.deliveryNow) {
+        queryParams['date'] = moment(this.selectedDate).format('YYYY-MM-DD');
+        queryParams['time'] = timeSelected[0].text;
+      }
+
+      this.router.navigate(['/payment'], {
+        queryParams,
+      });
+    }
   }
 }

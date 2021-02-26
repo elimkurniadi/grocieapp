@@ -18,6 +18,8 @@ export class PaymentListComponent implements OnInit {
   isNow: boolean;
   notes: string;
   voucherCode: string;
+  shippingDate: string;
+  shippingTime: string;
   paymentSummary: PaymentSummary;
   paymentMethods: PaymentMethod[];
 
@@ -30,10 +32,12 @@ export class PaymentListComponent implements OnInit {
     private toastSrv: ToastService
   ) {
     this.route.queryParams.subscribe((param) => {
-      this.isNow = param.is_now;
+      this.isNow = param.is_now === 'true';
       this.addressId = param.address_id;
       this.notes = param.notes;
       this.voucherCode = param.voucher_code;
+      this.shippingDate = param.date;
+      this.shippingTime = param.time;
 
       const params = new URLSearchParams();
       for (const key in param) {
@@ -56,6 +60,8 @@ export class PaymentListComponent implements OnInit {
       is_now: this.isNow,
       notes: this.notes,
       payment_id: this.paymentMethod,
+      date: this.shippingDate,
+      time: this.shippingTime,
     };
 
     if (this.voucherCode !== '' && this.voucherCode !== null) {
@@ -107,12 +113,24 @@ export class PaymentListComponent implements OnInit {
       payment_method_id: this.paymentMethod,
     };
 
-    if (this.notes !== null && this.notes !== '') {
+    if (this.notes !== null && this.notes !== '' && this.notes !== undefined) {
       body['notes'] = this.notes;
     }
 
-    this.transactionSrv.add(body).then((res) => {
-      this.browserSrv.openBrowser({ url: res.response });
-    });
+    if (!this.isNow) {
+      body['shipping_date'] = this.shippingDate;
+      body['shipping_time'] = this.shippingTime;
+    }
+
+    this.transactionSrv
+      .add(body)
+      .then((res) => {
+        this.browserSrv.openBrowser({ url: res.response });
+        this.router.navigate(['/my-order']);
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
   }
 }

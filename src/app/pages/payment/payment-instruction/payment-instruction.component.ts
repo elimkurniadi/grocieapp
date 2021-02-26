@@ -16,6 +16,8 @@ export class PaymentInstructionComponent implements OnInit {
   notes: string;
   voucherCode: string;
   paymentId: any;
+  shippingDate: string;
+  shippingTime: string;
   paymentSummary: PaymentSummary;
 
   constructor(
@@ -26,11 +28,13 @@ export class PaymentInstructionComponent implements OnInit {
     private toastSrv: ToastService
   ) {
     this.route.queryParams.subscribe((param) => {
-      this.isNow = param.is_now;
+      this.isNow = param.is_now === 'true';
       this.addressId = param.address_id;
       this.notes = param.notes;
       this.voucherCode = param.voucher_code;
       this.paymentId = param.payment_id;
+      this.shippingDate = param.date;
+      this.shippingTime = param.time;
 
       const params = new URLSearchParams();
       for (const key in param) {
@@ -66,14 +70,18 @@ export class PaymentInstructionComponent implements OnInit {
       payment_method_id: this.paymentId,
     };
 
-    if (this.notes !== null && this.notes !== '') {
+    if (this.notes !== null && this.notes !== '' && this.notes !== undefined) {
       body['notes'] = this.notes;
+    }
+
+    if (!this.isNow) {
+      body['shipping_date'] = this.shippingDate;
+      body['shipping_time'] = this.shippingTime;
     }
 
     this.transactionSrv
       .add(body)
       .then((res) => {
-        console.log('paid', res);
         this.router.navigate(['/payment', 'proof']);
       })
       .catch((err) => {
