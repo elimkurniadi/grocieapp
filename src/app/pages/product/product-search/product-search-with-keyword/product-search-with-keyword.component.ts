@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Brand, Product } from '@shared/models';
 
 @Component({
@@ -11,12 +10,13 @@ export class ProductSearchWithKeywordComponent implements OnInit {
   @Input() keyword: string;
   @Input() products: Product[];
   @Input() brands: Brand[];
+  @Output() redirectToList = new EventEmitter();
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit() {}
 
   goToProductList() {
-    this.router.navigate(['/product', 'list'], { queryParams: { search: this.keyword } });
+    this.redirectToList.emit();
   }
 }

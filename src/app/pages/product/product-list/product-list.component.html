@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title class="header-title center-with-back">{{ 'SEARCH_RESULT' | translate }}</ion-title>
   </ion-toolbar>
-  
+
   <ion-toolbar *ngIf="search" mode="ios">
     <div (click)="searchProduct()">
       <ion-searchbar class="custom-search" mode="ios" [value]="search"></ion-searchbar>
@@ -43,7 +43,7 @@
   </ion-grid>
 </ion-content>
 
-<!-- <ion-footer>
+<ion-footer>
   <ion-row class="padding-footer">
     <ion-col size="5.5" class="ion-text-center">
       <ion-text color="success" (click)="showSort()">
@@ -61,4 +61,4 @@
       </ion-text>
     </ion-col>
   </ion-row>
-</ion-footer> -->
+</ion-footer>

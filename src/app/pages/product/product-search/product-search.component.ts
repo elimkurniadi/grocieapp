@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ModalFilterProductComponent } from '@shared/common/modals/modal-filter-product/modal-filter-product.component';
 import { Brand, Page, Product, Response, ResponsePagination } from '@shared/models';
@@ -14,15 +15,18 @@ export class ProductSearchComponent implements OnInit {
   keyword: string;
   recentSearches: any[] = [];
   page: Page;
+  popularProducts: Product[];
   products: Product[];
   brands: Brand[];
+  filter: any;
 
   constructor(
     private productSrv: ProductService,
     private brandSrv: BrandService,
     private toastSrv: ToastService,
     private cache: CacheService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private router: Router
   ) {
     this.page = {
       row: 10,
@@ -32,6 +36,7 @@ export class ProductSearchComponent implements OnInit {
 
   ngOnInit() {
     this.saveRecentSearch();
+    this.getPopularProduct();
   }
 
   fetchData() {
@@ -54,9 +59,14 @@ export class ProductSearchComponent implements OnInit {
   }
 
   getProduct() {
-    // modify
+    let filter = null;
+
+    if (this.filter && this.filter.min_price) {
+      filter = this.filter;
+    }
+
     this.productSrv
-      .getListByKeyword(this.keyword, this.page)
+      .getListByKeyword(this.keyword, this.page, null, filter)
       .then((res: ResponsePagination) => {
         this.saveRecentSearch();
         const products = res.response.rows as Product[];
@@ -104,17 +114,62 @@ export class ProductSearchComponent implements OnInit {
       this.cache.setRecentSearch(this.recentSearches);
     });
   }
-
   async showFilter() {
     const modal = await this.modalCtrl.create({
       component: ModalFilterProductComponent,
       cssClass: 'modal-filter-product',
+      componentProps: {
+        minPrice: this.filter?.min_price,
+        maxPrice: this.filter?.max_price,
+      },
     });
 
-    modal.onDidDismiss().then(() => {
-      // Refresh data
+    modal.onDidDismiss().then((res) => {
+      const data = res.data;
+      if (data) {
+        this.filter = {
+          min_price: data.minPrice,
+          max_price: data.maxPrice,
+        };
+
+        this.refreshProduct();
+      }
     });
 
     return await modal.present();
+  }
+
+  refreshProduct() {
+    this.getPopularProduct();
+    this.fetchData();
+  }
+
+  getPopularProduct() {
+    let filter = null;
+
+    if (this.filter && this.filter.min_price) {
+      filter = this.filter;
+    }
+
+    this.productSrv
+      .getPopular(this.page, null, filter)
+      .then((res: ResponsePagination) => {
+        const products = res.response.rows as Product[];
+        this.popularProducts = products;
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
+  }
+
+  goToProductList() {
+    const queryParams = {
+      search: this.keyword,
+      min_price: this.filter?.min_price,
+      max_price: this.filter?.max_price,
+    };
+
+    this.router.navigate(['/product', 'list'], { queryParams });
   }
 }
