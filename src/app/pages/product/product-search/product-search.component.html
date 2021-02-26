@@ -5,7 +5,7 @@
       <ion-title class="header-title center-with-back">{{ 'SEARCH' | translate }}</ion-title>
     </ion-buttons>
   </ion-toolbar>
-  
+
   <ion-toolbar mode="ios">
     <div>
       <ion-searchbar
@@ -31,12 +31,14 @@
       *ngIf="!keyword"
       [recentSearches]="recentSearches"
       (assignKeyword)="assignKeyword($event)"
+      [products]="popularProducts"
     ></app-product-search-without-keyword>
     <app-product-search-with-keyword
       *ngIf="keyword"
       [keyword]="keyword"
       [products]="products"
       [brands]="brands"
+      (redirectToList)="goToProductList()"
     ></app-product-search-with-keyword>
   </ion-grid>
 </ion-content>

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ModalFilterProductComponent } from '@shared/common/modals/modal-filter-product/modal-filter-product.component';
 import { ModalSortProductComponent } from '@shared/common/modals/modal-sort-product/modal-sort-product.component';
-import { Bundling, Page, Product, Response, ResponsePagination } from '@shared/models';
+import { Bundling, Page, Product, Response, ResponsePagination, Sort } from '@shared/models';
 import { ToastService } from '@shared/services';
 import { BundlingService, ProductService } from '@shared/services/modules';
 
@@ -18,6 +18,9 @@ export class BundlingDetailComponent implements OnInit {
   products: Product[];
   productPage: Page;
   productCount: number;
+  sort: any;
+  order: Sort;
+  filter: any;
 
   constructor(
     private router: Router,
@@ -64,8 +67,19 @@ export class BundlingDetailComponent implements OnInit {
   }
 
   getProduct() {
+    let ordering = null;
+    let filter = null;
+
+    if (this.order && this.order.orderBy) {
+      ordering = this.order;
+    }
+
+    if (this.filter && this.filter.min_price) {
+      filter = this.filter;
+    }
+
     this.productSrv
-      .getListByBundling(this.id, this.productPage)
+      .getListByBundling(this.id, this.productPage, ordering, filter)
       .then((res: ResponsePagination) => {
         const products = res.response.rows as Product[];
         this.productCount = res.response.count;
@@ -98,10 +112,22 @@ export class BundlingDetailComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ModalFilterProductComponent,
       cssClass: 'modal-filter-product',
+      componentProps: {
+        minPrice: this.filter?.min_price,
+        maxPrice: this.filter?.max_price,
+      },
     });
 
-    modal.onDidDismiss().then(() => {
-      // Refresh data
+    modal.onDidDismiss().then((res) => {
+      const data = res.data;
+      if (data) {
+        this.filter = {
+          min_price: data.minPrice,
+          max_price: data.maxPrice,
+        };
+
+        this.refreshProduct();
+      }
     });
 
     return await modal.present();
@@ -111,12 +137,29 @@ export class BundlingDetailComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ModalSortProductComponent,
       cssClass: 'modal-sort-product',
+      componentProps: {
+        option: this.sort,
+      },
     });
 
-    modal.onDidDismiss().then(() => {
-      // Refresh data
+    modal.onDidDismiss().then((res) => {
+      const data = res.data;
+      if (data) {
+        this.sort = data.value;
+        this.order = {
+          orderBy: data.order?.orderBy,
+          orderType: data.order?.orderType,
+        };
+
+        this.refreshProduct();
+      }
     });
 
     return await modal.present();
+  }
+
+  refreshProduct() {
+    this.products = [];
+    this.getProduct();
   }
 }

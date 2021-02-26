@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ModalFilterProductComponent } from '@shared/common/modals/modal-filter-product/modal-filter-product.component';
 import { ModalSortProductComponent } from '@shared/common/modals/modal-sort-product/modal-sort-product.component';
-import { Category, Product, Response, ResponsePagination } from '@shared/models';
+import { Category, Product, Response, ResponsePagination, Sort } from '@shared/models';
 import { ToastService } from '@shared/services';
 import { CategoryService, ProductService } from '@shared/services/modules';
 
@@ -19,6 +19,10 @@ export class ProductListComponent implements OnInit {
   brandId: string;
   category: Category;
   products: Product[];
+  sort: any;
+  order: Sort;
+  filter: any;
+  productType: string;
 
   constructor(
     private router: Router,
@@ -32,23 +36,25 @@ export class ProductListComponent implements OnInit {
       this.setKeyword(param);
       this.setCategoryId(param);
       this.setBrand(param);
+      this.setFilterParam(param);
     });
   }
-  
-  ionViewWillEnter(){
+
+  ionViewWillEnter() {
     if (this.categoryId && this.categoryId !== null) {
       this.getCategory();
-      this.assignProductList('category');
+      this.productType = 'category';
+      this.assignProductList();
     } else if (this.brandId && this.brandId !== null) {
-      this.assignProductList('brand');
+      this.productType = 'brand';
+      this.assignProductList();
     } else if (this.search && this.search !== null) {
-      this.assignProductList('keyword');
+      this.productType = 'keyword';
+      this.assignProductList();
     }
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   searchProduct() {
     this.router.navigate(['/product', 'search']);
@@ -69,18 +75,39 @@ export class ProductListComponent implements OnInit {
   }
 
   getProductList(type: string) {
+    const ordering = this.setOrdering();
+    const filter = this.setFilter();
+
     if (type === 'keyword') {
-      return this.productSrv.getListByKeyword(this.search);
+      return this.productSrv.getListByKeyword(this.search, null, ordering, filter);
     } else if (type === 'category') {
-      return this.productSrv.getListByCategory(this.categoryId);
+      return this.productSrv.getListByCategory(this.categoryId, null, ordering, filter);
     }
     {
-      return this.productSrv.getListByBrand(this.brandId);
+      return this.productSrv.getListByBrand(this.brandId, null, ordering, filter);
     }
   }
 
-  assignProductList(type: string) {
-    this.getProductList(type)
+  setOrdering() {
+    let ordering = null;
+
+    if (this.order && this.order.orderBy) {
+      ordering = this.order;
+    }
+
+    return ordering;
+  }
+  setFilter() {
+    let filter = null;
+
+    if (this.filter && this.filter.min_price) {
+      filter = this.filter;
+    }
+
+    return filter;
+  }
+  assignProductList() {
+    this.getProductList(this.productType)
       .then((res: ResponsePagination) => {
         const products = res.response.rows as Product[];
         this.products = products;
@@ -117,14 +144,40 @@ export class ProductListComponent implements OnInit {
     }
   }
 
+  setFilterParam(param: any) {
+    const filter = {};
+
+    if (param.min_price !== null && param.min_price !== '') {
+      filter['min_price'] = param.min_price;
+    }
+
+    if (param.max_price !== null && param.max_price !== '') {
+      filter['max_price'] = param.max_price;
+    }
+
+    this.filter = filter;
+  }
+
   async showFilter() {
     const modal = await this.modalCtrl.create({
       component: ModalFilterProductComponent,
       cssClass: 'modal-filter-product',
+      componentProps: {
+        minPrice: this.filter?.min_price,
+        maxPrice: this.filter?.max_price,
+      },
     });
 
-    modal.onDidDismiss().then(() => {
-      // Refresh data
+    modal.onDidDismiss().then((res) => {
+      const data = res.data;
+      if (data) {
+        this.filter = {
+          min_price: data.minPrice,
+          max_price: data.maxPrice,
+        };
+
+        this.refreshProduct();
+      }
     });
 
     return await modal.present();
@@ -134,12 +187,29 @@ export class ProductListComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ModalSortProductComponent,
       cssClass: 'modal-sort-product',
+      componentProps: {
+        option: this.sort,
+      },
     });
 
-    modal.onDidDismiss().then(() => {
-      // Refresh data
+    modal.onDidDismiss().then((res) => {
+      const data = res.data;
+      if (data) {
+        this.sort = data.value;
+        this.order = {
+          orderBy: data.order?.orderBy,
+          orderType: data.order?.orderType,
+        };
+
+        this.refreshProduct();
+      }
     });
 
     return await modal.present();
+  }
+
+  refreshProduct() {
+    this.products = [];
+    this.assignProductList();
   }
 }
