@@ -12,7 +12,7 @@ export class ChatPage implements OnInit {
   ngOnInit() {}
 
   goToChat() {
-    const link = 'https://wa.me/628512345123?text=Halo saya ingin bertanya';
+    const link = 'https://wa.me/628123045670?text=Halo saya ingin bertanya';
     this.browserSrv.openBrowser({ url: link });
   }
 }

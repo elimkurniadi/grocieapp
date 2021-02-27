@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, ModalController } from '@ionic/angular';
+import { ActivityService } from '@shared/services/modules/activity.service';
+import { InboxDetailComponent } from '../../inbox/inbox-detail/inbox-detail.component';
 
 @Component({
   selector: 'app-notification-list',
@@ -9,12 +11,18 @@ import { IonSlides } from '@ionic/angular';
 export class NotificationListComponent implements OnInit {
   currentDate = Date.now();
   segmentValue = 'inbox';
+  notificationList;
+  inboxList;
 
   @ViewChild(IonSlides, { static: false }) slides: IonSlides;
 
-  constructor() {}
+  constructor(private activitySrv: ActivityService, private modalCtrl: ModalController) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('testing');
+    this.getNotificationList();
+    this.getInboxList();
+  }
 
   segmentChanged(event: any) {
     const value = event.detail.value;
@@ -34,4 +42,36 @@ export class NotificationListComponent implements OnInit {
       this.segmentValue = 'notification';
     }
   }
+
+  dismiss(){
+    this.modalCtrl.dismiss();
+  }
+
+  getNotificationList() {
+    this.activitySrv.getNotificationList().then(res => {
+      this.notificationList = res?.rows;
+      console.log(res);
+    })
+  }
+
+  getInboxList() {
+    this.activitySrv.getInboxList().then(res => {
+      this.inboxList = res?.rows;
+      console.log(res); 
+    })
+  }
+
+  async openDetail(data) {
+    const modal = await this.modalCtrl.create({
+      component: InboxDetailComponent,
+      componentProps: {inbox: data},
+    });
+
+    modal.onDidDismiss().then(() => {
+      // Refresh data
+    });
+
+    return await modal.present();
+  }
+
 }

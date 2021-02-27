@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-inbox-detail',
@@ -6,14 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inbox-detail.component.scss'],
 })
 export class InboxDetailComponent implements OnInit {
-  inbox: any = {
-    title: 'Save IDR 120k off!',
-    date: Date.now(),
-    description:
-      'Lorem ipsum dolor sir amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et',
-  };
+  @Input() inbox: any;
 
-  constructor() {}
+  constructor(private modalCtrl:ModalController) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
+
+  dismiss() {
+    this.modalCtrl.dismiss();
+  }
 }

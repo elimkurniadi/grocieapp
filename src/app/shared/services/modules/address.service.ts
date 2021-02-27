@@ -129,4 +129,19 @@ export class AddressService {
       );
     });
   }
+
+  getSubDistricts(districtId): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData(`address/sub_district/${districtId}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          resolve(res.response);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }

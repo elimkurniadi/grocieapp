@@ -1,0 +1,40 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" mode="md" class="title" (click)="dismiss()">
+      <ion-button>
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title">Help Center</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-padding">
+    <ion-col>
+      <ion-text class="faq-header">How may we help you?</ion-text>
+    </ion-col>
+  </ion-row>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let faq of faqList" (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="faq-subject">
+          {{faq.subject}}
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div [innerHTML]="faq?.content"></div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="divider"></div>
+  <ion-row class="ion-padding-horizontal">
+    <ion-col>
+      <ion-text class="faq-header">Still need help?</ion-text><br/><br/>
+      <ion-text class="faq-text"> Still couldn't find the answer you're looking for? Contact us by WhatsApp through the number below </ion-text><br/><br/>
+
+      <a class="faq-text" style="font-weight: 600;text-decoration: underline; color: #99cc33" (click)="goToChat()">WhatsApp +628123045670</a>
+    </ion-col>
+  </ion-row>
+</ion-content>

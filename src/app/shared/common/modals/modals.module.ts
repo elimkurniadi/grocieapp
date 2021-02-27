@@ -12,6 +12,8 @@ import { ModalSettingComponent } from './modal-setting/modal-setting.component';
 import { ModalShareAppComponent } from './modal-share-app/modal-share-app.component';
 import { ModalConfirmationComponent } from './modal-confirmation/modal-confirmation.component';
 import { ModalAddToCartComponent } from './modal-add-to-cart/modal-add-to-cart.component';
+import { ModalFaqComponent } from './modal-faq/modal-faq.component';
+import { MatExpansionModule}  from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -24,8 +26,9 @@ import { ModalAddToCartComponent } from './modal-add-to-cart/modal-add-to-cart.c
     ModalSettingComponent,
     ModalShareAppComponent,
     ModalConfirmationComponent,
+    ModalFaqComponent
   ],
-  imports: [CommonModule, IonicModule.forRoot(), SharedModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, IonicModule.forRoot(), SharedModule, FormsModule, ReactiveFormsModule, MatExpansionModule],
   exports: [
     ModalInfoComponent,
     ModalAddToFavoriteComponent,

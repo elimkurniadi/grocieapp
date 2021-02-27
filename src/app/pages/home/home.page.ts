@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { ModalLocationComponent } from '@shared/common/modals/modal-location/modal-location.component';
 import { BannerService, BundlingService } from '@shared/services/modules';
 import { Banner, Bundling } from '@shared/models';
+import { NotificationListComponent } from '../notification/notification-list/notification-list.component';
 
 @Component({
   selector: 'app-home',
@@ -34,6 +35,18 @@ export class HomePage implements OnInit {
   selectLang(lang) {
     this.selectedLanguage = lang;
     this.translate.setLanguage(lang);
+  }
+
+  async openNotification() {
+    const modal = await this.modalCtrl.create({
+      component: NotificationListComponent,
+    });
+
+    modal.onDidDismiss().then(() => {
+      // Refresh data
+    });
+
+    return await modal.present();
   }
 
   searchProduct() {
