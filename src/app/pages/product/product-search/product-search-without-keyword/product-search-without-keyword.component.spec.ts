@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { ProductSearchWithoutKeywordComponent } from './product-search-without-keyword.component';
@@ -7,7 +7,7 @@ describe('ProductSearchWithoutKeywordComponent', () => {
   let component: ProductSearchWithoutKeywordComponent;
   let fixture: ComponentFixture<ProductSearchWithoutKeywordComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ProductSearchWithoutKeywordComponent ],
       imports: [IonicModule.forRoot()]

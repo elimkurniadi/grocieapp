@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { MyOrderDetailComponent } from './my-order-detail.component';
@@ -7,7 +7,7 @@ describe('MyOrderDetailComponent', () => {
   let component: MyOrderDetailComponent;
   let fixture: ComponentFixture<MyOrderDetailComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MyOrderDetailComponent ],
       imports: [IonicModule.forRoot()]

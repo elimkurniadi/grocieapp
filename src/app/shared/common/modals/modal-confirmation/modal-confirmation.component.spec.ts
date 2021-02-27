@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { ModalConfirmationComponent } from './modal-confirmation.component';
@@ -7,7 +7,7 @@ describe('ModalConfirmationComponent', () => {
   let component: ModalConfirmationComponent;
   let fixture: ComponentFixture<ModalConfirmationComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ModalConfirmationComponent ],
       imports: [IonicModule.forRoot()]

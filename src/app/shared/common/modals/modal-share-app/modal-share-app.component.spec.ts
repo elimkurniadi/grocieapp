@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { ModalShareAppComponent } from './modal-share-app.component';
@@ -7,7 +7,7 @@ describe('ModalShareAppComponent', () => {
   let component: ModalShareAppComponent;
   let fixture: ComponentFixture<ModalShareAppComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ModalShareAppComponent ],
       imports: [IonicModule.forRoot()]

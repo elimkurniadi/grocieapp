@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { ScanQrComponent } from './scan-qr.component';
@@ -7,7 +7,7 @@ describe('ScanQrComponent', () => {
   let component: ScanQrComponent;
   let fixture: ComponentFixture<ScanQrComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ScanQrComponent ],
       imports: [IonicModule.forRoot()]
