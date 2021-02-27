@@ -80,6 +80,23 @@ export class AuthService {
     return true;
     // return this.login(credentials).toPromise();
   }
+
+  verifyPhone(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.postData('authentication/verify_phone', data);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          const response = res.response;
+          resolve(response);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
   isAuthenticated() {
     return new Observable<boolean>((observer) => {
       this.cache.getToken().then((token) => {

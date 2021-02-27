@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
-import { GlobalService } from '@shared/services';
+import { AuthService, GlobalService } from '@shared/services';
 import { AlertService } from '@shared/services/alert.service';
 import { OtpService } from '@shared/services/modules/otp.service';
 import { UserService } from '@shared/services/modules/user.service';
@@ -17,7 +17,7 @@ import { ModalSuccessComponent } from '../modal-success/modal-success.component'
 export class ModalOtpComponent implements OnInit {
   otpConfig = {
     allowNumbersOnly: true,
-    length: 6,
+    length: 4,
     isPasswordInput: false,
     disableAutoFocus: false,
     placeholder: '',
@@ -28,6 +28,8 @@ export class ModalOtpComponent implements OnInit {
   };
   otpValue = null;
   countdown = null;
+  userData: any = null;
+
   constructor(
     private modalCtrl: ModalController,
     private alertSrv: AlertService,
@@ -35,13 +37,15 @@ export class ModalOtpComponent implements OnInit {
     private gs: GlobalService,
     private otpSrv: OtpService,
     private userSrv: UserService,
-    private toastSrv: ToastService
+    private toastSrv: ToastService,
+    private authSrv: AuthService
   ) {}
 
   ngOnInit() {}
 
   ionViewWillEnter() {
     this.setupCountdown();
+    this.fetchUserData();
   }
 
   ionViewDidDismiss() {
@@ -68,9 +72,25 @@ export class ModalOtpComponent implements OnInit {
   }
 
   verifyOtp() {
-    // POST AND CALL SHOWSUCCESSOTPMODAL FUNCTION
+    const body = {
+      phone: this.userData.phone,
+      token: this.otpValue,
+    };
 
-    this.showSuccessOtpModal();
+    this.authSrv
+      .verifyPhone(body)
+      .then((valid) => {
+        if (valid) {
+          this.showSuccessOtpModal();
+        } else {
+          const errMsg = this.translateSrv.get('INVALID_OTP');
+          this.toastSrv.show(errMsg);
+        }
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
   }
 
   onOtpChange(event) {
@@ -104,5 +124,11 @@ export class ModalOtpComponent implements OnInit {
       presentingElement: await this.modalCtrl.getTop(),
     });
     return await modal.present();
+  }
+
+  fetchUserData() {
+    this.userSrv.getProfile().then((res) => {
+      this.userData = res;
+    });
   }
 }

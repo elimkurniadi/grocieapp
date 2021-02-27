@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { GlobalService, ToastService } from '@shared/services';
 import { ModalController } from '@ionic/angular';
 import { ModalLocationComponent } from '@shared/common/modals/modal-location/modal-location.component';
-import { BannerService, BundlingService } from '@shared/services/modules';
+import { BannerService, BundlingService, UserService } from '@shared/services/modules';
 import { Banner, Bundling } from '@shared/models';
+import { ModalOtpComponent } from '@shared/common/otp/modal-otp/modal-otp.component';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomePage implements OnInit {
     private toastSrv: ToastService,
     private bannerSrv: BannerService,
     private bundlingSrv: BundlingService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private userSrv: UserService
   ) {}
 
   ngOnInit() {
