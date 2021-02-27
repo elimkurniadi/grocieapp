@@ -14,11 +14,11 @@
       </ion-text>
     </ion-col>
     <ion-col size="12">
-      <ion-text class="text-price"> Rp. 76.700 </ion-text>
+      <ion-text class="text-price"> Rp. {{ paymentSummary?.final_price | number: '1.0-0':'id' }}</ion-text>
     </ion-col>
   </ion-row>
   <div class="divider"></div>
-  <ion-row class="ion-padding-horizontal">
+  <ion-row class="ion-padding-horizontal ion-padding-top">
     <ion-col size="12">
       <ion-text class="text-cod">
         {{ 'CASH_ON_DELIVERY' | translate }}
@@ -33,15 +33,18 @@
   <ion-row class="ion-padding-horizontal">
     <ion-col size="12">
       <form (ngSubmit)="pay()" #codForm="ngForm" [formGroup]="fg">
-        <ion-item lines="none" class="form-group">
-          <ion-input
-            class="default-theme"
-            formControlName="amount"
-            placeholder="Rp. 000.000"
-            class="ion-text-right"
-          ></ion-input>
+        <div class="form-group">
+          <ion-item lines="none">
+            <ion-input
+              class="default-theme"
+              formControlName="amount"
+              placeholder="Rp. 000.000"
+              class="ion-text-right"
+            ></ion-input>
+            <br />
+          </ion-item>
           <small *ngIf="fg.controls.amount.dirty">{{ fg.controls.amount.errors?.required?.message }}</small>
-        </ion-item>
+        </div>
       </form>
     </ion-col>
   </ion-row>

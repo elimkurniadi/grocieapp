@@ -25,7 +25,7 @@ const routes: Routes = [
         component: PaymentInstructionComponent,
       },
       {
-        path: 'proof',
+        path: ':id/proof',
         component: PaymentProofComponent,
       },
       {

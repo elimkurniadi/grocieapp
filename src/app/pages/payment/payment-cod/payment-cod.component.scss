@@ -15,6 +15,16 @@
   color: #353535;
 }
 
+.text-cod {
+  font-weight: bold;
+  font-size: 14px;
+
+  &-message {
+    font-size: 10px;
+    font-weight: normal;
+  }
+}
+
 .divider {
   height: 8px;
   margin-top: 0px !important;

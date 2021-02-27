@@ -13,6 +13,7 @@ export class MyOrderDetailComponent implements OnInit {
   totalPrice = 0;
   order;
   transactionStatus;
+  orderId: any;
   // order = {
   //   transaction_id: 'AHS - 70009876543',
   //   transaction_status: 'in_process',
@@ -22,7 +23,12 @@ export class MyOrderDetailComponent implements OnInit {
   //   total_price: '70000',
   // };
 
-  constructor(private cartSrv: CartService, private transactionSrv:TransactionService, private activatedRoute: ActivatedRoute, private router:Router) {}
+  constructor(
+    private cartSrv: CartService,
+    private transactionSrv: TransactionService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     // this.fetchCartList();
@@ -31,13 +37,12 @@ export class MyOrderDetailComponent implements OnInit {
 
   observeParam() {
     this.activatedRoute.params.subscribe((param) => {
-      const id = param?.id;
+      this.orderId = param?.id;
       // this.productId = id;
-      this.fetchTransactionDetail(id);
-      this.fetchTransactionStatus(id);
+      this.fetchTransactionDetail();
+      this.fetchTransactionStatus();
     });
   }
-
 
   fetchCartList() {
     this.cartSrv.getCartList().then((res) => {
@@ -56,19 +61,19 @@ export class MyOrderDetailComponent implements OnInit {
     });
   }
 
-  fetchTransactionDetail(id) {
-    this.transactionSrv.getTransactionDetail(id).then(data => {
+  fetchTransactionDetail() {
+    this.transactionSrv.getTransactionDetail(this.orderId).then((data) => {
       this.order = data;
-    })
+    });
   }
 
-  fetchTransactionStatus(id) {
-    this.transactionSrv.getTransactionStatus(id).then(data => {
+  fetchTransactionStatus() {
+    this.transactionSrv.getTransactionStatus(this.orderId).then((data) => {
       this.transactionStatus = data;
-    })
+    });
   }
 
   uploadProof() {
-    this.router.navigate(['/payment', 'proof']);
+    this.router.navigate(['/payment', this.orderId, 'proof']);
   }
 }
