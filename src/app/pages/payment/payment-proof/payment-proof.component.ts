@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
-import { GlobalService, RxValidatorService } from '@shared/services';
+import { GlobalService, RxValidatorService, ToastService } from '@shared/services';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { PaymentProofSuccessComponent } from '../payment-proof-success/payment-proof-success.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TransactionService } from '@shared/services/modules';
 
 @Component({
   selector: 'app-payment-proof',
@@ -16,6 +17,8 @@ import { Router } from '@angular/router';
 export class PaymentProofComponent implements OnInit {
   fg: FormGroup;
   selectedImage: any = null;
+  orderId: any;
+  previousUrl: string;
 
   constructor(
     private validatorSrv: RxValidatorService,
@@ -25,8 +28,17 @@ export class PaymentProofComponent implements OnInit {
     private camera: Camera,
     private gs: GlobalService,
     private router: Router,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private route: ActivatedRoute,
+    private transactionSrv: TransactionService,
+    private toastSrv: ToastService
   ) {
+    this.route.params.subscribe((param) => {
+      if (param.id) {
+        this.orderId = param.id;
+        this.previousUrl = `/my-order/${param.id}/detail`;
+      }
+    });
     this.buildPaymentForm();
   }
 
@@ -75,10 +87,6 @@ export class PaymentProofComponent implements OnInit {
     this.camera.getPicture(options).then((imageData) => {
       const image = `data:image/jpeg;base64,${imageData}`;
       this.setImageToForm(image);
-
-      this.getBlobFile(image).then((data) => {
-        this.gs.log('file', data);
-      });
     });
   }
 
@@ -105,8 +113,27 @@ export class PaymentProofComponent implements OnInit {
   }
 
   submit() {
-    console.log('submitted');
-    this.paymentSentModal();
+    if (this.fg.valid) {
+      this.getBlobFile(this.selectedImage).then((img) => {
+        const body = {
+          image: img,
+          payment_name: this.fg.value.name,
+          payment_bank: this.fg.value.bank_name,
+        };
+
+        this.transactionSrv
+          .uploadPaymentProof(this.orderId, body)
+          .then((res) => {
+            this.paymentSentModal();
+          })
+          .catch((err) => {
+            const error = err.error.error;
+            this.toastSrv.show(error.message);
+          });
+      });
+    } else {
+      this.gs.markDirtyForm(this.fg);
+    }
   }
   async paymentSentModal() {
     const modal = await this.modalCtrl.create({
