@@ -231,5 +231,6 @@
   "SELECT_TIME_FIRST": "Choose the time first",
   "VOUCHER_LIMIT": "The voucher cannot be used. Please read the terms and conditions or try another voucher code",
   "ACTIVITY": "Activity",
-  "CHECK_CART": "Check Cart"
+  "CHECK_CART": "Check Cart",
+  "INVALID_OTP": "Invalid OTP"
 }
