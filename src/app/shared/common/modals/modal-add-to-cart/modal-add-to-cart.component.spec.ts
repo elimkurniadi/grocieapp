@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { ModalAddToCartComponent } from './modal-add-to-cart.component';
@@ -7,7 +7,7 @@ describe('ModalAddToCartComponent', () => {
   let component: ModalAddToCartComponent;
   let fixture: ComponentFixture<ModalAddToCartComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ModalAddToCartComponent ],
       imports: [IonicModule.forRoot()]

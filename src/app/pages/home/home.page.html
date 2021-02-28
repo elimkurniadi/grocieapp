@@ -37,12 +37,16 @@
           name="notifications"
           color="primary"
           class="notif-icon link"
-          [routerLink]="['/tabs', 'notification']"
+          (click)="openNotification()"
         ></ion-icon>
       </ion-col>
     </ion-row>
   </ion-toolbar>
 </ion-header>
+
+<!-- 
+          [routerLink]="['/tabs', 'notification']"
+ -->
 
 <ion-content [fullscreen]="true">
   <ion-grid class="ion-no-padding">

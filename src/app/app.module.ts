@@ -26,6 +26,7 @@ import { File } from '@ionic-native/file/ngx';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeId, 'id');
 
@@ -55,6 +56,7 @@ export class SentryErrorHandler implements ErrorHandler {
     HttpClientModule,
     JwtAuthModule,
     FontAwesomeModule,
+    NoopAnimationsModule,
   ],
   providers: [
     StatusBar,

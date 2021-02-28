@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { ModalEmailSuccessComponent } from './modal-email-success.component';
@@ -7,7 +7,7 @@ describe('ModalEmailSuccessComponent', () => {
   let component: ModalEmailSuccessComponent;
   let fixture: ComponentFixture<ModalEmailSuccessComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ModalEmailSuccessComponent ],
       imports: [IonicModule.forRoot()]

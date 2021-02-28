@@ -38,6 +38,21 @@ export class SettingService {
     });
   }
 
+  getFAQ(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData('faq');
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
   getDeliveryTime(filter?: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData('setting/delivery_time', null, null, filter);

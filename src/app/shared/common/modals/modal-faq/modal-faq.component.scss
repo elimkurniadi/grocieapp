@@ -1,0 +1,27 @@
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.faq-header {
+  font-size: 18px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.19;
+  letter-spacing: normal;
+  color: var(--ion-color-primary);
+}
+
+.faq-subject {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.17;
+  letter-spacing: normal;
+  color: #353535;
+}
+
+.faq-text {
+  font-size: 14px;
+  line-height: 1.33;
+  color: #353535;
+}

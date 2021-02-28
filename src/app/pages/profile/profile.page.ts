@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { ModalController } from '@ionic/angular';
+import { ModalFaqComponent } from '@shared/common/modals/modal-faq/modal-faq.component';
 import { ModalSettingComponent } from '@shared/common/modals/modal-setting/modal-setting.component';
 import { ModalShareAppComponent } from '@shared/common/modals/modal-share-app/modal-share-app.component';
 import { Response, Setting } from '@shared/models';
@@ -85,7 +86,7 @@ export class ProfilePage implements OnInit {
       {
         title: `${this.translateSrv.get('HELP_CENTER')}`,
         route: null,
-        url: 'https://detik.com',
+        modal: 'faq',
       },
     ];
   }
@@ -123,14 +124,22 @@ export class ProfilePage implements OnInit {
   }
 
   showModal(modal: string) {
-    if (modal === 'tnc') {
-      this.showTnc();
-    } else if (modal === 'privacy_policy') {
-      this.showPrivacyPolicy();
-    } else if (modal === 'share') {
-      this.showShareAppModal();
-    } else {
-      return;
+    switch(modal) {
+      case 'tnc' : {
+        this.showTnc();
+        break;
+      }
+      case 'privacy_policy' : {
+        this.showPrivacyPolicy();
+        break;
+      }
+      case 'share' : {
+        this.showShareAppModal();
+        break;
+      }
+      case 'faq' : {
+        this.showFAQModal();
+      }
     }
   }
 
@@ -194,6 +203,15 @@ export class ProfilePage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ModalShareAppComponent,
       cssClass: 'modal-share-app',
+    });
+
+    return await modal.present();
+  }
+
+  async showFAQModal() {
+    const modal = await this.modalCtrl.create({
+      component: ModalFaqComponent,
+      cssClass: 'modal-faq-app',
     });
 
     return await modal.present();

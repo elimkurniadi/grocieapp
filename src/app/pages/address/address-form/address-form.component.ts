@@ -21,6 +21,7 @@ export class AddressFormComponent implements OnInit {
   provinceList: any[] = null;
   cityList: any[] = null;
   districtList: any[] = null;
+  subDistrictList: any[] = null;
   addressId: any = null;
 
   constructor(
@@ -52,6 +53,7 @@ export class AddressFormComponent implements OnInit {
     this.addressSrv.getAddress(id).then((res) => {
       this.addressData = res;
       this.initAddressForm(this.addressData);
+      console.log('Address Data', res);
     });
   }
 
@@ -82,6 +84,7 @@ export class AddressFormComponent implements OnInit {
       province_id: [data?.province?.province_id, [RxwebValidators.required()]],
       city_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
+      sub_district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       postal_code: [data?.postal_code, [RxwebValidators.required(), RxwebValidators.numeric()]],
       address_name: [data?.address_name, [RxwebValidators.required()]],
     });
@@ -89,7 +92,7 @@ export class AddressFormComponent implements OnInit {
     this.countCurrentChar();
     if (data) {
       setTimeout(() => {
-        this.initAreaList(data?.province?.province_id, data?.city?.city_id, data?.district?.district_id);
+        this.initAreaList(data?.province?.province_id, data?.city?.city_id, data?.district?.district_id, data?.sub_district?.sub_district_id);
       }, 1000);
     }
   }
@@ -120,7 +123,7 @@ export class AddressFormComponent implements OnInit {
     });
   }
 
-  initAreaList(idProvince, idCity, idDistrict) {
+  initAreaList(idProvince, idCity, idDistrict, idSubDistrict) {
     const controls = this.fg.controls;
     controls.province_id.setValue(idProvince);
     this.fg.updateValueAndValidity();
@@ -136,6 +139,14 @@ export class AddressFormComponent implements OnInit {
           controls.district_id.enable();
           this.fg.updateValueAndValidity();
         });
+      })
+      .then(() => { 
+        this.fetchSubDistricts(idDistrict).then(() => {
+          // controls.sub_district_id.setValue();
+          controls.sub_district_id.setValue(idSubDistrict);
+          controls.sub_district_id.enable();
+          this.fg.updateValueAndValidity();
+        })
       });
   }
 
@@ -157,6 +168,12 @@ export class AddressFormComponent implements OnInit {
     });
   }
 
+  async fetchSubDistricts(districtId) {
+    await this.addressSrv.getSubDistricts(districtId).then((res) => {
+      this.subDistrictList = res;
+    });
+  }
+
   onProvinceSelect(event) {
     const controls = this.fg.controls;
     controls.city_id.setValue(null);
@@ -172,6 +189,15 @@ export class AddressFormComponent implements OnInit {
       controls.district_id.setValue(null);
       controls.district_id.enable();
       this.fetchDistricts(event);
+    }
+  }
+
+  onDistrictSelect(event) {
+    const controls = this.fg.controls;
+    if (event) {
+      controls.sub_district_id.setValue(null);
+      controls.sub_district_id.enable();
+      this.fetchSubDistricts(event);
     }
   }
 
@@ -210,12 +236,15 @@ export class AddressFormComponent implements OnInit {
 
     modal.onWillDismiss().then((res) => {
       const data = res.data;
+      console.log(res);
       if (data) {
         const controls = this.fg.controls;
-        controls.longitude.setValue(data.longitude);
-        controls.latitude.setValue(data.latitude);
+        controls.longitude.setValue(data.coordinate.longitude);
+        controls.latitude.setValue(data.coordinate.latitude);
+        controls.address.setValue(data?.addressData?.formatted_address);
         controls.longitude.markAsDirty();
         controls.latitude.markAsDirty();
+        controls.address.markAsDirty();
       }
     });
 

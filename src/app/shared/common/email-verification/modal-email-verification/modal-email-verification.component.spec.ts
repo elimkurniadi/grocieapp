@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { ModalEmailVerificationComponent } from './modal-email-verification.component';
@@ -7,7 +7,7 @@ describe('ModalEmailVerificationComponent', () => {
   let component: ModalEmailVerificationComponent;
   let fixture: ComponentFixture<ModalEmailVerificationComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ModalEmailVerificationComponent ],
       imports: [IonicModule.forRoot()]

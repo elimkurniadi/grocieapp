@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { FavoriteDetailComponent } from './favorite-detail.component';
@@ -7,7 +7,7 @@ describe('FavoriteDetailComponent', () => {
   let component: FavoriteDetailComponent;
   let fixture: ComponentFixture<FavoriteDetailComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FavoriteDetailComponent ],
       imports: [IonicModule.forRoot()]

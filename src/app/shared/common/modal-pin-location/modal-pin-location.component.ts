@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
@@ -25,7 +25,7 @@ export class ModalPinLocationComponent implements OnInit {
   };
   fg: FormGroup;
 
-  constructor(private modalCtrl: ModalController, private geolocation: Geolocation, private fb: FormBuilder) {
+  constructor(private modalCtrl: ModalController, private geolocation: Geolocation, private fb: FormBuilder, private zone:NgZone) {
     this.buildForm();
   }
 
@@ -37,6 +37,8 @@ export class ModalPinLocationComponent implements OnInit {
     this.fg = this.fb.group({
       longitude: [null],
       latitude: [null],
+      formatted_address: [null],
+      route: [null]
     });
   }
 
@@ -56,57 +58,60 @@ export class ModalPinLocationComponent implements OnInit {
         disableDefaultUI: true,
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      this.initMarker(longLat, this.map);
+      // this.initMarker(longLat, this.map);
       this.getGeocodeInfo(this.map.getCenter());
 
-      google.maps.event.addListener(this.map, 'dragstart', () => {
-        this.marker.setPosition(this.map.getCenter());
-        this.getGeocodeInfo(this.map.getCenter());
-        const lat = this.marker.getPosition().lat();
-        const lng = this.marker.getPosition().lng();
+      google.maps.event.addListener(this.map, 'dragend', () => {
+        const center = this.map.getCenter();
+        this.getGeocodeInfo(center);
+        const lat = center.lat();
+        const lng = center.lng();
         this.fg?.controls?.latitude.patchValue(lat);
         this.fg?.controls?.longitude.patchValue(lng);
       });
 
       google.maps.event.addListener(this.map, 'zoom_changed', () => {
-        this.marker.setPosition(this.map.getCenter());
-        this.getGeocodeInfo(this.map.getCenter());
-        const lat = this.marker.getPosition().lat();
-        const lng = this.marker.getPosition().lng();
+        const center = this.map.getCenter();
+        this.getGeocodeInfo(center);
+        const lat = center.lat();
+        const lng = center.lng();
         this.fg?.controls?.latitude.patchValue(lat);
         this.fg?.controls?.longitude.patchValue(lng);
       });
     });
   }
 
-  initMarker(longLat, maps) {
-    this.marker = new google.maps.Marker({
-      position: longLat,
-      map: maps,
-    });
-    const objLonglat = longLat.toJSON();
-    const controls = this.fg?.controls;
-    controls?.latitude.patchValue(objLonglat.lat);
-    controls?.longitude.patchValue(objLonglat.lng);
-  }
+  // initMarker(longLat, maps) {
+  //   this.marker = new google.maps.Marker({
+  //     position: longLat,
+  //     map: maps,
+  //   });
+  //   const objLonglat = longLat.toJSON();
+  //   const controls = this.fg?.controls;
+  //   controls?.latitude.patchValue(objLonglat.lat);
+  //   controls?.longitude.patchValue(objLonglat.lng);
+  // }
 
   getGeocodeInfo(longlat) {
     this.geoCoder = new google.maps.Geocoder();
     this.geoCoder.geocode({ location: longlat }, (result, status) => {
       if (status === 'OK') {
+        console.log("Berubah", result[0]);
         this.processGeocodeResult(result[0]);
       }
     });
   }
 
   processGeocodeResult(result) {
-    this.geoAddressData.formatted_address = result?.formatted_address;
-    result?.address_components.forEach((element) => {
-      const found = element.types.find((x) => x === 'route');
-      if (found) {
-        this.geoAddressData.route_name = element?.long_name;
-      }
-    });
+    this.zone.run(() => {
+      this.geoAddressData.formatted_address = result?.formatted_address;
+      result?.address_components.forEach((element) => {
+        const found = element.types.find((x) => x === 'route');
+        if (found) {
+          this.geoAddressData.route_name = element?.long_name;
+        }
+      });
+    })
   }
 
   setCurrentLocation(data = null) {
@@ -114,13 +119,13 @@ export class ModalPinLocationComponent implements OnInit {
       if (!data) {
         this.geolocation.getCurrentPosition().then((res) => {
           const longLat = new google.maps.LatLng(res.coords.latitude, res.coords.longitude);
-          this.marker.setPosition(longLat);
+          // this.marker.setPosition(longLat);
           this.map.setCenter(longLat);
           this.getGeocodeInfo(longLat);
         });
       } else {
         const longLat = new google.maps.mapsLatLng(data.latitude, data.longitude);
-        this.marker.setPosition(longLat);
+        // this.marker.setPosition(longLat);
         this.map.setCenter(longLat);
         this.getGeocodeInfo(longLat);
       }
@@ -132,6 +137,9 @@ export class ModalPinLocationComponent implements OnInit {
   }
 
   pinLocation() {
-    this.dismiss(this.fg.value);
+    this.dismiss({
+      coordinate : this.fg.value,
+      addressData : this.geoAddressData
+    });
   }
 }

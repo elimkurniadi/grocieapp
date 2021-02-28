@@ -1,7 +1,10 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar mode="ios">
-    <ion-buttons slot="start" mode="md" class="title">
-      <ion-back-button icon="chevron-back" defaultHref="/tabs/home"></ion-back-button>
+    <ion-buttons slot="start" mode="md" class="title" (click)="dismiss()">
+      <!-- <ion-back-button icon="chevron-back"></ion-back-button> -->
+      <ion-button>
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title> {{ 'ACTIVITY' | translate }} </ion-title>
   </ion-toolbar>
@@ -21,10 +24,9 @@
       <ion-content>
         <ion-grid>
           <ion-row
-            *ngFor="let item of [1, 2, 3, 4, 5]"
+            *ngFor="let inbox of inboxList"
             class="ion-padding-bottom link ion-text-left"
-            [routerLink]="['/notification', item, 'detail']"
-          >
+            (click)="openDetail(inbox)">
             <ion-col size="2" class="ion-align-self-center">
               <ion-thumbnail class="thumb-notif">
                 <img src="assets/images/inbox-logo.svg" />
@@ -33,13 +35,13 @@
             <ion-col size="10">
               <ion-row>
                 <ion-col size="12" class="ion-no-padding">
-                  <ion-text class="notif-title"> Grocery shopping save IDR 120k off!</ion-text>
+                  <ion-text class="notif-title">{{inbox?.subject}}</ion-text>
                 </ion-col>
                 <ion-col size="12" class="ion-no-padding truncate">
-                  <ion-text class="notif-desc"> Everything 20% off! Save up to 120k by shopping with us </ion-text>
+                  <ion-text class="notif-desc">{{inbox?.message}}</ion-text>
                 </ion-col>
                 <ion-col size="12" class="ion-no-padding">
-                  <ion-text class="notif-time"> {{ currentDate | date: 'medium' }}</ion-text>
+                  <ion-text class="notif-time"> {{ inbox?.notification_created_at | date: 'medium' }}</ion-text>
                 </ion-col>
               </ion-row>
             </ion-col>
@@ -51,10 +53,9 @@
       <ion-content>
         <ion-grid>
           <ion-row
-            *ngFor="let item of [1, 2, 3, 4, 5]"
+            *ngFor="let notif of notificationList"
             class="ion-padding-bottom link ion-text-left"
-            [routerLink]="['/notification', item, 'detail']"
-          >
+            (click)="openDetail(notif)">
             <ion-col size="2" class="ion-align-self-center">
               <ion-thumbnail class="thumb-notif">
                 <img src="assets/images/notif-logo.svg" />
@@ -63,13 +64,13 @@
             <ion-col size="10">
               <ion-row>
                 <ion-col size="12" class="ion-no-padding">
-                  <ion-text class="notif-title"> Grocery shopping save IDR 120k off!</ion-text>
+                  <ion-text class="notif-title">{{notif?.subject}}</ion-text>
                 </ion-col>
                 <ion-col size="12" class="ion-no-padding truncate">
-                  <ion-text class="notif-desc"> Everything 20% off! Save up to 120k by shopping with us </ion-text>
+                  <ion-text class="notif-desc">{{notif?.message}}</ion-text>
                 </ion-col>
                 <ion-col size="12" class="ion-no-padding">
-                  <ion-text class="notif-time"> {{ currentDate | date: 'medium' }}</ion-text>
+                  <ion-text class="notif-time"> {{ notif?.notification_created_at | date: 'medium' }}</ion-text>
                 </ion-col>
               </ion-row>
             </ion-col>
