@@ -74,7 +74,9 @@
           <span><b>Rp. {{totalPrice | number}}</b></span>
         </ion-col>
         <ion-col size="6" class="ion-text-right ion-no-padding" [routerLink]="['/checkout']">
-          <ion-button color="limegreen" size="small" [disabled]="!canProceed"> {{'CHECKOUT' | translate}} </ion-button>
+          <ion-button color="limegreen" size="small" [disabled]="unprocessableCartList.length > 0">
+            {{'CHECKOUT' | translate}}
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -12,7 +12,6 @@ export class CartPage implements OnInit {
   unprocessableCartList: any[] = [];
   relatedProductList: any[] = null;
   totalPrice = 0;
-  canProceed = false;
 
   constructor(private cartSrv: CartService, private productSrv: ProductService) {}
 
