@@ -235,5 +235,7 @@
   "ACTIVITY": "Activity",
   "CHECK_CART": "Check Cart",
   "INVALID_OTP": "Invalid OTP",
-  "PROCEED_PAYMENT": "Proceed Payment"
+  "PROCEED_PAYMENT": "Proceed Payment",
+  "STOCK": "Stock",
+  "OUT_OF_STOCK": "Out of Stock"
 }

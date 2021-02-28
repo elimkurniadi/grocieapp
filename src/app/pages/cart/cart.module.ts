@@ -10,6 +10,7 @@ import { CartPage } from './cart.page';
 import { SharedModule } from '@shared/shared.module';
 import { ItemListModule } from '@shared/common/item-list/item-list.module';
 import { SlideProductModule } from '@shared/common/slide-product/slide-product.module';
+import { ItemListInactiveModule } from '@shared/common/item-list-inactive/item-list-inactive.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { SlideProductModule } from '@shared/common/slide-product/slide-product.m
     CartPageRoutingModule,
     SharedModule,
     ItemListModule,
+    ItemListInactiveModule,
     SlideProductModule,
   ],
   declarations: [CartPage],

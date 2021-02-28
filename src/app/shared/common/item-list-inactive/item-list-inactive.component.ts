@@ -1,56 +1,32 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { AlertService } from '@shared/services/alert.service';
-import { CartService } from '@shared/services/modules/cart.service';
+import { CartService } from '@shared/services/modules';
 
 @Component({
-  selector: 'app-item-list',
-  templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.scss'],
+  selector: 'app-item-list-inactive',
+  templateUrl: './item-list-inactive.component.html',
+  styleUrls: ['./item-list-inactive.component.scss'],
 })
-export class ItemListComponent implements OnInit {
-  @Input() cartData = null;
-  @Input() showSubstract = true;
-  @Output() quantityChange = new EventEmitter();
-  @Output() afterDeleteItem = new EventEmitter();
-  totalPrice = 0;
-
+export class ItemListInactiveComponent implements OnInit {
+  @Input() cartData: any[] = null;
+  @Output() afterCta = new EventEmitter();
+  showSubstract = false;
   constructor(private cartSrv: CartService, private alertSrv: AlertService, private translateSrv: TranslateService) {}
 
-  ngOnInit() {
-    if (this.cartData) {
-      this.calculateEachProductPrice().then(() => {
-        this.cartSrv.calculateSumPrice(this.cartData).then((res) => {
-          this.totalPrice = res;
-        });
-      });
-    }
-  }
-
-  async calculateEachProductPrice() {
-    const list = this.cartData;
-    await list.forEach((element) => {
-      const price = element.product.product_price * element.quantity;
-      element.price = price;
-    });
-  }
-
-  async calculateTotalPrice() {
-    await this.cartSrv.calculateSumPrice(this.cartData).then((res) => {
-      this.totalPrice = res;
-    });
-  }
+  ngOnInit() {}
 
   updateQuantity(index) {
     const listByIndex = this.cartData[index];
     const currentQty = listByIndex?.quantity;
-    this.cartSrv.updateCartQuantity(listByIndex?.cart_id, currentQty).then((res) => {
-      listByIndex.quantity = res;
-      listByIndex.local_subtotal_price = +listByIndex?.product?.primary_price * +res;
-      this.calculateTotalPrice().then(() => {
-        this.quantityChange.emit(this.totalPrice);
+    if (currentQty <= listByIndex?.product?.stock) {
+      this.cartSrv.updateCartQuantity(listByIndex?.cart_id, currentQty).then((res) => {
+        listByIndex.quantity = res;
+        listByIndex.local_subtotal_price = +listByIndex?.product?.primary_price * +res;
+
+        this.afterCta.emit();
       });
-    });
+    }
   }
 
   updateLocalQuantity(index, isIncrement) {
@@ -82,7 +58,7 @@ export class ItemListComponent implements OnInit {
 
   removeItemFromCart(cartId) {
     this.cartSrv.deleteCartItem(cartId).then(() => {
-      this.afterDeleteItem.emit();
+      this.afterCta.emit();
     });
   }
 

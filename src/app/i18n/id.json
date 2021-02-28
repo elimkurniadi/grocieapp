@@ -223,5 +223,7 @@
   "ACTIVITY": "Aktifitas",
   "CHECK_CART": "Periksa Keranjang",
   "INVALID_OTP": "OTP tidak valid",
-  "PROCEED_PAYMENT": "Lanjutkan Pembayaran"
+  "PROCEED_PAYMENT": "Lanjutkan Pembayaran",
+  "STOCK": "Stok",
+  "OUT_OF_STOCK": "Stok Habis"
 }

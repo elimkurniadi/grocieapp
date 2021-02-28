@@ -1,17 +1,10 @@
-<ion-row *ngIf="cartData?.length <= 0">
-  <ion-col class="ion-text-center product-name"> Cart is empty </ion-col>
-</ion-row>
 <ng-container *ngFor="let cart of cartData; let i = index">
   <ion-row class="ion-align-items-center ion-justify-content-center ion-margin-vertical">
-    <ion-col size="2">
-      <img
-        [routerLink]="['/product/detail', cart?.product?.product_id || cart?.product_id]"
-        [src]="cart?.product?.image_url || cart?.image_url"
-        alt="product_image"
-      />
+    <ion-col size="2" class="grayed-out">
+      <img [src]="cart?.product?.image_url || cart?.image_url" alt="product_image" />
     </ion-col>
     <ion-col size="10" class="ion-padding-start">
-      <ion-row>
+      <ion-row class="grayed-out">
         <ion-col size="12" class="ion-no-padding">
           <span class="product-name"
             ><b>{{ cart?.product?.name || cart?.name }}</b></span
@@ -19,8 +12,7 @@
         </ion-col>
       </ion-row>
       <ion-row class="ion-align-items-center ion-justify-content-center">
-        <ion-col [size]="showSubstract ? '8' : '8'" class="ion-no-padding">
-          <!-- <span class="product-brand">{{ cart?.product?.brand?.name || cart?.brand?.name }}</span> -->
+        <ion-col class="ion-no-padding grayed-out">
           <div class="product-price">
             {{ cart?.product?.secondary_price || cart?.secondary_price | currency: 'Rp. ' }}
           </div>
@@ -28,8 +20,8 @@
             Rp. {{ cart?.product?.primary_price || cart?.primary_price | number }}
           </span>
         </ion-col>
-        <ion-col size="4" class="ion-no-padding ion-text-center" *ngIf="showSubstract">
-          <ion-row class="ion-align-items-center">
+        <ion-col size="4" class="ion-no-padding ion-text-center">
+          <ion-row class="ion-align-items-center" *ngIf="cart?.product?.stock > 0">
             <ion-col size="4">
               <ion-icon
                 name="remove-circle-outline"
@@ -50,19 +42,18 @@
                 (click)="updateLocalQuantity(i, true)"
               ></ion-icon>
             </ion-col>
+            <ion-col size="12">
+              <small>({{ 'STOCK' | translate }} < {{ cart?.product?.stock + 1 }})</small>
+            </ion-col>
           </ion-row>
-        </ion-col>
-        <!-- <ion-col [size]="showSubstract ? '4' : '6'" class="ion-no-padding ion-text-right" *ngIf="showSubstract">
-          <ion-text color="dark">
-            <span><b>Rp. {{ cart?.local_subtotal_price || cart?.local_subtotal_price | number }}</b></span>
-          </ion-text>
-        </ion-col> -->
-        <ion-col [size]="showSubstract ? '4' : '4'" class="ion-no-padding ion-text-right" *ngIf="!showSubstract">
-          <ion-text color="dark">
-            <span
-              >x <b>{{ cart?.quantity || cart?.transaction_products?.quantity }}</b></span
-            >
-          </ion-text>
+          <ion-row *ngIf="cart?.product?.stock === 0">
+            <ion-col size="12">
+              <ion-icon name="trash-outline" color="danger" (click)="showAlertRemoveItem(cart?.cart_id)"></ion-icon>
+            </ion-col>
+            <ion-col size="12">
+              <small>({{ 'OUT_OF_STOCK' | translate }})</small>
+            </ion-col>
+          </ion-row>
         </ion-col>
       </ion-row>
     </ion-col>
