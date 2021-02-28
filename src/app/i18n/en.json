@@ -234,5 +234,6 @@
   "VOUCHER_LIMIT": "The voucher cannot be used. Please read the terms and conditions or try another voucher code",
   "ACTIVITY": "Activity",
   "CHECK_CART": "Check Cart",
-  "INVALID_OTP": "Invalid OTP"
+  "INVALID_OTP": "Invalid OTP",
+  "PROCEED_PAYMENT": "Proceed Payment"
 }

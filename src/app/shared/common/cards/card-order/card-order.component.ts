@@ -52,7 +52,7 @@ export class CardOrderComponent implements OnInit {
 
   confirmArrived(orderId: any) {
     this.transactionSrv
-      .uploadPaymentProof(orderId)
+      .confirmOrder(orderId)
       .then((res) => {
         this.router.navigate(['/my-order', orderId, 'detail']);
       })

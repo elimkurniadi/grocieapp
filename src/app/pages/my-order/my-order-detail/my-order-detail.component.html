@@ -49,30 +49,40 @@
         </ion-col>
       </ion-row>
       <ion-row>
-
-        <ion-col size="{{12/ transactionStatus?.length}}" class="padding-status-col"
-          *ngFor="let status of transactionStatus; let i = index">
-          <div [ngClass]="{'status-line' : i!=0 , 'green': status?.active }"></div>
+        <ion-col
+          size="{{ 12 / transactionStatus?.length }}"
+          class="padding-status-col"
+          *ngFor="let status of transactionStatus; let i = index"
+        >
+          <div [ngClass]="{ 'status-line': i != 0, green: status?.active }"></div>
           <!-- [ngClass]="{'status-line-right': i == 0 && i == transactionStatus.length - 1}" -->
           <div class="status-bg center">
-            <img src="{{ 'assets/images/' + status?.name + '.svg' }}" class="status-img"
-              [ngClass]="{'green' :status?.active}" />
+            <img
+              src="{{ 'assets/images/' + status?.name + '.svg' }}"
+              class="status-img"
+              [ngClass]="{ green: status?.active }"
+            />
           </div>
 
           <div
-            [ngClass]="{'status-line-right': i != transactionStatus.length - 1, 'green': transactionStatus[i+1]?.active == true }">
-          </div>
+            [ngClass]="{
+              'status-line-right': i != transactionStatus.length - 1,
+              green: transactionStatus[i + 1]?.active == true
+            }"
+          ></div>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <ion-col size="{{12/ transactionStatus?.length}}" class="padding-status-col ion-text-center"
-          *ngFor="let status of transactionStatus">
-          <ion-text class="order-status" [ngClass]="{'green': status?.active}">
+        <ion-col
+          size="{{ 12 / transactionStatus?.length }}"
+          class="padding-status-col ion-text-center"
+          *ngFor="let status of transactionStatus"
+        >
+          <ion-text class="order-status" [ngClass]="{ green: status?.active }">
             {{ status?.name | translate }}
           </ion-text>
         </ion-col>
-
       </ion-row>
     </ion-card-content>
   </ion-card>
@@ -146,15 +156,16 @@
           <ion-text color="success" class="summary-value green">- {{ order?.product_discount | currency: 'Rp. ':'symbol':'1.0-0' }} </ion-text>
         </ion-col>
       </ion-row> -->
-      <ion-row *ngIf="+order?.voucher_discount > 0 || +order?.product_discount > 0 ">
+      <ion-row *ngIf="+order?.voucher_discount > 0 || +order?.product_discount > 0">
         <ion-col size="6">
           <ion-text class="summary-label green">
             {{ 'DISCOUNT' | translate }}
           </ion-text>
         </ion-col>
         <ion-col size="6" class="ion-text-right">
-          <ion-text color="success" class="summary-value green">-
-            {{ order?.voucher_discount + order?.product_discount | currency: 'Rp. ':'symbol':'1.0-0' }} </ion-text>
+          <ion-text color="success" class="summary-value green"
+            >- {{ order?.voucher_discount + order?.product_discount | currency: 'Rp. ':'symbol':'1.0-0' }}
+          </ion-text>
         </ion-col>
       </ion-row>
       <div class="divider"></div>
@@ -199,10 +210,10 @@
       <ion-row>
         <ion-col>
           <ion-text class="order-delivery-date">
-            {{ order?.created_at | date: 'EEEE, d MMM yyyy' }}
+            {{ order?.shipping_date | date: 'EEEE, d MMM yyyy' }}
           </ion-text>
           <br />
-          <ion-text class="order-delivery-date"> 12:00 - 14:00 </ion-text>
+          <ion-text class="order-delivery-date"> {{ order?.shipping_time }} </ion-text>
         </ion-col>
       </ion-row>
     </ion-card-content>
@@ -210,8 +221,17 @@
 
   <ion-row class="ion-padding" *ngIf="order?.transaction_status?.transaction_status_id == 1">
     <ion-col>
-      <ion-button color="success" shape="round" expand="block" (click)="uploadProof()">
+      <ion-button
+        color="success"
+        shape="round"
+        expand="block"
+        (click)="uploadProof()"
+        *ngIf="order?.payment_method_id === '2'"
+      >
         {{ 'UPLOAD_PAYMENT_PROOF' | translate }}
+      </ion-button>
+      <ion-button color="success" shape="round" expand="block" (click)="pay()" *ngIf="order?.payment_method_id === '1'">
+        {{ 'PROCEED_PAYMENT' | translate }}
       </ion-button>
     </ion-col>
   </ion-row>

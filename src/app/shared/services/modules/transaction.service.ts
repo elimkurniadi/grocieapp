@@ -113,4 +113,19 @@ export class TransactionService {
       );
     });
   }
+
+  confirmOrder(id: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.putData(`transaction/finish/${id}`, null);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          res.code === 201 || res.code === 200 ? resolve(true) : reject(false);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }

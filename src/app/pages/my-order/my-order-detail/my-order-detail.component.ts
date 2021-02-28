@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Cart } from '@shared/models';
+import { Cart, Transaction } from '@shared/models';
+import { BrowserService } from '@shared/services/browser.service';
 import { CartService, TransactionService } from '@shared/services/modules';
 
 @Component({
@@ -11,23 +12,16 @@ import { CartService, TransactionService } from '@shared/services/modules';
 export class MyOrderDetailComponent implements OnInit {
   itemList: Cart[];
   totalPrice = 0;
-  order;
+  order: Transaction;
   transactionStatus;
   orderId: any;
-  // order = {
-  //   transaction_id: 'AHS - 70009876543',
-  //   transaction_status: 'in_process',
-  //   transaction_status_name: 'Order In Process',
-  //   created_at: new Date(),
-  //   order_payment_method: 'Manual Bank Transfer',
-  //   total_price: '70000',
-  // };
 
   constructor(
     private cartSrv: CartService,
     private transactionSrv: TransactionService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private browserSrv: BrowserService
   ) {}
 
   ngOnInit() {
@@ -75,5 +69,9 @@ export class MyOrderDetailComponent implements OnInit {
 
   uploadProof() {
     this.router.navigate(['/payment', this.orderId, 'proof']);
+  }
+
+  pay() {
+    this.browserSrv.openBrowser({ url: this.order.payment_url });
   }
 }

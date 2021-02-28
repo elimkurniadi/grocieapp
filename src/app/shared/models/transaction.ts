@@ -30,6 +30,9 @@ export interface Transaction {
   shipping_receipt?: string;
   shipping_time?: string;
   total_weight?: number;
+  voucher_discount?: string;
   created_at?: Date;
   updated_at?: Date;
+  service_fee?: string;
+  delivery_fee?: string;
 }
