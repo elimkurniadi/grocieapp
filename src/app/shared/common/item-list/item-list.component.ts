@@ -26,7 +26,7 @@ export class ItemListComponent implements OnInit {
       });
     }
   }
-  
+
   async calculateEachProductPrice() {
     const list = this.cartData;
     await list.forEach((element) => {
@@ -44,19 +44,28 @@ export class ItemListComponent implements OnInit {
   updateQuantity(index) {
     const listByIndex = this.cartData[index];
     const currentQty = listByIndex?.quantity;
-    this.cartSrv.updateCartQuantity(listByIndex?.cart_id, currentQty).then((res) => {
-      listByIndex.quantity = res;
-      listByIndex.local_subtotal_price = +listByIndex?.product?.primary_price * +res;
-      this.calculateTotalPrice().then(() => {
-        this.quantityChange.emit(this.totalPrice);
+    this.cartSrv
+      .updateCartQuantity(listByIndex?.cart_id, currentQty)
+      .then((res) => {
+        listByIndex.quantity = res;
+        listByIndex.local_subtotal_price = +listByIndex?.product?.primary_price * +res;
+        this.calculateTotalPrice().then(() => {
+          this.quantityChange.emit(this.totalPrice);
+        });
+      })
+      .catch((err) => {
+        console.log('err: ', err);
+        console.log('last qty', listByIndex);
       });
-    });
   }
 
   updateLocalQuantity(index, isIncrement) {
     const listByIndex = this.cartData[index];
-    const currentQty = isIncrement ? listByIndex?.quantity + 1 : listByIndex?.quantity - 1;
-    currentQty === 0 ? this.showAlertRemoveItem(this.cartData[index]?.cart_id) : (listByIndex.quantity = currentQty);
+    const canUpdate = this.compareQuantityWithStock(+listByIndex?.quantity, +listByIndex?.product?.stock);
+    if ((isIncrement && canUpdate) || !isIncrement) {
+      const currentQty = isIncrement ? listByIndex?.quantity + 1 : listByIndex?.quantity - 1;
+      currentQty === 0 ? this.showAlertRemoveItem(this.cartData[index]?.cart_id) : (listByIndex.quantity = currentQty);
+    }
   }
 
   showAlertRemoveItem(cartId) {
@@ -81,5 +90,9 @@ export class ItemListComponent implements OnInit {
     this.cartSrv.deleteCartItem(cartId).then(() => {
       this.afterDeleteItem.emit();
     });
+  }
+
+  compareQuantityWithStock(qty, stock) {
+    return qty < stock ? true : false;
   }
 }
