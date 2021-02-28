@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService, ProductService } from '@shared/services/modules';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-cart',
@@ -8,8 +9,10 @@ import { CartService, ProductService } from '@shared/services/modules';
 })
 export class CartPage implements OnInit {
   cartList: any[] = null;
+  unprocessableCartList: any[] = [];
   relatedProductList: any[] = null;
   totalPrice = 0;
+  canProceed = false;
 
   constructor(private cartSrv: CartService, private productSrv: ProductService) {}
 
@@ -43,7 +46,8 @@ export class CartPage implements OnInit {
         Object.assign(element, { local_subtotal_price: localSubTotalPrice });
       });
       this.cartList = res;
-      this.initTotalPrice();
+      console.log('list??', this.cartList);
+      this.partitionCartList(this.cartList);
     });
   }
 
@@ -51,5 +55,15 @@ export class CartPage implements OnInit {
     this.productSrv.getFeaturedProduct(null, null).then((res) => {
       this.relatedProductList = res;
     });
+  }
+
+  partitionCartList(list) {
+    const divide = _.partition(list, (x) => {
+      return x.quantity <= x.product.stock;
+    });
+    this.cartList = divide[0];
+
+    this.unprocessableCartList = divide[1];
+    this.initTotalPrice();
   }
 }

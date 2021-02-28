@@ -1,5 +1,8 @@
-<ion-card class="ion-no-border" style="margin-left: 0px; margin-right: 0px"
-  [ngClass]="{'disabled': product?.stock <= 0}">
+<ion-card
+  class="ion-no-border"
+  style="margin-left: 0px; margin-right: 0px"
+  [ngClass]="{ disabled: product?.stock <= 0 }"
+>
   <ion-card-header class="ion-no-padding link" [routerLink]="['/product/detail', product?.product_id]">
     <img [src]="product?.image_url" class="product-img full-width" *ngIf="product?.image_url" />
     <img src="https://via.placeholder.com/200.png" class="product-img full-width" *ngIf="!product?.image_url" />
@@ -27,8 +30,9 @@
     </ion-row>
     <ion-row>
       <ion-col [style.visibility]="product?.secondary_price ? 'unset' : 'hidden'">
-        <ion-badge style="font-size: 10px; --color: white; background-color: #f8a345">{{
-            ((product?.secondary_price - product?.primary_price) / product?.secondary_price) * 100 | number: '1.0-0'
+        <ion-badge style="font-size: 10px; --color: white; background-color: #f8a345"
+          >{{
+            ((+product?.secondary_price - +product?.primary_price) / +product?.secondary_price) * 100 | number: '1.0-0'
           }}
           %
         </ion-badge>
@@ -41,7 +45,5 @@
       </ion-col>
     </ion-row>
   </ion-card-content>
-  <div class="out-of-stock" *ngIf="product?.stock == 0">
-    Out of stock
-  </div>
+  <div class="out-of-stock" *ngIf="product?.stock == 0">Out of stock</div>
 </ion-card>

@@ -19,6 +19,17 @@
       </ion-col>
     </ion-row>
     <div class="divider"></div>
+    <ng-container *ngIf="unprocessableCartList.length > 0">
+      <ion-row class="ion-padding-horizontal ion-justify-content-between">
+        <ion-col size="12">
+          <app-item-list-inactive
+            [cartData]="unprocessableCartList"
+            (afterCta)="fetchCartList()"
+          ></app-item-list-inactive>
+        </ion-col>
+      </ion-row>
+      <div class="divider"></div>
+    </ng-container>
     <ion-row class="ion-margin-top">
       <ion-col size="12" style="padding-left: 16px">
         <span class="section-description">{{'CART_EXTRA' | translate }}</span>
@@ -33,14 +44,12 @@
   <ion-grid *ngIf="cartList?.length <= 0" class="ion-text-center ion-padding ion-margin">
     <ion-row>
       <ion-col>
-        <img src="assets/images/empty-cart.svg">
+        <img src="assets/images/empty-cart.svg" />
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <div class="text-empty-title ion-margin-vertical">
-          Start adding things to your cart!
-        </div>
+        <div class="text-empty-title ion-margin-vertical">Start adding things to your cart!</div>
         <ion-text class="text-empty-desc">
           You're cart is still empty. Start shopping and add things to your cart!
         </ion-text>
@@ -49,16 +58,14 @@
     <ion-row>
       <ion-col>
         <ion-button fill="outline" color="primary">
-          <strong>
-            Start Shopping
-          </strong>
+          <strong> Start Shopping </strong>
         </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
 
-<ion-footer class="ion-padding-horizontal" *ngIf="cartList?.length > 0" >
+<ion-footer class="ion-padding-horizontal" *ngIf="cartList?.length > 0">
   <ion-toolbar mode="md">
     <ion-grid class="ion-no-padding">
       <ion-row class="ion-justify-content-center ion-no-padding">
@@ -67,7 +74,7 @@
           <span><b>Rp. {{totalPrice | number}}</b></span>
         </ion-col>
         <ion-col size="6" class="ion-text-right ion-no-padding" [routerLink]="['/checkout']">
-          <ion-button color="limegreen" size="small"> {{'CHECKOUT' | translate}} </ion-button>
+          <ion-button color="limegreen" size="small" [disabled]="!canProceed"> {{'CHECKOUT' | translate}} </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
