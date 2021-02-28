@@ -53,6 +53,7 @@ export class CheckoutPage implements OnInit {
       this.deliveryNow = false;
       const currDate = this.currDate.add(1, 'days').format('YYYY-MM-DD');
       this.currDate = currDate;
+      this.selectedDate = moment(new Date()).add(1, 'days').format();
     } else {
       const currDate = this.currDate.format('YYYY-MM-DD');
       this.currDate = currDate;

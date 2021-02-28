@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonTabs } from '@ionic/angular';
+import { IonTabs, ModalController } from '@ionic/angular';
+import { ModalOtpComponent } from '@shared/common/otp/modal-otp/modal-otp.component';
+import { UserService } from '@shared/services/modules';
 
 @Component({
   selector: 'app-tabs',
@@ -46,17 +48,19 @@ export class TabsPage implements OnInit {
       selected: '',
     },
   ];
+  userData: any = null;
 
-  constructor() {}
+  constructor(private modalCtrl: ModalController, private userSrv: UserService) {}
 
   ngOnInit() {
     this.initMenuIcon();
+    this.fetchUserData();
   }
 
   setCurrentTab() {
     this.initMenuIcon();
     const idx = this.menus.find((menu) => menu.route === this.tabs.getSelected());
-    if(idx) {
+    if (idx) {
       idx.selected = idx.icon_active;
     }
   }
@@ -64,6 +68,23 @@ export class TabsPage implements OnInit {
   initMenuIcon() {
     this.menus.forEach((element) => {
       Object.assign(element, { selected: element.icon });
+    });
+  }
+
+  async showModalOtp() {
+    const modal = await this.modalCtrl.create({
+      component: ModalOtpComponent,
+    });
+    return await modal.present();
+  }
+
+  fetchUserData() {
+    this.userSrv.getProfile().then((res) => {
+      this.userData = res;
+
+      if (!this.userData.is_phone_verified) {
+        this.showModalOtp();
+      }
     });
   }
 }

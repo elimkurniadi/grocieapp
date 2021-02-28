@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentSummary, Response } from '@shared/models';
-import { ToastService } from '@shared/services';
+import { CacheService, ToastService } from '@shared/services';
 import { CheckoutService, TransactionService } from '@shared/services/modules';
 
 @Component({
@@ -25,7 +25,8 @@ export class PaymentInstructionComponent implements OnInit {
     private route: ActivatedRoute,
     private checkoutSrv: CheckoutService,
     private transactionSrv: TransactionService,
-    private toastSrv: ToastService
+    private toastSrv: ToastService,
+    private cache: CacheService
   ) {
     this.route.queryParams.subscribe((param) => {
       this.isNow = param.is_now === 'true';
@@ -82,11 +83,16 @@ export class PaymentInstructionComponent implements OnInit {
     this.transactionSrv
       .add(body)
       .then((res) => {
-        this.router.navigate(['/payment', 'proof']);
+        this.removeVoucher();
+        this.router.navigate(['/payment', res.response, 'proof']);
       })
       .catch((err) => {
         const error = err.error.error;
         this.toastSrv.show(error.message);
       });
+  }
+
+  removeVoucher() {
+    this.cache.removeVoucher();
   }
 }

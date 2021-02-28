@@ -11,11 +11,11 @@ import { BrandService, CategoryService, ProductService } from '@shared/services/
 })
 export class ProductSearchWithoutKeywordComponent implements OnInit {
   @Input() recentSearches: any;
+  @Input() products: Product[];
   @Output() assignKeyword = new EventEmitter();
 
   categories: Category[];
   brands: Brand[];
-  products: Product[];
   page: Page;
 
   constructor(
@@ -35,7 +35,6 @@ export class ProductSearchWithoutKeywordComponent implements OnInit {
   ngOnInit() {
     this.getCategory();
     this.getFeaturedBrand();
-    this.getPopularProduct();
   }
 
   setKeyword(keyword: string) {
@@ -65,19 +64,6 @@ export class ProductSearchWithoutKeywordComponent implements OnInit {
       .then((res) => {
         const brands = res.response as Brand[];
         this.brands = brands;
-      })
-      .catch((err) => {
-        const error = err.error.error;
-        this.toastSrv.show(error.message);
-      });
-  }
-
-  getPopularProduct() {
-    this.productSrv
-      .getPopular(this.page)
-      .then((res: ResponsePagination) => {
-        const products = res.response.rows as Product[];
-        this.products = products;
       })
       .catch((err) => {
         const error = err.error.error;

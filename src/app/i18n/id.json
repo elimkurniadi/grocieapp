@@ -221,5 +221,6 @@
   "SELECT_TIME_FIRST": "Pilih waktu dulu",
   "VOUCHER_LIMIT": "Voucher tidak dapat digunakan. Silakan baca syarat dan ketentuan atau coba kode voucher lain",
   "ACTIVITY": "Aktifitas",
-  "CHECK_CART": "Periksa Keranjang"
+  "CHECK_CART": "Periksa Keranjang",
+  "INVALID_OTP": "OTP tidak valid"
 }

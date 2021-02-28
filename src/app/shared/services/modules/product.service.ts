@@ -9,9 +9,9 @@ import { GlobalService } from '../global.service';
 export class ProductService {
   constructor(private api: ApiService, private gs: GlobalService) {}
 
-  getListByBundling(bundlingId: string, pagination?: Page, ordering?: Sort): Promise<any> {
+  getListByBundling(bundlingId: string, pagination?: Page, ordering?: Sort, filter?: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData(`product/bundling/${bundlingId}`, pagination, ordering);
+      const subscription = this.api.getData(`product/bundling/${bundlingId}`, pagination, ordering, filter);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: ResponsePagination) => {
@@ -23,9 +23,9 @@ export class ProductService {
       );
     });
   }
-  getListByCategory(categoryId: string, pagination?: Page, ordering?: Sort): Promise<any> {
+  getListByCategory(categoryId: string, pagination?: Page, ordering?: Sort, filter?: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData(`product/category/${categoryId}`, pagination, ordering);
+      const subscription = this.api.getData(`product/category/${categoryId}`, pagination, ordering, filter);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: ResponsePagination) => {
@@ -67,9 +67,9 @@ export class ProductService {
     });
   }
 
-  getListByBrand(brandId: string, pagination?: Page, ordering?: Sort): Promise<any> {
+  getListByBrand(brandId: string, pagination?: Page, ordering?: Sort, filter?: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData(`product/brand/${brandId}`, pagination, ordering);
+      const subscription = this.api.getData(`product/brand/${brandId}`, pagination, ordering, filter);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: ResponsePagination) => {
@@ -97,9 +97,9 @@ export class ProductService {
     });
   }
 
-  getListByKeyword(keyword: string, pagination?: Page, ordering?: Sort): Promise<any> {
+  getListByKeyword(keyword: string, pagination?: Page, ordering?: Sort, filter?: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData(`product/search/${keyword}`, pagination, ordering);
+      const subscription = this.api.getData(`product/search/${keyword}`, pagination, ordering, filter);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: ResponsePagination) => {
@@ -112,9 +112,9 @@ export class ProductService {
     });
   }
 
-  getPopular(pagination?: Page, ordering?: Sort): Promise<any> {
+  getPopular(pagination?: Page, ordering?: Sort, filter?: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData(`product/popular`, pagination, ordering);
+      const subscription = this.api.getData(`product/popular`, pagination, ordering, filter);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: ResponsePagination) => {
