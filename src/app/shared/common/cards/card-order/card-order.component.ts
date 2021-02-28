@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ModalConfirmationComponent } from '@shared/common/modals/modal-confirmation/modal-confirmation.component';
+import { Transaction } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
+import { ToastService } from '@shared/services';
 import { TransactionService } from '@shared/services/modules';
 
 @Component({
@@ -11,25 +13,17 @@ import { TransactionService } from '@shared/services/modules';
   styleUrls: ['./card-order.component.scss'],
 })
 export class CardOrderComponent implements OnInit {
-  @Input() order = {
-    transaction_code: 'AHS - 70009876543',
-    transaction_id: 'AHS - 70009876543',
-    payment_method : {
-      name: 'Virtual account'
-    },
-    transaction_status: {
-      name: 'IN_PROCESS'
-    },
-    order_status_name: 'Order In Process',
-    created_at: new Date(),
-    order_payment_method: 'Manual Bank Transfer',
-    total_price: '70000',
-  };
+  @Input() order: Transaction;
 
-  constructor(private modalCtrl: ModalController, private translate: TranslateService, private router: Router, private transactionSrv: TransactionService) {}
+  constructor(
+    private modalCtrl: ModalController,
+    private translate: TranslateService,
+    private router: Router,
+    private transactionSrv: TransactionService,
+    private toastSrv: ToastService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async presentConfirmModal(order: any) {
     const modal = await this.modalCtrl.create({
@@ -57,6 +51,14 @@ export class CardOrderComponent implements OnInit {
   }
 
   confirmArrived(orderId: any) {
-    this.router.navigate(['/tabs', 'profile']);
+    this.transactionSrv
+      .uploadPaymentProof(orderId)
+      .then((res) => {
+        this.router.navigate(['/my-order', orderId, 'detail']);
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
   }
 }

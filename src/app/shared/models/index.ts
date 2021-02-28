@@ -17,3 +17,5 @@ export * from './cart';
 export * from './payment_summary';
 export * from './payment_method';
 export * from './delivery_time';
+export * from './transaction';
+export * from './address';

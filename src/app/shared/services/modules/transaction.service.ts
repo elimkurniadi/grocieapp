@@ -99,7 +99,7 @@ export class TransactionService {
     });
   }
 
-  uploadPaymentProof(id, data): Promise<any> {
+  uploadPaymentProof(id, data?: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.putData(`transaction/upload_payment/${id}`, data, true);
       this.gs.pushSubscription(subscription);
