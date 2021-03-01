@@ -237,5 +237,8 @@
   "INVALID_OTP": "Invalid OTP",
   "PROCEED_PAYMENT": "Proceed Payment",
   "STOCK": "Stock",
-  "OUT_OF_STOCK": "Out of Stock"
+  "OUT_OF_STOCK": "Out of Stock",
+  "FORGOT_PASSWORD_INTRO": "Enter your email address and we will send you a message",
+  "CHECK_EMAIL": "Please check your email",
+  "SEND_EMAIL": "Send Email"
 }
