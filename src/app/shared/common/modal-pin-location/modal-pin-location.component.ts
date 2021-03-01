@@ -25,7 +25,12 @@ export class ModalPinLocationComponent implements OnInit {
   };
   fg: FormGroup;
 
-  constructor(private modalCtrl: ModalController, private geolocation: Geolocation, private fb: FormBuilder, private zone:NgZone) {
+  constructor(
+    private modalCtrl: ModalController,
+    private geolocation: Geolocation,
+    private fb: FormBuilder,
+    private zone: NgZone
+  ) {
     this.buildForm();
   }
 
@@ -38,7 +43,7 @@ export class ModalPinLocationComponent implements OnInit {
       longitude: [null],
       latitude: [null],
       formatted_address: [null],
-      route: [null]
+      route: [null],
     });
   }
 
@@ -59,6 +64,8 @@ export class ModalPinLocationComponent implements OnInit {
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
       // this.initMarker(longLat, this.map);
+      this.fg?.controls?.latitude.patchValue(latitude);
+      this.fg?.controls?.longitude.patchValue(longitude);
       this.getGeocodeInfo(this.map.getCenter());
 
       google.maps.event.addListener(this.map, 'dragend', () => {
@@ -96,7 +103,7 @@ export class ModalPinLocationComponent implements OnInit {
     this.geoCoder = new google.maps.Geocoder();
     this.geoCoder.geocode({ location: longlat }, (result, status) => {
       if (status === 'OK') {
-        console.log("Berubah", result[0]);
+        console.log('Berubah', result[0]);
         this.processGeocodeResult(result[0]);
       }
     });
@@ -111,7 +118,7 @@ export class ModalPinLocationComponent implements OnInit {
           this.geoAddressData.route_name = element?.long_name;
         }
       });
-    })
+    });
   }
 
   setCurrentLocation(data = null) {
@@ -138,8 +145,8 @@ export class ModalPinLocationComponent implements OnInit {
 
   pinLocation() {
     this.dismiss({
-      coordinate : this.fg.value,
-      addressData : this.geoAddressData
+      coordinate: this.fg.value,
+      addressData: this.geoAddressData,
     });
   }
 }

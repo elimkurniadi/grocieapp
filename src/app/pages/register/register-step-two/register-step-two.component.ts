@@ -23,6 +23,8 @@ export class RegisterStepTwoComponent implements OnInit {
   provinceList = [];
   cityList = [];
   districtList = [];
+  subDistrictList = [];
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -72,7 +74,8 @@ export class RegisterStepTwoComponent implements OnInit {
       province_id: [null, [RxwebValidators.required()]],
       city_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
-      postal_code: [null, [RxwebValidators.required(), RxwebValidators.numeric()]],
+      sub_district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
+      // postal_code: [null, [RxwebValidators.required(), RxwebValidators.numeric()]],
       address_name: [null, [RxwebValidators.required()]],
       tos: [false, RxwebValidators.requiredTrue()],
     });
@@ -84,6 +87,7 @@ export class RegisterStepTwoComponent implements OnInit {
     if (this.fg.valid) {
       const value = this.combineFormValues();
       this.userSrv.register(value).then(() => {
+        this.router.navigate(['/tabs', 'home']);
         this.showModalOtp();
       });
     }
@@ -128,6 +132,12 @@ export class RegisterStepTwoComponent implements OnInit {
     });
   }
 
+  async fetchSubDistricts(districtId) {
+    await this.addressSrv.getSubDistricts(districtId).then((res) => {
+      this.subDistrictList = res;
+    });
+  }
+
   onProvinceSelect(event) {
     const controls = this.fg.controls;
     controls.city_id.setValue(null);
@@ -146,13 +156,35 @@ export class RegisterStepTwoComponent implements OnInit {
     }
   }
 
+  onDistrictSelect(event) {
+    const controls = this.fg.controls;
+    if (event) {
+      controls.sub_district_id.setValue(null);
+      controls.sub_district_id.enable();
+      this.fetchSubDistricts(event);
+    }
+  }
+
   async presentModalPinLocation() {
     const modal = await this.modalCtrl.create({
       component: ModalPinLocationComponent,
+      componentProps: {
+        longitude: this.fg.value.longitude,
+        latitude: this.fg.value.latitude,
+      },
     });
 
-    modal.onWillDismiss().then(() => {
-      // CHANGE THE LONGLAT FORM VALUE
+    modal.onDidDismiss().then((res) => {
+      const data = res.data;
+      if (data) {
+        const controls = this.fg.controls;
+        controls.longitude.setValue(data.coordinate.longitude);
+        controls.latitude.setValue(data.coordinate.latitude);
+        controls.address.setValue(data?.addressData?.formatted_address);
+        controls.longitude.markAsDirty();
+        controls.latitude.markAsDirty();
+        controls.address.markAsDirty();
+      }
     });
 
     return await modal.present();
