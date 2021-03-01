@@ -225,5 +225,8 @@
   "INVALID_OTP": "OTP tidak valid",
   "PROCEED_PAYMENT": "Lanjutkan Pembayaran",
   "STOCK": "Stok",
-  "OUT_OF_STOCK": "Stok Habis"
+  "OUT_OF_STOCK": "Stok Habis",
+  "FORGOT_PASSWORD_INTRO": "Masukkan alamat email Anda dan kami akan mengirimkan Anda pesan",
+  "CHECK_EMAIL": "Mohon cek email anda",
+  "SEND_EMAIL": "Kirim Email"
 }

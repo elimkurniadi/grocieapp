@@ -28,7 +28,6 @@ export class AuthService {
       if (token) {
         const decoded = this.jwtHelper.decodeToken(token);
         const isExpired = this.jwtHelper.isTokenExpired(token);
-
         if (!isExpired) {
           this.cache.setCurrentUser(decoded, token);
           this.gs.log('not expired');

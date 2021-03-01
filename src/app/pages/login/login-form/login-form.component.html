@@ -37,7 +37,7 @@
     </ion-row>
     <ion-row class="ion-padding">
       <ion-col>
-        <ion-text class="login-redirect-text ion-padding-top" color="limegreen" [routerLink]="['/change-password']"
+        <ion-text class="login-redirect-text ion-padding-top" color="limegreen" [routerLink]="['/forgot-password']"
           ><b>{{ 'FORGOT_PASSWORD' | translate }}</b>
         </ion-text>
       </ion-col>
@@ -54,7 +54,9 @@
 <ion-footer class="ion-no-border">
   <ion-row class="ion-padding-bottom">
     <ion-col class="ion-padding">
-      <ion-button class="login-button" expand="block" color="limegreen" (click)="loginForm.ngSubmit.emit()"> {{ 'LOGIN' | translate }}</ion-button>
+      <ion-button class="login-button" expand="block" color="limegreen" (click)="loginForm.ngSubmit.emit()">
+        {{ 'LOGIN' | translate }}</ion-button
+      >
     </ion-col>
   </ion-row>
 </ion-footer>
