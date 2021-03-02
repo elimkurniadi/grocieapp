@@ -6,4 +6,5 @@ export interface PaymentSummary {
   delivery_fee?: number;
   discount?: number;
   raw_price?: number;
+  voucher_error?: any;
 }

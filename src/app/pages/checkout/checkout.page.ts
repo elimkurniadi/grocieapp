@@ -27,6 +27,7 @@ export class CheckoutPage implements OnInit {
   timeList: DeliveryTime[];
 
   voucher: Voucher;
+  voucherError = null;
 
   constructor(
     private cartSrv: CartService,
@@ -120,6 +121,7 @@ export class CheckoutPage implements OnInit {
     this.checkoutSrv.calculatePrice(filter).then((res: Response) => {
       const result = res.response as PaymentSummary;
       this.paymentSummary = result;
+      this.voucherError = result.voucher_error;
     });
   }
 
