@@ -1,5 +1,5 @@
 {
-    "appId": "com.klikgo.ionic",
+    "appId": "com.klikgo.klikgo",
     "appName": "Klikgo",
     "bundledWebRuntime": false,
     "npmClient": "npm",
@@ -14,6 +14,5 @@
             "serverClientId": "682784712996-65cbu37faq1lu6lc94erb48uf53cdka9.apps.googleusercontent.com",
             "forceCodeForRefreshToken": true
         }
-    },
-    "linuxAndroidStudioPath": "/home/dra/android-studio/bin/studio.sh"
+    }
 }

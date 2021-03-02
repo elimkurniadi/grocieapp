@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Klikgo</string>
     <string name="title_activity_main">Klikgo</string>
-    <string name="package_name">com.klikgo.ionic</string>
-    <string name="custom_url_scheme">com.klikgo.ionic</string>
+    <string name="package_name">com.klikgo.klikgo</string>
+    <string name="custom_url_scheme">com.klikgo.klikgo</string>
     <string name="server_client_id">682784712996-65cbu37faq1lu6lc94erb48uf53cdka9.apps.googleusercontent.com</string>
     <string name="facebook_app_id">1272637443123444</string>
     <string name="fb_login_protocol_scheme">fb1272637443123444</string>
