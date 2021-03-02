@@ -20,6 +20,14 @@
     </ion-row>
     <div class="divider"></div>
     <ng-container *ngIf="unprocessableCartList.length > 0">
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-text class="text-unprocessable">
+            {{unprocessableCartList.length}} item(s) cannot be processed
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <div class="divider"></div>
       <ion-row class="ion-padding-horizontal ion-justify-content-between">
         <ion-col size="12">
           <app-item-list-inactive
@@ -30,7 +38,7 @@
       </ion-row>
       <div class="divider"></div>
     </ng-container>
-    <ion-row class="ion-margin-top">
+    <ion-row class="ion-margin-top" *ngIf="relatedProductList?.length > 0">
       <ion-col size="12" style="padding-left: 16px">
         <span class="section-description">{{'CART_EXTRA' | translate }}</span>
       </ion-col>
@@ -57,7 +65,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button fill="outline" color="primary">
+        <ion-button fill="outline" color="primary" routerLink="/product/search">
           <strong> Start Shopping </strong>
         </ion-button>
       </ion-col>

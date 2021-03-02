@@ -17,7 +17,7 @@ export class CartPage implements OnInit {
 
   ngOnInit() {}
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.fetchCartList();
     this.fetchRelatedProductList();
   }

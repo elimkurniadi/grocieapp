@@ -38,6 +38,21 @@ export class SettingService {
     });
   }
 
+  getShareApp(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData('setting/share_text');
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res?.response);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
   getFAQ(): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData('faq');

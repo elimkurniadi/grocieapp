@@ -48,16 +48,41 @@ export class TabsPage implements OnInit {
       selected: '',
     },
   ];
+  private activeTab?: HTMLElement;
   userData: any = null;
 
   constructor(private modalCtrl: ModalController, private userSrv: UserService) {}
+
+  ionViewWillLeave() {
+    this.propagateToActiveTab('ionViewWillLeave');
+  }
+  
+  ionViewDidLeave() {
+    this.propagateToActiveTab('ionViewDidLeave');
+  }
+  
+  ionViewWillEnter() {
+    this.propagateToActiveTab('ionViewWillEnter');
+  }
+  
+  ionViewDidEnter() {
+    this.propagateToActiveTab('ionViewDidEnter');
+  }
+
+  private propagateToActiveTab(eventName: string) {    
+    if (this.activeTab) {
+      this.activeTab.dispatchEvent(new CustomEvent(eventName));
+    }
+  }
 
   ngOnInit() {
     this.initMenuIcon();
     this.fetchUserData();
   }
 
-  setCurrentTab() {
+  setCurrentTab(tabsRef: IonTabs) {
+    this.activeTab = tabsRef.outlet.activatedView.element;
+
     this.initMenuIcon();
     const idx = this.menus.find((menu) => menu.route === this.tabs.getSelected());
     if (idx) {

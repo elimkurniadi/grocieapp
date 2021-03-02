@@ -1,9 +1,9 @@
-<ion-card
-  class="ion-no-border"
+<ion-card [routerLink]="['/product/detail', product?.product_id]"
+  class="ion-no-border link"
   style="margin-left: 0px; margin-right: 0px"
   [ngClass]="{ disabled: product?.stock <= 0 }"
 >
-  <ion-card-header class="ion-no-padding link" [routerLink]="['/product/detail', product?.product_id]">
+  <ion-card-header class="ion-no-padding link">
     <img [src]="product?.image_url" class="product-img full-width" *ngIf="product?.image_url" />
     <img src="https://via.placeholder.com/200.png" class="product-img full-width" *ngIf="!product?.image_url" />
   </ion-card-header>
@@ -24,7 +24,7 @@
         <p class="product-size">Size: {{ product?.weight }} {{ product?.unit?.name }}</p>
       </ion-col>
       <ion-col size="2" class="ion-text-right">
-        <ion-icon src="assets/images/add-favorite.svg" color="primary" (click)="addToFavorite(product?.product_id)">
+        <ion-icon src="assets/images/add-favorite.svg" color="primary" (click)="addToFavorite(product?.product_id);$event.preventDefault();$event.stopPropagation()">
         </ion-icon>
       </ion-col>
     </ion-row>

@@ -27,7 +27,6 @@ export class CardProductComponent implements OnInit {
     modal.onDidDismiss().then(() => {
       // Refresh data
     });
-
     return await modal.present();
   }
 }

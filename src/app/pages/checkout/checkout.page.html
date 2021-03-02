@@ -115,8 +115,8 @@
         </fieldset>
       </ion-col>
 
-      <ion-col size="3" *ngFor="let time of timeList;let i = index">
-        <ion-chip
+      <ion-col size="3" class="ion-no-padding ion-text-center" *ngFor="let time of timeList;let i = index">
+        <ion-chip class="delivery-chip"
           [color]="time.selected ? 'success': 'light'"
           [outline]="!time?.selected"
           [disabled]="(!selectedDate || !time?.active) || deliveryNow"

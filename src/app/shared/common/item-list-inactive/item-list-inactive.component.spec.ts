@@ -7,12 +7,11 @@ describe('ItemListInactiveComponent', () => {
   let component: ItemListInactiveComponent;
   let fixture: ComponentFixture<ItemListInactiveComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ItemListInactiveComponent],
-        imports: [IonicModule.forRoot()],
-      }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ ItemListInactiveComponent ],
+      imports: [IonicModule.forRoot()]
+    }).compileComponents();
 
       fixture = TestBed.createComponent(ItemListInactiveComponent);
       component = fixture.componentInstance;

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import { ToastService } from '@shared/services';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
+import { SettingService } from '@shared/services/modules';
+import { DomSanitizer } from '@angular/platform-browser';
 const { Clipboard } = Plugins;
 
 @Component({
@@ -11,19 +13,31 @@ const { Clipboard } = Plugins;
   styleUrls: ['./modal-share-app.component.scss'],
 })
 export class ModalShareAppComponent implements OnInit {
-  shareLink = 'http://bit.ly/gtasamac';
+  shareLink;
 
   constructor(
     private modalCtrl: ModalController,
     private toastSrv: ToastService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private settingSrv: SettingService,
+    private domSanitizer: DomSanitizer,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.settingSrv.getShareApp().then(res => {
+      console.log("DATAnya euy", res);
+      const safeHTML = this.domSanitizer.bypassSecurityTrustHtml(res?.content);
+      this.shareLink = this.domSanitizer.sanitize(SecurityContext.HTML, safeHTML);
+    })
+  }
 
   copyLink() {
+    const parser = new DOMParser();
+    const stringParser = parser.parseFromString(this.shareLink,'text/html').body.textContent;
+    console.log(stringParser);
+    
     Clipboard.write({
-      string: this.shareLink,
+      string: stringParser,
     });
 
     this.toastSrv.show(this.translate.get('COPIED_SUCCESS'));
@@ -32,4 +46,7 @@ export class ModalShareAppComponent implements OnInit {
   dismiss() {
     this.modalCtrl.dismiss();
   }
+
+  
+
 }

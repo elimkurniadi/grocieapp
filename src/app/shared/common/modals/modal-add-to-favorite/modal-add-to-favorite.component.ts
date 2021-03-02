@@ -57,6 +57,7 @@ export class ModalAddToFavoriteComponent implements OnInit {
       this.favoriteSrv
         .addToFavorite(body)
         .then((res: Response) => {
+          this.toastSrv.show('Added to favorite list');
           this.dismiss();
         })
         .catch((err) => {

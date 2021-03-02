@@ -9,4 +9,13 @@
     font-size: 12px;
     color: var(--ion-color-primary);
   }
+
+  &-copy {
+    border-radius: 4px;
+    border: solid 1px #e7e7e7;
+    background-color: #ffffff;
+    font-size: 12px;
+    line-height: 1.17;
+    color: #707070;
+  }
 }

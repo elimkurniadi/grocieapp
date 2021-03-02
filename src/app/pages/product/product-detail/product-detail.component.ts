@@ -30,7 +30,7 @@ export class ProductDetailComponent implements OnInit {
     private navCtrl: NavController,
     private cartSrv: CartService,
     private modalCtrl: ModalController,
-    private router: Router
+    private router: Router,
   ) {
     this.observeParam();
 
@@ -96,7 +96,8 @@ export class ProductDetailComponent implements OnInit {
     modal.onDidDismiss().then((data) => {
       console.log(data);
       if(data?.data === 'cart') {
-        this.navCtrl.navigateRoot('/tabs/cart');
+        // this.navCtrl.navigateRoot(['tabs/cart']);
+        this.navCtrl.navigateRoot(['tabs/cart']);
       }
     })
 

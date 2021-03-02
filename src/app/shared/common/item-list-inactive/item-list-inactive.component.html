@@ -6,9 +6,7 @@
     <ion-col size="10" class="ion-padding-start">
       <ion-row class="grayed-out">
         <ion-col size="12" class="ion-no-padding">
-          <span class="product-name"
-            ><b>{{ cart?.product?.name || cart?.name }}</b></span
-          >
+          <span class="product-name"><b>{{ cart?.product?.name || cart?.name }}</b></span>
         </ion-col>
       </ion-row>
       <ion-row class="ion-align-items-center ion-justify-content-center">
@@ -23,27 +21,17 @@
         <ion-col size="4" class="ion-no-padding ion-text-center">
           <ion-row class="ion-align-items-center" *ngIf="cart?.product?.stock > 0">
             <ion-col size="4">
-              <ion-icon
-                name="remove-circle-outline"
-                size="small"
-                appDebounce
-                (debounceClick)="updateQuantity(i)"
-                (click)="updateLocalQuantity(i, false)"
-              ></ion-icon>
+              <ion-icon name="remove-circle-outline" size="small" appDebounce (debounceClick)="updateQuantity(i)"
+                (click)="updateLocalQuantity(i, false)"></ion-icon>
             </ion-col>
             <ion-col size="4">{{ cart?.quantity }}</ion-col>
             <ion-col size="4">
-              <ion-icon
-                name="add-circle-outline"
-                size="small"
+              <ion-icon name="add-circle-outline" size="small"
                 [color]="compareQuantityWithStock(+cart?.quantity, +cart?.product?.stock) ? 'black' : 'medium'"
-                appDebounce
-                (debounceClick)="updateQuantity(i)"
-                (click)="updateLocalQuantity(i, true)"
-              ></ion-icon>
+                appDebounce (debounceClick)="updateQuantity(i)" (click)="updateLocalQuantity(i, true)"></ion-icon>
             </ion-col>
             <ion-col size="12">
-              <small>({{ 'STOCK' | translate }} < {{ cart?.product?.stock + 1 }})</small>
+              <small class="text-unprocessable">({{ 'STOCK' | translate }} < {{ cart?.product?.stock + 1 }})</small>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="cart?.product?.stock === 0">

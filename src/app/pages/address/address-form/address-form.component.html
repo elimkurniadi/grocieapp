@@ -119,7 +119,7 @@
                 <ion-select placeholder="{{ 'SUB_DISTRICT_PLACEHOLDER' | translate }}"
                   formControlName="sub_district_id">
                   <ion-select-option *ngFor="let subDistrict of subDistrictList"
-                    [value]="subDistrict?.sub_district_id">{{subDistrict?.name | titlecase }}</ion-select-option>
+                    [value]="subDistrict?.sub_district_id">{{subDistrict?.name + ' - ' + subDistrict?.postal_code | titlecase }}</ion-select-option>
                 </ion-select>
                 <small *ngIf="fg.controls.sub_district_id.touched">{{
                   fg.controls.sub_district_id.errors?.required?.message
