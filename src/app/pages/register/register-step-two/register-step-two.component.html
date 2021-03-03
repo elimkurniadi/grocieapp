@@ -224,11 +224,11 @@
             }}</small>
           </div>
 
-          <div class="form-group">
-            <ion-item lines="none" class="form-group">
+          <div class="form-group ion-padding-vertical">
+            <div class="ion-padding-top">
               <ion-checkbox formControlName="tos" class="ion-margin-end"></ion-checkbox>
-              <ion-text>{{ 'TOS_AGREEMENT' | translate }}</ion-text>
-            </ion-item>
+              <ion-text (click)="showTnc()">{{ 'TOS_AGREEMENT' | translate }}</ion-text>
+            </div>
             <small>{{ fg.controls.tos.errors?.requiredTrue?.message }}</small>
           </div>
         </form>

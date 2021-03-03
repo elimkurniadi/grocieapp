@@ -4,10 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { ModalPinLocationComponent } from '@shared/common/modal-pin-location/modal-pin-location.component';
+import { ModalSettingComponent } from '@shared/common/modals/modal-setting/modal-setting.component';
 import { ModalOtpComponent } from '@shared/common/otp/modal-otp/modal-otp.component';
+import { Response, Setting } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
-import { GlobalService, RxValidatorService } from '@shared/services';
+import { GlobalService, RxValidatorService, ToastService } from '@shared/services';
 import { AlertService } from '@shared/services/alert.service';
+import { SettingService } from '@shared/services/modules';
 import { AddressService } from '@shared/services/modules/address.service';
 import { UserService } from '@shared/services/modules/user.service';
 
@@ -34,7 +37,9 @@ export class RegisterStepTwoComponent implements OnInit {
     private translateSrv: TranslateService,
     private gs: GlobalService,
     private modalCtrl: ModalController,
-    private addressSrv: AddressService
+    private addressSrv: AddressService,
+    private settingSrv: SettingService,
+    private toastSrv: ToastService
   ) {
     this.observeQueryParams();
     this.initRegisterFormStepTwo();
@@ -185,6 +190,32 @@ export class RegisterStepTwoComponent implements OnInit {
         controls.latitude.markAsDirty();
         controls.address.markAsDirty();
       }
+    });
+
+    return await modal.present();
+  }
+
+  showTnc() {
+    this.settingSrv
+      .getTnc()
+      .then((res: Response) => {
+        const data = res.response as Setting;
+        data.name = this.translateSrv.get('TERMS_CONDITIONS');
+        this.showSettingModal(data);
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
+  }
+
+  async showSettingModal(data: Setting) {
+    const modal = await this.modalCtrl.create({
+      component: ModalSettingComponent,
+      componentProps: {
+        title: data.name,
+        content: data.content,
+      },
     });
 
     return await modal.present();
