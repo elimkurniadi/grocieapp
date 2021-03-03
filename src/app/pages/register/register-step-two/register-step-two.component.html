@@ -180,7 +180,7 @@
                     <ion-select-option
                       *ngFor="let subDistrict of subDistrictList"
                       [value]="subDistrict?.sub_district_id"
-                      >{{ subDistrict?.name | titlecase }}</ion-select-option
+                      >{{ subDistrict?.name + ' - ' + subDistrict?.postal_code | titlecase }}</ion-select-option
                     >
                   </ion-select>
                 </ion-item>

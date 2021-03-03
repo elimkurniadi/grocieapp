@@ -240,5 +240,9 @@
   "OUT_OF_STOCK": "Out of Stock",
   "FORGOT_PASSWORD_INTRO": "Enter your email address and we will send you a message",
   "CHECK_EMAIL": "Please check your email",
-  "SEND_EMAIL": "Send Email"
+  "SEND_EMAIL": "Send Email",
+  "UNDER_MAINTENANCE": "Under Maintenance",
+  "MAINTENANCE_TITLE": "KlikGO Under Maintenance",
+  "MAINTENANCE_MESSAGE": "KlikGO is currently under maintenance. Please close the app and try again a few moments later.",
+  "CLOSE_APP": "Close App"
 }

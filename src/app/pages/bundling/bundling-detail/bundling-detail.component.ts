@@ -98,11 +98,11 @@ export class BundlingDetailComponent implements OnInit {
   loadMoreProduct(event: any) {
     setTimeout(() => {
       event.target.complete();
-      this.productPage.page += 1;
 
       if (this.productPage.page >= Math.ceil(this.productCount / this.productPage.row)) {
         event.target.disabled = true;
       } else {
+        this.productPage.page += 1;
         this.getProduct();
       }
     }, 600);
@@ -159,6 +159,7 @@ export class BundlingDetailComponent implements OnInit {
   }
 
   refreshProduct() {
+    this.productPage.page = 1;
     this.products = [];
     this.getProduct();
   }

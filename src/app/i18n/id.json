@@ -228,5 +228,9 @@
   "OUT_OF_STOCK": "Stok Habis",
   "FORGOT_PASSWORD_INTRO": "Masukkan alamat email Anda dan kami akan mengirimkan Anda pesan",
   "CHECK_EMAIL": "Mohon cek email anda",
-  "SEND_EMAIL": "Kirim Email"
+  "SEND_EMAIL": "Kirim Email",
+  "UNDER_MAINTENANCE": "Dalam Pemeliharaan",
+  "MAINTENANCE_TITLE": "KlikGO Dalam Pemeliharaan",
+  "MAINTENANCE_MESSAGE": "KlikGO saat ini sedang dalam pemeliharaan. Harap tutup aplikasi dan coba lagi beberapa saat kemudian.",
+  "CLOSE_APP": "Tutup Aplikasi"
 }

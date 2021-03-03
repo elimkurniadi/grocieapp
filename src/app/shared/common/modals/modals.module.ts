@@ -13,32 +13,25 @@ import { ModalShareAppComponent } from './modal-share-app/modal-share-app.compon
 import { ModalConfirmationComponent } from './modal-confirmation/modal-confirmation.component';
 import { ModalAddToCartComponent } from './modal-add-to-cart/modal-add-to-cart.component';
 import { ModalFaqComponent } from './modal-faq/modal-faq.component';
-import { MatExpansionModule}  from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ModalMaintenanceComponent } from './modal-maintenance/modal-maintenance.component';
 
+const MODAL_COMPONENT = [
+  ModalInfoComponent,
+  ModalAddToFavoriteComponent,
+  ModalAddToCartComponent,
+  ModalLocationComponent,
+  ModalFilterProductComponent,
+  ModalSortProductComponent,
+  ModalSettingComponent,
+  ModalShareAppComponent,
+  ModalConfirmationComponent,
+  ModalFaqComponent,
+  ModalMaintenanceComponent,
+];
 @NgModule({
-  declarations: [
-    ModalInfoComponent,
-    ModalAddToFavoriteComponent,
-    ModalAddToCartComponent,
-    ModalLocationComponent,
-    ModalFilterProductComponent,
-    ModalSortProductComponent,
-    ModalSettingComponent,
-    ModalShareAppComponent,
-    ModalConfirmationComponent,
-    ModalFaqComponent
-  ],
+  declarations: MODAL_COMPONENT,
   imports: [CommonModule, IonicModule.forRoot(), SharedModule, FormsModule, ReactiveFormsModule, MatExpansionModule],
-  exports: [
-    ModalInfoComponent,
-    ModalAddToFavoriteComponent,
-    ModalAddToCartComponent,
-    ModalLocationComponent,
-    ModalFilterProductComponent,
-    ModalSortProductComponent,
-    ModalSettingComponent,
-    ModalShareAppComponent,
-    ModalConfirmationComponent,
-  ],
+  exports: MODAL_COMPONENT,
 })
 export class ModalsModule {}
