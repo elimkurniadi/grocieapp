@@ -8,6 +8,7 @@ import { BannerService, BundlingService, UserService } from '@shared/services/mo
 import { Banner, Bundling } from '@shared/models';
 import { NotificationListComponent } from '../notification/notification-list/notification-list.component';
 import { ModalOtpComponent } from '@shared/common/otp/modal-otp/modal-otp.component';
+import { ActivityService } from '@shared/services/modules/activity.service';
 
 @Component({
   selector: 'app-home',
@@ -26,12 +27,14 @@ export class HomePage implements OnInit {
     private bannerSrv: BannerService,
     private bundlingSrv: BundlingService,
     private modalCtrl: ModalController,
-    private userSrv: UserService
+    private userSrv: UserService,
+    private activitySrv: ActivityService
   ) {}
 
   ngOnInit() {
     this.getBanner();
     this.getBundling();
+    this.activitySrv.registerPush();
   }
 
   selectLang(lang) {

@@ -1,4 +1,4 @@
-package com.klikgo.ionic;
+package com.klikgo.klikgo;
 
 import android.os.Bundle;
 
@@ -8,6 +8,8 @@ import com.getcapacitor.Plugin;
 import java.util.ArrayList;
 import com.codetrixstudio.capacitor.GoogleAuth.GoogleAuth;
 import jp.rdlabo.capacitor.plugin.facebook.FacebookLogin;
+import com.getcapacitor.community.fcm.FCMPlugin;
+
 public class MainActivity extends BridgeActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,7 @@ public class MainActivity extends BridgeActivity {
       // Ex: add(TotallyAwesomePlugin.class);
       add(GoogleAuth.class);
       add(FacebookLogin.class);
+      add(FCMPlugin.class);
     }});
   }
 }
