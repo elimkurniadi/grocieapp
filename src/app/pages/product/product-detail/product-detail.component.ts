@@ -5,6 +5,7 @@ import { ModalAddToCartComponent } from '@shared/common/modals/modal-add-to-cart
 import { ModalAddToFavoriteComponent } from '@shared/common/modals/modal-add-to-favorite/modal-add-to-favorite.component';
 import { Page, Product, ResponsePagination } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
+import { GlobalService } from '@shared/services';
 import { CartService, ProductService } from '@shared/services/modules';
 import { ToastService } from '@shared/services/toast.service';
 
@@ -21,6 +22,7 @@ export class ProductDetailComponent implements OnInit {
   qty = 0;
 
   products: Product[];
+  isOnFetch = false;
 
   constructor(
     private translateSrv: TranslateService,
@@ -30,7 +32,8 @@ export class ProductDetailComponent implements OnInit {
     private navCtrl: NavController,
     private cartSrv: CartService,
     private modalCtrl: ModalController,
-    private router: Router
+    private router: Router,
+    private gs: GlobalService
   ) {
     this.observeParam();
 
@@ -41,6 +44,16 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
+  }
 
   scanQR() {
     // Scan barcode and QR function should be inserted here.

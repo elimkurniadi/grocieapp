@@ -1,14 +1,29 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GlobalService {
   subscriptionList: Subscription[] = [];
+  fetchSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
   constructor() {}
+
+  observeOnFetch(): Observable<boolean> {
+    return this.fetchSubject.asObservable();
+  }
+
+  setOnFetchState(isOnFetch: boolean) {
+    this.fetchSubject.next(isOnFetch);
+  }
+
+  returnButtonState() {
+    this.observeOnFetch().subscribe((value) => {
+      return value;
+    });
+  }
 
   log(message: string, data: any = null, type: string = 'log') {
     if (isDevMode()) {

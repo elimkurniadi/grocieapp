@@ -29,6 +29,8 @@ export class CheckoutPage implements OnInit {
   voucher: Voucher;
   voucherError = null;
 
+  isOnFetch = false;
+
   constructor(
     private cartSrv: CartService,
     private voucherSrv: VoucherService,
@@ -66,7 +68,15 @@ export class CheckoutPage implements OnInit {
     });
   }
 
-  ionViewDidEnter() {}
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
+  }
 
   onDateSelect(value) {
     this.selectedDate = moment(value).format('YYYY-MM-DD');

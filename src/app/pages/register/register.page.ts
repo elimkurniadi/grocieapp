@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
-import { RxValidatorService } from '@shared/services';
+import { GlobalService, RxValidatorService } from '@shared/services';
 import { UserService } from '@shared/services/modules/user.service';
 import { ToastService } from '@shared/services/toast.service';
 import * as moment from 'moment';
@@ -18,6 +18,7 @@ export class RegisterPage implements OnInit, OnDestroy {
   currDate = moment(new Date()).format('YYYY-MM-DD');
   passwordIsShow = false;
   confPasswordIsShow = false;
+  isOnFetch = false;
 
   constructor(
     private fb: FormBuilder,
@@ -25,12 +26,23 @@ export class RegisterPage implements OnInit, OnDestroy {
     private validatorSrv: RxValidatorService,
     private translateSrv: TranslateService,
     private userSrv: UserService,
-    private toastSrv: ToastService
+    private toastSrv: ToastService,
+    private gs: GlobalService
   ) {
     this.initRegisterFormStepOne();
   }
 
   ngOnInit() {}
+
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
+  }
 
   ngOnDestroy() {}
 

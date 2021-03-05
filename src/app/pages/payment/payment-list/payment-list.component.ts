@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentMethod, PaymentSummary, Response } from '@shared/models';
-import { CacheService, ToastService } from '@shared/services';
+import { CacheService, GlobalService, ToastService } from '@shared/services';
 import { BrowserService } from '@shared/services/browser.service';
 import { CheckoutService, TransactionService } from '@shared/services/modules';
 
@@ -22,6 +22,7 @@ export class PaymentListComponent implements OnInit {
   shippingTime: string;
   paymentSummary: PaymentSummary;
   paymentMethods: PaymentMethod[];
+  isOnFetch = false;
 
   constructor(
     private router: Router,
@@ -30,7 +31,8 @@ export class PaymentListComponent implements OnInit {
     private checkoutSrv: CheckoutService,
     private browserSrv: BrowserService,
     private toastSrv: ToastService,
-    private cache: CacheService
+    private cache: CacheService,
+    private gs: GlobalService
   ) {
     this.route.queryParams.subscribe((param) => {
       this.isNow = param.is_now === 'true';
@@ -55,6 +57,15 @@ export class PaymentListComponent implements OnInit {
     this.getPaymentMethod();
   }
 
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
+  }
   next() {
     const queryParams = {
       address_id: this.addressId,

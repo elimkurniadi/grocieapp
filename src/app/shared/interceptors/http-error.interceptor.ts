@@ -20,12 +20,15 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
+          this.gs.setOnFetchState(false);
+          this.endRequest();
           this.gs.log('event--->>>', event);
         }
-        this.endRequest();
+
         return event;
       }),
       catchError((error: HttpErrorResponse) => {
+        this.gs.setOnFetchState(false);
         if (error.status === 401) {
           this.router.navigate(['/login']);
         }

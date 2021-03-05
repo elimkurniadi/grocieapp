@@ -12,6 +12,8 @@ import { ToastService } from '@shared/services/toast.service';
 })
 export class LoginFormComponent implements OnInit {
   fg: FormGroup;
+  isOnFetch = false;
+  showPass = false;
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -23,7 +25,17 @@ export class LoginFormComponent implements OnInit {
     this.buildLoginForm();
   }
 
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
   ngOnInit() {}
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
+  }
 
   buildLoginForm() {
     this.validatorSrv.validatorErrorMessage();

@@ -8,15 +8,12 @@ import { AuthService } from '@shared/services';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  faFb = faFacebookF
-  faGoogle = faGoogle
+  faFb = faFacebookF;
+  faGoogle = faGoogle;
 
-  constructor(
-    private authSrv: AuthService
-  ) { }
+  constructor(private authSrv: AuthService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   loginGoogle() {
     this.authSrv.loginGoogle();
@@ -25,5 +22,4 @@ export class LoginPage implements OnInit {
   loginFb() {
     this.authSrv.loginFb();
   }
-
 }
