@@ -27,6 +27,7 @@ import { File } from '@ionic-native/file/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 registerLocaleData(localeId, 'id');
 
@@ -77,6 +78,7 @@ export class SentryErrorHandler implements ErrorHandler {
     File,
     Geolocation,
     NativeGeocoder,
+    BarcodeScanner,
   ],
   bootstrap: [AppComponent],
 })

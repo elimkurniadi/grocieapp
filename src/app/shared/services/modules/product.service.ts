@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Page, ResponsePagination, Sort } from '@shared/models';
+import { Page, Response, ResponsePagination, Sort } from '@shared/models';
 import { ApiService } from '../core/api.service';
 import { GlobalService } from '../global.service';
 
@@ -118,6 +118,21 @@ export class ProductService {
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: ResponsePagination) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  getBySKU(sku: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData(`product/sku/${sku}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
           resolve(res);
         },
         (err) => {

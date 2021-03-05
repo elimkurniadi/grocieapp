@@ -11,11 +11,11 @@ import { ScanQrComponent } from './scan-qr/scan-qr.component';
 import { ShowQrComponent } from './show-qr/show-qr.component';
 import { SharedModule } from '@shared/shared.module';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
-import { QRScanner } from '@ionic-native/qr-scanner/ngx';
+// import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, QrPageRoutingModule, SharedModule, NgxQRCodeModule],
   declarations: [QrPage, ScanQrComponent, ShowQrComponent],
-  providers: [QRScanner],
+  providers: [],
 })
 export class QrPageModule {}

@@ -33,7 +33,13 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
     implementation platform('com.google.firebase:firebase-bom:26.1.1')
-    implementation 'com.facebook.android:facebook-login:[8.1)'
+    implementation('com.facebook.android:facebook-login:[8.1)'){
+        exclude group: 'com.google.zxing'
+    }
+}
+
+configurations {
+  implementation.exclude group: 'com.google.zxing'
 }
 
 apply from: 'capacitor.build.gradle'

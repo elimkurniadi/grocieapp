@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "107217049846726158025",
+          "client_id": "852595832919-bs9brjcb91pb4sglguh6o75q7gaeg6nk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.klikgo.klikgo",
+            "certificate_hash": "2d9781dff5b336932ad27c560c1627349979e85f"
+          }
+        },
+        {
+          "client_id": "852595832919-73lbej9udcco4jnpnuegraik09rmmbrh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

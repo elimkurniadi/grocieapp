@@ -30,7 +30,7 @@ export class ProductDetailComponent implements OnInit {
     private navCtrl: NavController,
     private cartSrv: CartService,
     private modalCtrl: ModalController,
-    private router: Router,
+    private router: Router
   ) {
     this.observeParam();
 
@@ -40,13 +40,12 @@ export class ProductDetailComponent implements OnInit {
     };
   }
 
-  ngOnInit() { 
-
-  }
+  ngOnInit() {}
 
   scanQR() {
     // Scan barcode and QR function should be inserted here.
     console.log('Test logging QR code');
+    this.router.navigate(['/qr', 'scan']);
   }
 
   observeParam() {
@@ -63,8 +62,7 @@ export class ProductDetailComponent implements OnInit {
       this.productData = res;
       this.getRelatedProduct();
 
-      if(this.productData?.stock > 0)
-        this.qty = 1;
+      if (this.productData?.stock > 0) this.qty = 1;
     });
   }
 
@@ -83,23 +81,22 @@ export class ProductDetailComponent implements OnInit {
         this.presentModal();
       });
     } else {
-
     }
   }
 
   async presentModal() {
     const modal = await this.modalCtrl.create({
       component: ModalAddToCartComponent,
-      cssClass: 'my-custom-class'
+      cssClass: 'my-custom-class',
     });
 
     modal.onDidDismiss().then((data) => {
       console.log(data);
-      if(data?.data === 'cart') {
+      if (data?.data === 'cart') {
         // this.navCtrl.navigateRoot(['tabs/cart']);
         this.navCtrl.navigateRoot(['tabs/cart']);
       }
-    })
+    });
 
     return await modal.present();
   }
@@ -119,8 +116,7 @@ export class ProductDetailComponent implements OnInit {
 
   updateLocalQuantity(increment) {
     if (increment) {
-      if (this.qty < this.productData?.stock)
-        this.qty += 1;
+      if (this.qty < this.productData?.stock) this.qty += 1;
     } else {
       if (this.qty > 0) {
         this.qty -= 1;

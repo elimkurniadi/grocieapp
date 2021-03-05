@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
+// import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 import { PermissionService } from '@shared/services/permission.service';
 import { ToastService } from '@shared/services/toast.service';
 import { Observable } from 'rxjs';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { ProductService } from '@shared/services/modules';
+import { Product } from '@shared/models';
+import { Router } from '@angular/router';
+import { GlobalService } from '@shared/services';
 
 @Component({
   selector: 'app-scan-qr',
@@ -10,54 +15,59 @@ import { Observable } from 'rxjs';
   styleUrls: ['./scan-qr.component.scss'],
 })
 export class ScanQrComponent implements OnInit {
-  constructor(private qrScanner: QRScanner, private toastSrv: ToastService, private permissionSrv: PermissionService) {}
+  scannedData: any;
 
-  ngOnInit() {}
+  constructor(
+    private toastSrv: ToastService,
+    private permissionSrv: PermissionService,
+    private barcodeScanner: BarcodeScanner,
+    private productSrv: ProductService,
+    private router: Router,
+    private gs: GlobalService
+  ) {
+    this.handleCameraPermission();
+  }
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.initScanner();
   }
 
+  async handleCameraPermission() {
+    await this.permissionSrv.cameraPermissionHandler();
+  }
+
   initScanner() {
-    this.prepareQr()
-      .then((allowed: any) => {
-        if (allowed) {
-          const observer = this.scanningQr().subscribe((res: string) => {
-            this.toastSrv.show(res);
-            this.qrScanner.hide();
-            observer.unsubscribe();
-          });
-          this.qrScanner.show();
-        } else {
-          this.permissionSrv.cameraPermissionHandler();
-        }
+    const options: BarcodeScannerOptions = {
+      preferFrontCamera: false,
+      showFlipCameraButton: true,
+      showTorchButton: true,
+      prompt: 'Place a barcode inside the scan area',
+      resultDisplayDuration: 500,
+    };
+
+    this.barcodeScanner
+      .scan(options)
+      .then((barcodeData) => {
+        this.gs.log('Barcode data', barcodeData);
+        this.scannedData = barcodeData;
+        this.getProduct(this.scannedData.text);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        this.gs.log('Error', err);
+      });
   }
 
-  prepareQr(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.qrScanner
-        .prepare()
-        .then((status: QRScannerStatus) => {
-          resolve(status.authorized);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-  scanningQr(): Observable<any> {
-    return new Observable<any>((observer) => {
-      this.qrScanner.scan().subscribe(
-        (res: any) => {
-          observer.next(res);
-        },
-        (err) => {
-          observer.next(err);
-        }
-      );
-    });
+  getProduct(sku: string) {
+    this.productSrv
+      .getBySKU(sku)
+      .then((res) => {
+        const product = res.response as Product;
+        this.router.navigate(['/product', 'detail', product.product_id]);
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+        this.router.navigate(['/tabs', 'home']);
+      });
   }
 }
