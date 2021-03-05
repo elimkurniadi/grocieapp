@@ -85,6 +85,21 @@ export class SettingService {
 
   checkMaintenance(): Promise<any> {
     return new Promise((resolve, reject) => {
+      const subscription = this.api.getData('setting/maintenance');
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  checkOperationalTime(): Promise<any> {
+    return new Promise((resolve, reject) => {
       const subscription = this.api.getData('setting/operational_time');
       this.gs.pushSubscription(subscription);
       subscription.subscribe(

@@ -22,9 +22,7 @@
     <ng-container *ngIf="unprocessableCartList.length > 0">
       <ion-row>
         <ion-col class="ion-text-center">
-          <ion-text class="text-unprocessable">
-            {{unprocessableCartList.length}} item(s) cannot be processed
-          </ion-text>
+          <ion-text class="text-unprocessable"> {{unprocessableCartList.length}} item(s) cannot be processed </ion-text>
         </ion-col>
       </ion-row>
       <div class="divider"></div>
@@ -81,8 +79,13 @@
           <span>{{'TOTAL_PRICE' | translate}}</span> <br />
           <span><b>Rp. {{totalPrice | number}}</b></span>
         </ion-col>
-        <ion-col size="6" class="ion-text-right ion-no-padding" [routerLink]="['/checkout']">
-          <ion-button color="limegreen" size="small" [disabled]="unprocessableCartList.length > 0">
+        <ion-col size="6" class="ion-text-right ion-no-padding">
+          <ion-button
+            color="limegreen"
+            size="small"
+            [disabled]="unprocessableCartList.length > 0"
+            (click)="goToCheckout()"
+          >
             {{'CHECKOUT' | translate}}
           </ion-button>
         </ion-col>

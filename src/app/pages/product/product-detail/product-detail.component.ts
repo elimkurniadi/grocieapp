@@ -58,6 +58,7 @@ export class ProductDetailComponent implements OnInit {
   scanQR() {
     // Scan barcode and QR function should be inserted here.
     console.log('Test logging QR code');
+    this.router.navigate(['/qr', 'scan']);
   }
 
   observeParam() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService, ProductService } from '@shared/services/modules';
 import * as _ from 'lodash';
 
@@ -13,7 +14,7 @@ export class CartPage implements OnInit {
   relatedProductList: any[] = null;
   totalPrice = 0;
 
-  constructor(private cartSrv: CartService, private productSrv: ProductService) {}
+  constructor(private cartSrv: CartService, private productSrv: ProductService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -64,5 +65,9 @@ export class CartPage implements OnInit {
 
     this.unprocessableCartList = divide[1];
     this.initTotalPrice();
+  }
+
+  goToCheckout() {
+    this.router.navigate(['/checkout']);
   }
 }
