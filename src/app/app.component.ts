@@ -58,9 +58,8 @@ export class AppComponent {
     this.settingSrv
       .checkMaintenance()
       .then((res) => {
-        const response = res.response;
-        console.log('res', res);
-        if (!response?.is_open) {
+        const isMaintenance = res.response;
+        if (isMaintenance) {
           this.showMaintenanceModal();
         }
       })

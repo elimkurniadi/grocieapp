@@ -93,7 +93,7 @@ export class RegisterStepTwoComponent implements OnInit {
       const value = this.combineFormValues();
       this.userSrv.register(value).then(() => {
         this.router.navigate(['/tabs', 'home']);
-        this.showModalOtp();
+        // this.showModalOtp();
       });
     }
   }

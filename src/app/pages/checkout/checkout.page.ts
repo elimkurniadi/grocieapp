@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cart, DeliveryTime, PaymentSummary, Response, Voucher } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
-import { CacheService, ToastService } from '@shared/services';
+import { CacheService, GlobalService, ToastService } from '@shared/services';
 import { AddressService, CartService, CheckoutService, SettingService, VoucherService } from '@shared/services/modules';
 import * as moment from 'moment';
 
@@ -39,27 +39,16 @@ export class CheckoutPage implements OnInit {
     private checkoutSrv: CheckoutService,
     private settingSrv: SettingService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private gs: GlobalService
   ) {
     this.observeQueryParam();
   }
 
   ngOnInit() {
-    this.canDeliverNow = true;
-    this.deliveryNow = true;
-    this.selectedDate = moment(new Date()).format();
     this.fetchCartList();
-    if (this.currDate > this.maxCurrDate) {
-      this.canDeliverNow = false;
-      this.deliveryNow = false;
-      const currDate = this.currDate.add(1, 'days').format('YYYY-MM-DD');
-      this.currDate = currDate;
-      this.selectedDate = moment(new Date()).add(1, 'days').format();
-    } else {
-      const currDate = this.currDate.format('YYYY-MM-DD');
-      this.currDate = currDate;
-    }
 
+    this.checkOperationalTime();
     this.getDeliveryTime();
   }
 
@@ -145,6 +134,37 @@ export class CheckoutPage implements OnInit {
 
       this.getPriceSummary();
     });
+  }
+
+  checkOperationalTime() {
+    this.settingSrv
+      .checkOperationalTime()
+      .then((res) => {
+        const response = res.response;
+        const closeHour = parseInt(response.close.split(':')[0], 10);
+        this.maxCurrDate = moment(new Date()).set({ hour: closeHour, minute: 0 });
+        this.selectedDate = moment(new Date());
+        this.setDefaultDate();
+      })
+      .catch((err) => {
+        this.gs.log(err);
+      });
+  }
+
+  setDefaultDate() {
+    this.canDeliverNow = true;
+    this.deliveryNow = true;
+    this.selectedDate = moment(new Date()).format();
+    if (this.currDate > this.maxCurrDate) {
+      this.canDeliverNow = false;
+      this.deliveryNow = false;
+      const currDate = this.currDate.add(1, 'days').format('YYYY-MM-DD');
+      this.currDate = currDate;
+      this.selectedDate = moment(new Date()).add(1, 'days').format();
+    } else {
+      const currDate = this.currDate.format('YYYY-MM-DD');
+      this.currDate = currDate;
+    }
   }
 
   showAlertVoucherLimit() {
