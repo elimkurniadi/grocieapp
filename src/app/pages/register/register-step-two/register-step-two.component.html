@@ -189,23 +189,6 @@
                 }}</small>
               </div>
             </ion-col>
-
-            <!-- <ion-col size="6" class="ion-padding-start ion-no-padding">
-              <div class="form-group">
-                <ion-item lines="none">
-                  <ion-label position="stacked">{{ 'POSTAL_CODE' | translate }}</ion-label>
-                  <ion-input
-                    class="default-theme"
-                    placeholder="{{ 'POSTAL_CODE_PLACEHOLDER' | translate }}"
-                    type="number"
-                    formControlName="postal_code"
-                  ></ion-input>
-                </ion-item>
-                <small *ngIf="fg.controls.postal_code.dirty">{{
-                  fg.controls.postal_code.errors?.required?.message
-                }}</small>
-              </div>
-            </ion-col> -->
           </ion-row>
 
           <div class="form-group">
@@ -241,8 +224,14 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" shape="round" color="success" (click)="register()" [disabled]="fg.invalid">
-          {{ 'NEXT' | translate }}
+        <ion-button
+          expand="block"
+          shape="round"
+          color="success"
+          (click)="register()"
+          [disabled]="fg.invalid || isOnFetch"
+        >
+          {{ 'NEXT' | translate }} <ion-spinner *ngIf="isOnFetch" name="dots" color="dark"></ion-spinner>
         </ion-button>
       </ion-col>
     </ion-row>

@@ -230,8 +230,15 @@
       >
         {{ 'UPLOAD_PAYMENT_PROOF' | translate }}
       </ion-button>
-      <ion-button color="success" shape="round" expand="block" (click)="pay()" *ngIf="order?.payment_method_id === '1'">
-        {{ 'PROCEED_PAYMENT' | translate }}
+      <ion-button
+        color="success"
+        shape="round"
+        expand="block"
+        (click)="pay()"
+        *ngIf="order?.payment_method_id === '1'"
+        [disabled]="isOnFetch"
+      >
+        {{ 'PROCEED_PAYMENT' | translate }} <ion-spinner *ngIf="isOnFetch" name="dots" color="dark"></ion-spinner>
       </ion-button>
     </ion-col>
   </ion-row>

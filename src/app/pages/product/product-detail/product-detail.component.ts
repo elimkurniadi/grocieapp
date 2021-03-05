@@ -5,6 +5,7 @@ import { ModalAddToCartComponent } from '@shared/common/modals/modal-add-to-cart
 import { ModalAddToFavoriteComponent } from '@shared/common/modals/modal-add-to-favorite/modal-add-to-favorite.component';
 import { Page, Product, ResponsePagination } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
+import { GlobalService } from '@shared/services';
 import { CartService, ProductService } from '@shared/services/modules';
 import { ToastService } from '@shared/services/toast.service';
 
@@ -21,6 +22,7 @@ export class ProductDetailComponent implements OnInit {
   qty = 0;
 
   products: Product[];
+  isOnFetch = false;
 
   constructor(
     private translateSrv: TranslateService,
@@ -31,6 +33,7 @@ export class ProductDetailComponent implements OnInit {
     private cartSrv: CartService,
     private modalCtrl: ModalController,
     private router: Router,
+    private gs: GlobalService
   ) {
     this.observeParam();
 
@@ -40,8 +43,16 @@ export class ProductDetailComponent implements OnInit {
     };
   }
 
-  ngOnInit() { 
+  ngOnInit() {}
 
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
   }
 
   scanQR() {
@@ -63,8 +74,7 @@ export class ProductDetailComponent implements OnInit {
       this.productData = res;
       this.getRelatedProduct();
 
-      if(this.productData?.stock > 0)
-        this.qty = 1;
+      if (this.productData?.stock > 0) this.qty = 1;
     });
   }
 
@@ -83,23 +93,22 @@ export class ProductDetailComponent implements OnInit {
         this.presentModal();
       });
     } else {
-
     }
   }
 
   async presentModal() {
     const modal = await this.modalCtrl.create({
       component: ModalAddToCartComponent,
-      cssClass: 'my-custom-class'
+      cssClass: 'my-custom-class',
     });
 
     modal.onDidDismiss().then((data) => {
       console.log(data);
-      if(data?.data === 'cart') {
+      if (data?.data === 'cart') {
         // this.navCtrl.navigateRoot(['tabs/cart']);
         this.navCtrl.navigateRoot(['tabs/cart']);
       }
-    })
+    });
 
     return await modal.present();
   }
@@ -119,8 +128,7 @@ export class ProductDetailComponent implements OnInit {
 
   updateLocalQuantity(increment) {
     if (increment) {
-      if (this.qty < this.productData?.stock)
-        this.qty += 1;
+      if (this.qty < this.productData?.stock) this.qty += 1;
     } else {
       if (this.qty > 0) {
         this.qty -= 1;

@@ -34,8 +34,8 @@
 <ion-footer class="ion-no-border">
   <ion-row class="ion-padding">
     <ion-col>
-      <ion-button color="success" expand="block" shape="round" (click)="next()">
-        {{ 'NEXT' | translate }}
+      <ion-button color="success" expand="block" shape="round" (click)="next()" [disabled]="isOnFetch">
+        {{ 'NEXT' | translate }} <ion-spinner *ngIf="isOnFetch" name="dots" color="dark"></ion-spinner>
       </ion-button>
     </ion-col>
   </ion-row>

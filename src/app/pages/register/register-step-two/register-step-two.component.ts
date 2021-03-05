@@ -27,6 +27,7 @@ export class RegisterStepTwoComponent implements OnInit {
   cityList = [];
   districtList = [];
   subDistrictList = [];
+  isOnFetch = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -47,6 +48,16 @@ export class RegisterStepTwoComponent implements OnInit {
 
   ngOnInit() {}
 
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
+  }
+
   observeQueryParams() {
     const prefix = this.activatedRoute.snapshot.queryParamMap.get('prefix');
     prefix ? (this.prefixFormValue = JSON.parse(prefix)) : this.router.navigate(['/registers']);
@@ -65,8 +76,8 @@ export class RegisterStepTwoComponent implements OnInit {
           RxwebValidators.maxLength({ value: 15, message: `${this.translateSrv.get('VALIDATOR_MAX')} 15` }),
         ],
       ],
-      latitude: ['-6.598574', [RxwebValidators.required(), RxwebValidators.latitude()]],
-      longitude: ['106.807496', [RxwebValidators.required(), RxwebValidators.longitude()]],
+      latitude: [null, [RxwebValidators.required(), RxwebValidators.latitude()]],
+      longitude: [null, [RxwebValidators.required(), RxwebValidators.longitude()]],
       address: ['-', [RxwebValidators.required()]],
       address_detail: [
         null,
@@ -80,7 +91,6 @@ export class RegisterStepTwoComponent implements OnInit {
       city_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       sub_district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
-      // postal_code: [null, [RxwebValidators.required(), RxwebValidators.numeric()]],
       address_name: [null, [RxwebValidators.required()]],
       tos: [false, RxwebValidators.requiredTrue()],
     });

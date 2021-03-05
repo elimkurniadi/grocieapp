@@ -48,9 +48,9 @@
           shape="round"
           color="success"
           (click)="verifyOtp()"
-          [disabled]="otpValue?.length !== 4"
+          [disabled]="otpValue?.length !== 4 || isOnFetch"
         >
-          {{ 'VERIFY' | translate }}
+          {{ 'VERIFY' | translate }} <ion-spinner *ngIf="isOnFetch" name="dots" color="dark"></ion-spinner>
         </ion-button>
       </ion-col>
     </ion-row>

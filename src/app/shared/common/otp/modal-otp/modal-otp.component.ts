@@ -29,6 +29,7 @@ export class ModalOtpComponent implements OnInit {
   otpValue = null;
   countdown = null;
   userData: any = null;
+  isOnFetch = false;
 
   constructor(
     private modalCtrl: ModalController,
@@ -42,6 +43,16 @@ export class ModalOtpComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
+  }
 
   ionViewWillEnter() {
     this.setupCountdown();

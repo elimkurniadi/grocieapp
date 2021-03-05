@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cart, Transaction } from '@shared/models';
+import { GlobalService } from '@shared/services';
 import { BrowserService } from '@shared/services/browser.service';
 import { CartService, TransactionService } from '@shared/services/modules';
 
@@ -15,18 +16,30 @@ export class MyOrderDetailComponent implements OnInit {
   order: Transaction;
   transactionStatus;
   orderId: any;
+  isOnFetch = false;
 
   constructor(
     private cartSrv: CartService,
     private transactionSrv: TransactionService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private browserSrv: BrowserService
+    private browserSrv: BrowserService,
+    private gs: GlobalService
   ) {}
 
   ngOnInit() {
     // this.fetchCartList();
     this.observeParam();
+  }
+
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
   }
 
   observeParam() {

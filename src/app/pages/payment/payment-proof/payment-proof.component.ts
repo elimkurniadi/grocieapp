@@ -19,6 +19,7 @@ export class PaymentProofComponent implements OnInit {
   selectedImage: any = null;
   orderId: any;
   previousUrl: string;
+  isOnFetch = false;
 
   constructor(
     private validatorSrv: RxValidatorService,
@@ -43,6 +44,16 @@ export class PaymentProofComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
+  }
 
   buildPaymentForm() {
     this.validatorSrv.validatorErrorMessage();

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cart, DeliveryTime, PaymentSummary, Response, Voucher } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
-import { CacheService, ToastService } from '@shared/services';
+import { CacheService, GlobalService, ToastService } from '@shared/services';
 import { AddressService, CartService, CheckoutService, SettingService, VoucherService } from '@shared/services/modules';
 import * as moment from 'moment';
 
@@ -29,6 +29,8 @@ export class CheckoutPage implements OnInit {
   voucher: Voucher;
   voucherError = null;
 
+  isOnFetch = false;
+
   constructor(
     private cartSrv: CartService,
     private voucherSrv: VoucherService,
@@ -39,7 +41,8 @@ export class CheckoutPage implements OnInit {
     private checkoutSrv: CheckoutService,
     private settingSrv: SettingService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private gs: GlobalService
   ) {
     this.observeQueryParam();
   }
@@ -77,7 +80,15 @@ export class CheckoutPage implements OnInit {
     });
   }
 
-  ionViewDidEnter() {}
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
+  }
 
   onDateSelect(value) {
     this.selectedDate = moment(value).format('YYYY-MM-DD');

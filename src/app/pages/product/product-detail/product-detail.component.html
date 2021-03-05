@@ -8,25 +8,30 @@
     <!-- <ion-searchbar class="custom-search" placeholder="{{ 'SEARCH' | translate }}" [routerLink]="['/product/search']"></ion-searchbar> -->
     <ion-row class="ion-no-padding">
       <ion-col class="ion-no-padding" size="12">
-        <ion-searchbar class="custom-search" mode="ios" placeholder="{{ 'SEARCH' | translate }}" [routerLink]="['/product/search']"></ion-searchbar>
-        <div class="ion-no-padding ion-align-self-center ion-text-center scan-icon-container" (click)="scanQR();$event.stopPropagation();">
+        <ion-searchbar
+          class="custom-search"
+          mode="ios"
+          placeholder="{{ 'SEARCH' | translate }}"
+          [routerLink]="['/product/search']"
+        ></ion-searchbar>
+        <div
+          class="ion-no-padding ion-align-self-center ion-text-center scan-icon-container"
+          (click)="scanQR(); $event.stopPropagation()"
+        >
           <ion-icon name="qr-code-outline" color="primary" class="scan-icon"></ion-icon>
         </div>
       </ion-col>
     </ion-row>
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid class="ion-margin-top ion-no-padding h-100">
-    <ion-row [ngClass]="{'disabled' : productData?.stock == 0}">
+    <ion-row [ngClass]="{ disabled: productData?.stock == 0 }">
       <ion-col size="12" class="ion-no-padding ion-text-center">
         <img class="img-product" [src]="productData?.image_url" />
       </ion-col>
-      <div class="out-of-stock" *ngIf="productData?.stock == 0">
-        Out of stock
-      </div>
+      <div class="out-of-stock" *ngIf="productData?.stock == 0">Out of stock</div>
     </ion-row>
     <ion-row class="ion-justify-content-between ion-padding-horizontal">
       <ion-col size="12">
@@ -40,11 +45,11 @@
 
         <ion-row class="ion-align-items-center">
           <ion-col size="6" class="ion-no-padding">
-              <ion-text class="product-brand" *ngIf="productData?.brand">
-                {{ productData?.brand?.name }}
-                <br />
-              </ion-text>
-              <span class="product-size">Size: {{ productData?.weight }} {{ productData?.unit?.name }}</span>
+            <ion-text class="product-brand" *ngIf="productData?.brand">
+              {{ productData?.brand?.name }}
+              <br />
+            </ion-text>
+            <span class="product-size">Size: {{ productData?.weight }} {{ productData?.unit?.name }}</span>
           </ion-col>
           <!-- <ion-col size="6" class="ion-no-padding ion-text-right">
             <ion-button color="primary" size="small" shape="round" (click)="addItemToCart()">
@@ -67,10 +72,16 @@
           </ion-col>
         </ion-row> -->
         <ion-row>
-          <ion-col [style.visibility]="productData?.secondary_price ? 'unset' : 'hidden' ">
-            <ion-badge style="font-size:12px;--color: white;background-color: #f8a345;margin-right:8px">{{ ((productData?.secondary_price - productData?.primary_price) / productData?.secondary_price) * 100 | number:'1.0-0'}} %</ion-badge>
+          <ion-col [style.visibility]="productData?.secondary_price ? 'unset' : 'hidden'">
+            <ion-badge style="font-size: 12px; --color: white; background-color: #f8a345; margin-right: 8px"
+              >{{
+                ((productData?.secondary_price - productData?.primary_price) / productData?.secondary_price) * 100
+                  | number: '1.0-0'
+              }}
+              %</ion-badge
+            >
             <span class="product-price price-linethrough">
-              Rp {{ productData?.secondary_price| number: '1.0-0' }}
+              Rp {{ productData?.secondary_price | number: '1.0-0' }}
             </span>
           </ion-col>
         </ion-row>
@@ -79,7 +90,12 @@
             <span class="product-final-price">Rp {{ productData?.primary_price | number: '1.0-0':'id' }} </span>
           </ion-col>
           <ion-col size="1" class="ion-no-padding ion-text-right">
-            <ion-icon color="primary" style="font-size: 28px;" src="assets/images/add-favorite.svg" (click)="addToFavorite()"></ion-icon>
+            <ion-icon
+              color="primary"
+              style="font-size: 28px"
+              src="assets/images/add-favorite.svg"
+              (click)="addToFavorite()"
+            ></ion-icon>
           </ion-col>
         </ion-row>
       </ion-col>
@@ -112,24 +128,35 @@
     <ion-col size="4" class="ion-text-center">
       <ion-row class="ion-align-items-center">
         <ion-col size="4">
-          <ion-icon name="remove-outline" size="small" color="limegreen"
-            (click)="updateLocalQuantity(false)" [ngClass]="{'disabled' : qty < 1}"></ion-icon>
+          <ion-icon
+            name="remove-outline"
+            size="small"
+            color="limegreen"
+            (click)="updateLocalQuantity(false)"
+            [ngClass]="{ disabled: qty < 1 }"
+          ></ion-icon>
         </ion-col>
         <ion-col size="4" style="border: solid 2px #e2e2e2">{{ qty }}</ion-col>
         <ion-col size="4">
-          <ion-icon name="add-outline" size="small"
-            (click)="updateLocalQuantity(true)"></ion-icon>
+          <ion-icon name="add-outline" size="small" (click)="updateLocalQuantity(true)"></ion-icon>
         </ion-col>
       </ion-row>
     </ion-col>
     <ion-col size="8">
-      <ion-button shape="round" color="success" expand="full" (click)="addItemToCart()" [ngClass]="{'disabled' : qty < 1 || productData?.stock == 0}">
+      <ion-button
+        shape="round"
+        color="success"
+        expand="full"
+        (click)="addItemToCart()"
+        [ngClass]="{ disabled: qty < 1 || productData?.stock == 0 }"
+        [disabled]="isOnFetch"
+      >
         {{ 'ADD_TO_CART' | translate }}
+        <ion-spinner *ngIf="isOnFetch" name="dots" color="dark"></ion-spinner>
       </ion-button>
     </ion-col>
   </ion-row>
 </ion-footer>
-
 
 <!-- <ion-row>
   <ion-col>

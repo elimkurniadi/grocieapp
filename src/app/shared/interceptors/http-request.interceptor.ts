@@ -3,11 +3,11 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 
 import { Observable, throwError, from } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { CacheService } from '@shared/services';
+import { CacheService, GlobalService } from '@shared/services';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
-  constructor(private cache: CacheService) {}
+  constructor(private cache: CacheService, private gs: GlobalService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // add authorization header with jwt token if available
@@ -34,6 +34,11 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     request = request.clone({
       headers: request.headers.set('Accept', 'application/json'),
     });
+
+    // SET BUTTON TO DISABLE
+    if (request.method !== 'GET') {
+      this.gs.setOnFetchState(true);
+    }
 
     return next.handle(request);
   }

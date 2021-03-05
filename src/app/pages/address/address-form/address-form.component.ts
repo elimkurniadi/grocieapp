@@ -23,6 +23,7 @@ export class AddressFormComponent implements OnInit {
   districtList: any[] = null;
   subDistrictList: any[] = null;
   addressId: any = null;
+  isOnFetch = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,6 +41,16 @@ export class AddressFormComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
+  }
 
   observerParam() {
     this.activatedRoute.params.subscribe((param) => {
@@ -85,19 +96,24 @@ export class AddressFormComponent implements OnInit {
       city_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       sub_district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
-      postal_code: [data?.postal_code, [RxwebValidators.required(), RxwebValidators.numeric()]],
       address_name: [data?.address_name, [RxwebValidators.required()]],
     });
 
     this.countCurrentChar();
     if (data) {
       setTimeout(() => {
-        this.initAreaList(data?.province?.province_id, data?.city?.city_id, data?.district?.district_id, data?.sub_district?.sub_district_id);
+        this.initAreaList(
+          data?.province?.province_id,
+          data?.city?.city_id,
+          data?.district?.district_id,
+          data?.sub_district?.sub_district_id
+        );
       }, 1000);
     }
   }
 
   submit() {
+    console.log(this.fg);
     if (this.fg.valid) {
       this.addressId ? this.updateAddress(this.fg, this.addressId) : this.addAddress(this.fg.value);
     }
@@ -140,13 +156,13 @@ export class AddressFormComponent implements OnInit {
           this.fg.updateValueAndValidity();
         });
       })
-      .then(() => { 
+      .then(() => {
         this.fetchSubDistricts(idDistrict).then(() => {
           // controls.sub_district_id.setValue();
           controls.sub_district_id.setValue(idSubDistrict);
           controls.sub_district_id.enable();
           this.fg.updateValueAndValidity();
-        })
+        });
       });
   }
 

@@ -116,7 +116,8 @@
       </ion-col>
 
       <ion-col size="3" class="ion-no-padding ion-text-center" *ngFor="let time of timeList;let i = index">
-        <ion-chip class="delivery-chip"
+        <ion-chip
+          class="delivery-chip"
           [color]="time.selected ? 'success': 'light'"
           [outline]="!time?.selected"
           [disabled]="(!selectedDate || !time?.active) || deliveryNow"
@@ -222,7 +223,9 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" color="limegreen" (click)="pay()"> {{'PROCEED_TO_PAYMENT' | translate}} </ion-button>
+        <ion-button expand="block" color="limegreen" (click)="pay()" [disabled]="isOnFetch">
+          {{'PROCEED_TO_PAYMENT' | translate}} <ion-spinner *ngIf="isOnFetch" name="dots" color="dark"></ion-spinner>
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
