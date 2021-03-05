@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { AuthService, GlobalService, RxValidatorService } from '@shared/services';
 import { ToastService } from '@shared/services/toast.service';
@@ -15,7 +16,7 @@ export class LoginFormComponent implements OnInit {
   isOnFetch = false;
   showPass = false;
   constructor(
-    private router: Router,
+    private navCtrl: NavController,
     private fb: FormBuilder,
     private authSrv: AuthService,
     private validatorSrv: RxValidatorService,
@@ -51,7 +52,7 @@ export class LoginFormComponent implements OnInit {
       this.authSrv
         .login(this.fg.value)
         .then(() => {
-          this.router.navigate(['/tabs', 'home']);
+          this.navCtrl.navigateRoot(['/tabs', 'home']);
         })
         .catch((err) => {
           const error = err.error.error;
