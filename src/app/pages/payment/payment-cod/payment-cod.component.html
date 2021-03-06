@@ -37,9 +37,12 @@
           <ion-item lines="none">
             <ion-input
               class="default-theme"
-              formControlName="amount"
               placeholder="Rp. 000.000"
               class="ion-text-right"
+              (ngModelChange)="amountChanged($event)"
+              [ngModel]="amountCod"
+              [ngModelOptions]="{ standalone: true }"
+              maxlength="16"
             ></ion-input>
             <br />
           </ion-item>

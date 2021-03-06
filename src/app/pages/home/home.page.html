@@ -29,22 +29,17 @@
           class="ion-no-padding ion-align-self-center ion-text-center scan-icon-container"
           (click)="scanQR();$event.stopPropagation();"
         >
-          <ion-icon name="qr-code-outline" color="primary" class="scan-icon"></ion-icon>
+          <img src="assets/images/barcode.svg" class="scan-icon" />
         </div>
       </ion-col>
       <ion-col size="1.5" class="ion-no-padding ion-align-self-center ion-text-center">
-        <ion-icon
-          name="notifications"
-          color="primary"
-          class="notif-icon link"
-          (click)="openNotification()"
-        ></ion-icon>
+        <ion-icon name="notifications" color="primary" class="notif-icon link" (click)="openNotification()"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-toolbar>
 </ion-header>
 
-<!-- 
+<!--
           [routerLink]="['/tabs', 'notification']"
  -->
 
@@ -60,9 +55,9 @@
         <app-home-categories></app-home-categories>
       </ion-col>
     </ion-row>
-    
+
     <div class="divider"></div>
-    
+
     <ion-row *ngFor="let bundling of bundlings">
       <ion-col>
         <app-home-bundling [bundling]="bundling"></app-home-bundling>

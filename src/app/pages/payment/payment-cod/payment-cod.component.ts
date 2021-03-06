@@ -22,6 +22,7 @@ export class PaymentCodComponent implements OnInit {
   shippingDate: string;
   shippingTime: string;
   paymentSummary: PaymentSummary;
+  amountCod: any;
 
   constructor(
     private validatorSrv: RxValidatorService,
@@ -63,19 +64,36 @@ export class PaymentCodComponent implements OnInit {
 
     this.fg = this.fb.group({
       amount: [null, [RxwebValidators.required()]],
+      cod_payment_amount: [null, [RxwebValidators.required()]],
     });
   }
 
   getPriceSummary() {
-    const filter = {};
+    const filter = {
+      is_now: this.isNow,
+      address_id: this.addressId,
+    };
+
     if (this.voucherCode !== '' || this.voucherCode !== null) {
       filter['voucher_code'] = this.voucherCode;
+    }
+
+    if (!this.isNow) {
+      filter['delivery_date'] = this.shippingDate;
     }
 
     this.checkoutSrv.calculatePrice(filter).then((res: Response) => {
       const result = res.response as PaymentSummary;
       this.paymentSummary = result;
     });
+  }
+
+  amountChanged(event: any) {
+    const value = event.replace(/,/g, '');
+    const formattedNumber = this.gs.numberWithCommas(value);
+    this.amountCod = formattedNumber;
+
+    this.fg.patchValue({ cod_payment_amount: value, amount: formattedNumber });
   }
 
   pay() {
@@ -85,7 +103,7 @@ export class PaymentCodComponent implements OnInit {
         address_id: this.addressId,
         shipping_id: 1,
         payment_method_id: this.paymentId,
-        cod_payment_amount: this.fg.value.amount,
+        cod_payment_amount: this.fg.value.cod_payment_amount,
       };
 
       if (this.notes !== null && this.notes !== '' && this.notes !== undefined) {

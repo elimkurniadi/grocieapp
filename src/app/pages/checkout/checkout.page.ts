@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Cart, DeliveryTime, PaymentSummary, Response, Voucher } from '@shared/models';
+import { Address, Cart, DeliveryTime, PaymentSummary, Response, Voucher } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { CacheService, GlobalService, ToastService } from '@shared/services';
 import { AddressService, CartService, CheckoutService, SettingService, VoucherService } from '@shared/services/modules';
@@ -12,7 +12,7 @@ import * as moment from 'moment';
   styleUrls: ['./checkout.page.scss'],
 })
 export class CheckoutPage implements OnInit {
-  defaultAddress;
+  defaultAddress: Address;
   cartList: Cart[];
   totalPrice = 0;
   paymentSummary: PaymentSummary;
@@ -112,7 +112,12 @@ export class CheckoutPage implements OnInit {
   }
 
   getPriceSummary() {
-    const filter = {};
+    const filter = {
+      is_now: this.deliveryNow,
+      address_id: this.defaultAddress.address_id,
+      delivery_date: moment(this.selectedDate).format('YYYY-MM-DD'),
+    };
+
     if (this.voucher && (this.voucher?.voucher_code !== '' || this.voucher?.voucher_code !== null)) {
       filter['voucher_code'] = this.voucher.voucher_code;
     }
@@ -153,7 +158,9 @@ export class CheckoutPage implements OnInit {
         const response = res.response;
         const closeHour = parseInt(response.close.split(':')[0], 10);
         this.maxCurrDate = moment(new Date()).set({ hour: closeHour, minute: 0 });
-        this.selectedDate = moment(new Date());
+
+        this.canDeliverNow = response.is_open;
+        this.deliveryNow = response.is_open;
         this.setDefaultDate();
       })
       .catch((err) => {
@@ -162,8 +169,6 @@ export class CheckoutPage implements OnInit {
   }
 
   setDefaultDate() {
-    this.canDeliverNow = true;
-    this.deliveryNow = true;
     this.selectedDate = moment(new Date()).format();
     if (this.currDate > this.maxCurrDate) {
       this.canDeliverNow = false;

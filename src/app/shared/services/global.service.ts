@@ -71,6 +71,10 @@ export class GlobalService {
     return chunkedArr;
   }
 
+  numberWithCommas(x: any) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
   getChangedFormProperties(form: any) {
     const dirtyValues = {};
     Object.keys(form.controls).forEach((key) => {

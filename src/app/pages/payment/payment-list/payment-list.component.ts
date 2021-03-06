@@ -106,9 +106,17 @@ export class PaymentListComponent implements OnInit {
   }
 
   getPriceSummary() {
-    const filter = {};
+    const filter = {
+      is_now: this.isNow,
+      address_id: this.addressId,
+    };
+
     if (this.voucherCode !== '' || this.voucherCode !== null) {
       filter['voucher_code'] = this.voucherCode;
+    }
+
+    if (!this.isNow) {
+      filter['delivery_date'] = this.shippingDate;
     }
 
     this.checkoutSrv.calculatePrice(filter).then((res: Response) => {
