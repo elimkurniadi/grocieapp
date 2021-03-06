@@ -143,4 +143,19 @@ export class FavoriteService {
       );
     });
   }
+
+  updateFavoriteList(id: string, name): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.putData(`favourite_group/${id}`, {name});
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
 }

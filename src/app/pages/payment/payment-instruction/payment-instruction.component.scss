@@ -1,9 +1,20 @@
+.text-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #353535;
+}
+
+.text-subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #353535;
+}
+
 .text-label {
   font-size: 12px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.2;
   letter-spacing: normal;
   color: #353535;
 }
@@ -11,7 +22,6 @@
 .text-price {
   font-size: 18px;
   font-weight: bold;
-  line-height: 1.22;
   color: #353535;
 }
 

@@ -16,8 +16,8 @@ export class TabsPage implements OnInit {
   selectedTab;
   menus = [
     {
-      icon: 'storefront-outline',
-      icon_active: 'storefront',
+      icon: 'home-outline',
+      icon_active: 'home-sharp',
       label: 'Store',
       route: 'home',
       selected: '',

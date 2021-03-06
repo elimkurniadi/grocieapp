@@ -17,7 +17,8 @@
         >
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option style="font-weight: 600;text-transform: capitalize;border-radius: 5px;" color="danger" (click)="delete(item)">Delete</ion-item-option>
+        <ion-item-option style="height:95%; font-weight: 600;text-transform: capitalize;border-radius: 2px;" color="danger" (click)="delete(item)">Delete</ion-item-option>
+        <ion-item-option style="height:95%; font-weight: 600;text-transform: capitalize;border-radius: 2px;" color="success" (click)="edit(item)">Rename</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
 
@@ -42,7 +43,7 @@
   </ion-grid>
   <ion-row class="ion-text-center">
     <ion-col>
-      <ion-button fill="outline" color="primary" size="small" (click)="addToList()">
+      <ion-button fill="outline" color="primary" (click)="addToList()">
         <ion-icon slot="start"  name="add-outline"></ion-icon>
          <strong>{{ 'ADD_NEW_LIST' | translate }}</strong>
       </ion-button>

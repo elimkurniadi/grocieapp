@@ -58,6 +58,11 @@ export class FavoriteListComponent implements OnInit {
     this.presentAlertConfirm(item);
   }
 
+  edit(item) {
+    console.log(item);
+    this.presentAlertPrompt(item);
+  }
+
   async presentAlertConfirm(item) {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
@@ -73,6 +78,38 @@ export class FavoriteListComponent implements OnInit {
           cssClass: 'modal-confirm',
           handler: () => {
             this.favoriteSrv.deleteFavoriteList(item.favourite_group_id).then(res => {
+              this.getFavorites();
+            })
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertPrompt(item) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Rename ' +  item.name,
+      inputs: [
+         {
+          name: 'favouriteListName',
+          type: 'text',
+          placeholder: 'Insert new name'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Rename',
+          handler: (data) => {
+            console.log(data);
+            this.favoriteSrv.updateFavoriteList(item.favourite_group_id, data?.favouriteListName).then(res => {
+              this.toastSrv.show(res?.response);
               this.getFavorites();
             })
           }
