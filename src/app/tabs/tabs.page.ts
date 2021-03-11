@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, IonRouterOutlet, IonTabs, ModalController, Platform } from '@ionic/angular';
+import { AlertController, IonRouterOutlet, IonTabs, ModalController, NavController, Platform } from '@ionic/angular';
 import { ModalOtpComponent } from '@shared/common/otp/modal-otp/modal-otp.component';
 import { UserService } from '@shared/services/modules';
 
@@ -59,13 +59,16 @@ export class TabsPage implements OnInit {
     private userSrv: UserService,
     private platform: Platform,
     private routerOutlet: IonRouterOutlet,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private navCtrl: NavController
   ) {
     this.platform.backButton.subscribeWithPriority(10, (processNextHandler) => {
       console.log('Back press handler!');
       if (!this.routerOutlet.canGoBack()) {
         this.showExitConfirm();
         processNextHandler();
+      }else { 
+        this.navCtrl.pop();
       }
     });
 

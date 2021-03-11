@@ -40,7 +40,7 @@ export class AddressFormComponent implements OnInit {
     this.fetchProvinces();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewDidEnter() {
     this.observeFetchState();
@@ -148,22 +148,20 @@ export class AddressFormComponent implements OnInit {
         controls.city_id.setValue(idCity);
         controls.city_id.enable();
         this.fg.updateValueAndValidity();
-      })
-      .then(() => {
+
         this.fetchDistricts(idCity).then(() => {
           controls.district_id.setValue(idDistrict);
           controls.district_id.enable();
           this.fg.updateValueAndValidity();
+
+          this.fetchSubDistricts(idDistrict).then(() => {
+            // controls.sub_district_id.setValue();
+            controls.sub_district_id.setValue(idSubDistrict);
+            controls.sub_district_id.enable();
+            this.fg.updateValueAndValidity();
+          });
         });
       })
-      .then(() => {
-        this.fetchSubDistricts(idDistrict).then(() => {
-          // controls.sub_district_id.setValue();
-          controls.sub_district_id.setValue(idSubDistrict);
-          controls.sub_district_id.enable();
-          this.fg.updateValueAndValidity();
-        });
-      });
   }
 
   async fetchProvinces() {

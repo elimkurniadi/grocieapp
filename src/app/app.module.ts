@@ -51,7 +51,9 @@ export class SentryErrorHandler implements ErrorHandler {
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      rippleEffect: false
+    }),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,

@@ -49,7 +49,7 @@
         <span><b>{{'DELIVERY_NOTES' | translate}}</b></span>
       </ion-col>
       <ion-col size="12" class="ion-no-padding">
-        <ion-item lines="none" class="form-group">
+        <ion-item lines="none" class="form-group" style="margin:5px;--padding-start: 0;">
           <ion-textarea
             rows="3"
             placeholder="{{'LOCATION_DETAIL_PLACEHOLDER' | translate}}"
@@ -75,7 +75,7 @@
               (change)="radioChanged('deliver_now')"
               [checked]="canDeliverNow"
             />
-            <label class="radio-label">{{'DELIVER_NOW' | translate}}</label>
+            <label class="radio-label" [ngClass]="{ 'text-muted' : !canDeliverNow }">{{'DELIVER_NOW' | translate}}</label>
           </div>
           <div>
             <ion-row class="ion-align-items-center">
@@ -154,19 +154,19 @@
       <ion-col size="6" class="ion-text-right text-payment-price">
         Rp. {{ paymentSummary?.raw_price | number: '1.0-0':'id' }}
       </ion-col>
-      <ion-col size="6">
+      <!-- <ion-col size="6">
         <span class="text-payment-info">{{'SERVICE_FEE' |translate}}</span>
       </ion-col>
       <ion-col size="6" class="ion-text-right text-payment-price">
         Rp. {{ paymentSummary?.service_fee | number: '1.0-0':'id' }}
-      </ion-col>
+      </ion-col> -->
       <ion-col size="6">
         <span class="text-payment-info">{{'DELIVERY_FEE' |translate}}</span>
       </ion-col>
       <ion-col size="6" class="ion-text-right text-payment-price">
         Rp. {{ paymentSummary?.delivery_fee | number: '1.0-0':'id' }}
       </ion-col>
-      <ion-col size="6">
+      <ion-col size="6" *ngIf="paymentSummary?.discount > 0">
         <span class="text-payment-info">{{'DISCOUNT' |translate}}</span>
       </ion-col>
       <ion-col size="6" class="ion-text-right text-payment-price" *ngIf="paymentSummary?.discount > 0">

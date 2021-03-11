@@ -16,9 +16,9 @@
           ><b>{{ 'SEE_LIST' | translate }}</b></ion-text
         >
       </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option style="height:95%; font-weight: 600;text-transform: capitalize;border-radius: 2px;" color="danger" (click)="delete(item)">Delete</ion-item-option>
-        <ion-item-option style="height:95%; font-weight: 600;text-transform: capitalize;border-radius: 2px;" color="success" (click)="edit(item)">Rename</ion-item-option>
+      <ion-item-options side="end" class="ion-align-items-center">
+        <ion-item-option class="custom-option" color="danger" (click)="delete(item)">Delete</ion-item-option>
+        <ion-item-option class="custom-option" color="success" (click)="edit(item)">Rename</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
 

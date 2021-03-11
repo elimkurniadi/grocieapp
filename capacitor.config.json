@@ -10,6 +10,11 @@
       "scopes": ["profile", "email"],
       "serverClientId": "682784712996-65cbu37faq1lu6lc94erb48uf53cdka9.apps.googleusercontent.com",
       "forceCodeForRefreshToken": true
+    },
+    "SplashScreen": {
+      "launchAutoHide": true,
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": true
     }
   },
   "linuxAndroidStudioPath": "/home/dra/android-studio/bin/studio.sh"
