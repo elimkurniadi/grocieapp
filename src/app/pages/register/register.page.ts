@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { CacheService, GlobalService, RxValidatorService } from '@shared/services';
+import { ThirdPartyService } from '@shared/services/core/third-party.service';
 import { UserService } from '@shared/services/modules/user.service';
 import { ToastService } from '@shared/services/toast.service';
 import * as moment from 'moment';
@@ -19,7 +20,8 @@ export class RegisterPage implements OnInit, OnDestroy {
   passwordIsShow = false;
   confPasswordIsShow = false;
   isOnFetch = false;
-  userInfo = null;
+  googleInfo = null;
+  fbInfo = null;
 
   constructor(
     private fb: FormBuilder,
@@ -29,9 +31,10 @@ export class RegisterPage implements OnInit, OnDestroy {
     private userSrv: UserService,
     private toastSrv: ToastService,
     private gs: GlobalService,
-    private cache: CacheService
+    private cache: CacheService,
+    private thirdPartySrv: ThirdPartyService
   ) {
-    this.userInfo = this.cache.googleUserInfo;
+    this.googleInfo = this.cache.googleUserInfo;
   }
 
   ngOnInit() {
@@ -53,8 +56,8 @@ export class RegisterPage implements OnInit, OnDestroy {
   initRegisterFormStepOne() {
     this.validatorSrv.validatorErrorMessage();
     this.fg = this.fb.group({
-      full_name: [this.userInfo?.displayName, [RxwebValidators.required()]],
-      email: [this.userInfo?.email, [RxwebValidators.required(), RxwebValidators.email()]],
+      full_name: [this.googleInfo?.displayName, [RxwebValidators.required()]],
+      email: [this.googleInfo?.email, [RxwebValidators.required(), RxwebValidators.email()]],
       phone: [
         null,
         [
@@ -75,6 +78,10 @@ export class RegisterPage implements OnInit, OnDestroy {
       ],
       confirm_password: [null, [RxwebValidators.required(), RxwebValidators.compare({ fieldName: 'password' })]],
     });
+
+    if (this.cache.fbToken) {
+      this.getFbAccountInfo();
+    }
   }
 
   onDateSelect(event) {
@@ -98,5 +105,17 @@ export class RegisterPage implements OnInit, OnDestroy {
           this.toastSrv.show(this.translateSrv.get('PHONE_EMAIL_TAKEN'));
         });
     }
+  }
+
+  getFbAccountInfo() {
+    this.thirdPartySrv
+      .getFbData(this.cache.fbToken)
+      .then((res: any) => {
+        this.fg.controls.full_name.patchValue(res?.name);
+        this.fg.controls.email.patchValue(res?.email);
+      })
+      .catch((err) => {
+        this.gs.log('err', err);
+      });
   }
 }

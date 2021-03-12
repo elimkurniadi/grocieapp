@@ -6,6 +6,6 @@
     <string name="custom_url_scheme">klikgo</string>
     <string name="custom_host_scheme">app.myklikgo.com</string>
     <string name="server_client_id">852595832919-73lbej9udcco4jnpnuegraik09rmmbrh.apps.googleusercontent.com</string>
-    <string name="facebook_app_id">1272637443123444</string>
-    <string name="fb_login_protocol_scheme">fb1272637443123444</string>
-  </resources>
+    <string name="facebook_app_id">729501611082377</string>
+    <string name="fb_login_protocol_scheme">fb729501611082377</string>
+</resources>

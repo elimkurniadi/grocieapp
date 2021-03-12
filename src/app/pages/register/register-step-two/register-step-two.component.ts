@@ -94,7 +94,7 @@ export class RegisterStepTwoComponent implements OnInit {
       sub_district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       address_name: [null, [RxwebValidators.required()]],
       tos: [false, RxwebValidators.requiredTrue()],
-      token: [this.cache.googleUserInfo?.authentication?.idToken],
+      token: [this.cache.googleUserInfo?.authentication?.idToken || this.cache.fbToken],
     });
     this.countCurrentChar();
     this.fetchProvinces();
@@ -106,9 +106,12 @@ export class RegisterStepTwoComponent implements OnInit {
       let platform = null;
       if (this.cache.googleUserInfo) {
         platform = '/google';
+      } else if (this.cache.fbToken) {
+        platform = '/facebook';
       }
 
       this.userSrv.register(value, platform).then(() => {
+        this.cache.clearSocialInfo();
         this.router.navigate(['/tabs', 'home']);
         // this.showModalOtp();
       });
