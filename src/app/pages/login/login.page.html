@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border" style="visibility: hidden;">
+<ion-header class="ion-no-border" style="visibility: hidden">
   <ion-toolbar mode="ios"></ion-toolbar>
 </ion-header>
 
@@ -13,14 +13,14 @@
       <ion-col size="12">
         <ion-button expand="block" color="limegreen" [routerLink]="[ 'form' ]"><b>Login</b></ion-button>
       </ion-col>
-      <ion-col size="12">
+      <!-- <ion-col size="12">
         <ion-button expand="block" fill="solid" class="social-media-login" (click)="loginFb()">
           <fa-icon [icon]="faFb"></fa-icon>
           <span class="ion-padding-start"> Login With Facebook </span>
         </ion-button>
-      </ion-col>
+      </ion-col> -->
       <ion-col size="12">
-        <ion-button expand="block" fill="solid" class="social-media-login"  (click)="loginGoogle()">
+        <ion-button expand="block" fill="solid" class="social-media-login" (click)="loginGoogle()">
           <fa-icon [icon]="faGoogle"></fa-icon>
           <span class="ion-padding-start"> Login With Google </span>
         </ion-button>

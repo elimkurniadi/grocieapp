@@ -232,5 +232,7 @@
   "UNDER_MAINTENANCE": "Dalam Pemeliharaan",
   "MAINTENANCE_TITLE": "KlikGO Dalam Pemeliharaan",
   "MAINTENANCE_MESSAGE": "KlikGO saat ini sedang dalam pemeliharaan. Harap tutup aplikasi dan coba lagi beberapa saat kemudian.",
-  "CLOSE_APP": "Tutup Aplikasi"
+  "CLOSE_APP": "Tutup Aplikasi",
+  "INVALID_TOKEN": "Token tidak valid",
+  "EMAIL_VERIFIED": "Email Anda Telah Terverifikasi"
 }

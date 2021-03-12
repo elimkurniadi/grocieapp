@@ -9,9 +9,14 @@ import { GlobalService } from '../global.service';
 export class UserService {
   constructor(private api: ApiService, private gs: GlobalService, private authSrv: AuthService) {}
 
-  register(data): Promise<any> {
+  register(data, platform = null): Promise<any> {
+    let path = 'profile/register';
+
+    if (platform) {
+      path += platform;
+    }
     return new Promise((resolve, reject) => {
-      const subscription = this.api.postData('profile/register', data);
+      const subscription = this.api.postData(path, data);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
@@ -110,6 +115,36 @@ export class UserService {
   forgotPassword(data): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.postData('profile/forgot_password', data);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          res.code === 200 ? resolve(true) : reject(false);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  setPassword(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.putData('profile/change_forgot_password', data);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          res.code === 200 ? resolve(true) : reject(false);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  sendEmailVerification(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.putData('profile/send_email_verification', {});
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {

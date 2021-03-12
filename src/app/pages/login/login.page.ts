@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { AuthService } from '@shared/services';
+import { Response } from '@shared/models';
+import { AuthService, CacheService, ToastService } from '@shared/services';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +13,25 @@ export class LoginPage implements OnInit {
   faFb = faFacebookF;
   faGoogle = faGoogle;
 
-  constructor(private authSrv: AuthService) {}
+  constructor(private authSrv: AuthService, private toastSrv: ToastService, private router: Router) {}
 
   ngOnInit() {}
 
   loginGoogle() {
-    this.authSrv.loginGoogle();
+    this.authSrv
+      .loginGoogle()
+      .then((res: Response) => {
+        const token = res.response;
+        if (token) {
+          this.router.navigate(['/tabs', 'home']);
+        } else {
+          this.router.navigate(['/register']);
+        }
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
   }
 
   loginFb() {

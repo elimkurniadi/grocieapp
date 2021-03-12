@@ -9,6 +9,7 @@ import { Response } from '@shared/models';
 
 import { Plugins } from '@capacitor/core';
 import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -59,12 +60,26 @@ export class AuthService {
   async loginGoogle() {
     const googleUser = await Plugins.GoogleAuth.signIn();
     const credentials = {
-      user_token: googleUser.authentication.idToken,
-      email: googleUser.email,
+      token: googleUser.authentication.idToken,
     };
 
-    return true;
-    // return this.login(credentials).toPromise();
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.postData('authentication/login/google', credentials);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          const token = res.response;
+          if (token) {
+            this.loginByToken(token);
+          }
+          this.cache.googleUserInfo = googleUser;
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
   }
 
   async loginFb() {
@@ -83,6 +98,38 @@ export class AuthService {
   verifyPhone(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.postData('authentication/verify_phone', data);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          const response = res.response;
+          resolve(response);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  checkForgotToken(token: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData(`authentication/check_forgot_password_token/${token}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          const response = res.response;
+          resolve(response);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  verifyEmail(token: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.postData(`authentication/verify_email`, { token });
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {

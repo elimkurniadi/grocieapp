@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
-import { Router } from '@angular/router';
-import { GlobalService, ToastService } from '@shared/services';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService, GlobalService, ToastService } from '@shared/services';
 import { ModalController } from '@ionic/angular';
 import { ModalLocationComponent } from '@shared/common/modals/modal-location/modal-location.component';
 import { BannerService, BundlingService, UserService } from '@shared/services/modules';
@@ -9,6 +9,7 @@ import { Banner, Bundling } from '@shared/models';
 import { NotificationListComponent } from '../notification/notification-list/notification-list.component';
 import { ModalOtpComponent } from '@shared/common/otp/modal-otp/modal-otp.component';
 import { ActivityService } from '@shared/services/modules/activity.service';
+import { ModalEmailVerificationComponent } from '@shared/common/email-verification/modal-email-verification/modal-email-verification.component';
 
 @Component({
   selector: 'app-home',
@@ -28,8 +29,17 @@ export class HomePage implements OnInit {
     private bundlingSrv: BundlingService,
     private modalCtrl: ModalController,
     private userSrv: UserService,
-    private activitySrv: ActivityService
-  ) {}
+    private activitySrv: ActivityService,
+    private route: ActivatedRoute,
+    private authSrv: AuthService
+  ) {
+    this.route.queryParams.subscribe((param) => {
+      const token = param.emailToken;
+      if (token) {
+        this.verifyEmail(token);
+      }
+    });
+  }
 
   ngOnInit() {
     this.getBanner();
@@ -94,6 +104,19 @@ export class HomePage implements OnInit {
       .then((res) => {
         const bundlings = res.response.rows as Bundling[];
         this.bundlings = bundlings;
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
+  }
+
+  verifyEmail(token) {
+    this.authSrv
+      .verifyEmail(token)
+      .then(() => {
+        const msg = this.translate.get('EMAIL_VERIFIED');
+        this.toastSrv.show(msg);
       })
       .catch((err) => {
         const error = err.error.error;

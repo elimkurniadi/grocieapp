@@ -21,6 +21,7 @@ export class EditProfilePage implements OnInit {
     quality: 50,
   };
   selectedImage: any = null;
+  currDate: any;
 
   constructor(
     private validatorSrv: RxValidatorService,
@@ -35,6 +36,7 @@ export class EditProfilePage implements OnInit {
     private toastSrv: ToastService
   ) {
     this.userSrv.getProfile().then((res) => {
+      this.currDate = new Date();
       this.initProfileForm(res);
     });
   }
@@ -43,11 +45,11 @@ export class EditProfilePage implements OnInit {
 
   initProfileForm(user) {
     this.selectedImage = user?.profile_picture
-      ? user?.profile_picture
+      ? user?.profile_picture + `?${this.currDate.toString()}`
       : 'https://via.placeholder.com/35.png?text=LOGO+Placeholder';
     this.validatorSrv.validatorErrorMessage();
     this.fg = this.fb.group({
-      profile_picture: [user?.profile_picture ? user?.profile_picture : null],
+      profile_picture: [user?.profile_picture ? user?.profile_picture + `?${this.currDate.toString()}` : null],
       full_name: [user?.full_name, [RxwebValidators.required()]],
       email: [user?.email, [RxwebValidators.required(), RxwebValidators.email()]],
       phone: [

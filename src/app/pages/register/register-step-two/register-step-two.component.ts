@@ -8,7 +8,7 @@ import { ModalSettingComponent } from '@shared/common/modals/modal-setting/modal
 import { ModalOtpComponent } from '@shared/common/otp/modal-otp/modal-otp.component';
 import { Response, Setting } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
-import { GlobalService, RxValidatorService, ToastService } from '@shared/services';
+import { CacheService, GlobalService, RxValidatorService, ToastService } from '@shared/services';
 import { AlertService } from '@shared/services/alert.service';
 import { SettingService } from '@shared/services/modules';
 import { AddressService } from '@shared/services/modules/address.service';
@@ -40,7 +40,8 @@ export class RegisterStepTwoComponent implements OnInit {
     private modalCtrl: ModalController,
     private addressSrv: AddressService,
     private settingSrv: SettingService,
-    private toastSrv: ToastService
+    private toastSrv: ToastService,
+    private cache: CacheService
   ) {
     this.observeQueryParams();
     this.initRegisterFormStepTwo();
@@ -93,6 +94,7 @@ export class RegisterStepTwoComponent implements OnInit {
       sub_district_id: [{ value: null, disabled: true }, [RxwebValidators.required()]],
       address_name: [null, [RxwebValidators.required()]],
       tos: [false, RxwebValidators.requiredTrue()],
+      token: [this.cache.googleUserInfo?.authentication?.idToken],
     });
     this.countCurrentChar();
     this.fetchProvinces();
@@ -101,7 +103,12 @@ export class RegisterStepTwoComponent implements OnInit {
   register() {
     if (this.fg.valid) {
       const value = this.combineFormValues();
-      this.userSrv.register(value).then(() => {
+      let platform = null;
+      if (this.cache.googleUserInfo) {
+        platform = '/google';
+      }
+
+      this.userSrv.register(value, platform).then(() => {
         this.router.navigate(['/tabs', 'home']);
         // this.showModalOtp();
       });

@@ -23,6 +23,7 @@ export class ProfilePage implements OnInit {
   langList = null;
   currentVersion = null;
   userData: any = null;
+  currDate: any;
 
   constructor(
     private translateSrv: TranslateService,
@@ -124,20 +125,20 @@ export class ProfilePage implements OnInit {
   }
 
   showModal(modal: string) {
-    switch(modal) {
-      case 'tnc' : {
+    switch (modal) {
+      case 'tnc': {
         this.showTnc();
         break;
       }
-      case 'privacy_policy' : {
+      case 'privacy_policy': {
         this.showPrivacyPolicy();
         break;
       }
-      case 'share' : {
+      case 'share': {
         this.showShareAppModal();
         break;
       }
-      case 'faq' : {
+      case 'faq': {
         this.showFAQModal();
       }
     }
@@ -147,7 +148,9 @@ export class ProfilePage implements OnInit {
     this.userSrv
       .getProfile()
       .then((res) => {
+        this.currDate = new Date();
         this.userData = res;
+        this.userData.profile_picture += `?${this.currDate.toString()}`;
         if (event) {
           event.target.complete();
         }

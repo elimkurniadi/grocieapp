@@ -56,11 +56,11 @@ export class CheckoutPage implements OnInit {
 
   observeQueryParam() {
     this.route.queryParams.subscribe((param) => {
-      this.getVoucher();
       if (param.address_id) {
         // FETCH ADDRESS DETAIL HERE
         this.addressSrv.getAddress(param?.address_id).then((address) => {
           this.defaultAddress = address;
+          this.getVoucher();
         });
       } else {
         this.fetchAddressList();
@@ -108,6 +108,7 @@ export class CheckoutPage implements OnInit {
   fetchAddressList() {
     this.addressSrv.getAddress().then((res) => {
       this.defaultAddress = res[0];
+      this.getVoucher();
     });
   }
 
@@ -190,6 +191,7 @@ export class CheckoutPage implements OnInit {
   }
 
   removeVoucher() {
+    this.voucher = null;
     this.cache.removeVoucher();
   }
 

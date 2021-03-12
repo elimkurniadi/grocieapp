@@ -41,7 +41,7 @@ dependencies {
 configurations {
   implementation.exclude group: 'com.google.zxing'
 }
-
+  
 apply from: 'capacitor.build.gradle'
 
 try {

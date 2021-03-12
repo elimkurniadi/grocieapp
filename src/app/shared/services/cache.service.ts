@@ -9,6 +9,7 @@ export class CacheService {
   private recentKey = 'recent-search';
   private voucherKey = 'voucher-id';
   currentUser: any;
+  googleUserInfo: any;
 
   constructor(private storage: Storage) {}
 

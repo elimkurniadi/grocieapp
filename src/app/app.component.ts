@@ -9,7 +9,8 @@ import { HTTP } from '@ionic-native/http/ngx';
 import { AuthService, GlobalService } from '@shared/services';
 import { ModalMaintenanceComponent } from '@shared/common/modals/modal-maintenance/modal-maintenance.component';
 import { SettingService } from '@shared/services/modules';
-import { Response } from '@shared/models';
+import { Deeplinks } from '@ionic-native/deeplinks/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,9 @@ export class AppComponent {
     private gs: GlobalService,
     private authSrv: AuthService,
     private modalCtrl: ModalController,
-    private settingSrv: SettingService
+    private settingSrv: SettingService,
+    private deeplinks: Deeplinks,
+    private router: Router
   ) {
     this.authSrv.checkToken();
     this.initializeApp();
@@ -36,6 +39,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.checkMaintenance();
+      this.setDeepLink();
     });
   }
 
@@ -73,5 +77,32 @@ export class AppComponent {
       component: ModalMaintenanceComponent,
     });
     return await modal.present();
+  }
+
+  setDeepLink() {
+    this.deeplinks
+      .route({
+        '/set-password': '/set-password/:forgotToken',
+        '/tabs-home': '/email-verification/:emailToken',
+      })
+      .subscribe(
+        (match) => {
+          // match.$route - the route we matched, which is the matched entry from the arguments to route()
+          // match.$args - the args passed in the link
+          // match.$link - the full link data
+
+          this.gs.log('Successfully matched route', match);
+          // console.log('Successfully matched route', match);
+          if (match.$route === '/set-password/:forgotToken') {
+            this.router.navigateByUrl(`/set-password/${match.$args.forgotToken}`);
+          } else if (match.$route === '/email-verification/:emailToken') {
+            this.router.navigateByUrl(`/tabs/home?emailToken=${match.$args.emailToken}`);
+          }
+        },
+        (nomatch) => {
+          // nomatch.$link - the full link data
+          this.gs.log("Got a deeplink that didn't match", nomatch, 'error');
+        }
+      );
   }
 }

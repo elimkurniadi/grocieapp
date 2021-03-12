@@ -8,7 +8,7 @@
   "plugins": {
     "GoogleAuth": {
       "scopes": ["profile", "email"],
-      "serverClientId": "682784712996-65cbu37faq1lu6lc94erb48uf53cdka9.apps.googleusercontent.com",
+      "serverClientId": "852595832919-73lbej9udcco4jnpnuegraik09rmmbrh.apps.googleusercontent.com",
       "forceCodeForRefreshToken": true
     },
     "SplashScreen": {

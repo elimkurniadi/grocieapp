@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
-import { GlobalService, RxValidatorService } from '@shared/services';
+import { CacheService, GlobalService, RxValidatorService } from '@shared/services';
 import { UserService } from '@shared/services/modules/user.service';
 import { ToastService } from '@shared/services/toast.service';
 import * as moment from 'moment';
@@ -19,6 +19,7 @@ export class RegisterPage implements OnInit, OnDestroy {
   passwordIsShow = false;
   confPasswordIsShow = false;
   isOnFetch = false;
+  userInfo = null;
 
   constructor(
     private fb: FormBuilder,
@@ -27,12 +28,15 @@ export class RegisterPage implements OnInit, OnDestroy {
     private translateSrv: TranslateService,
     private userSrv: UserService,
     private toastSrv: ToastService,
-    private gs: GlobalService
+    private gs: GlobalService,
+    private cache: CacheService
   ) {
-    this.initRegisterFormStepOne();
+    this.userInfo = this.cache.googleUserInfo;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initRegisterFormStepOne();
+  }
 
   ionViewDidEnter() {
     this.observeFetchState();
@@ -49,8 +53,8 @@ export class RegisterPage implements OnInit, OnDestroy {
   initRegisterFormStepOne() {
     this.validatorSrv.validatorErrorMessage();
     this.fg = this.fb.group({
-      full_name: [null, [RxwebValidators.required()]],
-      email: [null, [RxwebValidators.required(), RxwebValidators.email()]],
+      full_name: [this.userInfo?.displayName, [RxwebValidators.required()]],
+      email: [this.userInfo?.email, [RxwebValidators.required(), RxwebValidators.email()]],
       phone: [
         null,
         [

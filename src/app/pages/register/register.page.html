@@ -50,6 +50,7 @@
                 type="email"
                 formControlName="email"
                 style="--placeholder-color: blue !important"
+                [disabled]="userInfo"
               ></ion-input>
             </ion-item>
             <small *ngIf="fg.controls.email.dirty">
