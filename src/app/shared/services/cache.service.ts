@@ -10,6 +10,7 @@ export class CacheService {
   private voucherKey = 'voucher-id';
   currentUser: any;
   googleUserInfo: any;
+  fbToken: any;
 
   constructor(private storage: Storage) {}
 
@@ -57,5 +58,10 @@ export class CacheService {
 
   removeVoucher() {
     return this.storage.remove(this.voucherKey);
+  }
+
+  clearSocialInfo() {
+    this.googleUserInfo = null;
+    this.fbToken = null;
   }
 }

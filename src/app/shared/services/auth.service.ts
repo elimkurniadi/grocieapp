@@ -83,16 +83,30 @@ export class AuthService {
   }
 
   async loginFb() {
-    // const FACEBOOK_PERMISSIONS = ['public_profile','email'];
-    const FACEBOOK_PERMISSIONS = ['email'];
+    const FACEBOOK_PERMISSIONS = ['public_profile', 'email'];
     const result = await Plugins.FacebookLogin.login({
       permissions: FACEBOOK_PERMISSIONS,
     });
+    const accessToken = result.accessToken.token;
+    const credentials = { token: accessToken };
 
-    const credentials = { user_token: result.accessToken.token };
-
-    return true;
-    // return this.login(credentials).toPromise();
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.postData('authentication/login/facebook', credentials);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          const token = res.response;
+          if (token) {
+            this.loginByToken(token);
+          }
+          this.cache.fbToken = accessToken;
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
   }
 
   verifyPhone(data: any): Promise<any> {
@@ -129,7 +143,7 @@ export class AuthService {
 
   verifyEmail(token: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.postData(`authentication/verify_email`, { token });
+      const subscription = this.api.getData(`authentication/verify_email`, null, null, { token });
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {

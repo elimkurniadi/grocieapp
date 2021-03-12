@@ -13,7 +13,12 @@ export class LoginPage implements OnInit {
   faFb = faFacebookF;
   faGoogle = faGoogle;
 
-  constructor(private authSrv: AuthService, private toastSrv: ToastService, private router: Router) {}
+  constructor(
+    private authSrv: AuthService,
+    private toastSrv: ToastService,
+    private router: Router,
+    private cache: CacheService
+  ) {}
 
   ngOnInit() {}
 
@@ -23,6 +28,7 @@ export class LoginPage implements OnInit {
       .then((res: Response) => {
         const token = res.response;
         if (token) {
+          this.cache.clearSocialInfo();
           this.router.navigate(['/tabs', 'home']);
         } else {
           this.router.navigate(['/register']);
@@ -35,6 +41,20 @@ export class LoginPage implements OnInit {
   }
 
   loginFb() {
-    this.authSrv.loginFb();
+    this.authSrv
+      .loginFb()
+      .then((res: Response) => {
+        const token = res.response;
+        if (token) {
+          this.cache.clearSocialInfo();
+          this.router.navigate(['/tabs', 'home']);
+        } else {
+          this.router.navigate(['/register']);
+        }
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
   }
 }
