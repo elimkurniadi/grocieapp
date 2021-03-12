@@ -34,7 +34,7 @@ export class ProfilePage implements OnInit {
     private authSrv: AuthService,
     private modalCtrl: ModalController,
     private settingSrv: SettingService,
-    private toastSrv: ToastService
+    private toastSrv: ToastService,
   ) {
     this.getAppVersion();
     this.setupLanguage();
@@ -163,8 +163,9 @@ export class ProfilePage implements OnInit {
   }
 
   showTnc() {
+    const lang = `_${this.translateSrv.lang}`;
     this.settingSrv
-      .getTnc()
+      .getTnc(lang)
       .then((res: Response) => {
         const data = res.response as Setting;
         data.name = this.translateSrv.get('TERMS_CONDITIONS');
@@ -177,8 +178,9 @@ export class ProfilePage implements OnInit {
   }
 
   showPrivacyPolicy() {
+    const lang = `_${this.translateSrv.lang}`;
     this.settingSrv
-      .getPrivacyPolicy()
+      .getPrivacyPolicy(lang)
       .then((res: Response) => {
         const data = res.response as Setting;
         data.name = this.translateSrv.get('PRIVACY_POLICY');

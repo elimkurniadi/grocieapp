@@ -20,6 +20,7 @@ export class CheckoutPage implements OnInit {
   maxCurrDate: any = moment(new Date()).set({ hour: 18, minute: 0 });
   selectedDate = null;
   deliveryDate: any;
+  operationalTime;
   canDeliverNow: boolean;
   deliveryNow: boolean;
   notes: string;
@@ -157,6 +158,7 @@ export class CheckoutPage implements OnInit {
       .checkOperationalTime()
       .then((res) => {
         const response = res.response;
+        this.operationalTime = response;
         const closeHour = parseInt(response.close.split(':')[0], 10);
         this.maxCurrDate = moment(new Date()).set({ hour: closeHour, minute: 0 });
 

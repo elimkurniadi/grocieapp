@@ -47,6 +47,13 @@ export class HomePage implements OnInit {
     this.activitySrv.registerPush();
   }
 
+  doRefresh(event) {
+    Promise.all([this.getBanner(),this.getBundling()]).then((success => {
+      console.log('Async operation has ended', success);
+      event.target.complete();
+    }))
+  }
+
   selectLang(lang) {
     this.selectedLanguage = lang;
     this.translate.setLanguage(lang);
@@ -87,7 +94,7 @@ export class HomePage implements OnInit {
   }
 
   getBanner() {
-    this.bannerSrv
+    return this.bannerSrv
       .getList()
       .then((res) => {
         const banners = res.response as Banner[];
@@ -99,7 +106,7 @@ export class HomePage implements OnInit {
       });
   }
   getBundling() {
-    this.bundlingSrv
+    return this.bundlingSrv
       .getList()
       .then((res) => {
         const bundlings = res.response.rows as Bundling[];

@@ -47,6 +47,21 @@ export class CartService {
     });
   }
 
+  getCartMaxQty(productId): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData(`cart/max_quantity?product_id=${productId}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res) => {
+          resolve(res?.response);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
   updateCartQuantity(id, qty): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.putData(`cart/quantity/${id}`, { quantity: qty });

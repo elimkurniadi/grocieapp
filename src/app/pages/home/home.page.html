@@ -44,6 +44,9 @@
  -->
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-grid class="ion-no-padding">
     <ion-row class="ion-no-padding">
       <ion-col class="ion-no-padding">

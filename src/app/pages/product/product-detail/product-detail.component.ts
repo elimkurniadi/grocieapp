@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
@@ -20,7 +21,7 @@ export class ProductDetailComponent implements OnInit {
   productId: number = null;
   page: Page;
   qty = 0;
-
+  maxQty = 0;
   products: Product[];
   isOnFetch = false;
 
@@ -28,9 +29,9 @@ export class ProductDetailComponent implements OnInit {
     private translateSrv: TranslateService,
     private toastSrv: ToastService,
     private productSrv: ProductService,
+    private cartSrv: CartService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
-    private cartSrv: CartService,
     private modalCtrl: ModalController,
     private router: Router,
     private gs: GlobalService
@@ -43,7 +44,7 @@ export class ProductDetailComponent implements OnInit {
     };
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewDidEnter() {
     this.observeFetchState();
@@ -70,12 +71,14 @@ export class ProductDetailComponent implements OnInit {
   }
 
   fetchProductDetail(id) {
-    this.productSrv.getProductDetail(id).then((res) => {
-      console.log('RES', res);
-      this.productData = res;
+    this.productSrv.getProductDetail(id).then((detail) => {
+      this.productData = detail;
+      this.cartSrv.getCartMaxQty(detail.product_id).then(res => {
+        console.log('datatatata', res);
+        this.maxQty = res.max_quantity;
+        res.max_quantity > 0 ? this.qty = 1 : this.qty = 0;
+      })
       this.getRelatedProduct();
-
-      if (this.productData?.stock > 0) this.qty = 1;
     });
   }
 
@@ -86,18 +89,17 @@ export class ProductDetailComponent implements OnInit {
   addItemToCart() {
     if (this.qty > 0) {
       this.cartSrv.addToCart(this.productId, this.qty).then((res) => {
-        // this.toastSrv.show(`${this.translateSrv.get('SUCCESS_ADD_TO_CART')}`);
-
         // Ini untuk recheck qty
         // this.fetchProductDetail(this.productId);
-
-        this.presentModal();
-      });
+        this.presentModalSuccess();
+      }).catch(err => {
+        console.log('err', err);
+      })
     } else {
     }
   }
 
-  async presentModal() {
+  async presentModalSuccess() {
     const modal = await this.modalCtrl.create({
       component: ModalAddToCartComponent,
       cssClass: 'my-custom-class',
@@ -129,7 +131,7 @@ export class ProductDetailComponent implements OnInit {
 
   updateLocalQuantity(increment) {
     if (increment) {
-      if (this.qty < this.productData?.stock) this.qty += 1;
+      if (this.qty < this.maxQty) this.qty += 1;
     } else {
       if (this.qty > 0) {
         this.qty -= 1;

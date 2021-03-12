@@ -9,9 +9,9 @@ import { GlobalService } from '../global.service';
 export class SettingService {
   constructor(private api: ApiService, private gs: GlobalService) {}
 
-  getTnc(): Promise<any> {
+  getTnc(lang?): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData('setting/terms_condition');
+      const subscription = this.api.getData('setting/terms_condition' + lang);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: Response) => {
@@ -23,9 +23,9 @@ export class SettingService {
       );
     });
   }
-  getPrivacyPolicy(): Promise<any> {
+  getPrivacyPolicy(lang?): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData('setting/privacy_policy');
+      const subscription = this.api.getData('setting/privacy_policy' + lang);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: Response) => {
@@ -86,6 +86,21 @@ export class SettingService {
   checkMaintenance(): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData('setting/maintenance');
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  checkAppVersion(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData('setting/app_version');
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: Response) => {

@@ -11,6 +11,13 @@ import { ModalMaintenanceComponent } from '@shared/common/modals/modal-maintenan
 import { SettingService } from '@shared/services/modules';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import { Router } from '@angular/router';
+import { Plugins } from '@capacitor/core';
+
+const { Device } = Plugins;
+
+const logDeviceInfo = async () => {
+  return Device.getInfo();
+};
 
 @Component({
   selector: 'app-root',
@@ -28,7 +35,7 @@ export class AppComponent {
     private modalCtrl: ModalController,
     private settingSrv: SettingService,
     private deeplinks: Deeplinks,
-    private router: Router
+    private router: Router,
   ) {
     this.authSrv.checkToken();
     this.initializeApp();
@@ -40,7 +47,7 @@ export class AppComponent {
       this.splashScreen.hide();
       this.checkMaintenance();
       this.setDeepLink();
-    });
+    })
   }
 
   setSslPinning() {
@@ -65,6 +72,19 @@ export class AppComponent {
         const isMaintenance = res.response;
         if (isMaintenance) {
           this.showMaintenanceModal();
+        } else {
+          this.settingSrv.checkAppVersion().then(async (app) => {
+            const info = await logDeviceInfo();
+            const appVer = app.response;
+            if (appVer.content !== info.appVersion) {
+              this.gs.log('wrong version');
+              // call modal update app
+            } else {
+              this.gs.log('correct version');
+              // do nothing
+            }
+          })
+
         }
       })
       .catch((err) => {

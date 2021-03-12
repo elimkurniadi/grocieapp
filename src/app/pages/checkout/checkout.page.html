@@ -33,9 +33,8 @@
     <ion-row class="ion-align-items-center ion-padding-horizontal">
       <ion-col size="6"><span class="text-address-info">{{'DELIVERY_LOCATION' | translate}}</span></ion-col>
       <ion-col size="6" class="ion-text-right">
-        <small class="link" [routerLink]="['/address']" [queryParams]="{mode: 'select'}"
-          >{{"CHANGE_DELIVERY_LOCATION" | translate}}</small
-        >
+        <small class="link" [routerLink]="['/address']" [queryParams]="{mode: 'select'}">{{"CHANGE_DELIVERY_LOCATION" |
+          translate}}</small>
       </ion-col>
       <ion-col size="12">
         <ion-text color="medium">
@@ -50,65 +49,44 @@
       </ion-col>
       <ion-col size="12" class="ion-no-padding">
         <ion-item lines="none" class="form-group" style="margin:5px;--padding-start: 0;">
-          <ion-textarea
-            rows="3"
-            placeholder="{{'LOCATION_DETAIL_PLACEHOLDER' | translate}}"
-            [(ngModel)]="notes"
-          ></ion-textarea>
+          <ion-textarea rows="3" placeholder="{{'LOCATION_DETAIL_PLACEHOLDER' | translate}}" [(ngModel)]="notes">
+          </ion-textarea>
         </ion-item>
       </ion-col>
     </ion-row>
 
     <ion-row class="ion-padding-horizontal">
-      <ion-col size="12"
-        ><span><b>{{'DELIVERY_TIME' | translate}}</b></span></ion-col
-      >
+      <ion-col size="12"><span><b>{{'DELIVERY_TIME' | translate}}</b></span></ion-col>
       <ion-col size="12">
         <fieldset class="radio-wrapper">
           <div>
-            <input
-              class="radio-input"
-              type="radio"
-              name="delivery_time"
-              [value]="false"
-              [disabled]="!canDeliverNow"
-              (change)="radioChanged('deliver_now')"
-              [checked]="canDeliverNow"
-            />
-            <label class="radio-label" [ngClass]="{ 'text-muted' : !canDeliverNow }">{{'DELIVER_NOW' | translate}}</label>
+            <input class="radio-input" type="radio" name="delivery_time" [value]="false" [disabled]="!canDeliverNow"
+              (change)="radioChanged('deliver_now')" [checked]="canDeliverNow" />
+            <label class="radio-label" [ngClass]="{ 'text-muted' : !canDeliverNow }">{{'DELIVER_NOW' |
+              translate}}</label><br />
+            <div style="font-size: 11px;padding-left: 24px;">
+              <span style="color:#F64740;">Now closed</span>
+              <span class="text-muted">
+                  <b> - Open on {{operationalTime?.open}}</b>
+              </span>
+            </div>
+
           </div>
           <div>
             <ion-row class="ion-align-items-center">
               <ion-col size="6" class="ion-no-padding">
-                <input
-                  class="radio-input"
-                  type="radio"
-                  name="delivery_time"
-                  [value]="true"
-                  (change)="radioChanged('deliver_later')"
-                  [checked]="!canDeliverNow"
-                />
+                <input class="radio-input" type="radio" name="delivery_time" [value]="true"
+                  (change)="radioChanged('deliver_later')" [checked]="!canDeliverNow" />
                 <label class="radio-label">{{'SCHEDULE_FOR_LATER' | translate}}</label>
               </ion-col>
               <ion-col size="6" class="ion-text-right">
-                <ion-button
-                  expand="block"
-                  fill="outline"
-                  size="small"
-                  color="medium"
-                  (click)="scheduleDatepicker.open()"
-                >
+                <ion-button expand="block" fill="outline" size="small" color="medium"
+                  (click)="scheduleDatepicker.open()">
                   {{selectedDate ? (selectedDate | date:'longDate') : ('SELECT_DATE' | translate)}}
                 </ion-button>
-                <ion-datetime
-                  #scheduleDatepicker
-                  class="ion-hide"
-                  displayFormat="D MMMM YYYY"
-                  pickerFormat="D MMMM YYYY"
-                  [min]="currDate"
-                  [ngModel]="selectedDate"
-                  (ionChange)="onDateSelect($event.detail.value)"
-                ></ion-datetime>
+                <ion-datetime #scheduleDatepicker class="ion-hide" displayFormat="D MMMM YYYY"
+                  pickerFormat="D MMMM YYYY" [min]="currDate" [ngModel]="selectedDate"
+                  (ionChange)="onDateSelect($event.detail.value)"></ion-datetime>
               </ion-col>
             </ion-row>
           </div>
@@ -116,13 +94,8 @@
       </ion-col>
 
       <ion-col size="3" class="ion-no-padding ion-text-center" *ngFor="let time of timeList;let i = index">
-        <ion-chip
-          class="delivery-chip"
-          [color]="time.selected ? 'success': 'light'"
-          [outline]="!time?.selected"
-          [disabled]="(!selectedDate || !time?.active) || deliveryNow"
-          (click)="onTimeSelect(i)"
-        >
+        <ion-chip class="delivery-chip" [color]="time.selected ? 'success': 'light'" [outline]="!time?.selected"
+          [disabled]="(!selectedDate || !time?.active) || deliveryNow" (click)="onTimeSelect(i)">
           <span>{{time?.text}}</span>
         </ion-chip>
       </ion-col>
@@ -186,23 +159,18 @@
         <span class="text-payment-info">{{'SELECT_VOUCHER' |translate}}</span>
       </ion-col>
       <ion-col size="6" class="ion-text-right">
-        <ion-icon
-          name="checkmark-outline"
-          color="success"
-          *ngIf="(voucher && voucher?.quota > 0) || voucherError"
-        ></ion-icon>
-        <ion-icon
-          name="alert-outline"
-          color="warning"
-          *ngIf="(voucher && voucher?.quota <= 0) || voucherError"
-        ></ion-icon>
+        <ion-icon name="checkmark-outline" style="vertical-align: middle;" color="success"
+          *ngIf="(voucher && voucher?.quota > 0) || voucherError"></ion-icon>
+        <ion-icon name="alert-outline" style="vertical-align: middle;" color="warning"
+          *ngIf="(voucher && voucher?.quota <= 0) || voucherError"></ion-icon>
 
         <span [routerLink]="['/voucher']" class="link">
           <small *ngIf="!voucher || !voucher?.voucher_code"> {{'USE_VOUCHER' | translate}} </small>
           <span class="used-voucher" *ngIf="voucher?.voucher_code"> {{ voucher?.voucher_code | uppercase }} </span>
         </span>
 
-        <ion-icon name="close-outline" *ngIf="voucher && voucher?.voucher_code" (click)="removeVoucher()"></ion-icon>
+        <ion-icon name="close-outline" style="vertical-align: middle;" *ngIf="voucher && voucher?.voucher_code"
+          (click)="removeVoucher()"></ion-icon>
       </ion-col>
     </ion-row>
 
