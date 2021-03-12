@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-maintenance',
@@ -7,9 +7,13 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./modal-maintenance.component.scss'],
 })
 export class ModalMaintenanceComponent implements OnInit {
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private platform: Platform, private modalCtrl: ModalController) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.platform.backButton.subscribeWithPriority(0, () => {
+      this.exitApp();
+    });
+  }
 
   dismiss() {
     this.modalCtrl.dismiss();
