@@ -234,5 +234,8 @@
   "MAINTENANCE_MESSAGE": "KlikGO saat ini sedang dalam pemeliharaan. Harap tutup aplikasi dan coba lagi beberapa saat kemudian.",
   "CLOSE_APP": "Tutup Aplikasi",
   "INVALID_TOKEN": "Token tidak valid",
-  "EMAIL_VERIFIED": "Email Anda Telah Terverifikasi"
+  "EMAIL_VERIFIED": "Email Anda Telah Terverifikasi",
+  "MODAL_UPDATE_TITLE": "Pembaruan Baru Tersedia",
+  "MODAL_UPDATE_MESSAGE": "Perbarui KlikGO untuk menikmati fitur aplikasi terbaru kami!",
+  "LATER": "Nanti"
 }

@@ -12,6 +12,9 @@ import { SettingService } from '@shared/services/modules';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
+import { ModalConfirmationComponent } from '@shared/common/modals/modal-confirmation/modal-confirmation.component';
+import { TranslateService } from '@shared/pipes/translate/translate.service';
+import { Market } from '@ionic-native/market/ngx';
 
 const { Device } = Plugins;
 
@@ -36,6 +39,8 @@ export class AppComponent {
     private settingSrv: SettingService,
     private deeplinks: Deeplinks,
     private router: Router,
+    private translate: TranslateService,
+    private market: Market
   ) {
     this.authSrv.checkToken();
     this.initializeApp();
@@ -47,7 +52,7 @@ export class AppComponent {
       this.splashScreen.hide();
       this.checkMaintenance();
       this.setDeepLink();
-    })
+    });
   }
 
   setSslPinning() {
@@ -79,17 +84,39 @@ export class AppComponent {
             if (appVer.content !== info.appVersion) {
               this.gs.log('wrong version');
               // call modal update app
+              this.showUpdateModal();
             } else {
               this.gs.log('correct version');
               // do nothing
             }
-          })
-
+          });
         }
       })
       .catch((err) => {
         this.gs.log(err);
       });
+  }
+  async showUpdateModal() {
+    const modal = await this.modalCtrl.create({
+      component: ModalConfirmationComponent,
+      cssClass: 'modal-confirm',
+      componentProps: {
+        title: this.translate.get('MODAL_UPDATE_TITLE'),
+        message: this.translate.get('MODAL_UPDATE_MESSAGE'),
+        cancelText: 'LATER',
+        submitText: 'UPDATE',
+      },
+    });
+
+    modal.onDidDismiss().then((res) => {
+      const data = res.data;
+
+      if (data && data.confirm) {
+        this.market.open('com.klikgo.klikgo');
+      }
+    });
+
+    return await modal.present();
   }
 
   async showMaintenanceModal() {

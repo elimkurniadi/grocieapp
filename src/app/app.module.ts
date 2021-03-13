@@ -29,6 +29,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
+import { Market } from '@ionic-native/market/ngx';
 
 registerLocaleData(localeId, 'id');
 
@@ -53,7 +54,7 @@ export class SentryErrorHandler implements ErrorHandler {
   imports: [
     BrowserModule,
     IonicModule.forRoot({
-      rippleEffect: false
+      rippleEffect: false,
     }),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
@@ -83,6 +84,7 @@ export class SentryErrorHandler implements ErrorHandler {
     NativeGeocoder,
     BarcodeScanner,
     Deeplinks,
+    Market,
   ],
   bootstrap: [AppComponent],
 })

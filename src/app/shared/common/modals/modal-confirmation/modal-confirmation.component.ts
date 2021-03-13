@@ -9,6 +9,8 @@ import { ModalController } from '@ionic/angular';
 export class ModalConfirmationComponent implements OnInit {
   @Input() title: string;
   @Input() message: string;
+  @Input() cancelText = 'NO';
+  @Input() submitText = 'YES';
 
   constructor(private modalCtrl: ModalController) {}
 

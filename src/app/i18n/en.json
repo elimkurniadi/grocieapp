@@ -247,5 +247,8 @@
   "MAINTENANCE_MESSAGE": "KlikGO is currently under maintenance. Please close the app and try again a few moments later.",
   "CLOSE_APP": "Close App",
   "INVALID_TOKEN": "Invalid Token",
-  "EMAIL_VERIFIED": "Your Email is Verified!"
+  "EMAIL_VERIFIED": "Your Email is Verified!",
+  "MODAL_UPDATE_TITLE": "New Update Available",
+  "MODAL_UPDATE_MESSAGE": "Update KlikGO to enjoy our latest app features!",
+  "LATER": "Later"
 }
