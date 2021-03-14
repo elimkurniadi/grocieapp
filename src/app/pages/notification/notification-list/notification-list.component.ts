@@ -19,7 +19,6 @@ export class NotificationListComponent implements OnInit {
   constructor(private activitySrv: ActivityService, private modalCtrl: ModalController) {}
 
   ngOnInit() {
-    console.log('testing');
     this.getNotificationList();
     this.getInboxList();
   }
@@ -43,28 +42,26 @@ export class NotificationListComponent implements OnInit {
     }
   }
 
-  dismiss(){
+  dismiss() {
     this.modalCtrl.dismiss();
   }
 
   getNotificationList() {
-    this.activitySrv.getNotificationList().then(res => {
+    this.activitySrv.getNotificationList().then((res) => {
       this.notificationList = res?.rows;
-      console.log(res);
-    })
+    });
   }
 
   getInboxList() {
-    this.activitySrv.getInboxList().then(res => {
+    this.activitySrv.getInboxList().then((res) => {
       this.inboxList = res?.rows;
-      console.log(res); 
-    })
+    });
   }
 
   async openDetail(data) {
     const modal = await this.modalCtrl.create({
       component: InboxDetailComponent,
-      componentProps: {inbox: data},
+      componentProps: { inbox: data },
     });
 
     modal.onDidDismiss().then(() => {
@@ -73,5 +70,4 @@ export class NotificationListComponent implements OnInit {
 
     return await modal.present();
   }
-
 }

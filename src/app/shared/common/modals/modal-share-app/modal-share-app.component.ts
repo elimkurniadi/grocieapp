@@ -20,22 +20,20 @@ export class ModalShareAppComponent implements OnInit {
     private toastSrv: ToastService,
     private translate: TranslateService,
     private settingSrv: SettingService,
-    private domSanitizer: DomSanitizer,
+    private domSanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
-    this.settingSrv.getShareApp().then(res => {
-      console.log("DATAnya euy", res);
+    this.settingSrv.getShareApp().then((res) => {
       const safeHTML = this.domSanitizer.bypassSecurityTrustHtml(res?.content);
       this.shareLink = this.domSanitizer.sanitize(SecurityContext.HTML, safeHTML);
-    })
+    });
   }
 
   copyLink() {
     const parser = new DOMParser();
-    const stringParser = parser.parseFromString(this.shareLink,'text/html').body.textContent;
-    console.log(stringParser);
-    
+    const stringParser = parser.parseFromString(this.shareLink, 'text/html').body.textContent;
+
     Clipboard.write({
       string: stringParser,
     });
@@ -46,7 +44,4 @@ export class ModalShareAppComponent implements OnInit {
   dismiss() {
     this.modalCtrl.dismiss();
   }
-
-  
-
 }

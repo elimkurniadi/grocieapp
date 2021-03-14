@@ -40,7 +40,7 @@ export class AddressFormComponent implements OnInit {
     this.fetchProvinces();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewDidEnter() {
     this.observeFetchState();
@@ -64,7 +64,6 @@ export class AddressFormComponent implements OnInit {
     this.addressSrv.getAddress(id).then((res) => {
       this.addressData = res;
       this.initAddressForm(this.addressData);
-      console.log('Address Data', res);
     });
   }
 
@@ -113,7 +112,6 @@ export class AddressFormComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.fg);
     if (this.fg.valid) {
       this.addressId ? this.updateAddress(this.fg, this.addressId) : this.addAddress(this.fg.value);
     }
@@ -143,25 +141,24 @@ export class AddressFormComponent implements OnInit {
     const controls = this.fg.controls;
     controls.province_id.setValue(idProvince);
     this.fg.updateValueAndValidity();
-    this.fetchCities(idProvince)
-      .then(() => {
-        controls.city_id.setValue(idCity);
-        controls.city_id.enable();
+    this.fetchCities(idProvince).then(() => {
+      controls.city_id.setValue(idCity);
+      controls.city_id.enable();
+      this.fg.updateValueAndValidity();
+
+      this.fetchDistricts(idCity).then(() => {
+        controls.district_id.setValue(idDistrict);
+        controls.district_id.enable();
         this.fg.updateValueAndValidity();
 
-        this.fetchDistricts(idCity).then(() => {
-          controls.district_id.setValue(idDistrict);
-          controls.district_id.enable();
+        this.fetchSubDistricts(idDistrict).then(() => {
+          // controls.sub_district_id.setValue();
+          controls.sub_district_id.setValue(idSubDistrict);
+          controls.sub_district_id.enable();
           this.fg.updateValueAndValidity();
-
-          this.fetchSubDistricts(idDistrict).then(() => {
-            // controls.sub_district_id.setValue();
-            controls.sub_district_id.setValue(idSubDistrict);
-            controls.sub_district_id.enable();
-            this.fg.updateValueAndValidity();
-          });
         });
-      })
+      });
+    });
   }
 
   async fetchProvinces() {
@@ -250,7 +247,6 @@ export class AddressFormComponent implements OnInit {
 
     modal.onWillDismiss().then((res) => {
       const data = res.data;
-      console.log(res);
       if (data) {
         const controls = this.fg.controls;
         controls.longitude.setValue(data.coordinate.longitude);

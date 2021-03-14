@@ -4,6 +4,7 @@ import { ModalOtpComponent } from '@shared/common/otp/modal-otp/modal-otp.compon
 import { UserService } from '@shared/services/modules';
 
 import { Plugins } from '@capacitor/core';
+import { GlobalService } from '@shared/services';
 const { App } = Plugins;
 
 @Component({
@@ -60,53 +61,59 @@ export class TabsPage implements OnInit {
     private platform: Platform,
     private routerOutlet: IonRouterOutlet,
     private alertCtrl: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private gs: GlobalService
   ) {
     this.platform.backButton.subscribeWithPriority(10, (processNextHandler) => {
-      console.log('Back press handler!');
+      this.gs.log('Back press handler!');
       if (!this.routerOutlet.canGoBack()) {
         this.showExitConfirm();
         processNextHandler();
-      }else { 
+      } else {
         this.navCtrl.pop();
       }
     });
 
     this.platform.backButton.subscribeWithPriority(5, () => {
-      console.log('Handler called to force close!');
-      this.alertCtrl.getTop().then(r => {
-        if (r) {
-          navigator['app'].exitApp();
-        }
-      }).catch(e => {
-        console.log(e);
-      })
+      this.gs.log('Handler called to force close!');
+      this.alertCtrl
+        .getTop()
+        .then((r) => {
+          if (r) {
+            navigator['app'].exitApp();
+          }
+        })
+        .catch((e) => {
+          this.gs.log(e);
+        });
     });
-
   }
 
   showExitConfirm() {
-    this.alertCtrl.create({
-      header: 'App termination',
-      message: 'Do you want to close the app?',
-      backdropDismiss: false,
-      buttons: [{
-        text: 'Stay',
-        role: 'cancel',
-        handler: () => {
-          console.log('Application exit prevented!');
-        }
-      }, {
-        text: 'Exit',
-        handler: () => {
-          navigator['app'].exitApp();
-        }
-      }]
-    })
-      .then(alert => {
+    this.alertCtrl
+      .create({
+        header: 'App termination',
+        message: 'Do you want to close the app?',
+        backdropDismiss: false,
+        buttons: [
+          {
+            text: 'Stay',
+            role: 'cancel',
+            handler: () => {
+              this.gs.log('Application exit prevented!');
+            },
+          },
+          {
+            text: 'Exit',
+            handler: () => {
+              navigator['app'].exitApp();
+            },
+          },
+        ],
+      })
+      .then((alert) => {
         alert.present();
       });
-
   }
 
   ionViewWillLeave() {

@@ -139,7 +139,6 @@ export class AppComponent {
           // match.$link - the full link data
 
           this.gs.log('Successfully matched route', match);
-          // console.log('Successfully matched route', match);
           if (match.$route === '/set-password/:forgotToken') {
             this.router.navigateByUrl(`/set-password/${match.$args.forgotToken}`);
           } else if (match.$route === '/email-verification/:emailToken') {

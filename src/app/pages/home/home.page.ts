@@ -48,10 +48,9 @@ export class HomePage implements OnInit {
   }
 
   doRefresh(event) {
-    Promise.all([this.getBanner(),this.getBundling()]).then((success => {
-      console.log('Async operation has ended', success);
+    Promise.all([this.getBanner(), this.getBundling()]).then((success) => {
       event.target.complete();
-    }))
+    });
   }
 
   selectLang(lang) {
@@ -77,7 +76,6 @@ export class HomePage implements OnInit {
 
   scanQR() {
     // Scan barcode and QR function should be inserted here.
-    console.log('Test logging QR code');
     this.router.navigate(['/qr', 'scan']);
   }
 

@@ -61,7 +61,7 @@ export class FavoriteDetailComponent implements OnInit {
         });
 
         this.productFavorites = productFavorites;
-    })
+      })
       .catch((err) => {
         const error = err.error.error;
         this.toastSrv.show(error.message);
@@ -111,7 +111,6 @@ export class FavoriteDetailComponent implements OnInit {
   }
 
   delete(item) {
-    console.log(item);
     this.presentAlertConfirm(item);
   }
 
@@ -125,17 +124,17 @@ export class FavoriteDetailComponent implements OnInit {
           text: 'No',
           role: 'cancel',
           cssClass: 'modal-confirm',
-        }, {
+        },
+        {
           text: 'Yes',
           cssClass: 'modal-confirm',
           handler: () => {
-            this.favoriteSrv.deleteFavoriteItem(item.favourite_id).then(res =>{
-              console.log(res);
+            this.favoriteSrv.deleteFavoriteItem(item.favourite_id).then((res) => {
               this.getProductList();
-            })
-          }
-        }
-      ]
+            });
+          },
+        },
+      ],
     });
 
     await alert.present();

@@ -11,15 +11,16 @@ import { SettingService } from '@shared/services/modules';
 export class ModalFaqComponent implements OnInit {
   faqList;
   panelOpenState = false;
-  constructor(private settingsSrv: SettingService, private modalCtrl: ModalController, private browserSrv:BrowserService) {
-
-  }
+  constructor(
+    private settingsSrv: SettingService,
+    private modalCtrl: ModalController,
+    private browserSrv: BrowserService
+  ) {}
 
   ngOnInit() {
-    this.settingsSrv.getFAQ().then(res => {
-      console.log('FAQ', res);
+    this.settingsSrv.getFAQ().then((res) => {
       this.faqList = res?.response;
-    })
+    });
   }
 
   dismiss() {
@@ -30,5 +31,4 @@ export class ModalFaqComponent implements OnInit {
     const link = 'https://wa.me/628123045670?text=Halo saya ingin bertanya';
     this.browserSrv.openBrowser({ url: link });
   }
-
 }

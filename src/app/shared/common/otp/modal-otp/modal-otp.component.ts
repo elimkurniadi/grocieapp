@@ -55,6 +55,7 @@ export class ModalOtpComponent implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.sendOtp();
     this.setupCountdown();
     this.fetchUserData();
   }
@@ -73,6 +74,7 @@ export class ModalOtpComponent implements OnInit {
   }
 
   setBanOtp() {
+    this.sendOtp();
     this.otpSrv.setBanResendOtp();
   }
 
@@ -141,5 +143,20 @@ export class ModalOtpComponent implements OnInit {
     this.userSrv.getProfile().then((res) => {
       this.userData = res;
     });
+  }
+
+  sendOtp() {
+    this.userSrv
+      .sendOtp()
+      .then((valid) => {
+        if (!valid) {
+          const errMsg = this.translateSrv.get('INVALID_OTP');
+          this.toastSrv.show(errMsg);
+        }
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
   }
 }

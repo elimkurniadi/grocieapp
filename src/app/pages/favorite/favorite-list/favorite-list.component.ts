@@ -54,12 +54,10 @@ export class FavoriteListComponent implements OnInit {
   }
 
   delete(item) {
-    console.log(item);
     this.presentAlertConfirm(item);
   }
 
   edit(item) {
-    console.log(item);
     this.presentAlertPrompt(item);
   }
 
@@ -72,17 +70,18 @@ export class FavoriteListComponent implements OnInit {
         {
           text: 'No',
           role: 'cancel',
-          cssClass: 'modal-confirm'
-        }, {
+          cssClass: 'modal-confirm',
+        },
+        {
           text: 'Yes',
           cssClass: 'modal-confirm',
           handler: () => {
-            this.favoriteSrv.deleteFavoriteList(item.favourite_group_id).then(res => {
+            this.favoriteSrv.deleteFavoriteList(item.favourite_group_id).then((res) => {
               this.getFavorites();
-            })
-          }
-        }
-      ]
+            });
+          },
+        },
+      ],
     });
 
     await alert.present();
@@ -91,30 +90,30 @@ export class FavoriteListComponent implements OnInit {
   async presentAlertPrompt(item) {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
-      header: 'Rename ' +  item.name,
+      header: 'Rename ' + item.name,
       inputs: [
-         {
+        {
           name: 'favouriteListName',
           type: 'text',
-          placeholder: 'Insert new name'
+          placeholder: 'Insert new name',
         },
       ],
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'secondary'
-        }, {
+          cssClass: 'secondary',
+        },
+        {
           text: 'Rename',
           handler: (data) => {
-            console.log(data);
-            this.favoriteSrv.updateFavoriteList(item.favourite_group_id, data?.favouriteListName).then(res => {
+            this.favoriteSrv.updateFavoriteList(item.favourite_group_id, data?.favouriteListName).then((res) => {
               this.toastSrv.show(res?.response);
               this.getFavorites();
-            })
-          }
-        }
-      ]
+            });
+          },
+        },
+      ],
     });
 
     await alert.present();

@@ -46,7 +46,6 @@ export class CartPage implements OnInit {
         Object.assign(element, { local_subtotal_price: localSubTotalPrice });
       });
       this.cartList = res;
-      console.log('list??', this.cartList);
       this.partitionCartList(this.cartList);
     });
   }

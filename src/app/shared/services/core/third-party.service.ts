@@ -15,7 +15,6 @@ export class ThirdPartyService {
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
-          console.log('res', res);
           resolve(res);
         },
         (err) => {

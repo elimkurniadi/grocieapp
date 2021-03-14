@@ -25,6 +25,7 @@ export class ModalEmailVerificationComponent implements OnInit {
         this.dismiss();
       });
   }
+
   dismiss() {
     this.modalCtrl.dismiss();
   }

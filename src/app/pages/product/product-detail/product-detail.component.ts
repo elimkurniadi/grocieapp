@@ -44,7 +44,7 @@ export class ProductDetailComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewDidEnter() {
     this.observeFetchState();
@@ -58,7 +58,6 @@ export class ProductDetailComponent implements OnInit {
 
   scanQR() {
     // Scan barcode and QR function should be inserted here.
-    console.log('Test logging QR code');
     this.router.navigate(['/qr', 'scan']);
   }
 
@@ -73,11 +72,10 @@ export class ProductDetailComponent implements OnInit {
   fetchProductDetail(id) {
     this.productSrv.getProductDetail(id).then((detail) => {
       this.productData = detail;
-      this.cartSrv.getCartMaxQty(detail.product_id).then(res => {
-        console.log('datatatata', res);
+      this.cartSrv.getCartMaxQty(detail.product_id).then((res) => {
         this.maxQty = res.max_quantity;
-        res.max_quantity > 0 ? this.qty = 1 : this.qty = 0;
-      })
+        res.max_quantity > 0 ? (this.qty = 1) : (this.qty = 0);
+      });
       this.getRelatedProduct();
     });
   }
@@ -88,13 +86,16 @@ export class ProductDetailComponent implements OnInit {
 
   addItemToCart() {
     if (this.qty > 0) {
-      this.cartSrv.addToCart(this.productId, this.qty).then((res) => {
-        // Ini untuk recheck qty
-        // this.fetchProductDetail(this.productId);
-        this.presentModalSuccess();
-      }).catch(err => {
-        console.log('err', err);
-      })
+      this.cartSrv
+        .addToCart(this.productId, this.qty)
+        .then((res) => {
+          // Ini untuk recheck qty
+          // this.fetchProductDetail(this.productId);
+          this.presentModalSuccess();
+        })
+        .catch((err) => {
+          this.gs.log('err', err);
+        });
     } else {
     }
   }
@@ -106,7 +107,6 @@ export class ProductDetailComponent implements OnInit {
     });
 
     modal.onDidDismiss().then((data) => {
-      console.log(data);
       if (data?.data === 'cart') {
         // this.navCtrl.navigateRoot(['tabs/cart']);
         this.navCtrl.navigateRoot(['tabs/cart']);

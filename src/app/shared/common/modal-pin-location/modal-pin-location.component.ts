@@ -103,7 +103,6 @@ export class ModalPinLocationComponent implements OnInit {
     this.geoCoder = new google.maps.Geocoder();
     this.geoCoder.geocode({ location: longlat }, (result, status) => {
       if (status === 'OK') {
-        console.log('Berubah', result[0]);
         this.processGeocodeResult(result[0]);
       }
     });
