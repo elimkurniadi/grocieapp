@@ -106,8 +106,7 @@ ion-searchbar.custom-search {
 }
 
 .disabled {
-  filter: grayscale(0.3);
-  opacity: 0.8;
+  opacity: 0.5;
 
   &>.out-of-stock {
     position: absolute;
