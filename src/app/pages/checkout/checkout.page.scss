@@ -34,7 +34,7 @@ small {
   color: var(--ion-color-medium);
 }
 
-.text{
+.text {
   &-address-info {
     font-size: 14px;
     font-weight: 600;
@@ -82,4 +82,8 @@ small {
   & span {
     width: 100%;
   }
+}
+
+.text-discount {
+  color: var(--ion-color-success);
 }

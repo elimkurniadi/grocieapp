@@ -237,5 +237,7 @@
   "EMAIL_VERIFIED": "Email Anda Telah Terverifikasi",
   "MODAL_UPDATE_TITLE": "Pembaruan Baru Tersedia",
   "MODAL_UPDATE_MESSAGE": "Perbarui KlikGO untuk menikmati fitur aplikasi terbaru kami!",
-  "LATER": "Nanti"
+  "LATER": "Nanti",
+  "NOW_CLOSED": "Sekarang Ditutup",
+  "OPEN_ON": "Buka"
 }
