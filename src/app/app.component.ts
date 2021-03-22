@@ -131,6 +131,7 @@ export class AppComponent {
       .route({
         '/set-password': '/set-password/:forgotToken',
         '/tabs-home': '/email-verification/:emailToken',
+        '/my-order': '/my-order/:orderId',
       })
       .subscribe(
         (match) => {
@@ -143,6 +144,8 @@ export class AppComponent {
             this.router.navigateByUrl(`/set-password/${match.$args.forgotToken}`);
           } else if (match.$route === '/email-verification/:emailToken') {
             this.router.navigateByUrl(`/tabs/home?emailToken=${match.$args.emailToken}`);
+          } else if (match.$route === '/my-order/:orderId') {
+            this.router.navigateByUrl(`/my-order/${match.$args.orderId}/detail`);
           }
         },
         (nomatch) => {
