@@ -174,8 +174,12 @@
       <ion-col size="6" *ngIf="paymentSummary?.saved_price > 0">
         <span class="text-payment-info">{{'DISCOUNT' |translate}}</span>
       </ion-col>
-      <ion-col size="6" class="ion-text-right text-payment-price text-discount" *ngIf="paymentSummary?.saved_price > 0">
-        Rp. {{ paymentSummary?.saved_price | number: '1.0-0':'id' }}
+      <ion-col
+        size="6"
+        class="ion-text-right text-payment-price text-discount"
+        *ngIf="paymentSummary?.saved_price > 0 || paymentSummary?.discount > 0"
+      >
+        Rp. {{ paymentSummary?.saved_price + paymentSummary?.discount | number: '1.0-0':'id' }}
       </ion-col>
     </ion-row>
 
