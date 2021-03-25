@@ -15,6 +15,7 @@ import { ModalAddToCartComponent } from './modal-add-to-cart/modal-add-to-cart.c
 import { ModalFaqComponent } from './modal-faq/modal-faq.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ModalMaintenanceComponent } from './modal-maintenance/modal-maintenance.component';
+import { ModalUpdateComponent } from './modal-update/modal-update.component';
 
 const MODAL_COMPONENT = [
   ModalInfoComponent,
@@ -28,6 +29,7 @@ const MODAL_COMPONENT = [
   ModalConfirmationComponent,
   ModalFaqComponent,
   ModalMaintenanceComponent,
+  ModalUpdateComponent,
 ];
 @NgModule({
   declarations: MODAL_COMPONENT,

@@ -253,5 +253,8 @@
   "LATER": "Later",
   "NOW_CLOSED": "Now Closed",
   "OPEN_ON": "Open on",
-  "SAVING": "Saving"
+  "SAVING": "Saving",
+  "UPDATE_KLIKGO": "Update KlikGo",
+  "UPDATE_APPS_TITLE": "App Update",
+  "UPDATE_APPS_MESSAGE": "Update KlikGO to enjoy new features, bug fixes, performance improvements, enhancements, minor improvements"
 }
