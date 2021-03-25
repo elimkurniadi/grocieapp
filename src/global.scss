@@ -342,7 +342,7 @@ ion-slide.full-width {
     padding: 4px 12px;
   }
   &-desc {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
     line-height: 1.2;
     color: #454545;
@@ -351,7 +351,7 @@ ion-slide.full-width {
 
 .category {
   &-name {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     line-height: 1.2;
     color: #353535;
@@ -476,4 +476,9 @@ ion-searchbar {
 ion-toolbar.transparent {
   --background: transparent;
   --ion-color-base: transparent !important;
+}
+
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios {
+    white-space: break-spaces;
 }

@@ -58,6 +58,7 @@
               placeholder="{{'YOUR_EMAIL_ADDRESS' | translate}}"
               class="default-theme"
               formControlName="email"
+              disabled
             ></ion-input>
             <small *ngIf="fg.controls.email.dirty"
               >{{fg.controls.email.errors?.required?.message}} {{fg.controls.email.errors?.email?.message}}</small
@@ -71,6 +72,7 @@
               placeholder="{{'PHONE_NUMBER' | translate}}"
               class="default-theme"
               formControlName="phone"
+              disabled
             ></ion-input>
             <small *ngIf="fg.controls.phone.dirty"
               >{{fg.controls.phone.errors?.required?.message}} {{fg.controls.phone.errors?.numeric?.message}}

@@ -23,7 +23,7 @@ ion-header {
 
 .product {
   &-brand {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 600;
     line-height: 1.5;
     letter-spacing: normal;
@@ -31,7 +31,7 @@ ion-header {
     text-transform: capitalize;
   }
   &-name {
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 700;
     line-height: 1;
     letter-spacing: normal;
@@ -39,7 +39,7 @@ ion-header {
     text-transform: capitalize;
   }
   &-size {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 400;
     line-height: 1.5;
     color: #454545;
@@ -49,7 +49,7 @@ ion-header {
     text-overflow: ellipsis;
   }
   &-final-price {
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 700;
     line-height: 1.3;
     color: #99cc33;
@@ -59,7 +59,7 @@ ion-header {
     text-overflow: ellipsis;
   }
   &-price {
-    font-size: 14px;
+    font-size: 17px;
     width: 95px;
     font-weight: 700;
     line-height: 2;
@@ -70,7 +70,7 @@ ion-header {
     color: #f8a345;
   }
   &-out-of-stock {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 600;
     line-height: 1.25;
     color: #d61414;
@@ -110,18 +110,19 @@ ion-searchbar.custom-search {
 
   &>.out-of-stock {
     position: absolute;
+    font-size: 15px;
     font-weight: 600;
-    font-size: 20px;
     border-radius: 15px;
-    border: 1px solid black;
-    background-color: rgba(255,255,255,0.9);
-    padding: 3px 6px;
+    background-color: rgba(38,38,38,0.7);
+    padding: 10px;
     color: black;
     left: 0;
     right: 0;
-    margin: 0 auto;
-    top: 70px;
-    width: 200px;
+    top: 100px;
+    width: fit-content;
+    margin: auto;
+    color: white;
     text-align: center;
+    text-transform: uppercase;
   }
 }

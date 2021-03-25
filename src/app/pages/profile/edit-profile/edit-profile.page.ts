@@ -83,6 +83,7 @@ export class EditProfilePage implements OnInit {
       .updateProfilePicture(data)
       .then((res) => {
         // this.router.navigate(['/tabs/profile']);
+        this.toastSrv.show('Photo updated successfully');
       })
       .catch((err) => {
         const error = err.error.error;
