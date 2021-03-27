@@ -1,12 +1,13 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="success">
+  <ion-toolbar mode="ios">
     <ion-buttons slot="start">
       <ion-back-button icon="chevron-back"></ion-back-button>
     </ion-buttons>
+    <ion-title>QR Code</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="limegreen" [fullscreen]="true">
+<ion-content [fullscreen]="true">
   <ion-grid class="ion-padding-top ion-padding-horizontal h-100">
     <ion-row class="ion-justify-content-between">
       <ion-col size="12" class="ion-no-padding">
@@ -15,22 +16,35 @@
         <ng-template #scanComp><app-scan-qr></app-scan-qr></ng-template>
       </ion-col>
     </ion-row>
+    <ion-row class="ion-padding-vertical">
+      <ion-col size="6">
+        <ion-button color="limegreen" expand="block" (click)="changeMode('show')" [disabled]="isShow" [fill]="isShow ? 'solid' : 'outline'" >
+          {{'SHOW_QR' | translate}}
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button color="limegreen" expand="block" (click)="changeMode('scan')" [disabled]="!isShow" [fill]="!isShow ? 'solid' : 'outline'">
+          {{'SCAN_QR' | translate}}
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
   </ion-grid>
 </ion-content>
 
-<ion-footer class="ion-no-border ion-padding-horizontal">
+<!-- <ion-footer class="ion-no-border ion-padding-horizontal">
   <ion-grid>
     <ion-row>
       <ion-col size="6">
-        <ion-button expand="block" (click)="changeMode('scan')" [disabled]="!isShow">
+        <ion-button color="limegreen" expand="block" (click)="changeMode('scan')" [disabled]="!isShow">
           {{'SCAN_QR' | translate}}
         </ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button expand="block" (click)="changeMode('show')" [disabled]="isShow">
+        <ion-button color="limegreen" expand="block" (click)="changeMode('show')" [disabled]="isShow">
           {{'SHOW_QR' | translate}}
         </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
-</ion-footer>
+</ion-footer> -->

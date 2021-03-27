@@ -2,3 +2,47 @@
   border-radius: 12px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 }
+
+.qr-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.qr-illustration {
+  height: 80px;
+  width: 100%;
+  object-fit: none;
+  margin-bottom: -5px;
+  object-position: top right;
+}
+
+.qr-logo {
+  max-width: 60px;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.text-name {
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.21;
+  letter-spacing: normal;
+  text-align: left;
+  color: #353535;
+}
+
+.text-id {
+  font-size: 12px;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: normal;
+  text-align: left;
+  color: #353535;
+}

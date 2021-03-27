@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '@shared/services/modules';
 
 @Component({
   selector: 'app-show-qr',
@@ -7,8 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowQrComponent implements OnInit {
 
-  constructor() { }
+  userData;
+  constructor(private userSrv:UserService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchUserData();
+  }
+
+  fetchUserData(event = null) {
+    this.userSrv
+      .getProfile()
+      .then((res) => {
+        console.log('res', res);
+        this.userData = res;
+        if (event) {
+          event.target.complete();
+        }
+      })
+      .catch(() => {
+        if (event) {
+          event.target.complete();
+        }
+      });
+  }
 
 }
