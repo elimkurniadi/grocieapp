@@ -140,13 +140,15 @@
               <ion-item lines="none" class="form-group">
                 <ion-label position="stacked">{{ 'SUB_DISTRICT' | translate }}</ion-label>
                 <ion-select
+                  class="custom-options"
                   placeholder="{{ 'SUB_DISTRICT_PLACEHOLDER' | translate }}"
                   formControlName="sub_district_id"
                 >
                   <ion-select-option
                     *ngFor="let subDistrict of subDistrictList"
                     [value]="subDistrict?.sub_district_id"
-                    >{{ subDistrict?.name + ' - ' + subDistrict?.postal_code | titlecase }}</ion-select-option
+                    >{{ subDistrict?.name + '\n' + subDistrict?.postal_code | titlecase }}
+                    </ion-select-option
                   >
                 </ion-select>
                 <small *ngIf="fg.controls.sub_district_id.touched">{{
@@ -190,7 +192,7 @@
 </ion-content>
 
 <ion-footer class="ion-no-border ion-padding-horizontal">
-  <ion-grid>
+  <ion-grid style="background: white;">
     <ion-row>
       <ion-col size="12">
         <ion-button

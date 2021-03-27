@@ -252,7 +252,7 @@ ion-searchbar.custom-search {
 
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: #707070;
+  color: #262626;
   font-size: 12px;
   opacity: 1;
 }
@@ -305,7 +305,7 @@ ion-button {
 ion-input {
   font-size: 13px !important;
   line-height: 1.17;
-  color: #454545 i !important;
+  color: #262626 i !important;
   --placeholder-color: red !important;
   --placeholder-opacity: 1 !important;
 }
@@ -326,7 +326,7 @@ ion-slide.full-width {
 
 .section {
   &-title {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     line-height: 1.21;
     letter-spacing: normal;
@@ -342,16 +342,16 @@ ion-slide.full-width {
     padding: 4px 12px;
   }
   &-desc {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: normal;
     line-height: 1.2;
-    color: #454545;
+    color: #262626;
   }
 }
 
 .category {
   &-name {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     line-height: 1.2;
     color: #353535;
@@ -476,4 +476,9 @@ ion-searchbar {
 ion-toolbar.transparent {
   --background: transparent;
   --ion-color-base: transparent !important;
+}
+
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios {
+    white-space: break-spaces;
 }

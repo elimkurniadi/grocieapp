@@ -26,21 +26,12 @@
     </ion-item>
 
     <ion-item lines="none" *ngFor="let item of productFavorites; let i = index">
-      <ion-checkbox
-        slot="start"
-        color="limegreen"
-        class="product-checkbox"
-        [ngModel]="item?.selected"
-        (ngModelChange)="toggleSelect(i)"
-        [ngModelOptions]="{ standalone: true }"
-      ></ion-checkbox>
+      <ion-checkbox slot="start" color="limegreen" class="product-checkbox" [ngModel]="item?.selected"
+        (ngModelChange)="toggleSelect(i)" [ngModelOptions]="{ standalone: true }"></ion-checkbox>
       <ion-thumbnail class="thumb-product" slot="start">
         <img [src]="item?.product?.image_url" class="product-img full-width" *ngIf="item?.product?.image_url" />
-        <img
-          src="https://via.placeholder.com/200.png"
-          class="product-img full-width"
-          *ngIf="!item?.product?.image_url"
-        />
+        <img src="https://via.placeholder.com/200.png" class="product-img full-width"
+          *ngIf="!item?.product?.image_url" />
       </ion-thumbnail>
       <ion-grid class="ion-align-self-start">
         <ion-row class="ion-align-items-center">
@@ -56,8 +47,7 @@
                   </ion-text>
                 </div>
                 <ion-text class="product-final-price">
-                  Rp. {{ item?.product?.primary_price | number: '1.0-0':'id' }}</ion-text
-                >
+                  Rp. {{ item?.product?.primary_price | number: '1.0-0':'id' }}</ion-text>
               </ion-col>
             </ion-row>
             <ion-row> </ion-row>
@@ -89,12 +79,8 @@
       </ion-text>
     </ion-col>
     <ion-col class="ion-text-right">
-      <ion-button
-        [disabled]="!selectedItem.length"
-        [color]="!selectedItem.length ? 'light' : 'success'"
-        shape="round"
-        (click)="addToCart()"
-      >
+      <ion-button [disabled]="!selectedItem.length" [color]="!selectedItem.length ? 'light' : 'success'" shape="round"
+        (click)="addToCart()">
         <ion-text class="btn-action">
           {{ 'ADD_TO_CART' | translate }}
         </ion-text>

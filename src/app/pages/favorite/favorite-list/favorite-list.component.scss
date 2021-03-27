@@ -31,12 +31,26 @@
 .text-empty-desc {
   font-size: 14px;
   line-height: 1.33;
-  color: #707070;
+  color: #262626;
 }
 
-.custom-option {
+.custom-option-left {
   height: 93%;
   font-weight: 600;
   text-transform: capitalize;
   border-radius: 2px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
+
+.custom-option-right {
+  height: 93%;
+  font-weight: 600;
+  text-transform: capitalize;
+  border-radius: 2px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+
+

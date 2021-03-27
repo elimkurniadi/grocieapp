@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content>
+  <img class="img-banner" src="assets/images/detail_image.jpg"/>
   <ion-list class="ion-padding">
     <ion-item-sliding *ngFor="let item of favorites" class="ion-margin-bottom">
       <ion-item lines="none" class="favorite-item">
@@ -17,8 +18,8 @@
         >
       </ion-item>
       <ion-item-options side="end" class="ion-align-items-center">
-        <ion-item-option class="custom-option" color="danger" (click)="delete(item)">Delete</ion-item-option>
-        <ion-item-option class="custom-option" color="success" (click)="edit(item)">Rename</ion-item-option>
+        <ion-item-option class="custom-option-right" color="danger" (click)="delete(item)">Delete</ion-item-option>
+        <ion-item-option class="custom-option-left" color="success" (click)="edit(item)">Rename</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
 

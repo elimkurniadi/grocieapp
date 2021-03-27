@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService, GlobalService, ToastService } from '@shared/services';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { ModalLocationComponent } from '@shared/common/modals/modal-location/modal-location.component';
 import { BannerService, BundlingService, UserService } from '@shared/services/modules';
 import { Banner, Bundling } from '@shared/models';
@@ -31,7 +31,8 @@ export class HomePage implements OnInit {
     private userSrv: UserService,
     private activitySrv: ActivityService,
     private route: ActivatedRoute,
-    private authSrv: AuthService
+    private authSrv: AuthService,
+    private toastCtrl: ToastController
   ) {
     this.route.queryParams.subscribe((param) => {
       const token = param.emailToken;
@@ -45,6 +46,25 @@ export class HomePage implements OnInit {
     this.getBanner();
     this.getBundling();
     this.activitySrv.registerPush();
+  }
+
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      header: `Push notification`,
+      message: 'Your settings have been saved.',
+      position: 'top',
+      color: 'limegreen',
+      buttons: [
+        {
+          side: 'end',
+          text: 'Ok',
+          handler: () => {
+            console.log('Favorite clicked');
+          }
+        }
+      ]
+    });
+    toast.present();
   }
 
   doRefresh(event) {

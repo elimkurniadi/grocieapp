@@ -7,11 +7,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-content>
-    <ion-row class="ion-no-padding">
-      <ion-col class="ion-no-padding" size="3" *ngFor="let item of brands">
-        <app-card-brand [brand]="item"></app-card-brand>
-      </ion-col>
-    </ion-row>
-  </ion-content>
+  <img class="img-banner" src="assets/images/detail_image.jpg"/>
+
+  <ion-row class="ion-no-padding">
+    <ion-col class="ion-no-padding" size="3" *ngFor="let item of brands">
+      <app-card-brand [brand]="item"></app-card-brand>
+    </ion-col>
+  </ion-row>
 </ion-content>

@@ -30,6 +30,11 @@
             <small>{{ address?.address_detail }}</small>
           </ion-text>
         </ion-col>
+        <ion-col size="12" class="ion-no-padding">
+          <ion-text color="medium">
+            <small>{{ address?.formatted_address | lowercase | titlecase }}</small>
+          </ion-text>
+        </ion-col>
       </ion-row>
 
       <ion-row>
