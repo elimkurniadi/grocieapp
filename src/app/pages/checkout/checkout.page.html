@@ -38,7 +38,8 @@
       </ion-col>
       <ion-col size="12">
         <ion-text color="medium">
-          <span class="text-address-detail">{{ defaultAddress?.address_detail }}</span>
+          <span class="text-address-detail">{{ defaultAddress?.address_detail }}</span><br/><br/>
+          <span class="text-address-detail">{{ defaultAddress?.formatted_address | lowercase | titlecase }}</span>
         </ion-text>
       </ion-col>
     </ion-row>
@@ -64,7 +65,7 @@
               (change)="radioChanged('deliver_now')" [checked]="canDeliverNow" />
             <label class="radio-label" [ngClass]="{ 'text-muted' : !canDeliverNow }">{{'DELIVER_NOW' |
               translate}}</label><br />
-            <div style="font-size: 11px;padding-left: 24px;">
+            <div style="font-size: 11px;padding-left: 24px;" *ngIf="!canDeliverNow">
               <span style="color:#F64740;">Now closed</span>
               <span class="text-muted">
                 <b> - Open on {{operationalTime?.open}}</b>
@@ -79,9 +80,9 @@
                 <label class="radio-label">{{'SCHEDULE_FOR_LATER' | translate}}</label>
               </ion-col>
               <ion-col size="6" class="ion-text-right">
-                <ion-button expand="block" fill="outline" size="small" color="medium"
+                <ion-button class="btn-selected-date" expand="block" fill="outline" size="small"
                   (click)="scheduleDatepicker.open()">
-                  {{selectedDate ? (selectedDate | date:'longDate') : ('SELECT_DATE' | translate)}}
+                  {{selectedDate ? (selectedDate | date:'EEEE, MMMM d, y') : ('SELECT_DATE' | translate)}}
                 </ion-button>
                 <ion-datetime #scheduleDatepicker class="ion-hide" displayFormat="D MMMM YYYY"
                   pickerFormat="D MMMM YYYY" [min]="currDate" [ngModel]="selectedDate"
@@ -94,7 +95,7 @@
 
       <ion-col size="3" class="ion-no-padding ion-text-center" *ngFor="let time of timeList;let i = index">
         <ion-chip class="delivery-chip" [color]="time.selected ? 'success': 'light'" [outline]="!time?.selected"
-          [disabled]="(!selectedDate || !time?.active) || deliveryNow" (click)="onTimeSelect(i)">
+        [ngClass]="{'date-selected' : time.selected }" [disabled]="(!selectedDate || !time?.active) || deliveryNow" (click)="onTimeSelect(i)">
           <span>{{time?.text}}</span>
         </ion-chip>
       </ion-col>
@@ -139,10 +140,10 @@
         Rp. {{ paymentSummary?.delivery_fee | number: '1.0-0':'id' }}
       </ion-col>
       <ion-col size="6" *ngIf="paymentSummary?.discount > 0">
-        <span class="text-payment-info">{{'DISCOUNT' |translate}}</span>
+        <span class="text-discount-info">{{'DISCOUNT' |translate}}</span>
       </ion-col>
-      <ion-col size="6" class="ion-text-right text-payment-price" *ngIf="paymentSummary?.discount > 0">
-        Rp. {{ paymentSummary?.discount | number: '1.0-0':'id' }}
+      <ion-col size="6" class="ion-text-right text-discount-price" *ngIf="paymentSummary?.discount > 0">
+        - Rp. {{ paymentSummary?.discount | number: '1.0-0':'id' }}
       </ion-col>
     </ion-row>
 

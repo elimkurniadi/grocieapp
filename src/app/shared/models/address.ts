@@ -3,6 +3,7 @@ export interface Address {
   address_detail?: string;
   address_id?: string;
   address_name?: string;
+  formatted_address?: string;
   city?: {
     name?: string;
   };
