@@ -34,7 +34,7 @@ export class ProfilePage implements OnInit {
     private authSrv: AuthService,
     private modalCtrl: ModalController,
     private settingSrv: SettingService,
-    private toastSrv: ToastService,
+    private toastSrv: ToastService
   ) {
     this.getAppVersion();
     this.setupLanguage();
@@ -150,7 +150,9 @@ export class ProfilePage implements OnInit {
       .then((res) => {
         this.currDate = new Date();
         this.userData = res;
-        this.userData.profile_picture += `?${this.currDate.toString()}`;
+        if (this.userData.profile_picture) {
+          this.userData.profile_picture += `?${this.currDate.toString()}`;
+        }
         if (event) {
           event.target.complete();
         }

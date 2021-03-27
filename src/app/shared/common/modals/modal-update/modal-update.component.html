@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="end" mode="md">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ 'UPDATE_KLIKGO' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="h-100 ion-align-items-center ion-justify-content-center ion-text-center">
+    <ion-col size="12" class="ion-text-center ion-padding-vertical">
+      <ion-row>
+        <ion-col size="12">
+          <img src="assets/images/ic_update.svg" />
+        </ion-col>
+
+        <ion-col size="12" class="ion-text-center">
+          <ion-text class="update-title"> {{ 'UPDATE_APPS_TITLE' | translate }} v {{ appVersion }} </ion-text>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center padding-message">
+          <ion-text class="update-message">
+            {{ 'UPDATE_APPS_MESSAGE' | translate }}
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-row>
+    <ion-col class="ion-padding-horizontal ion-padding-bottom">
+      <ion-button expand="full" shape="round" color="success" fill="outline" (click)="dismiss()">
+        {{ 'LATER' | translate }}
+      </ion-button>
+    </ion-col>
+    <ion-col class="ion-padding-horizontal ion-padding-bottom">
+      <ion-button expand="full" shape="round" color="success" (click)="submit()">
+        {{ 'UPDATE' | translate }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

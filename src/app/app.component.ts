@@ -15,6 +15,7 @@ import { Plugins } from '@capacitor/core';
 import { ModalConfirmationComponent } from '@shared/common/modals/modal-confirmation/modal-confirmation.component';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { Market } from '@ionic-native/market/ngx';
+import { ModalUpdateComponent } from '@shared/common/modals/modal-update/modal-update.component';
 
 const { Device } = Plugins;
 
@@ -84,7 +85,7 @@ export class AppComponent {
             if (appVer.content !== info.appVersion) {
               this.gs.log('wrong version');
               // call modal update app
-              this.showUpdateModal();
+              this.showUpdateModal(appVer.content);
             } else {
               this.gs.log('correct version');
               // do nothing
@@ -96,15 +97,11 @@ export class AppComponent {
         this.gs.log(err);
       });
   }
-  async showUpdateModal() {
+  async showUpdateModal(appVersion: string) {
     const modal = await this.modalCtrl.create({
-      component: ModalConfirmationComponent,
-      cssClass: 'modal-confirm',
+      component: ModalUpdateComponent,
       componentProps: {
-        title: this.translate.get('MODAL_UPDATE_TITLE'),
-        message: this.translate.get('MODAL_UPDATE_MESSAGE'),
-        cancelText: 'LATER',
-        submitText: 'UPDATE',
+        appVersion,
       },
     });
 
@@ -131,6 +128,7 @@ export class AppComponent {
       .route({
         '/set-password': '/set-password/:forgotToken',
         '/tabs-home': '/email-verification/:emailToken',
+        '/my-order': '/my-order/:orderId',
       })
       .subscribe(
         (match) => {
@@ -143,6 +141,8 @@ export class AppComponent {
             this.router.navigateByUrl(`/set-password/${match.$args.forgotToken}`);
           } else if (match.$route === '/email-verification/:emailToken') {
             this.router.navigateByUrl(`/tabs/home?emailToken=${match.$args.emailToken}`);
+          } else if (match.$route === '/my-order/:orderId') {
+            this.router.navigateByUrl(`/my-order/${match.$args.orderId}/detail`);
           }
         },
         (nomatch) => {

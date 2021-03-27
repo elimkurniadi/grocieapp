@@ -250,5 +250,11 @@
   "EMAIL_VERIFIED": "Your Email is Verified!",
   "MODAL_UPDATE_TITLE": "New Update Available",
   "MODAL_UPDATE_MESSAGE": "Update KlikGO to enjoy our latest app features!",
-  "LATER": "Later"
+  "LATER": "Later",
+  "NOW_CLOSED": "Now Closed",
+  "OPEN_ON": "Open on",
+  "SAVING": "Saving",
+  "UPDATE_KLIKGO": "Update KlikGo",
+  "UPDATE_APPS_TITLE": "App Update",
+  "UPDATE_APPS_MESSAGE": "Update KlikGO to enjoy new features, bug fixes, performance improvements, enhancements, minor improvements"
 }

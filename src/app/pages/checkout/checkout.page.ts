@@ -195,6 +195,7 @@ export class CheckoutPage implements OnInit {
   removeVoucher() {
     this.voucher = null;
     this.cache.removeVoucher();
+    this.getPriceSummary();
   }
 
   getDeliveryTime() {

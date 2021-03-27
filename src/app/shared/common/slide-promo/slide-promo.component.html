@@ -1,6 +1,11 @@
 <ion-slides pager [options]="slideOpts" class="full-width">
   <ion-slide *ngFor="let banner of banners">
-    <img class="img-banner" [src]="banner?.image_url" *ngIf="banner.image_url" />
+    <img
+      class="img-banner"
+      [src]="banner?.image_url"
+      *ngIf="banner?.image_url"
+      (click)="openBanner(banner?.link_url)"
+    />
     <img class="img-banner" src="assets/images/placeholder-banner.png" *ngIf="!banner.image_url" />
   </ion-slide>
 </ion-slides>
