@@ -4,23 +4,17 @@
 <ng-container *ngFor="let cart of cartData; let i = index">
   <ion-row class="ion-align-items-center ion-justify-content-center ion-margin-vertical">
     <ion-col size="2">
-      <img
-        [routerLink]="['/product/detail', cart?.product?.product_id || cart?.product_id]"
-        [src]="cart?.product?.image_url || cart?.image_url"
-        alt="product_image"
-      />
+      <img [routerLink]="['/product/detail', cart?.product?.product_id || cart?.product_id]"
+        [src]="cart?.product?.image_url || cart?.image_url" alt="product_image" />
     </ion-col>
     <ion-col size="10" class="ion-padding-start">
       <ion-row>
         <ion-col size="12" class="ion-no-padding">
-          <span class="product-name"
-            ><b>{{ cart?.product?.name || cart?.name }}</b></span
-          >
+          <span class="product-name"><b>{{ cart?.product?.name || cart?.name }}</b></span>
         </ion-col>
       </ion-row>
-      <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-row class="ion-align-items-center ion-justify-content-center ion-padding-top">
         <ion-col [size]="showSubstract ? '8' : '8'" class="ion-no-padding">
-          <!-- <span class="product-brand">{{ cart?.product?.brand?.name || cart?.brand?.name }}</span> -->
           <div class="product-price">
             {{ cart?.product?.secondary_price || cart?.secondary_price | currency: 'Rp. ' }}
           </div>
@@ -31,37 +25,20 @@
         <ion-col size="4" class="ion-no-padding ion-text-center" *ngIf="showSubstract">
           <ion-row class="ion-align-items-center">
             <ion-col size="4">
-              <ion-icon
-                name="remove-circle-outline"
-                size="small"
-                appDebounce
-                (debounceClick)="updateQuantity(i)"
-                (click)="updateLocalQuantity(i, false)"
-              ></ion-icon>
+              <ion-icon name="remove-circle-outline" size="small" appDebounce (debounceClick)="updateQuantity(i)"
+                (click)="updateLocalQuantity(i, false)"></ion-icon>
             </ion-col>
             <ion-col size="4">{{ cart?.quantity }}</ion-col>
             <ion-col size="4">
-              <ion-icon
-                name="add-circle-outline"
-                size="small"
+              <ion-icon name="add-circle-outline" size="small"
                 [color]="compareQuantityWithStock(+cart?.quantity, +cart?.product?.stock) ? 'black' : 'medium'"
-                appDebounce
-                (debounceClick)="updateQuantity(i)"
-                (click)="updateLocalQuantity(i, true)"
-              ></ion-icon>
+                appDebounce (debounceClick)="updateQuantity(i)" (click)="updateLocalQuantity(i, true)"></ion-icon>
             </ion-col>
           </ion-row>
         </ion-col>
-        <!-- <ion-col [size]="showSubstract ? '4' : '6'" class="ion-no-padding ion-text-right" *ngIf="showSubstract">
-          <ion-text color="dark">
-            <span><b>Rp. {{ cart?.local_subtotal_price || cart?.local_subtotal_price | number }}</b></span>
-          </ion-text>
-        </ion-col> -->
         <ion-col [size]="showSubstract ? '4' : '4'" class="ion-no-padding ion-text-right" *ngIf="!showSubstract">
           <ion-text color="dark">
-            <span
-              >x <b>{{ cart?.quantity || cart?.transaction_products?.quantity }}</b></span
-            >
+            <span>x <b>{{ cart?.quantity || cart?.transaction_products?.quantity }}</b></span>
           </ion-text>
         </ion-col>
       </ion-row>

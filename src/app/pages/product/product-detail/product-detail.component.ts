@@ -44,7 +44,7 @@ export class ProductDetailComponent implements OnInit {
     };
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewDidEnter() {
     this.observeFetchState();
@@ -118,7 +118,7 @@ export class ProductDetailComponent implements OnInit {
 
   getRelatedProduct() {
     this.productSrv
-      .getRelated(this.productData?.name, this.page)
+      .getRelated(this.productData?.product_id, this.page)
       .then((res: ResponsePagination) => {
         const products = res.response.rows as Product[];
         this.products = products;

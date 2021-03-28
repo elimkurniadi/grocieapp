@@ -82,9 +82,9 @@ export class ProductService {
     });
   }
 
-  getRelated(keyword: string, pagination?: Page, ordering?: Sort): Promise<any> {
+  getRelated(productId: string, pagination?: Page, ordering?: Sort): Promise<any> {
     return new Promise((resolve, reject) => {
-      const subscription = this.api.getData(`product/search/related/${keyword}`, pagination, ordering);
+      const subscription = this.api.getData(`product/related/${productId}`, pagination, ordering);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: ResponsePagination) => {

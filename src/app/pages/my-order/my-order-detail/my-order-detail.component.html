@@ -197,17 +197,19 @@
           <br />
           <ion-text class="address-label">{{ order?.address?.address_detail }}</ion-text>
           <br />
+          <ion-text class="address-label">{{ order?.address?.formatted_address }}</ion-text>
+          <br />
           <ion-text class="address-label"> {{ order?.address?.phone }} </ion-text>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="order?.shipping_date">
         <ion-col>
           <ion-text class="order-label">
             {{ 'ESTIMATED_ARRIVAL' | translate }}
           </ion-text>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="order?.shipping_date">
         <ion-col>
           <ion-text class="order-delivery-date">
             {{ order?.shipping_date | date: 'EEEE, d MMM yyyy' }}

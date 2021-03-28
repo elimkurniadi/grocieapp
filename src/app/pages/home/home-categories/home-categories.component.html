@@ -1,9 +1,9 @@
 <ion-row>
-  <ion-col>
+  <ion-col class="ion-padding-start">
     <ion-text class="section-title">{{ 'CATEGORIES' | translate }}</ion-text>
   </ion-col>
 </ion-row>
-<ion-slides pager>
+<ion-slides pager class="ion-padding-bottom">
   <ion-slide *ngFor="let categories of categoriesChunk">
     <ion-grid>
       <ion-row class="ion-no-padding">
