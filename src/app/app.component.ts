@@ -43,7 +43,6 @@ export class AppComponent {
     private translate: TranslateService,
     private market: Market
   ) {
-    this.authSrv.checkToken();
     this.initializeApp();
   }
 
