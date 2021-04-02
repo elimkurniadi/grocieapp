@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { IonSearchbar, ModalController } from '@ionic/angular';
 import { ModalFilterProductComponent } from '@shared/common/modals/modal-filter-product/modal-filter-product.component';
 import { Brand, Page, Product, Response, ResponsePagination } from '@shared/models';
 import { CacheService, ToastService } from '@shared/services';
@@ -11,7 +11,8 @@ import { BrandService, ProductService } from '@shared/services/modules';
   templateUrl: './product-search.component.html',
   styleUrls: ['./product-search.component.scss'],
 })
-export class ProductSearchComponent implements OnInit {
+export class ProductSearchComponent implements OnInit, AfterViewInit {
+  @ViewChild('searchBar') searchBar: IonSearchbar;
   keyword: string;
   recentSearches: any[] = [];
   page: Page;
@@ -37,6 +38,12 @@ export class ProductSearchComponent implements OnInit {
   ngOnInit() {
     this.saveRecentSearch();
     this.getPopularProduct();
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.searchBar.setFocus();
+    }, 150);
   }
 
   fetchData() {
