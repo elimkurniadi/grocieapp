@@ -14,7 +14,7 @@ export class MyOrderListComponent implements OnInit {
   orders;
   completedOrders;
 
-  constructor(private transactionSrv:TransactionService) {}
+  constructor(private transactionSrv: TransactionService) {}
 
   ngOnInit() {
     this.getTransactionList();
@@ -41,14 +41,23 @@ export class MyOrderListComponent implements OnInit {
   }
 
   getTransactionList() {
-    this.transactionSrv.getTransaction().then(res => {
+    this.transactionSrv.getTransaction().then((res) => {
       this.orders = res.response.rows;
-    })
+    });
   }
 
   getTransactionCompletedList() {
-    this.transactionSrv.getTransactionHistory().then(res => {
+    this.transactionSrv.getTransactionHistory().then((res) => {
       this.completedOrders = res.response.rows;
-    })
+    });
+  }
+
+  onRefresh(event) {
+    if (this.segmentValue === 'ongoing') {
+      this.getTransactionList();
+    } else {
+      this.getTransactionCompletedList();
+    }
+    event.target.complete();
   }
 }
