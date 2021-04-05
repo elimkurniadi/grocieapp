@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)" pullFactor="1.2" pullMin="20" pullMax="80">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-segment color="primary" (ionChange)="segmentChanged($event)" [value]="segmentValue">

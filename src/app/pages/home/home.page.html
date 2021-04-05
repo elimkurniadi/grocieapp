@@ -43,7 +43,7 @@
  -->
 
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="1.2" pullMin="20" pullMax="80">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-grid class="ion-no-padding">

@@ -45,7 +45,7 @@
             </ion-text>
             <span class="product-size">Size: {{ productData?.weight }} {{ productData?.unit?.name }}</span>
             <br />
-            <ion-text class="product-out-of-stock" *ngIf="productData?.stock < 5">
+            <ion-text class="product-out-of-stock" *ngIf="productData?.stock < 5 && productData?.stock > 0">
               {{ 'STOCK' | translate }} < 5 </ion-text>
           </ion-col>
           <!-- <ion-col size="6" class="ion-no-padding ion-text-right">

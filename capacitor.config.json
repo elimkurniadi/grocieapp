@@ -14,7 +14,7 @@
     "SplashScreen": {
       "launchAutoHide": true,
       "androidScaleType": "CENTER_CROP",
-      "showSpinner": true
+      "showSpinner": false
     }
   },
   "linuxAndroidStudioPath": "/home/dra/android-studio/bin/studio.sh"

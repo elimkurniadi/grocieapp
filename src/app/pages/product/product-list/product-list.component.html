@@ -4,12 +4,11 @@
       <ion-back-button icon="chevron-back" defaultHref="/product/search" icon="chevron-back-outline"> </ion-back-button>
     </ion-buttons>
     <ion-title>{{ 'SEARCH_RESULT' | translate }}</ion-title>
-  </ion-toolbar>
-
-  <ion-toolbar *ngIf="search" mode="ios">
-    <div (click)="searchProduct()">
-      <ion-searchbar class="custom-search" mode="ios" [value]="search"></ion-searchbar>
-    </div>
+    <ion-buttons slot="end">
+      <ion-button (click)="searchProduct()">
+        <ion-icon name="search" class="header-action-size"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 
   <ion-toolbar *ngIf="!search" mode="ios">
