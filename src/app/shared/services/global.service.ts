@@ -72,7 +72,41 @@ export class GlobalService {
   }
 
   numberWithCommas(x: any) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return x
+      .toString()
+      .replace(/\D/g, '')
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  numberWithCurrency(value: any) {
+    // check for decimal
+    if (value.indexOf('.') >= 0) {
+      // get position of first decimal
+      // this prevents multiple decimals from
+      // being entered
+      const decimalPos = value.indexOf('.');
+
+      // split number by decimal point
+      let leftSide = value.substring(0, decimalPos);
+      let rightSide = value.substring(decimalPos);
+
+      // add commas to left side of number
+      leftSide = this.numberWithCommas(leftSide);
+
+      // validate right side
+      rightSide = this.numberWithCommas(rightSide);
+
+      // join number by .
+      value = 'Rp. ' + leftSide + '.' + rightSide;
+    } else {
+      // no decimal entered
+      // add commas to number
+      // remove all non-digits
+      value = this.numberWithCommas(value);
+      value = 'Rp. ' + value;
+    }
+
+    return value;
   }
 
   getChangedFormProperties(form: any) {
