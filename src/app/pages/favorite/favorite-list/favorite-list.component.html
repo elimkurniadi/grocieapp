@@ -1,14 +1,5 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar mode="ios">
-    <ion-buttons slot="end" mode="md">
-      <ion-button>
-        <ion-text [color]="isEditMode ? 'danger' : 'primary'" (click)="isEditMode = !isEditMode">
-          <span
-            ><b>{{ isEditMode ? ('CANCEL' | translate) : ('EDIT' | translate) }}</b></span
-          >
-        </ion-text>
-      </ion-button>
-    </ion-buttons>
     <ion-title> {{ 'FAVORITES' | translate }} </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,6 +8,11 @@
   <ion-refresher slot="fixed" (ionRefresh)="getFavorites($event)" pullFactor="1.2" pullMin="20" pullMax="80">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  <ion-row class="ion-no-padding">
+    <ion-col size="12" class="ion-no-padding">
+      <img src="/assets/images/detail_image.jpg" class="full-width img-header" />
+    </ion-col>
+  </ion-row>
   <ion-list class="ion-padding" *ngIf="!favorites">
     <app-favorite-skeleton></app-favorite-skeleton>
   </ion-list>
