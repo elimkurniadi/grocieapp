@@ -35,9 +35,14 @@
       <form (ngSubmit)="pay()" #codForm="ngForm" [formGroup]="fg">
         <div class="form-group">
           <ion-item lines="none">
-            <ion-input class="default-theme" placeholder="Rp. 000.000" class="ion-text-right"
-              (ngModelChange)="amountChanged($event)" [ngModel]="amountCod" [ngModelOptions]="{ standalone: true }"
-              maxlength="16"></ion-input>
+            <ion-input
+              class="default-theme text-amount"
+              placeholder="Rp. 000.000"
+              (ngModelChange)="amountChanged($event)"
+              [ngModel]="amountCod"
+              [ngModelOptions]="{ standalone: true }"
+              maxlength="16"
+            ></ion-input>
             <br />
           </ion-item>
           <small *ngIf="fg.controls.amount.dirty">{{ fg.controls.amount.errors?.required?.message }}</small>
