@@ -2,7 +2,7 @@
   <ion-toolbar mode="ios">
     <ion-row class="ion-align-items-center ion-padding-top">
       <ion-col size="4" size-md="3" class="ion-padding-horizontal">
-        <img style="height:25px" src="assets/images/app-logo.svg" />
+        <img style="height: 25px" src="assets/images/app-logo.svg" />
       </ion-col>
       <ion-col size="8" size-md="9" class="ion-text-right">
         <ion-row>
@@ -32,15 +32,10 @@
       </ion-col>
       <ion-col size="1.5" class="ion-no-padding ion-align-self-center ion-text-center">
         <ion-icon name="notifications" color="primary" class="notif-icon link" (click)="openNotification()"></ion-icon>
-        <!-- <ion-icon name="alert-circle-outline" color="primary" class="notif-icon link" (click)="presentToast()"></ion-icon> -->
       </ion-col>
     </ion-row>
   </ion-toolbar>
 </ion-header>
-
-<!--
-          [routerLink]="['/tabs', 'notification']"
- -->
 
 <ion-content [fullscreen]="true">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="1.2" pullMin="20" pullMax="80">

@@ -11,7 +11,8 @@ import { FavoriteNewComponent } from '../favorite-new/favorite-new.component';
   styleUrls: ['./favorite-list.component.scss'],
 })
 export class FavoriteListComponent implements OnInit {
-  favorites: Favorite[];
+  favorites: Favorite[] = null;
+  isEditMode = false;
 
   constructor(
     private modalCtrl: ModalController,
@@ -40,7 +41,9 @@ export class FavoriteListComponent implements OnInit {
     return await modal.present();
   }
 
-  getFavorites() {
+  getFavorites(event = null) {
+    this.favorites = null;
+
     this.favoriteSrv
       .getList()
       .then((res: Response) => {
@@ -50,6 +53,11 @@ export class FavoriteListComponent implements OnInit {
       .catch((err) => {
         const error = err.error.error;
         this.toastSrv.show(error.message);
+      })
+      .finally(() => {
+        if (event) {
+          event.target.complete();
+        }
       });
   }
 
@@ -76,9 +84,14 @@ export class FavoriteListComponent implements OnInit {
           text: 'Yes',
           cssClass: 'modal-confirm',
           handler: () => {
-            this.favoriteSrv.deleteFavoriteList(item.favourite_group_id).then((res) => {
-              this.getFavorites();
-            });
+            this.favoriteSrv
+              .deleteFavoriteList(item.favourite_group_id)
+              .then((res) => {
+                this.getFavorites();
+              })
+              .finally(() => {
+                this.isEditMode = false;
+              });
           },
         },
       ],

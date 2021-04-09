@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { GlobalService } from '@shared/services';
 import { CartService, ProductService } from '@shared/services/modules';
 import * as _ from 'lodash';
 
@@ -13,8 +14,14 @@ export class CartPage implements OnInit {
   unprocessableCartList: any[] = [];
   relatedProductList: any[] = null;
   totalPrice = 0;
+  fetching = false;
 
-  constructor(private cartSrv: CartService, private productSrv: ProductService, private router: Router) {}
+  constructor(
+    private cartSrv: CartService,
+    private productSrv: ProductService,
+    private router: Router,
+    private gs: GlobalService
+  ) {}
 
   ngOnInit() {}
 
@@ -40,6 +47,7 @@ export class CartPage implements OnInit {
   }
 
   fetchCartList() {
+    this.fetching = true;
     this.cartSrv.getCartList().then((res) => {
       res.forEach((element) => {
         const localSubTotalPrice = element?.quantity * +element?.product?.primary_price;
@@ -47,6 +55,8 @@ export class CartPage implements OnInit {
       });
       this.cartList = res;
       this.partitionCartList(this.cartList);
+
+      this.fetching = false;
     });
   }
 

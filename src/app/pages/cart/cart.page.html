@@ -8,11 +8,18 @@
   <ion-refresher slot="fixed" (ionRefresh)="pullToRefresh($event)" pullFactor="1.2" pullMin="20" pullMax="80">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-grid class="ion-no-padding h-100" *ngIf="cartList?.length > 0">
+  <ion-grid class="ion-no-padding h-100" *ngIf="fetching">
+    <app-cart-skeleton></app-cart-skeleton>
+  </ion-grid>
+
+  <ion-grid class="ion-no-padding h-100" *ngIf="cartList?.length > 0 && !fetching">
     <ion-row class="ion-padding-horizontal ion-justify-content-between">
       <ion-col size="12">
-        <app-item-list [cartData]="cartList" (afterDeleteItem)="fetchCartList()"
-          (quantityChange)="updateTotalPrice($event)"></app-item-list>
+        <app-item-list
+          [cartData]="cartList"
+          (afterDeleteItem)="fetchCartList()"
+          (quantityChange)="updateTotalPrice($event)"
+        ></app-item-list>
       </ion-col>
     </ion-row>
     <div class="divider"></div>
@@ -42,27 +49,9 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid *ngIf="cartList?.length && cartList?.length <= 0" class="ion-text-center ion-padding ion-margin">
-    <ion-row>
-      <ion-col>
-        <img src="assets/images/empty-cart.svg" />
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <div class="text-empty-title ion-margin-vertical">Start adding things to your cart!</div>
-        <ion-text class="text-empty-desc">
-          You're cart is still empty. Start shopping and add things to your cart!
-        </ion-text>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button fill="outline" color="primary" routerLink="/product/search">
-          <strong> Start Shopping </strong>
-        </ion-button>
-      </ion-col>
-    </ion-row>
+
+  <ion-grid *ngIf="cartList?.length <= 0 && !fetching" class="ion-text-center ion-padding ion-margin">
+    <app-cart-empty></app-cart-empty>
   </ion-grid>
 </ion-content>
 
@@ -75,8 +64,12 @@
           <span><b>Rp. {{totalPrice | number}}</b></span>
         </ion-col>
         <ion-col size="6" class="ion-text-right ion-no-padding">
-          <ion-button color="limegreen" size="small" [disabled]="unprocessableCartList.length > 0"
-            (click)="goToCheckout()">
+          <ion-button
+            color="limegreen"
+            size="small"
+            [disabled]="unprocessableCartList.length > 0"
+            (click)="goToCheckout()"
+          >
             {{'CHECKOUT' | translate}}
           </ion-button>
         </ion-col>

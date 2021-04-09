@@ -1,52 +1,60 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar mode="ios">
+    <ion-buttons slot="end" mode="md">
+      <ion-button>
+        <ion-text [color]="isEditMode ? 'danger' : 'primary'" (click)="isEditMode = !isEditMode">
+          <span
+            ><b>{{ isEditMode ? ('CANCEL' | translate) : ('EDIT' | translate) }}</b></span
+          >
+        </ion-text>
+      </ion-button>
+    </ion-buttons>
     <ion-title> {{ 'FAVORITES' | translate }} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <img class="img-banner" src="assets/images/detail_image.jpg"/>
-  <ion-list class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="getFavorites($event)" pullFactor="1.2" pullMin="20" pullMax="80">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list class="ion-padding" *ngIf="!favorites">
+    <app-favorite-skeleton></app-favorite-skeleton>
+  </ion-list>
+  <ion-list class="ion-padding" *ngIf="favorites && favorites.length > 0">
     <ion-item-sliding *ngFor="let item of favorites" class="ion-margin-bottom">
       <ion-item lines="none" class="favorite-item">
         <ion-label class="favorite-name">{{ item.name }}</ion-label>
         <ion-text
+          *ngIf="!isEditMode"
           slot="end"
           class="ion-text-right text-see-list link"
           [routerLink]="['/favorite', item.favourite_group_id, 'detail']"
           ><b>{{ 'SEE_LIST' | translate }}</b></ion-text
         >
+        <ion-icon
+          *ngIf="isEditMode"
+          slot="end"
+          name="trash-outline"
+          color="danger"
+          (click)="presentAlertConfirm(item)"
+        ></ion-icon>
       </ion-item>
       <ion-item-options side="end" class="ion-align-items-center">
         <ion-item-option class="custom-option-right" color="danger" (click)="delete(item)">Delete</ion-item-option>
         <ion-item-option class="custom-option-left" color="success" (click)="edit(item)">Rename</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
-
   </ion-list>
 
-  <ion-grid *ngIf="favorites?.length <= 0" class="ion-text-center ion-padding ion-margin">
-    <ion-row>
-      <ion-col>
-        <img src="assets/images/empty-favorite.svg">
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <div class="text-empty-title ion-margin-vertical">
-          You have no favorites
-        </div>
-        <ion-text class="text-empty-desc">
-          Start by creating a favorite list and fill it with things you love!
-        </ion-text>
-      </ion-col>
-    </ion-row>
+  <ion-grid *ngIf="favorites && favorites?.length === 0" class="ion-text-center ion-padding ion-margin">
+    <app-favorite-empty></app-favorite-empty>
   </ion-grid>
+
   <ion-row class="ion-text-center">
     <ion-col>
       <ion-button fill="outline" color="primary" (click)="addToList()">
-        <ion-icon slot="start"  name="add-outline"></ion-icon>
-         <strong>{{ 'ADD_NEW_LIST' | translate }}</strong>
+        <ion-icon slot="start" name="add-outline"></ion-icon>
+        <strong>{{ 'ADD_NEW_LIST' | translate }}</strong>
       </ion-button>
     </ion-col>
   </ion-row>

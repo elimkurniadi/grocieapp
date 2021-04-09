@@ -11,10 +11,19 @@ import { FavoriteListComponent } from './favorite-list/favorite-list.component';
 import { SharedModule } from '@shared/shared.module';
 import { FavoriteDetailComponent } from './favorite-detail/favorite-detail.component';
 import { FavoriteNewComponent } from './favorite-new/favorite-new.component';
+import { FavoriteEmptyComponent } from './favorite-empty/favorite-empty.component';
+import { FavoriteSkeletonComponent } from './favorite-skeleton/favorite-skeleton.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, FavoritePageRoutingModule, SharedModule, ReactiveFormsModule],
-  declarations: [FavoritePage, FavoriteListComponent, FavoriteDetailComponent, FavoriteNewComponent],
+  declarations: [
+    FavoritePage,
+    FavoriteListComponent,
+    FavoriteDetailComponent,
+    FavoriteNewComponent,
+    FavoriteEmptyComponent,
+    FavoriteSkeletonComponent,
+  ],
   exports: [FavoriteNewComponent],
 })
 export class FavoritePageModule {}

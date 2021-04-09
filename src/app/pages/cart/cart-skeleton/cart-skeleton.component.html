@@ -1,0 +1,31 @@
+<ion-row
+  class="ion-align-items-center ion-justify-content-center ion-margin-vertical ion-padding-horizontal"
+  *ngFor="let skeleton of [1, 2, 3, 4]; let i = index"
+>
+  <ion-col size="2">
+    <ion-thumbnail>
+      <ion-skeleton-text animated></ion-skeleton-text>
+    </ion-thumbnail>
+  </ion-col>
+  <ion-col size="10" class="ion-padding-start">
+    <ion-row>
+      <ion-col size="12" class="ion-no-padding">
+        <span class="product-name"> <ion-skeleton-text animated></ion-skeleton-text> </span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col class="ion-no-padding">
+        <div class="product-price">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </div>
+        <span class="product-final-price">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </span>
+      </ion-col>
+
+      <ion-col>
+        <ion-skeleton-text animated style="width: 40%; float: right"></ion-skeleton-text>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+</ion-row>

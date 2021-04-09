@@ -49,7 +49,9 @@
   "CITY": "Kota",
   "CITY_PLACEHOLDER": "Pilih Kota",
   "DISTRICT": "Kecamatan",
+  "SUB_DISTRICT": "Kelurahan",
   "DISTRICT_PLACEHOLDER": "Pilih Kecamatan",
+  "SUB_DISTRICT_PLACEHOLDER": "Pilih Kelurahan",
   "POSTAL_CODE": "Kode Pos",
   "POSTAL_CODE_PLACEHOLDER": "Kode Pos Anda",
   "ADDRESS_NAME": "Nama Alamat",
@@ -243,5 +245,6 @@
   "SAVING": "Hemat",
   "UPDATE_KLIKGO": "Update KlikGo",
   "UPDATE_APPS_TITLE": "App Update",
-  "UPDATE_APPS_MESSAGE": "Perbarui KlikGO untuk menikmati fitur-fitur baru, perbaikan bug, peningkatan kinerja, peningkatan, peningkatan kecil"
+  "UPDATE_APPS_MESSAGE": "Perbarui KlikGO untuk menikmati fitur-fitur baru, perbaikan bug, peningkatan kinerja, peningkatan, peningkatan kecil",
+  "EDIT" : "Ubah"
 }

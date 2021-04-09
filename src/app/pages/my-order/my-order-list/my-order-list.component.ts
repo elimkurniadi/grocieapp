@@ -11,8 +11,8 @@ export class MyOrderListComponent implements OnInit {
   @ViewChild(IonSlides, { static: false }) slides: IonSlides;
 
   segmentValue = 'ongoing';
-  orders;
-  completedOrders;
+  orders: any[] = null;
+  completedOrders: any[] = null;
 
   constructor(private transactionSrv: TransactionService) {}
 
@@ -41,12 +41,14 @@ export class MyOrderListComponent implements OnInit {
   }
 
   getTransactionList() {
+    this.orders = null;
     this.transactionSrv.getTransaction().then((res) => {
       this.orders = res.response.rows;
     });
   }
 
   getTransactionCompletedList() {
+    this.completedOrders = null;
     this.transactionSrv.getTransactionHistory().then((res) => {
       this.completedOrders = res.response.rows;
     });

@@ -11,6 +11,8 @@ import { SharedModule } from '@shared/shared.module';
 import { ItemListModule } from '@shared/common/item-list/item-list.module';
 import { SlideProductModule } from '@shared/common/slide-product/slide-product.module';
 import { ItemListInactiveModule } from '@shared/common/item-list-inactive/item-list-inactive.module';
+import { CartEmptyComponent } from './cart-empty/cart-empty.component';
+import { CartSkeletonComponent } from './cart-skeleton/cart-skeleton.component';
 
 @NgModule({
   imports: [
@@ -23,6 +25,6 @@ import { ItemListInactiveModule } from '@shared/common/item-list-inactive/item-l
     ItemListInactiveModule,
     SlideProductModule,
   ],
-  declarations: [CartPage],
+  declarations: [CartPage, CartEmptyComponent, CartSkeletonComponent],
 })
 export class CartPageModule {}

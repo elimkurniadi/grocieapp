@@ -11,7 +11,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-grid class="ion-no-padding">
     <ion-row class="ion-no-padding">
       <ion-col>
@@ -47,7 +47,7 @@
   </ion-infinite-scroll>
 </ion-content>
 
-<ion-footer style="padding: 6px">
+<ion-footer style="padding: 6px" color="light" [translucent]="false" [mode]="'md'">
   <ion-row class="ion-align-items-center">
     <ion-col size="6" class="ion-text-center" style="border-right: 1px solid #99cc33">
       <ion-text color="success" (click)="showSort()">
