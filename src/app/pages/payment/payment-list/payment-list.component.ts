@@ -126,6 +126,22 @@ export class PaymentListComponent implements OnInit {
   }
 
   payOrder() {
+    const body = this.prepareBodyTransaction();
+
+    this.transactionSrv
+      .add(body)
+      .then((res) => {
+        this.removeVoucher();
+        this.browserSrv.openBrowser({ url: res.response });
+        this.router.navigate(['/my-order']);
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
+  }
+
+  prepareBodyTransaction() {
     const body = {
       is_now: this.isNow,
       address_id: this.addressId,
@@ -142,17 +158,11 @@ export class PaymentListComponent implements OnInit {
       body['shipping_time'] = this.shippingTime;
     }
 
-    this.transactionSrv
-      .add(body)
-      .then((res) => {
-        this.removeVoucher();
-        this.browserSrv.openBrowser({ url: res.response });
-        this.router.navigate(['/my-order']);
-      })
-      .catch((err) => {
-        const error = err.error.error;
-        this.toastSrv.show(error.message);
-      });
+    if (this.voucherCode !== null && this.voucherCode !== '' && this.voucherCode !== undefined) {
+      body['voucher_code'] = this.voucherCode;
+    }
+
+    return body;
   }
 
   removeVoucher() {

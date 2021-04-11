@@ -1,4 +1,5 @@
-<ion-card [routerLink]="['/product/detail', product?.product_id]"
+<ion-card
+  [routerLink]="['/product/detail', product?.product_id]"
   class="ion-no-border link"
   style="margin-left: 0px; margin-right: 0px"
   [ngClass]="{ disabled: product?.stock <= 0 }"
@@ -24,13 +25,17 @@
         <p class="product-size">Size: {{ product?.weight }} {{ product?.unit?.name }}</p>
       </ion-col>
       <ion-col size="2" class="ion-text-right">
-        <ion-icon src="assets/images/add-favorite.svg" color="primary" (click)="addToFavorite(product?.product_id);$event.preventDefault();$event.stopPropagation()">
+        <ion-icon
+          src="assets/images/add-favorite.svg"
+          color="primary"
+          (click)="addToFavorite(product?.product_id); $event.preventDefault(); $event.stopPropagation()"
+        >
         </ion-icon>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col [style.visibility]="product?.secondary_price ? 'unset' : 'hidden'">
-        <ion-badge style="font-size: 10px; --color: white; background-color: #f8a345"
+        <ion-badge class="product-discount"
           >{{
             ((+product?.secondary_price - +product?.primary_price) / +product?.secondary_price) * 100 | number: '1.0-0'
           }}

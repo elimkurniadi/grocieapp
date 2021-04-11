@@ -310,6 +310,16 @@ ion-input {
   --placeholder-opacity: 1 !important;
 }
 
+ion-input.text-amount {
+  &:before {
+    margin-left: 10px;
+    content: 'Rp. ';
+  }
+  .native-input {
+    padding-left: 5px !important;
+  }
+}
+
 ion-slide.full-width {
   width: 100% !important;
 }

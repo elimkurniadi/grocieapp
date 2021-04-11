@@ -89,18 +89,8 @@ export class PaymentCodComponent implements OnInit {
   }
 
   amountChanged(event: any) {
-    let amount = event;
-    if (event.indexOf('Rp.') === 0) {
-      amount = event.substring(4);
-    }
-
-    let value = amount.replace(/,/g, '');
-    if (value === 'Rp' || value === 'R') {
-      value = '0';
-    }
-
-    const formattedNumber = this.gs.numberWithCurrency(value);
-
+    const value = event.replace(/,/g, '');
+    const formattedNumber = this.gs.numberWithCommas(value);
     this.amountCod = formattedNumber;
 
     this.fg.patchValue({ cod_payment_amount: value, amount: formattedNumber });
@@ -108,23 +98,7 @@ export class PaymentCodComponent implements OnInit {
 
   pay() {
     if (this.fg.valid) {
-      const body = {
-        is_now: this.isNow,
-        address_id: this.addressId,
-        shipping_id: 1,
-        payment_method_id: this.paymentId,
-        cod_payment_amount: this.fg.value.cod_payment_amount,
-      };
-
-      if (this.notes !== null && this.notes !== '' && this.notes !== undefined) {
-        body['notes'] = this.notes;
-      }
-
-      if (!this.isNow) {
-        body['shipping_date'] = this.shippingDate;
-        body['shipping_time'] = this.shippingTime;
-      }
-
+      const body = this.prepareBodyTransaction();
       this.transactionSrv
         .add(body)
         .then((res) => {
@@ -138,6 +112,31 @@ export class PaymentCodComponent implements OnInit {
     } else {
       this.gs.markDirtyForm(this.fg);
     }
+  }
+
+  prepareBodyTransaction() {
+    const body = {
+      is_now: this.isNow,
+      address_id: this.addressId,
+      shipping_id: 1,
+      payment_method_id: this.paymentId,
+      cod_payment_amount: this.fg.value.cod_payment_amount,
+    };
+
+    if (this.notes !== null && this.notes !== '' && this.notes !== undefined) {
+      body['notes'] = this.notes;
+    }
+
+    if (!this.isNow) {
+      body['shipping_date'] = this.shippingDate;
+      body['shipping_time'] = this.shippingTime;
+    }
+
+    if (this.voucherCode !== null && this.voucherCode !== '' && this.voucherCode !== undefined) {
+      body['voucher_code'] = this.voucherCode;
+    }
+
+    return body;
   }
 
   removeVoucher() {

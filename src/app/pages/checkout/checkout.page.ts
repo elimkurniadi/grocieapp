@@ -49,6 +49,7 @@ export class CheckoutPage implements OnInit {
   }
 
   ngOnInit() {
+    this.cache.removeVoucher();
     this.fetchCartList();
 
     this.checkOperationalTime();
@@ -61,7 +62,11 @@ export class CheckoutPage implements OnInit {
         // FETCH ADDRESS DETAIL HERE
         this.addressSrv.getAddress(param?.address_id).then((address) => {
           this.defaultAddress = address;
-          this.getVoucher();
+          if (this.voucher !== null) {
+            this.getVoucher();
+          } else {
+            this.getPriceSummary();
+          }
         });
       } else {
         this.fetchAddressList();
@@ -109,7 +114,12 @@ export class CheckoutPage implements OnInit {
   fetchAddressList() {
     this.addressSrv.getAddress().then((res) => {
       this.defaultAddress = res[0];
-      this.getVoucher();
+
+      if (this.voucher !== null) {
+        this.getVoucher();
+      } else {
+        this.getPriceSummary();
+      }
     });
   }
 
