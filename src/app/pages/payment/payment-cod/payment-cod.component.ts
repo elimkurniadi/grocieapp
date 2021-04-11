@@ -108,23 +108,7 @@ export class PaymentCodComponent implements OnInit {
 
   pay() {
     if (this.fg.valid) {
-      const body = {
-        is_now: this.isNow,
-        address_id: this.addressId,
-        shipping_id: 1,
-        payment_method_id: this.paymentId,
-        cod_payment_amount: this.fg.value.cod_payment_amount,
-      };
-
-      if (this.notes !== null && this.notes !== '' && this.notes !== undefined) {
-        body['notes'] = this.notes;
-      }
-
-      if (!this.isNow) {
-        body['shipping_date'] = this.shippingDate;
-        body['shipping_time'] = this.shippingTime;
-      }
-
+      const body = this.prepareBodyTransaction();
       this.transactionSrv
         .add(body)
         .then((res) => {
@@ -138,6 +122,31 @@ export class PaymentCodComponent implements OnInit {
     } else {
       this.gs.markDirtyForm(this.fg);
     }
+  }
+
+  prepareBodyTransaction() {
+    const body = {
+      is_now: this.isNow,
+      address_id: this.addressId,
+      shipping_id: 1,
+      payment_method_id: this.paymentId,
+      cod_payment_amount: this.fg.value.cod_payment_amount,
+    };
+
+    if (this.notes !== null && this.notes !== '' && this.notes !== undefined) {
+      body['notes'] = this.notes;
+    }
+
+    if (!this.isNow) {
+      body['shipping_date'] = this.shippingDate;
+      body['shipping_time'] = this.shippingTime;
+    }
+
+    if (this.voucherCode !== null && this.voucherCode !== '' && this.voucherCode !== undefined) {
+      body['voucher_code'] = this.voucherCode;
+    }
+
+    return body;
   }
 
   removeVoucher() {
