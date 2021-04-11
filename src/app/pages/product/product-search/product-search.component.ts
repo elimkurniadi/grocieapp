@@ -179,4 +179,9 @@ export class ProductSearchComponent implements OnInit {
 
     this.router.navigate(['/product', 'list'], { queryParams });
   }
+
+  scanQR() {
+    // Scan barcode and QR function should be inserted here.
+    this.router.navigate(['/qr', 'scan']);
+  }
 }
