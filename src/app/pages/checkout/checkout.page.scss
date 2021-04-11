@@ -115,3 +115,81 @@ small {
 .text-saving {
   color: var(--ion-color-secondary);
 }
+
+@media only screen and (max-width: 360px) {
+  .delivery-location-btn {
+    font-size: 10px;
+  }
+
+  .text {
+    &-address-info {
+      font-size: 13px;
+    }
+    &-address-detail {
+      font-size: 13px;
+    }
+    &-payment-info {
+      font-size: 13px;
+    }
+    &-discount-info {
+      font-size: 13px;
+    }
+    &-discount-price {
+      font-size: 13px;
+    }
+    &-payment-price {
+      font-size: 13px;
+    }
+  }
+
+  .radio-wrapper {
+    div {
+      .radio-label {
+        font-size: 13px;
+      }
+    }
+  }
+
+  .label-title {
+    font-size: 15px;
+  }
+
+  .delivery-chip {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 340px) {
+  .delivery-location-btn {
+    font-size: 8px;
+  }
+
+  .text {
+    &-address-info {
+      font-size: 12px;
+    }
+    &-address-detail {
+      font-size: 12px;
+    }
+    &-payment-info {
+      font-size: 12px;
+    }
+    &-discount-info {
+      font-size: 12px;
+    }
+    &-discount-price {
+      font-size: 12px;
+    }
+    &-payment-price {
+      font-size: 12px;
+    }
+  }
+
+  .radio-wrapper {
+    div {
+      .radio-label {
+        font-size: 12px;
+      }
+    }
+  }
+}
