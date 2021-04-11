@@ -37,11 +37,12 @@
           <ion-item lines="none">
             <ion-input
               class="default-theme text-amount"
-              placeholder="Rp. 000.000"
+              placeholder="000.000"
               (ngModelChange)="amountChanged($event)"
               [ngModel]="amountCod"
               [ngModelOptions]="{ standalone: true }"
               maxlength="16"
+              inputmode="numeric"
             ></ion-input>
             <br />
           </ion-item>

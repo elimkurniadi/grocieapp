@@ -89,18 +89,8 @@ export class PaymentCodComponent implements OnInit {
   }
 
   amountChanged(event: any) {
-    let amount = event;
-    if (event.indexOf('Rp.') === 0) {
-      amount = event.substring(4);
-    }
-
-    let value = amount.replace(/,/g, '');
-    if (value === 'Rp' || value === 'R') {
-      value = '0';
-    }
-
-    const formattedNumber = this.gs.numberWithCurrency(value);
-
+    const value = event.replace(/,/g, '');
+    const formattedNumber = this.gs.numberWithCommas(value);
     this.amountCod = formattedNumber;
 
     this.fg.patchValue({ cod_payment_amount: value, amount: formattedNumber });
