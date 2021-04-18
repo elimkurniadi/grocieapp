@@ -58,7 +58,13 @@ export class CheckoutPage implements OnInit {
 
   observeQueryParam() {
     this.route.queryParams.subscribe((param) => {
-      if (param.address_id) {
+      if (param?.voucher_id) {
+        this.getVoucher();
+      } else {
+        this.cache.removeVoucher();
+      }
+
+      if (param?.address_id) {
         // FETCH ADDRESS DETAIL HERE
         this.addressSrv.getAddress(param?.address_id).then((address) => {
           this.defaultAddress = address;

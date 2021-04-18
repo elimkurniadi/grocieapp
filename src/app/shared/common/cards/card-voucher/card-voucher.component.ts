@@ -17,6 +17,6 @@ export class CardVoucherComponent implements OnInit {
 
   useVoucher(voucherId: string) {
     this.cache.setVoucher(voucherId);
-    this.router.navigate(['/checkout']);
+    this.router.navigate(['/checkout'], { queryParams: { voucher_id: voucherId } });
   }
 }
