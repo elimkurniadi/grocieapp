@@ -66,7 +66,7 @@
   color: #353535;
 }
 
-.summary{
+.summary {
   &-label {
     font-size: 14px;
     line-height: 1.17;
@@ -85,14 +85,19 @@
     line-height: 1.17;
     color: #353535;
     &.large {
-      font-size:16px;
+      font-size: 16px;
     }
   }
 }
 
 .green {
-  filter: brightness(0%) saturate(100%) invert(90%) sepia(32%) saturate(973%) hue-rotate(22deg) brightness(83%) contrast(90%);
+  filter: brightness(0%) saturate(100%) invert(90%) sepia(32%) saturate(973%) hue-rotate(22deg) brightness(83%)
+    contrast(90%);
   color: #99cc33 !important;
+}
+
+.orange {
+  color: var(--ion-color-secondary) !important;
 }
 
 .address-label {
@@ -143,7 +148,7 @@ ion-button {
   color: #353535;
 }
 
-.text{
+.text {
   &-address-info {
     font-size: 14px;
     font-weight: 600;
