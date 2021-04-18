@@ -1,20 +1,16 @@
 <ion-header class="ion-no-border">
-  <ion-grid class="ion-padding-horizontal">
-    <ion-row class="ion-no-padding">
-      <ion-col size="12" class="ion-no-padding">
-        <ion-row class="ion-no-padding">
-          <ion-col class="ion-text-right ion-no-padding-end">
-            <ion-icon name="close" color="light" (click)="dismiss()"></ion-icon>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-no-padding">
-          <ion-col class="ion-no-padding ion-text-center">
-            <ion-text class="share-title"> {{ 'SHARE_MY_APP' | translate }}</ion-text> <br />
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-toolbar mode="ios">
+    <ion-title>
+      <ion-text class="share-title">
+        {{ 'SHARE_MY_APP' | translate }}
+      </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -33,10 +29,12 @@
       </ion-item>
     </ion-col>
   </ion-row>
+</ion-content>
+
+<ion-footer class="ion-no-border">
   <ion-row>
     <ion-col class="ion-text-center">
       <ion-button color="success" shape="round" (click)="copyLink()">Copy</ion-button>
     </ion-col>
   </ion-row>
-</ion-content>
-
+</ion-footer>
