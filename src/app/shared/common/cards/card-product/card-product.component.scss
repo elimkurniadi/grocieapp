@@ -25,7 +25,7 @@
     text-overflow: ellipsis;
   }
   &-price {
-    font-size: 13px;
+    font-size: 11px;
     width: 95px;
     font-weight: 700;
     line-height: 3.4;
@@ -85,7 +85,7 @@
   }
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 460px) {
   .product {
     &-brand {
       font-size: 10px;
@@ -108,7 +108,7 @@
       text-overflow: ellipsis;
     }
     &-price {
-      font-size: 11px;
+      font-size: 10px;
       width: 95px;
       font-weight: 700;
       line-height: 3.4;
