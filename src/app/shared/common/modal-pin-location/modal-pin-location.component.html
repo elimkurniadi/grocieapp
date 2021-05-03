@@ -1,6 +1,10 @@
 <ion-content [fullscreen]="true">
   <ion-icon name="chevron-back-outline" (click)="dismiss()" class="back-button"></ion-icon>
 
+  <div class="map-search">
+    <ion-input placeholder="{{ 'SEARCH' | translate }}" #pacInput></ion-input>
+  </div>
+
   <div class="map-wrapper">
     <div #map id="map"></div>
   </div>

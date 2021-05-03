@@ -16,6 +16,7 @@ import { ModalConfirmationComponent } from '@shared/common/modals/modal-confirma
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { Market } from '@ionic-native/market/ngx';
 import { ModalUpdateComponent } from '@shared/common/modals/modal-update/modal-update.component';
+import { ActivityService } from '@shared/services/modules/activity.service';
 
 const { Device } = Plugins;
 
@@ -41,6 +42,7 @@ export class AppComponent {
     private deeplinks: Deeplinks,
     private router: Router,
     private translate: TranslateService,
+    private activitySrv: ActivityService,
     private market: Market
   ) {
     this.initializeApp();
@@ -52,6 +54,7 @@ export class AppComponent {
       this.splashScreen.hide();
       this.checkMaintenance();
       this.setDeepLink();
+      this.activitySrv.initPushListener();
     });
   }
 
@@ -81,7 +84,7 @@ export class AppComponent {
           this.settingSrv.checkAppVersion().then(async (app) => {
             const info = await logDeviceInfo();
             const appVer = app.response;
-            if (appVer.content !== info.appVersion) {
+            if (info.appVersion !== '' && appVer.content !== info.appVersion) {
               this.gs.log('wrong version');
               // call modal update app
               this.showUpdateModal(appVer.content);

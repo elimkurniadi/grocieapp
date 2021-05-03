@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSlides, ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { IonSlides, ModalController, NavController } from '@ionic/angular';
 import { ActivityService } from '@shared/services/modules/activity.service';
 import { InboxDetailComponent } from '../../inbox/inbox-detail/inbox-detail.component';
 
@@ -16,7 +17,7 @@ export class NotificationListComponent implements OnInit {
 
   @ViewChild(IonSlides, { static: false }) slides: IonSlides;
 
-  constructor(private activitySrv: ActivityService, private modalCtrl: ModalController) {}
+  constructor(private activitySrv: ActivityService, private modalCtrl: ModalController, private navCtrl: NavController) {}
 
   ngOnInit() {
     this.getNotificationList();
@@ -44,6 +45,7 @@ export class NotificationListComponent implements OnInit {
 
   dismiss() {
     this.modalCtrl.dismiss();
+    this.navCtrl.navigateRoot('tabs/home');
   }
 
   getNotificationList() {

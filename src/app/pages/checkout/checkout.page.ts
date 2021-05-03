@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
+import { PopoverInfoComponent } from '@shared/common/popover/popover-info/popover-info.component';
 import { Address, Cart, DeliveryTime, PaymentSummary, Response, Voucher } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { CacheService, GlobalService, ToastService } from '@shared/services';
@@ -43,7 +45,8 @@ export class CheckoutPage implements OnInit {
     private settingSrv: SettingService,
     private router: Router,
     private translate: TranslateService,
-    private gs: GlobalService
+    private gs: GlobalService,
+    private popoverCtrl: PopoverController
   ) {
     this.observeQueryParam();
   }
@@ -142,6 +145,9 @@ export class CheckoutPage implements OnInit {
 
     this.checkoutSrv.calculatePrice(filter).then((res: Response) => {
       const result = res.response as PaymentSummary;
+      if (this.paymentSummary && result?.final_price !== this.paymentSummary?.final_price) {
+        this.toastSrv.show(this.translate.get('PRICE_UPDATED'));
+      }
       this.paymentSummary = result;
       this.voucherError = result.voucher_error;
     });
@@ -219,6 +225,12 @@ export class CheckoutPage implements OnInit {
       date: moment(this.selectedDate).format('YYYY-MM-DD'),
     };
 
+    if (this.timeList) {
+      this.timeList.forEach((time) => {
+        time.active = false;
+      });
+    }
+
     this.settingSrv
       .getDeliveryTime(params)
       .then((res: Response) => {
@@ -237,6 +249,11 @@ export class CheckoutPage implements OnInit {
 
   radioChanged(value: any) {
     this.deliveryNow = value === 'deliver_now';
+    this.getPriceSummary();
+
+    if (!this.deliveryNow) {
+      this.getDeliveryTime();
+    }
   }
   pay() {
     const timeSelected = this.timeList.filter((time) => {
@@ -261,5 +278,21 @@ export class CheckoutPage implements OnInit {
         queryParams,
       });
     }
+  }
+
+  async presentDeliveryInfo(type: string) {
+    const message =
+      type === 'now' ? this.translate.get('DELIVERY_NOW_INFO') : this.translate.get('DELIVERY_LATER_INFO');
+    const popover = await this.popoverCtrl.create({
+      component: PopoverInfoComponent,
+      cssClass: 'popover-info',
+      componentProps: {
+        message,
+      },
+      // translucent: true,
+    });
+    await popover.present();
+
+    // const { role } = await popover.onDidDismiss();
   }
 }

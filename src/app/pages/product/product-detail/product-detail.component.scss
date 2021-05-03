@@ -28,7 +28,6 @@ ion-header {
     line-height: 1.5;
     letter-spacing: normal;
     color: #262626;
-    text-transform: capitalize;
   }
   &-name {
     font-size: 21px;
@@ -36,7 +35,6 @@ ion-header {
     line-height: 1;
     letter-spacing: normal;
     color: #262626;
-    text-transform: capitalize;
   }
   &-size {
     font-size: 15px !important;
@@ -86,10 +84,10 @@ ion-header {
   top: 6px;
   height: 25px;
   right: 16px;
-  .scan-icon {
-    font-size: 25px;
-    height: 100%;
-  }
+  // .scan-icon {
+  //   font-size: 25px;
+  //   height: 100%;
+  // }
 }
 
 ion-searchbar.custom-search {
@@ -97,23 +95,23 @@ ion-searchbar.custom-search {
   padding: 12px !important;
   margin-top: -1px;
 
-  .searchbar-input-container input {
-  padding-left: 30px !important;
-    border: solid 0.5px #e5e5e5 !important;
-    border-radius: 5px;
-    background-color: white;
-  }
+  // .searchbar-input-container input {
+  //   padding-left: 30px !important;
+  //   border: solid 0.5px #e5e5e5 !important;
+  //   border-radius: 5px;
+  //   background-color: white;
+  // }
 }
 
 .disabled {
   opacity: 0.5;
 
-  &>.out-of-stock {
+  & > .out-of-stock {
     position: absolute;
     font-size: 15px;
     font-weight: 600;
     border-radius: 15px;
-    background-color: rgba(38,38,38,0.7);
+    background-color: rgba(38, 38, 38, 0.7);
     padding: 10px;
     color: black;
     left: 0;

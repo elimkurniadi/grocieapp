@@ -39,6 +39,17 @@ export class HomePage implements OnInit {
       if (token) {
         this.verifyEmail(token);
       }
+
+      const notifTitle = param.notifTitle;
+      const notifBody = param.notifBody;
+      if (notifTitle && notifBody) {
+        this.presentToast(notifTitle, notifBody);
+      }
+
+      const openNotif = param.openNotif;
+      if (openNotif) {
+        this.openNotification();
+      }
     });
   }
 
@@ -48,10 +59,10 @@ export class HomePage implements OnInit {
     this.activitySrv.registerPush();
   }
 
-  async presentToast() {
+  async presentToast(title: string, body: string) {
     const toast = await this.toastCtrl.create({
-      header: `Push notification`,
-      message: 'Your settings have been saved.',
+      header: title,
+      message: body,
       position: 'top',
       color: 'limegreen',
       buttons: [
@@ -59,10 +70,10 @@ export class HomePage implements OnInit {
           side: 'end',
           text: 'Ok',
           handler: () => {
-            console.log('Favorite clicked');
-          }
-        }
-      ]
+            this.openNotification();
+          },
+        },
+      ],
     });
     toast.present();
   }

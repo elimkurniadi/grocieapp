@@ -257,5 +257,8 @@
   "UPDATE_KLIKGO": "Update Klikgo",
   "UPDATE_APPS_TITLE": "App Update",
   "UPDATE_APPS_MESSAGE": "Update Klikgo to enjoy new features, bug fixes, performance improvements, enhancements, minor improvements",
-  "EDIT" : "Edit"
+  "EDIT": "Edit",
+  "PRICE_UPDATED": "Delivery fee has been adjusted",
+  "DELIVERY_LATER_INFO": "Your order will proceed for delivery within the soonest available or preferred selected date and time range.",
+  "DELIVERY_NOW_INFO": "Your order will proceed for delivery immediately once order preparation is completed. Order is estimated to arrive within less than 45 mins under normal traffic condition."
 }

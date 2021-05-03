@@ -246,5 +246,8 @@
   "UPDATE_KLIKGO": "Update Klikgo",
   "UPDATE_APPS_TITLE": "App Update",
   "UPDATE_APPS_MESSAGE": "Perbarui Klikgo untuk menikmati fitur-fitur baru, perbaikan bug, peningkatan kinerja, peningkatan, peningkatan kecil",
-  "EDIT" : "Ubah"
+  "EDIT": "Ubah",
+  "PRICE_UPDATED": "Biaya pengiriman telah disesuaikan",
+  "DELIVERY_LATER_INFO": "Pesanan Anda akan diproses untuk pengiriman dalam rentang tanggal dan waktu yang paling cepat tersedia atau yang dipilih",
+  "DELIVERY_NOW_INFO": "Pesanan Anda akan segera diproses untuk pengiriman setelah persiapan pesanan selesai. Pesanan diperkirakan tiba dalam waktu kurang dari 45 menit dalam kondisi lalu lintas normal."
 }

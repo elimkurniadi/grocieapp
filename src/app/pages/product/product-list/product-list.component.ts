@@ -23,6 +23,7 @@ export class ProductListComponent implements OnInit {
   order: Sort;
   filter: any;
   productType: string;
+  brandImage: string;
 
   constructor(
     private router: Router,
@@ -111,6 +112,11 @@ export class ProductListComponent implements OnInit {
       .then((res: ResponsePagination) => {
         const products = res.response.rows as Product[];
         this.products = products;
+
+        // handle checking brand image
+        if (res.response.image_url) {
+          this.brandImage = res.response.image_url;
+        }
       })
       .catch((err) => {
         const error = err.error.error;

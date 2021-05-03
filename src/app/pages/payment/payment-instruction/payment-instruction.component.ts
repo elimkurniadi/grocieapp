@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentSummary, Response } from '@shared/models';
-import { CacheService, ToastService } from '@shared/services';
+import { CacheService, GlobalService, ToastService } from '@shared/services';
 import { CheckoutService, TransactionService } from '@shared/services/modules';
 
 @Component({
@@ -19,6 +19,7 @@ export class PaymentInstructionComponent implements OnInit {
   shippingDate: string;
   shippingTime: string;
   paymentSummary: PaymentSummary;
+  isOnFetch = false;
 
   constructor(
     private router: Router,
@@ -26,7 +27,8 @@ export class PaymentInstructionComponent implements OnInit {
     private checkoutSrv: CheckoutService,
     private transactionSrv: TransactionService,
     private toastSrv: ToastService,
-    private cache: CacheService
+    private cache: CacheService,
+    private gs: GlobalService
   ) {
     this.route.queryParams.subscribe((param) => {
       this.isNow = param.is_now === 'true';
@@ -49,6 +51,16 @@ export class PaymentInstructionComponent implements OnInit {
 
   ngOnInit() {
     this.getPriceSummary();
+  }
+
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
   }
 
   getPriceSummary() {

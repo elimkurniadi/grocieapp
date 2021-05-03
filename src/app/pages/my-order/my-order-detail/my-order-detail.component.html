@@ -168,7 +168,7 @@
           <ion-text color="success" class="summary-value green">- {{ order?.product_discount | currency: 'Rp. ':'symbol':'1.0-0' }} </ion-text>
         </ion-col>
       </ion-row> -->
-      <ion-row *ngIf="+order?.voucher_discount > 0 || +order?.product_discount > 0">
+      <ion-row *ngIf="+order?.voucher_discount > 0">
         <ion-col size="6">
           <ion-text class="summary-label green">
             {{ 'DISCOUNT' | translate }}

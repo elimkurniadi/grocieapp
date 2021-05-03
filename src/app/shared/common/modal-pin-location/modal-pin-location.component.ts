@@ -1,17 +1,17 @@
-import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { ModalController } from '@ionic/angular';
 
-declare var google: any;
+declare const google: any;
 @Component({
   selector: 'app-modal-pin-location',
   templateUrl: './modal-pin-location.component.html',
   styleUrls: ['./modal-pin-location.component.scss'],
 })
-export class ModalPinLocationComponent implements OnInit {
+export class ModalPinLocationComponent implements OnInit, AfterViewInit {
   @ViewChild('map', { static: false }) mapElement: ElementRef;
+  @ViewChild('pacInput', { read: ElementRef }) pacInput: ElementRef<HTMLIonInputElement>;
   @Input() longitude: any;
   @Input() latitude: any;
 
@@ -34,8 +34,12 @@ export class ModalPinLocationComponent implements OnInit {
     this.buildForm();
   }
 
-  ngOnInit() {
-    this.initMap();
+  ngOnInit() {}
+
+  ngAfterViewInit() {
+    this.initMap().then(() => {
+      this.initSearchbox();
+    });
   }
 
   buildForm() {
@@ -146,6 +150,33 @@ export class ModalPinLocationComponent implements OnInit {
     this.dismiss({
       coordinate: this.fg.value,
       addressData: this.geoAddressData,
+    }).then(() => {});
+  }
+
+  initSearchbox() {
+    this.pacInput.nativeElement.getInputElement().then((res) => {
+      const input = res;
+      const autoComOptions = {
+        componentRestrictions: { country: 'id' },
+        fields: ['formatted_address', 'geometry', 'name'],
+        origin: this.map.getCenter(),
+        strictBounds: false,
+        types: ['establishment'],
+      };
+      const autocomplete = new google.maps.places.Autocomplete(input, autoComOptions);
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        if (!place.geometry || !place.geometry.location) {
+          return;
+        }
+
+        if (place.geometry.viewport) {
+          this.map.fitBounds(place.geometry.viewport);
+        } else {
+          this.map.setCenter(place.geometry.location);
+          this.map.setZoom(17);
+        }
+      });
     });
   }
 }

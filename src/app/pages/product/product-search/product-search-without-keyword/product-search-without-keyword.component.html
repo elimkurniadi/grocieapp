@@ -1,5 +1,5 @@
 <ion-row class="ion-padding-vertical ion-align-items-center" *ngIf="recentSearches && recentSearches.length">
-  <ion-col size="7" class="ion-padding-start padding-category" style="padding-top:0px">
+  <ion-col size="7" class="ion-padding-start padding-category" style="padding-top: 0px">
     <ion-text class="search-title"> {{ 'RECENT_SEARCHES' | translate }}</ion-text>
   </ion-col>
   <ion-col size="5" class="ion-padding-end ion-text-right">
@@ -25,7 +25,7 @@
   </ion-col>
   <ion-col size="12" class="padding-category">
     <ion-chip
-      style="border: 1px solid #99cc33; background: white; text-transform: capitalize"
+      style="border: 1px solid #99cc33; background: white"
       *ngFor="let item of categories"
       (click)="goToProductByCategory(item?.category_id)"
     >

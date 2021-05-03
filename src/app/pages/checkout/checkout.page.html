@@ -74,8 +74,10 @@
               [checked]="canDeliverNow"
             />
             <label class="radio-label" [ngClass]="{ 'text-muted' : !canDeliverNow }"
-              >{{'DELIVER_NOW' | translate}}</label
-            ><br />
+              >{{'DELIVER_NOW' | translate}}
+            </label>
+            <ion-icon name="information-circle" color="success" (click)="presentDeliveryInfo('now')"></ion-icon>
+            <br />
             <div style="font-size: 11px; padding-left: 24px" *ngIf="!canDeliverNow">
               <span style="color: #f64740">{{'NOW_CLOSED' | translate}}</span>
               <span class="text-muted">
@@ -85,7 +87,7 @@
           </div>
           <div>
             <ion-row class="ion-align-items-center">
-              <ion-col size="6" class="ion-no-padding">
+              <ion-col size="7" class="ion-no-padding">
                 <input
                   class="radio-input"
                   type="radio"
@@ -95,8 +97,9 @@
                   [checked]="!canDeliverNow"
                 />
                 <label class="radio-label">{{'SCHEDULE_FOR_LATER' | translate}}</label>
+                <ion-icon name="information-circle" color="success" (click)="presentDeliveryInfo('later')"></ion-icon>
               </ion-col>
-              <ion-col size="6" class="ion-text-right">
+              <ion-col size="5" class="ion-text-right">
                 <ion-button
                   class="btn-selected-date"
                   expand="block"

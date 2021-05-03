@@ -60,7 +60,7 @@ ion-header {
     font-weight: bold;
   }
   ion-input.has-focus {
-    outline: auto 1px #99cc33 !important;
+    border: 2px solid #99cc33 !important;
   }
   ion-input.default-theme,
   ion-textarea,
@@ -76,6 +76,7 @@ ion-header {
       color: #353535;
     }
   }
+
   ion-icon {
     position: absolute;
     // background: var(--ion-color-light);
@@ -210,6 +211,10 @@ ion-item {
   position: absolute;
   display: block;
   border-radius: 0.5em;
+}
+
+.popover-info .popover-content {
+  height: 100px;
 }
 
 .font-md {

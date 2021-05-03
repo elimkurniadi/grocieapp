@@ -13,6 +13,9 @@ import {
 } from '@capacitor/core';
 
 import { FCM } from '@capacitor-community/fcm';
+import { ToastService } from '../toast.service';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 const { PushNotifications } = Plugins;
 const fcm = new FCM();
@@ -21,7 +24,13 @@ const fcm = new FCM();
   providedIn: 'root',
 })
 export class ActivityService {
-  constructor(private api: ApiService, private gs: GlobalService, private userSrv: UserService) {}
+  constructor(
+    private api: ApiService,
+    private gs: GlobalService,
+    private userSrv: UserService,
+    private router: Router,
+    private toastCtrl: ToastController
+  ) {}
 
   getNotificationList(pagination?: Page, ordering?: Sort): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -71,7 +80,9 @@ export class ActivityService {
         });
       }
     });
+  }
 
+  initPushListener() {
     PushNotifications.addListener('registration', (token: PushNotificationToken) => {
       this.gs.log('My token: ' + JSON.stringify(token));
     });
@@ -82,6 +93,8 @@ export class ActivityService {
 
     PushNotifications.addListener('pushNotificationReceived', async (notification: PushNotification) => {
       this.gs.log('Push received: ' + JSON.stringify(notification));
+      // this.router.navigateByUrl(`/tabs/home?notifTitle=${notification.title}&notifBody=${notification.body}`);
+      this.presentToast(notification.title, notification.body);
     });
 
     PushNotifications.addListener(
@@ -89,10 +102,32 @@ export class ActivityService {
       async (notification: PushNotificationActionPerformed) => {
         const data = notification.notification.data;
         this.gs.log('Action performed: ' + JSON.stringify(notification.notification));
+        this.router.navigateByUrl(`/tabs/home?openNotif=true`);
         // if (data.detailsId) {
         //   this.router.navigateByUrl(`/home/${data.detailsId}`);
         // }
       }
     );
   }
+
+  async presentToast(title: string, body: string) {
+    const toast = await this.toastCtrl.create({
+      header: title,
+      message: body,
+      position: 'top',
+      color: 'limegreen',
+      duration: 3000,
+      buttons: [
+        {
+          side: 'end',
+          text: 'Ok',
+          handler: () => {
+            this.router.navigateByUrl(`/tabs/home?openNotif=true`);
+          },
+        },
+      ],
+    });
+    toast.present();
+  }
+  
 }

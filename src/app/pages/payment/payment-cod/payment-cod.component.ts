@@ -23,6 +23,7 @@ export class PaymentCodComponent implements OnInit {
   shippingTime: string;
   paymentSummary: PaymentSummary;
   amountCod: any;
+  isOnFetch = false;
 
   constructor(
     private validatorSrv: RxValidatorService,
@@ -57,6 +58,16 @@ export class PaymentCodComponent implements OnInit {
   ngOnInit() {
     this.buildCodForm();
     this.getPriceSummary();
+  }
+
+  ionViewDidEnter() {
+    this.observeFetchState();
+  }
+
+  observeFetchState() {
+    this.gs.observeOnFetch().subscribe((value: boolean) => {
+      this.isOnFetch = value;
+    });
   }
 
   buildCodForm() {
