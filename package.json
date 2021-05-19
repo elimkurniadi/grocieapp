@@ -7,6 +7,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "npx jetifier && ng build && npx cap sync android && npx cap open android",
+    "build:staging": "npx jetifier && ng build --configuration staging && npx cap sync android && npx cap open android",
     "test": "ng test --coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
