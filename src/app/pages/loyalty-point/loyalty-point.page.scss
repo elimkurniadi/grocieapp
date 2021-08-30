@@ -1,0 +1,37 @@
+.padding-point {
+  padding: 10px;
+}
+
+.point {
+  &-label {
+    padding-left: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #353535;
+  }
+
+  &-value {
+    font-size: 12px;
+    font-weight: 500;
+    color: #353535;
+  }
+
+  &-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.subtitle {
+  &-point {
+    font-size: 14px;
+    font-weight: 600;
+    color: #353535;
+  }
+}
+
+.img-banner {
+  width: 100%;
+  height: 121px;
+  object-fit: cover;
+}

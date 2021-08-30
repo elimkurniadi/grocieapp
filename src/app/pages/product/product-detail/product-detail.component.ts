@@ -44,7 +44,7 @@ export class ProductDetailComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewDidEnter() {
     this.observeFetchState();
@@ -153,5 +153,17 @@ export class ProductDetailComponent implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  get productTagBg() {
+    return (
+      'background: rgba(' +
+      this.gs.hexToRgb(this.productData?.product_tag?.color).r +
+      ',' +
+      this.gs.hexToRgb(this.productData?.product_tag?.color).g +
+      ',' +
+      this.gs.hexToRgb(this.productData?.product_tag?.color).b +
+      ', 0.2) !important'
+    );
   }
 }

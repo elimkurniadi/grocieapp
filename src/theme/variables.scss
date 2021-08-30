@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
@@ -20,13 +19,15 @@ $app-warn: mat-palette($mat-red);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$app-theme: mat-light-theme((
-  color: (
-    primary: $app-primary,
-    accent: $app-accent,
-    warn: $app-warn,
+$app-theme: mat-light-theme(
+  (
+    color: (
+      primary: $app-primary,
+      accent: $app-accent,
+      warn: $app-warn,
+    ),
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -143,7 +144,30 @@ $app-theme: mat-light-theme((
   --ion-color-pinkish-gray-shade: #b3b3b3;
   --ion-color-pinkish-gray-tint: #d0d0d0;
 
+  --ion-color-sunflower-yellow: #ffcc00;
+  --ion-color-sunflower-yellow-rgb: 255, 204, 0;
+  --ion-color-sunflower-yellow-contrast: #000000;
+  --ion-color-sunflower-yellow-contrast-rgb: 0, 0, 0;
+  --ion-color-sunflower-yellow-shade: #e0b400;
+  --ion-color-sunflower-yellow-tint: #ffd11a;
+
+  --ion-color-white: #ffffff;
+  --ion-color-white-rgb: 255, 255, 255;
+  --ion-color-white-contrast: #000000;
+  --ion-color-white-contrast-rgb: 0, 0, 0;
+  --ion-color-white-shade: #e0e0e0;
+  --ion-color-white-tint: #ffffff;
+
   --ion-font-family: 'Metropolis';
+}
+
+.ion-color-sunflower-yellow {
+  --ion-color-base: var(--ion-color-sunflower-yellow);
+  --ion-color-base-rgb: var(--ion-color-sunflower-yellow-rgb);
+  --ion-color-contrast: var(--ion-color-sunflower-yellow-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-sunflower-yellow-contrast-rgb);
+  --ion-color-shade: var(--ion-color-sunflower-yellow-shade);
+  --ion-color-tint: var(--ion-color-sunflower-yellow-tint);
 }
 
 .ion-color-limegreen {
@@ -162,6 +186,15 @@ $app-theme: mat-light-theme((
   --ion-color-contrast-rgb: var(--ion-color-pinkish-gray-contrast-rgb);
   --ion-color-shade: var(--ion-color-pinkish-gray-shade);
   --ion-color-tint: var(--ion-color-pinkish-gray-tint);
+}
+
+.ion-color-white {
+  --ion-color-base: var(--ion-color-white);
+  --ion-color-base-rgb: var(--ion-color-white-rgb);
+  --ion-color-contrast: var(--ion-color-white-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-white-contrast-rgb);
+  --ion-color-shade: var(--ion-color-white-shade);
+  --ion-color-tint: var(--ion-color-white-tint);
 }
 
 // @media (prefers-color-scheme: dark) {
@@ -315,5 +348,11 @@ $app-theme: mat-light-theme((
 //   }
 // }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}

@@ -2,14 +2,31 @@
   <ion-card class="ion-border ion-no-margin ion-margin-bottom card-address">
     <ion-card-content>
       <ion-row class="ion-align-items-center">
-        <ion-col [size]="address?.is_default ? '8' : '12'" class="ion-no-padding">
+        <ion-col
+          [size]="
+            (address?.is_default && !selectedAddressId) ||
+            (selectedAddressId && address?.address_id == selectedAddressId)
+              ? '8'
+              : '12'
+          "
+          class="ion-no-padding"
+        >
           <span class="text-address-name">
             <b>{{ address?.address_name }}</b>
           </span>
         </ion-col>
-        <ion-col size="4" class="ion-text-right ion-no-padding" *ngIf="address?.is_default">
+        <ion-col size="4" class="ion-text-right ion-no-padding" *ngIf="address?.is_default && !selectedAddressId">
           <ion-text size="small" class="text-chip">
             <small>{{ isSelectMode ? ('SELECTED' | translate) : ('PRIMARY' | translate) }}</small>
+          </ion-text>
+        </ion-col>
+        <ion-col
+          size="4"
+          class="ion-text-right ion-no-padding"
+          *ngIf="selectedAddressId && address?.address_id == selectedAddressId"
+        >
+          <ion-text size="small" class="text-chip">
+            <small>{{ 'SELECTED' | translate }}</small>
           </ion-text>
         </ion-col>
       </ion-row>
@@ -49,7 +66,24 @@
             {{ 'EDIT_ADDRESS' | translate }}
           </ion-button>
         </ion-col>
-        <ion-col size="12" *ngIf="!address?.is_default" class="ion-no-padding">
+
+        <ion-col
+          size="12"
+          *ngIf="isSelectMode && selectedAddressId && address?.address_id != selectedAddressId"
+          class="ion-no-padding"
+        >
+          <ion-button
+            expand="block"
+            fill="outline"
+            color="primary"
+            size="small"
+            (click)="setAsDefaultAddress(address?.address_id)"
+          >
+            {{ isSelectMode ? ('USE_ADDRESS' | translate) : ('SET_DEFAULT' | translate) }}
+          </ion-button>
+        </ion-col>
+
+        <ion-col size="12" *ngIf="!isSelectMode && !address?.is_default" class="ion-no-padding">
           <ion-button
             expand="block"
             fill="outline"

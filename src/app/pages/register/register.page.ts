@@ -16,7 +16,7 @@ import * as moment from 'moment';
 })
 export class RegisterPage implements OnInit, OnDestroy {
   fg: FormGroup;
-  currDate = moment(new Date()).format('YYYY-MM-DD');
+  currDate = moment(new Date()).tz(this.gs.timezoneName).format('YYYY-MM-DD');
   passwordIsShow = false;
   confPasswordIsShow = false;
   isOnFetch = false;
@@ -85,7 +85,7 @@ export class RegisterPage implements OnInit, OnDestroy {
   }
 
   onDateSelect(event) {
-    const formatted = moment(event).format('YYYY-MM-DD');
+    const formatted = moment(event).tz(this.gs.timezoneName).format('YYYY-MM-DD');
     this.fg.controls.birth_date.patchValue(formatted);
   }
 

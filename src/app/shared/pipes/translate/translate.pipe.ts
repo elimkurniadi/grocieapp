@@ -8,11 +8,11 @@ import { TranslateService } from './translate.service';
 export class TranslatePipe implements PipeTransform {
   constructor(private translator: TranslateService) {}
 
-  transform(value: any, args?: any): any {
+  transform(value: any, args?: object): any {
     if (!value) {
       return;
     }
-    const ret = this.translator.get(value);
-    return ret ? ret : value
+    const ret = this.translator.get(value, args);
+    return ret ? ret : value;
   }
 }

@@ -22,9 +22,18 @@ export class TranslateService {
     this.languagesObject = require(`../../../i18n/${value}.json`);
   }
 
-  get(key) {
+  get(key, args?: object) {
     try {
-      return this.languagesObject[key];
+      let msg = this.languagesObject[key];
+
+      for (const hashKey in args) {
+        if (args.hasOwnProperty(hashKey)) {
+          const argKey = `%${hashKey}%`;
+          const argValue = args[hashKey];
+          msg = msg.replaceAll(argKey, argValue);
+        }
+      }
+      return msg;
     } catch (error) {}
   }
 }

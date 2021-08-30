@@ -1,5 +1,5 @@
 .img-header {
-  height: 203px;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -11,4 +11,44 @@
   margin: 14px 14px;
   font-size: 14px;
   font-weight: bold;
+}
+
+.voucher {
+  &-header {
+    height: 203px;
+  }
+  &-background {
+    background: #ffcc00;
+  }
+  &-label {
+    font-size: 12px;
+    color: #454545;
+  }
+  &-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #454545;
+  }
+}
+
+.validity {
+  &-label {
+    font-size: 12px;
+    color: #454545;
+  }
+  &-value {
+    font-size: 10px;
+    color: #454545;
+  }
+}
+
+.description {
+  &-label {
+    font-size: 12px;
+    color: #454545;
+  }
+  &-value {
+    font-size: 10px;
+    color: #000000;
+  }
 }

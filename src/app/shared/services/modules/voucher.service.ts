@@ -24,6 +24,21 @@ export class VoucherService {
     });
   }
 
+  getListLoyalty(page?: Page, ordering?: Sort): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData('voucher/loyalty', page, ordering);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
   getListByCode(code: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData(`voucher/code/${code}`);
@@ -42,6 +57,21 @@ export class VoucherService {
   getDetail(id?: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData(`voucher/${id}`);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: Response) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  buyVoucher(id?: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.postData(`voucher/buy/${id}`);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: Response) => {

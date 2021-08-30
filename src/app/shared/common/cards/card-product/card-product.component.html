@@ -5,8 +5,13 @@
   [ngClass]="{ disabled: product?.stock <= 0 }"
 >
   <ion-card-header class="ion-no-padding link">
-    <img [src]="product?.image_url" class="product-img full-width" *ngIf="product?.image_url" />
-    <img src="https://via.placeholder.com/200.png" class="product-img full-width" *ngIf="!product?.image_url" />
+    <img
+      [src]="product?.image_url"
+      class="product-img full-width"
+      *ngIf="product?.image_url"
+      onerror="this.onerror=null;this.src='assets/images/placeholder-product.svg'"
+    />
+    <img src="assets/images/placeholder-product.svg" class="product-img full-width" *ngIf="!product?.image_url" />
   </ion-card-header>
 
   <ion-card-content class="ion-no-padding ion-text-left">
@@ -16,8 +21,19 @@
       </ion-col>
     </ion-row> -->
     <ion-row>
+      <ion-col *ngIf="product?.product_tag?.name !== null">
+        <span class="tag-background" [style]="productTagBg">
+          <ion-icon name="pricetag" class="tag-text" [ngStyle]="{ color: product?.product_tag?.color }"></ion-icon>
+          <ion-text class="tag-text" [ngStyle]="{ color: product?.product_tag?.color }">
+            {{ product?.product_tag?.name }}
+          </ion-text>
+        </span>
+      </ion-col>
+      <ion-col *ngIf="product?.product_tag?.name == null"> &nbsp; </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col class="height-ellipsis">
-        <ion-text class="product-name">{{ product?.name }} </ion-text>
+        <ion-text class="product-name">{{ product?.name | titlecase }} </ion-text>
       </ion-col>
     </ion-row>
     <ion-row>

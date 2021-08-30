@@ -13,7 +13,11 @@
 </ion-row>
 <ion-row class="ion-no-padding" *ngIf="bundling.image_url">
   <ion-col class="ion-no-padding">
-    <img class="img-banner" [src]="bundling.image_url" />
+    <img
+      class="img-banner"
+      [src]="bundling.image_url"
+      onerror="this.onerror=null;this.src='assets/images/placeholder-banner.png'"
+    />
   </ion-col>
 </ion-row>
 <ion-row [ngClass]="{ 'ion-padding-top': bundling.image_url }">

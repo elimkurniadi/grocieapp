@@ -157,7 +157,7 @@ ion-item {
   border-radius: 0.5em;
 }
 .modal-confirm .modal-wrapper {
-  height: 23%;
+  height: 27%;
   width: 80%;
   position: absolute;
   display: block;
@@ -198,6 +198,14 @@ ion-item {
 
 .modal-share-app .modal-wrapper {
   height: 70%;
+  width: 80%;
+  position: absolute;
+  display: block;
+  border-radius: 0.5em;
+}
+
+.modal-voucher-success .modal-wrapper {
+  height: 60%;
   width: 80%;
   position: absolute;
   display: block;
@@ -500,4 +508,24 @@ ion-toolbar.transparent {
 
 .pt-small {
   padding-top: 4px;
+}
+
+.voucher-confirm-message {
+  font-weight: 500;
+  color: #353535;
+}
+
+ion-searchbar.search-store {
+  .searchbar-input-container input {
+    padding-left: 16px !important;
+    border-radius: 4px;
+    border: solid 0.5px #e5e5e5;
+    background-color: white;
+    font-size: 13px !important;
+  }
+
+  ion-icon {
+    right: 16px !important;
+    left: auto !important;
+  }
 }

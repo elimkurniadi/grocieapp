@@ -33,7 +33,10 @@
     <ion-row class="ion-align-items-center ion-padding-horizontal">
       <ion-col size="6"><span class="text-address-info">{{'DELIVERY_LOCATION' | translate}}</span></ion-col>
       <ion-col size="6" class="ion-text-right">
-        <small class="link delivery-location-btn" [routerLink]="['/address']" [queryParams]="{mode: 'select'}"
+        <small
+          class="link delivery-location-btn"
+          [routerLink]="['/address']"
+          [queryParams]="{mode: 'select', address_id: defaultAddress?.address_id}"
           >{{"CHANGE_DELIVERY_LOCATION" | translate}}</small
         >
       </ion-col>
@@ -177,7 +180,9 @@
         Rp. {{ paymentSummary?.delivery_fee | number: '1.0-0':'id' }}
       </ion-col>
       <ion-col size="6" *ngIf="paymentSummary?.discount > 0">
-        <span class="text-payment-info text-discount">{{'DISCOUNT' |translate}}</span>
+        <span class="text-payment-info text-discount"
+          >{{ ('PROMO' | translate) + ' ( ' + voucher?.voucher_code + ' )' }}</span
+        >
       </ion-col>
       <ion-col size="6" class="ion-text-right text-payment-price text-discount" *ngIf="paymentSummary?.discount > 0">
         - Rp. {{ paymentSummary?.discount | number: '1.0-0':'id' }}

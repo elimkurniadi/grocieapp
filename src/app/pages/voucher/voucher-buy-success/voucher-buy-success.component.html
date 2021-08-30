@@ -1,0 +1,43 @@
+<ion-header class="ion-no-border voucher-header">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="h-100 ion-align-items-center ion-justify-content-center ion-text-center">
+    <ion-col size="12" class="ion-text-center ion-padding-vertical">
+      <ion-row>
+        <ion-col size="12">
+          <img src="assets/images/ic_voucher_success.svg" />
+        </ion-col>
+
+        <ion-col size="12" class="ion-text-center">
+          <ion-text class="voucher-title">
+            {{ 'VOUCHER_SUCCESS_TITLE' | translate }}
+          </ion-text>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center">
+          <ion-text
+            class="voucher-message"
+            innerHtml="{{ 'VOUCHER_SUCCESS_MESSAGE' | translate: { email: userEmail } }}"
+          >
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-row class="ion-padding">
+    <ion-col class="ion-text-center">
+      <ion-button color="success" shape="round" expand="block" (click)="dismiss()">
+        {{ 'OK' | translate }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -13,7 +13,9 @@
 
   <ion-toolbar *ngIf="!search" mode="ios">
     <ion-buttons slot="start" mode="md">
-      <ion-back-button icon="chevron-back" defaultHref="/tabs/home"> </ion-back-button>
+      <ion-button (click)="goBack()">
+        <ion-icon name="chevron-back-outline" slot="icon-only" color="dark"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>{{ title | titlecase }}</ion-title>
     <ion-buttons slot="end">
@@ -27,9 +29,26 @@
   <ion-grid class="ion-no-padding">
     <ion-row class="ion-no-padding" *ngIf="!search && category">
       <ion-col class="ion-no-padding">
-        <img [src]="category?.image_url" class="full-width img-header" />
+        <img
+          [src]="category?.image_url"
+          class="full-width img-header"
+          onerror="this.onerror=null;this.src='assets/images/placeholder-banner.png'"
+        />
       </ion-col>
     </ion-row>
+
+    <ion-slides pager class="ion-padding-bottom" *ngIf="category && categoriesChunk && categoriesChunk.length">
+      <ion-slide *ngFor="let categories of categoriesChunk">
+        <ion-grid>
+          <ion-row class="ion-no-padding">
+            <ion-col class="ion-no-padding" size="4" *ngFor="let item of categories">
+              <app-card-subcategory [category]="item"></app-card-subcategory>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+    </ion-slides>
+
     <ion-row class="ion-no-padding" *ngIf="brandImage">
       <ion-col class="ion-no-padding">
         <img [src]="brandImage" class="full-width img-header" />
@@ -47,22 +66,24 @@
   </ion-grid>
 </ion-content>
 
-<ion-footer>
-  <ion-row class="padding-footer">
-    <ion-col size="5.5" class="ion-text-center">
-      <ion-text color="success" (click)="showSort()">
-        <ion-icon name="funnel"></ion-icon>
-        {{ 'SORT' | translate }}
-      </ion-text>
-    </ion-col>
-    <ion-col size="1" class="ion-text-center">
-      <ion-text color="success" class="divider"> </ion-text>
-    </ion-col>
-    <ion-col size="5.5" class="ion-text-center">
-      <ion-text color="success" (click)="showFilter()">
-        <ion-icon name="funnel"></ion-icon>
-        {{ 'FILTER' | translate }}
-      </ion-text>
-    </ion-col>
-  </ion-row>
+<ion-footer color="light" [translucent]="false" [mode]="'md'">
+  <ion-grid style="background: white">
+    <ion-row class="padding-footer">
+      <ion-col size="5.5" class="ion-text-center">
+        <ion-text color="success" (click)="showSort()">
+          <ion-icon name="funnel"></ion-icon>
+          {{ 'SORT' | translate }}
+        </ion-text>
+      </ion-col>
+      <ion-col size="1" class="ion-text-center">
+        <ion-text color="success" class="divider"> </ion-text>
+      </ion-col>
+      <ion-col size="5.5" class="ion-text-center">
+        <ion-text color="success" (click)="showFilter()">
+          <ion-icon name="funnel"></ion-icon>
+          {{ 'FILTER' | translate }}
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-footer>

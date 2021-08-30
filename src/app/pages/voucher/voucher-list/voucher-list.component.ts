@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Page, Response, ResponsePagination, Voucher } from '@shared/models';
-import { ToastService } from '@shared/services';
+import { GlobalService, ToastService } from '@shared/services';
 import { VoucherService } from '@shared/services/modules';
 
 @Component({
@@ -11,19 +12,49 @@ import { VoucherService } from '@shared/services/modules';
 export class VoucherListComponent implements OnInit {
   vouchers: Voucher[];
   voucherCount: number;
+  voucherType: string;
+  redirectBackUrl: string;
+  fetching = false;
+
   code: string;
 
   page: Page;
 
-  constructor(private voucherSrv: VoucherService, private toastSrv: ToastService) {
+  constructor(
+    private voucherSrv: VoucherService,
+    private toastSrv: ToastService,
+    private route: ActivatedRoute,
+    private gs: GlobalService
+  ) {
+    this.observeQueryParam();
     this.page = {
       row: 10,
       page: 1,
     };
   }
+  observeQueryParam() {
+    this.route.queryParams.subscribe((param) => {
+      if (param?.type === 'point') {
+        this.voucherType = 'buy';
+        this.redirectBackUrl = '/loyalty-point';
+      } else {
+        this.voucherType = 'redeem';
+        this.redirectBackUrl = '/checkout';
+      }
+    });
+  }
 
   ngOnInit() {
-    this.getVoucher();
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.fetching = true;
+    if (this.voucherType === 'buy') {
+      this.getVoucherLoyalty();
+    } else {
+      this.getVoucher();
+    }
   }
 
   getVoucher() {
@@ -37,10 +68,33 @@ export class VoucherListComponent implements OnInit {
         } else {
           this.vouchers = vouchers;
         }
+
+        this.fetching = false;
       })
       .catch((err) => {
         const error = err.error.error;
         this.toastSrv.show(error.message);
+        this.fetching = false;
+      });
+  }
+  getVoucherLoyalty() {
+    this.voucherSrv
+      .getListLoyalty(this.page)
+      .then((res: Response) => {
+        const vouchers = res.response as Voucher[];
+
+        if (this.vouchers && this.vouchers.length) {
+          this.vouchers.concat(vouchers);
+        } else {
+          this.vouchers = vouchers;
+        }
+
+        this.fetching = false;
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+        this.fetching = false;
       });
   }
 
@@ -57,20 +111,25 @@ export class VoucherListComponent implements OnInit {
         page: 1,
       };
 
-      this.getVoucher();
+      this.fetchData();
     }
   }
 
   getVoucherByCode() {
+    this.fetching = true;
+
     this.voucherSrv
       .getListByCode(this.code)
       .then((res: Response) => {
         const vouchers = res.response as Voucher[];
         this.vouchers = vouchers;
+
+        this.fetching = false;
       })
       .catch((err) => {
         const error = err.error.error;
         this.toastSrv.show(error.message);
+        this.fetching = false;
       });
   }
 
@@ -82,7 +141,7 @@ export class VoucherListComponent implements OnInit {
       if (this.page.page >= Math.ceil(this.voucherCount / this.page.row)) {
         event.target.disabled = true;
       } else {
-        this.getVoucher();
+        this.fetchData();
       }
     }, 500);
   }

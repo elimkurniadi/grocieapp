@@ -90,6 +90,14 @@ const routes: Routes = [
     path: 'set-password',
     loadChildren: () => import('./pages/set-password/set-password.module').then( m => m.SetPasswordPageModule)
   },
+  {
+    path: 'loyalty-point',
+    loadChildren: () => import('./pages/loyalty-point/loyalty-point.module').then( m => m.LoyaltyPointPageModule)
+  },
+  {
+    path: 'store-location',
+    loadChildren: () => import('./pages/store-location/store-location.module').then( m => m.StoreLocationPageModule)
+  },
 ];
 
 @NgModule({

@@ -171,7 +171,7 @@
       <ion-row *ngIf="+order?.voucher_discount > 0">
         <ion-col size="6">
           <ion-text class="summary-label green">
-            {{ 'DISCOUNT' | translate }}
+            {{ ('PROMO' | translate) + ' ( ' + order?.voucher_code + ' )' }}
           </ion-text>
         </ion-col>
         <ion-col size="6" class="ion-text-right">
@@ -240,7 +240,7 @@
         shape="round"
         expand="block"
         (click)="uploadProof()"
-        *ngIf="order?.payment_method_id === '2'"
+        *ngIf="order?.payment_method_id === 2"
       >
         {{ 'UPLOAD_PAYMENT_PROOF' | translate }}
       </ion-button>
@@ -249,7 +249,7 @@
         shape="round"
         expand="block"
         (click)="pay()"
-        *ngIf="order?.payment_method_id === '1'"
+        *ngIf="order?.payment_method_id === 1"
         [disabled]="isOnFetch"
       >
         {{ 'PROCEED_PAYMENT' | translate }} <ion-spinner *ngIf="isOnFetch" name="dots" color="dark"></ion-spinner>

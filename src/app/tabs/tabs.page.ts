@@ -70,7 +70,7 @@ export class TabsPage implements OnInit {
         this.showExitConfirm();
         processNextHandler();
       } else {
-        this.navCtrl.pop();
+        this.navCtrl.back();
       }
     });
 

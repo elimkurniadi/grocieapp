@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.klikgo.klikgo"
+        applicationId "com.grocie.grocie"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -41,7 +41,7 @@ dependencies {
 configurations {
   implementation.exclude group: 'com.google.zxing'
 }
-  
+
 apply from: 'capacitor.build.gradle'
 
 try {

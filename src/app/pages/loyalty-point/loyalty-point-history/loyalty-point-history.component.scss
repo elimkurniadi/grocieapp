@@ -1,0 +1,15 @@
+.point {
+  &-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #353535;
+  }
+  &-value {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  &-icon {
+    width: 12px;
+  }
+}

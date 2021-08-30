@@ -17,7 +17,6 @@ export class SetPasswordPage implements OnInit {
   fg: FormGroup;
   showCurrPass = false;
   showNewPass = false;
-  forgotToken: string;
 
   constructor(
     private modalCtrl: ModalController,
@@ -32,29 +31,29 @@ export class SetPasswordPage implements OnInit {
     private authSrv: AuthService,
     private navCtrl: NavController
   ) {
+    this.buildForm();
     this.route.params.subscribe((param) => {
-      this.forgotToken = param.token;
       this.checkForgotToken(param.token);
     });
   }
 
-  ngOnInit() {
-    this.buildForm();
-  }
+  ngOnInit() {}
 
   checkForgotToken(token: string) {
     this.authSrv
       .checkForgotToken(token)
       .then((res) => {
-        if (!res) {
+        if (res) {
+          this.fg.patchValue({ token });
+        } else {
           const msg = this.translate.get('INVALID_TOKEN');
           this.toastSrv.show(msg);
           this.navigateToLogin();
         }
       })
       .catch((err) => {
-        const error = err.error.error;
-        this.toastSrv.show(error.message);
+        const message = this.gs.getErrorMessage(err);
+        this.toastSrv.show(message);
       });
   }
 
@@ -70,7 +69,7 @@ export class SetPasswordPage implements OnInit {
         ],
       ],
       confirm_password: [null, [RxwebValidators.required(), RxwebValidators.compare({ fieldName: 'password' })]],
-      token: this.forgotToken,
+      token: null,
     });
   }
 
@@ -82,8 +81,8 @@ export class SetPasswordPage implements OnInit {
           this.presentSuccessModal();
         })
         .catch((err) => {
-          const error = err.error.error;
-          this.toastSrv.show(error.message);
+          const message = this.gs.getErrorMessage(err);
+          this.toastSrv.show(message);
         });
     } else {
       this.gs.markDirtyForm(this.fg);

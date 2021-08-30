@@ -1,0 +1,18 @@
+<ion-card class="ion-text-center" (click)="goToProductByCategory(category?.category_id)">
+  <ion-card-content class="cat-content">
+    <ion-row>
+      <ion-col size="8" class="ion-align-items-center ion-align-self-center ion-text-left height-ellipsis">
+        <ion-text color="success" class="cat-name">{{ category?.name }}</ion-text>
+      </ion-col>
+      <ion-col size="4" class="ion-text-right ion-align-items-center ion-align-self-center">
+        <img
+          [src]="category?.icon_url"
+          class="cat-icon rounded"
+          *ngIf="category?.icon_url"
+          onerror="this.onerror=null;this.src='https://via.placeholder.com/50.png'"
+        />
+        <img src="https://via.placeholder.com/50.png" class="cat-icon rounded" *ngIf="!category?.icon_url" />
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>

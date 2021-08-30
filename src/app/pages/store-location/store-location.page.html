@@ -1,0 +1,51 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-buttons mode="md" class="ion-text-center">
+      <ion-back-button defaultHref="/tabs/home" icon="chevron-back-outline"> </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'STORE_LOCATION' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid class="ion-padding-top">
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding">
+        <ion-label class="ion-padding-start store-title"> {{ 'CHOOSE_STORE_LOCATION' | translate }}</ion-label>
+        <ion-searchbar
+          class="search-store"
+          mode="ios"
+          debounce="500"
+          (ionChange)="searchBranch($event)"
+        ></ion-searchbar>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-no-padding">
+      <ion-col size="12" class="ion-text-center" *ngIf="fetching">
+        <app-store-location-skeleton></app-store-location-skeleton>
+      </ion-col>
+      <ion-col
+        size="12"
+        class="ion-text-center ion-no-padding"
+        *ngIf="!fetching && (!branches || branches && !branches.length)"
+      >
+        <ion-text> {{ 'STORE_NOT_FOUND' | translate }}</ion-text>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" *ngIf="!fetching">
+        <ion-list class="ion-no-padding">
+          <ion-item lines="none" *ngFor="let item of branches" (click)="selectBranch(item)">
+            <ion-icon name="location" style="vertical-align: middle" color="success" class="store-text"></ion-icon>
+            <ion-text color="success" class="store-text"> {{ item.name }}</ion-text>
+            <ion-text color="success" class="store-distance" slot="end" *ngIf="item.distance">
+              {{ item.distance | number: '1.0-0' }} KM
+            </ion-text>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreBranch($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"> </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

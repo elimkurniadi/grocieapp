@@ -70,6 +70,28 @@ export class GlobalService {
     }
     return chunkedArr;
   }
+  getErrorMessage(err: { code?: number; error?: any }) {
+    this.log('err', err, 'error');
+    const resError = err.error;
+    if (err) {
+      if (err.code === 400) {
+        return resError.message;
+      }
+      if (err.code === 0) {
+        return 'Koneksi terputus, silahkan coba lagi';
+      } else {
+        if (isDevMode()) {
+          const errors = _.isArray(err.error.message.errors) ? err.error.message.errors : err.error.message;
+          return _.isArray(err.error.message.errors) ? _.map(errors, 'msg').join(' ') : errors;
+        } else {
+          const errors = _.isArray(err.error.message.errors) ? err.error.message.errors : err.error.message;
+          return _.isArray(err.error.message.errors) ? _.map(errors, 'msg').join(' ') : errors;
+        }
+      }
+    } else {
+      return 'Terjadi kesalahan, silahkan coba lagi nanti';
+    }
+  }
 
   numberWithCommas(x: any) {
     return x
@@ -126,5 +148,20 @@ export class GlobalService {
     Object.keys(formGroup.controls).forEach((key) => {
       formGroup.get(key).markAsDirty();
     });
+  }
+
+  hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
+      : null;
+  }
+
+  get timezoneName() {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
 }

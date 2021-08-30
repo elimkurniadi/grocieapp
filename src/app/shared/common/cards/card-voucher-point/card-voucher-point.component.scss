@@ -1,0 +1,31 @@
+.img-header {
+  width: 100%;
+  height: 158px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  object-fit: cover;
+  // border-radius: 8px;
+}
+
+.card-voucher {
+  border-radius: 8px;
+}
+
+.point-value {
+  font-size: 12px;
+  font-weight: 500;
+  color: #454545;
+}
+
+.text-voucher-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #262626;
+}
+
+.text-voucher-desc {
+  font-size: 12px;
+  line-height: 1.2;
+  color: #262626;
+}

@@ -24,6 +24,11 @@ ion-header {
   line-height: 1.2;
   letter-spacing: normal;
   color: #99cc33;
+  vertical-align: top;
+}
+
+.location-icon {
+  margin-top: 1px;
 }
 
 .notif-icon {
@@ -39,4 +44,28 @@ ion-header {
 
 .toast-header {
   font-weight: bold;
+}
+
+.padding-point {
+  padding: 10px;
+}
+
+.point {
+  &-label {
+    padding-left: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #353535;
+  }
+
+  &-value {
+    font-size: 12px;
+    font-weight: 500;
+    color: #353535;
+  }
+
+  &-icon {
+    width: 16px;
+    height: 16px;
+  }
 }

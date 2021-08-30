@@ -11,9 +11,17 @@ import { VoucherListComponent } from './voucher-list/voucher-list.component';
 import { VoucherDetailComponent } from './voucher-detail/voucher-detail.component';
 import { SharedModule } from '@shared/shared.module';
 import { CardModule } from '@shared/common/cards/card.module';
+import { VoucherBuySuccessComponent } from './voucher-buy-success/voucher-buy-success.component';
+import { VoucherSkeletonComponent } from './voucher-skeleton/voucher-skeleton.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, VoucherPageRoutingModule, SharedModule, CardModule],
-  declarations: [VoucherPage, VoucherListComponent, VoucherDetailComponent],
+  declarations: [
+    VoucherPage,
+    VoucherListComponent,
+    VoucherDetailComponent,
+    VoucherBuySuccessComponent,
+    VoucherSkeletonComponent,
+  ],
 })
 export class VoucherPageModule {}

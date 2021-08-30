@@ -9,33 +9,35 @@ import { HttpIonicService } from './http-ionic.service';
 import { HttpAngularService } from './http-angular.service';
 import { environment } from '@env/environment';
 
-export const genericRetryStrategy = ({
-  maxRetryAttempts = 3,
-  scalingDuration = 5000,
-  excludedStatusCodes = [],
-}: {
-  maxRetryAttempts?: number;
-  scalingDuration?: number;
-  excludedStatusCodes?: number[];
-} = {}) => (attempts: Observable<any>) => {
-  return attempts.pipe(
-    mergeMap((error, i) => {
-      const retryAttempt = i + 1;
-      // if maximum number of retries have been met
-      // or response is a status code we don't wish to retry, throw error
-      if (retryAttempt > maxRetryAttempts || excludedStatusCodes.find((e) => e === error.status)) {
-        return throwError(error);
-      }
-      // console.log(
-      //   `Attempt ${retryAttempt}: retrying in ${retryAttempt *
-      //     scalingDuration}ms`
-      // );
-      // retry after 1s, 2s, etc...
-      return timer(retryAttempt * scalingDuration);
-    })
-    // finalize(() => console.log('We are done!'))
-  );
-};
+export const genericRetryStrategy =
+  ({
+    maxRetryAttempts = 3,
+    scalingDuration = 5000,
+    excludedStatusCodes = [],
+  }: {
+    maxRetryAttempts?: number;
+    scalingDuration?: number;
+    excludedStatusCodes?: number[];
+  } = {}) =>
+  (attempts: Observable<any>) => {
+    return attempts.pipe(
+      mergeMap((error, i) => {
+        const retryAttempt = i + 1;
+        // if maximum number of retries have been met
+        // or response is a status code we don't wish to retry, throw error
+        if (retryAttempt > maxRetryAttempts || excludedStatusCodes.find((e) => e === error.status)) {
+          return throwError(error);
+        }
+        // console.log(
+        //   `Attempt ${retryAttempt}: retrying in ${retryAttempt *
+        //     scalingDuration}ms`
+        // );
+        // retry after 1s, 2s, etc...
+        return timer(retryAttempt * scalingDuration);
+      })
+      // finalize(() => console.log('We are done!'))
+    );
+  };
 
 @Injectable({
   providedIn: 'root',
@@ -107,7 +109,7 @@ export class ApiService {
     model: object = {},
     multipart = false,
     httpHeaders?: any,
-    apiTimeout = 5000
+    apiTimeout = 10000
   ): Observable<any> {
     if (multipart) {
       this.http = this.angularHttp;
@@ -123,7 +125,7 @@ export class ApiService {
     );
   }
 
-  putData(path: string, model: object = {}, multipart = false, httpHeaders?: any, apiTimeout = 5000): Observable<any> {
+  putData(path: string, model: object = {}, multipart = false, httpHeaders?: any, apiTimeout = 10000): Observable<any> {
     if (multipart) {
       this.http = this.angularHttp;
     }
@@ -138,7 +140,7 @@ export class ApiService {
     );
   }
 
-  deleteData(path: string, model: object = {}, httpHeaders?: any, apiTimeout = 5000): Observable<any> {
+  deleteData(path: string, model: object = {}, httpHeaders?: any, apiTimeout = 10000): Observable<any> {
     return this.http.deleteData(environment.api_url + path, model, httpHeaders).pipe(
       catchError((err) => {
         return throwError(err);

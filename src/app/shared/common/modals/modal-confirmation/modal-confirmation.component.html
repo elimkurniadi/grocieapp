@@ -7,7 +7,7 @@
             <ion-icon name="close" color="light" (click)="dismiss()"></ion-icon>
           </ion-col>
         </ion-row>
-        <ion-row class="ion-no-padding">
+        <ion-row class="ion-no-padding" *ngIf="title">
           <ion-col class="ion-no-padding ion-text-center">
             <ion-text class="modal-title"> {{ title }}</ion-text> <br />
           </ion-col>
@@ -16,7 +16,7 @@
     </ion-row>
     <ion-row>
       <ion-col class="ion-text-center ion-padding-horizontal ion-padding-top"
-        ><ion-text class="modal-message ion-padding-vertical">{{ message }}</ion-text></ion-col
+        ><ion-text class="ion-padding-vertical" [ngClass]="messageClass">{{ message }}</ion-text></ion-col
       >
     </ion-row>
   </ion-grid>

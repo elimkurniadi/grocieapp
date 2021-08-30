@@ -9,11 +9,7 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row
-      *ngFor="let item of [1, 2, 3]"
-      class="ion-padding-bottom link"
-      [routerLink]="['/inbox', item, 'detail']"
-    >
+    <ion-row *ngFor="let item of [1, 2, 3]" class="ion-padding-bottom link" [routerLink]="['/inbox', item, 'detail']">
       <ion-col size="2" class="ion-align-self-center">
         <ion-thumbnail class="thumb-notif">
           <img src="assets/images/inbox-logo.svg" />
@@ -25,7 +21,8 @@
             <ion-text class="notif-title">New Member Registration</ion-text>
           </ion-col>
           <ion-col size="12" class="ion-no-padding truncate">
-            <ion-text class="notif-desc">Thank you for registering at Klikgo. Please check your email for verification.
+            <ion-text class="notif-desc"
+              >Thank you for registering at Grocie. Please check your email for verification.
             </ion-text>
           </ion-col>
           <ion-col size="12" class="ion-no-padding">

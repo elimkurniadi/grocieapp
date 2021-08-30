@@ -8,6 +8,7 @@ import { ProductService } from '@shared/services/modules';
 import { Product } from '@shared/models';
 import { Router } from '@angular/router';
 import { GlobalService } from '@shared/services';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-scan-qr',
@@ -23,7 +24,8 @@ export class ScanQrComponent implements OnInit {
     private barcodeScanner: BarcodeScanner,
     private productSrv: ProductService,
     private router: Router,
-    private gs: GlobalService
+    private gs: GlobalService,
+    private navCtrl: NavController
   ) {
     this.handleCameraPermission();
   }
@@ -48,9 +50,13 @@ export class ScanQrComponent implements OnInit {
     this.barcodeScanner
       .scan(options)
       .then((barcodeData) => {
-        this.gs.log('Barcode data', barcodeData);
+        this.gs.log('Barcode data', barcodeData.cancelled);
         this.scannedData = barcodeData;
-        this.getProduct(this.scannedData.text);
+        if (!this.scannedData.cancelled) {
+          this.getProduct(this.scannedData.text);
+        } else {
+          this.navCtrl.back();
+        }
       })
       .catch((err) => {
         this.gs.log('Error', err);
@@ -67,7 +73,7 @@ export class ScanQrComponent implements OnInit {
       .catch((err) => {
         const error = err.error.error;
         this.toastSrv.show(error.message);
-        this.router.navigate(['/tabs', 'home']);
+        this.navCtrl.back();
       });
   }
 }

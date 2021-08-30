@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar mode="ios">
     <ion-buttons mode="md" class="ion-text-center">
-      <ion-back-button defaultHref="/checkout" icon="chevron-back-outline"> </ion-back-button>
+      <ion-back-button [defaultHref]="redirectBackUrl" icon="chevron-back-outline"> </ion-back-button>
     </ion-buttons>
     <ion-title>{{ 'VOUCHER_LIST' | translate }}</ion-title>
   </ion-toolbar>
@@ -16,9 +16,20 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-row class="ion-padding-horizontal">
+  <ion-row class="ion-padding-horizontal" *ngIf="fetching">
+    <ion-col size="12" *ngFor="let item of [1, 2, 3]">
+      <app-voucher-skeleton></app-voucher-skeleton>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-padding-horizontal" *ngIf="!fetching && (!vouchers || (vouchers && !vouchers.length))">
+    <ion-col size="12" class="ion-text-center ion-padding-top">
+      <ion-text> {{ 'VOUCHER_NOT_FOUND' | translate }}</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-padding-horizontal" *ngIf="!fetching && vouchers && vouchers.length">
     <ion-col size="12" *ngFor="let item of vouchers">
-      <app-card-voucher [voucher]="item"></app-card-voucher>
+      <app-card-voucher [voucher]="item" *ngIf="voucherType == 'redeem'"></app-card-voucher>
+      <app-card-voucher-point [voucher]="item" *ngIf="voucherType == 'buy'"></app-card-voucher-point>
     </ion-col>
   </ion-row>
 

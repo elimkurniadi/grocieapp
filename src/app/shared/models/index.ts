@@ -19,3 +19,4 @@ export * from './payment_method';
 export * from './delivery_time';
 export * from './transaction';
 export * from './address';
+export * from './loyalty_point';

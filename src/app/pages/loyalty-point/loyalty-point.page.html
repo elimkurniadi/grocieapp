@@ -1,0 +1,78 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-buttons mode="md" class="ion-text-center">
+      <ion-back-button icon="chevron-back" defaultHref="/tabs/home" icon="chevron-back-outline"> </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'LOYALTY_POINTS' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHistory()">
+        <ion-icon name="time-outline" class="header-action-size" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding">
+        <img src="assets/images/banner-point.svg" class="img-banner" />
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-horizontal ion-padding-top">
+      <ion-col>
+        <ion-text class="subtitle-point"> {{'YOUR_POINTS' | translate }} </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <!-- <ion-card-content> -->
+          <ion-row class="padding-point">
+            <ion-col>
+              <ion-row>
+                <ion-col size="1" class="ion-align-self-center">
+                  <img src="assets/images/ic_point.svg" class="point-icon" />
+                </ion-col>
+                <ion-col class="ion-align-self-center">
+                  <ion-text class="point-label">{{'LOYALTY_POINTS' | translate}}</ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col class="ion-text-right ion-align-self-center">
+              <ion-text class="point-value">{{(point | number) || '-'}} POINTS</ion-text>
+            </ion-col>
+          </ion-row>
+          <!-- </ion-card-content> -->
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-horizontal ion-padding-top">
+      <ion-col size="8">
+        <ion-text>{{'BUY_VOUCHERS' | translate}}</ion-text>
+      </ion-col>
+      <ion-col size="4" class="ion-text-right">
+        <ion-text class="section-see-all link" [routerLink]="['/voucher', 'list']" [queryParams]="{type: 'point'}">
+          {{ 'SEE_ALL' | translate }}
+        </ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="fetching">
+      <ion-col size="12" *ngFor="let item of [1, 2, 3]">
+        <app-voucher-skeleton></app-voucher-skeleton>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="!fetching && (!vouchers || (vouchers && !vouchers.length))">
+      <ion-col size="12" class="ion-text-center ion-padding-top">
+        <ion-text> {{ 'VOUCHER_NOT_FOUND' | translate }}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!fetching && vouchers && vouchers.length">
+      <ion-col class="ion-padding-horizontal" size="12" *ngFor="let voucher of vouchers">
+        <app-card-voucher-point [voucher]="voucher"></app-card-voucher-point>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

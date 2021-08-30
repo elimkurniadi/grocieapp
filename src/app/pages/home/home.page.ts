@@ -10,6 +10,8 @@ import { NotificationListComponent } from '../notification/notification-list/not
 import { ModalOtpComponent } from '@shared/common/otp/modal-otp/modal-otp.component';
 import { ActivityService } from '@shared/services/modules/activity.service';
 import { ModalEmailVerificationComponent } from '@shared/common/email-verification/modal-email-verification/modal-email-verification.component';
+import { Article } from '@shared/models/article';
+import { ArticleService } from '@shared/services/modules/article.service';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +22,9 @@ export class HomePage implements OnInit {
   selectedLanguage: any = 'id';
   banners: Banner[];
   bundlings: Bundling[];
+  articles: Article[];
+  point: any;
+  branchName: string;
 
   constructor(
     private translate: TranslateService,
@@ -32,7 +37,8 @@ export class HomePage implements OnInit {
     private activitySrv: ActivityService,
     private route: ActivatedRoute,
     private authSrv: AuthService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private articleSrv: ArticleService
   ) {
     this.route.queryParams.subscribe((param) => {
       const token = param.emailToken;
@@ -50,12 +56,15 @@ export class HomePage implements OnInit {
       if (openNotif) {
         this.openNotification();
       }
+
+      this.doRefresh();
     });
   }
 
   ngOnInit() {
     this.getBanner();
     this.getBundling();
+    this.getArticle();
     this.activitySrv.registerPush();
   }
 
@@ -64,7 +73,7 @@ export class HomePage implements OnInit {
       header: title,
       message: body,
       position: 'top',
-      color: 'limegreen',
+      color: 'white',
       buttons: [
         {
           side: 'end',
@@ -78,9 +87,11 @@ export class HomePage implements OnInit {
     toast.present();
   }
 
-  doRefresh(event) {
-    Promise.all([this.getBanner(), this.getBundling()]).then((success) => {
-      event.target.complete();
+  doRefresh(event?) {
+    Promise.all([this.getBanner(), this.getBundling(), this.getArticle(), this.getUser()]).then((success) => {
+      if (event) {
+        event.target.complete();
+      }
     });
   }
 
@@ -147,16 +158,40 @@ export class HomePage implements OnInit {
       });
   }
 
+  getArticle() {
+    this.articleSrv.getArticle().then((res) => {
+      const articles = res.response as Article[];
+      this.articles = articles;
+    });
+  }
+
+  getUser() {
+    this.userSrv
+      .getProfile()
+      .then((res) => {
+        this.point = res.loyalty_point;
+        this.branchName = res.branch_name;
+      })
+      .catch(() => {
+        this.point = null;
+      });
+  }
+
   verifyEmail(token) {
     this.authSrv
       .verifyEmail(token)
       .then(() => {
         const msg = this.translate.get('EMAIL_VERIFIED');
         this.toastSrv.show(msg);
+        this.router.navigate(['/tabs', 'home']);
       })
       .catch((err) => {
         const error = err.error.error;
         this.toastSrv.show(error.message);
       });
+  }
+
+  selectStore() {
+    this.router.navigate(['/store-location']);
   }
 }

@@ -1,0 +1,24 @@
+<ion-card class="ion-no-margin ion-margin-top card-voucher">
+  <ion-card-header
+    class="ion-no-padding link"
+    [routerLink]="['/voucher', voucher?.voucher_id, 'detail']"
+    [queryParams]="{ type: 'point' }"
+  >
+    <img src="https://via.placeholder.com/200.png" class="full-width img-header" *ngIf="!voucher?.image_url" />
+    <img [src]="voucher?.image_url" class="full-width img-header" *ngIf="voucher?.image_url" />
+  </ion-card-header>
+
+  <ion-card-content class="ion-no-padding ion-text-left">
+    <ion-row class="ion-padding-horizontal">
+      <ion-col size="7">
+        <span class="text-voucher-title">{{ voucher?.description }} </span><br />
+        <span class="text-voucher-desc">
+          {{ 'VALID_UNTIL' | translate }} {{ voucher?.end_date | date: 'longDate' }} </span
+        ><br />
+      </ion-col>
+      <ion-col size="5" class="ion-text-right ion-align-self-center">
+        <ion-text class="point-value">{{ voucher?.value | number }} POINTS</ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>

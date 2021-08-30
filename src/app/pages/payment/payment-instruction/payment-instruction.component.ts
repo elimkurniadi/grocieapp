@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavController, Platform } from '@ionic/angular';
 import { PaymentSummary, Response } from '@shared/models';
+import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { CacheService, GlobalService, ToastService } from '@shared/services';
+import { AlertService } from '@shared/services/alert.service';
 import { CheckoutService, TransactionService } from '@shared/services/modules';
 
 @Component({
@@ -21,6 +24,8 @@ export class PaymentInstructionComponent implements OnInit {
   paymentSummary: PaymentSummary;
   isOnFetch = false;
 
+  backButton: any;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -28,7 +33,11 @@ export class PaymentInstructionComponent implements OnInit {
     private transactionSrv: TransactionService,
     private toastSrv: ToastService,
     private cache: CacheService,
-    private gs: GlobalService
+    private gs: GlobalService,
+    private translate: TranslateService,
+    private alertSrv: AlertService,
+    private navCtrl: NavController,
+    private platform: Platform
   ) {
     this.route.queryParams.subscribe((param) => {
       this.isNow = param.is_now === 'true';
@@ -55,6 +64,18 @@ export class PaymentInstructionComponent implements OnInit {
 
   ionViewDidEnter() {
     this.observeFetchState();
+
+    this.backButton = this.platform.backButton.subscribeWithPriority(20, () => {
+      this.goBack();
+    });
+  }
+
+  ionViewDidLeave() {
+    this.backButton.unsubscribe();
+  }
+
+  goBack() {
+    this.navCtrl.navigateBack(this.previousUrl);
   }
 
   observeFetchState() {

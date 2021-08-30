@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar mode="ios">
     <ion-buttons mode="md" class="ion-text-center">
-      <ion-back-button defaultHref="/tabs/profile" icon="chevron-back-outline"> </ion-back-button>
+      <ion-back-button [defaultHref]="previousUrl" icon="chevron-back-outline" (click)="goBack()"> </ion-back-button>
     </ion-buttons>
     <ion-title>{{ 'MY_ORDER' | translate }}</ion-title>
   </ion-toolbar>

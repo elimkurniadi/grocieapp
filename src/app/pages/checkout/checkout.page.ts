@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PopoverController } from '@ionic/angular';
+import { NavController, Platform, PopoverController } from '@ionic/angular';
 import { PopoverInfoComponent } from '@shared/common/popover/popover-info/popover-info.component';
 import { Address, Cart, DeliveryTime, PaymentSummary, Response, Voucher } from '@shared/models';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
 import { CacheService, GlobalService, ToastService } from '@shared/services';
 import { AddressService, CartService, CheckoutService, SettingService, VoucherService } from '@shared/services/modules';
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 
 @Component({
   selector: 'app-checkout',
@@ -18,8 +18,8 @@ export class CheckoutPage implements OnInit {
   cartList: Cart[];
   totalPrice = 0;
   paymentSummary: PaymentSummary;
-  currDate: any = moment(new Date());
-  maxCurrDate: any = moment(new Date()).set({ hour: 18, minute: 0 });
+  currDate: any = moment(new Date()).tz(this.gs.timezoneName);
+  maxCurrDate: any = moment(new Date()).tz(this.gs.timezoneName).set({ hour: 18, minute: 0 });
   selectedDate = null;
   deliveryDate: any;
   operationalTime;
@@ -33,6 +33,7 @@ export class CheckoutPage implements OnInit {
   voucherError = null;
 
   isOnFetch = false;
+  backButton: any;
 
   constructor(
     private cartSrv: CartService,
@@ -46,7 +47,9 @@ export class CheckoutPage implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private gs: GlobalService,
-    private popoverCtrl: PopoverController
+    private popoverCtrl: PopoverController,
+    private platform: Platform,
+    private navCtrl: NavController
   ) {
     this.observeQueryParam();
   }
@@ -85,6 +88,14 @@ export class CheckoutPage implements OnInit {
 
   ionViewDidEnter() {
     this.observeFetchState();
+
+    this.backButton = this.platform.backButton.subscribeWithPriority(15, () => {
+      this.navCtrl.pop();
+    });
+  }
+
+  ionViewDidLeave() {
+    this.backButton.unsubscribe();
   }
 
   observeFetchState() {
@@ -94,7 +105,8 @@ export class CheckoutPage implements OnInit {
   }
 
   onDateSelect(value) {
-    this.selectedDate = moment(value).format('YYYY-MM-DD');
+    this.selectedDate = moment(value).tz(this.gs.timezoneName).format('YYYY-MM-DD');
+    this.getPriceSummary();
 
     this.getDeliveryTime();
   }
@@ -136,7 +148,7 @@ export class CheckoutPage implements OnInit {
     const filter = {
       is_now: this.deliveryNow,
       address_id: this.defaultAddress.address_id,
-      delivery_date: moment(this.selectedDate).format('YYYY-MM-DD'),
+      delivery_date: moment(this.selectedDate).tz(this.gs.timezoneName).format('YYYY-MM-DD'),
     };
 
     if (this.voucher && (this.voucher?.voucher_code !== '' || this.voucher?.voucher_code !== null)) {
@@ -145,8 +157,11 @@ export class CheckoutPage implements OnInit {
 
     this.checkoutSrv.calculatePrice(filter).then((res: Response) => {
       const result = res.response as PaymentSummary;
-      if (this.paymentSummary && result?.final_price !== this.paymentSummary?.final_price) {
-        this.toastSrv.show(this.translate.get('PRICE_UPDATED'));
+      if (this.paymentSummary && result?.delivery_fee !== this.paymentSummary?.delivery_fee) {
+        this.toastSrv.show(this.translate.get('DELIVERY_UPDATED'));
+      } else if (this.paymentSummary && result?.discount !== this.paymentSummary?.discount) {
+        if (result?.discount > 0) this.toastSrv.show(this.translate.get('VOUCHER_APPLIED'));
+        else this.toastSrv.show(this.translate.get('VOUCHER_REMOVED'));
       }
       this.paymentSummary = result;
       this.voucherError = result.voucher_error;
@@ -182,7 +197,7 @@ export class CheckoutPage implements OnInit {
         const response = res.response;
         this.operationalTime = response;
         const closeHour = parseInt(response.close.split(':')[0], 10);
-        this.maxCurrDate = moment(new Date()).set({ hour: closeHour, minute: 0 });
+        this.maxCurrDate = moment(new Date()).tz(this.gs.timezoneName).set({ hour: closeHour, minute: 0 });
 
         this.canDeliverNow = response.is_open;
         this.deliveryNow = response.is_open;
@@ -194,13 +209,11 @@ export class CheckoutPage implements OnInit {
   }
 
   setDefaultDate() {
-    this.selectedDate = moment(new Date()).format();
-    if (this.currDate > this.maxCurrDate) {
-      this.canDeliverNow = false;
-      this.deliveryNow = false;
+    this.selectedDate = moment(new Date()).tz(this.gs.timezoneName).format();
+    if (!this.canDeliverNow) {
       const currDate = this.currDate.add(1, 'days').format('YYYY-MM-DD');
       this.currDate = currDate;
-      this.selectedDate = moment(new Date()).add(1, 'days').format();
+      this.selectedDate = moment(new Date()).tz(this.gs.timezoneName).add(1, 'days').format();
     } else {
       const currDate = this.currDate.format('YYYY-MM-DD');
       this.currDate = currDate;
@@ -222,7 +235,7 @@ export class CheckoutPage implements OnInit {
 
   getDeliveryTime() {
     const params = {
-      date: moment(this.selectedDate).format('YYYY-MM-DD'),
+      date: moment(this.selectedDate).tz(this.gs.timezoneName).format('YYYY-MM-DD'),
     };
 
     if (this.timeList) {
@@ -270,7 +283,7 @@ export class CheckoutPage implements OnInit {
       }
 
       if (!this.deliveryNow) {
-        queryParams['date'] = moment(this.selectedDate).format('YYYY-MM-DD');
+        queryParams['date'] = moment(this.selectedDate).tz(this.gs.timezoneName).format('YYYY-MM-DD');
         queryParams['time'] = timeSelected[0].text;
       }
 

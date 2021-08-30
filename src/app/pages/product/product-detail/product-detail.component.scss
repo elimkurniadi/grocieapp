@@ -124,3 +124,19 @@ ion-searchbar.custom-search {
     text-transform: uppercase;
   }
 }
+
+.tag {
+  &-background {
+    border-radius: 4px;
+    background: rgba(110, 154, 242, 0.2);
+    padding: 3px 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-text {
+    color: #6e9af2;
+    font-size: 11px;
+  }
+}

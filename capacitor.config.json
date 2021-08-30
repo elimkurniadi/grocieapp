@@ -1,6 +1,6 @@
 {
-  "appId": "com.klikgo.klikgo",
-  "appName": "Klikgo",
+  "appId": "com.grocie.grocie",
+  "appName": "Grocie",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

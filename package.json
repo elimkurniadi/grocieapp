@@ -1,5 +1,5 @@
 {
-  "name": "klikgo",
+  "name": "grocie",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -13,7 +13,10 @@
     "e2e": "ng e2e",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "mock:server": "json-server --watch mocks/dummy-data.json --routes mocks/routes.json --middlewares mocks/middleware.js",
-    "build:android": "npx jetifier && ionic build --prod && npx cap sync android && npx cap open android"
+    "build:android": "npx jetifier && ionic build --prod && npx cap sync android && npx cap open android",
+    "release:android": "npx jetifier && ionic build --prod --release && npx cap sync android && npx cap open android",
+    "build:ios": "npx jetifier && ionic build --prod && npx cap sync ios && npx cap open ios",
+    "release:ios": "npx jetifier && ionic build --prod --release && npx cap sync ios && npx cap open ios"
   },
   "private": true,
   "dependencies": {
@@ -68,6 +71,7 @@
     "core-js": "^2.6.12",
     "ionic-plugin-deeplinks": "^1.0.22",
     "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
     "ng-otp-input": "^1.7.1",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "rxjs": "~6.5.1",

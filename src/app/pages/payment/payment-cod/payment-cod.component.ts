@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavController, Platform } from '@ionic/angular';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { PaymentSummary, Response } from '@shared/models';
 import { CacheService, GlobalService, RxValidatorService, ToastService } from '@shared/services';
@@ -25,6 +26,8 @@ export class PaymentCodComponent implements OnInit {
   amountCod: any;
   isOnFetch = false;
 
+  backButton: any;
+
   constructor(
     private validatorSrv: RxValidatorService,
     private fb: FormBuilder,
@@ -34,7 +37,9 @@ export class PaymentCodComponent implements OnInit {
     private transactionSrv: TransactionService,
     private toastSrv: ToastService,
     private gs: GlobalService,
-    private cache: CacheService
+    private cache: CacheService,
+    private platform: Platform,
+    private navCtrl: NavController
   ) {
     this.route.queryParams.subscribe((param) => {
       this.isNow = param.is_now === 'true';
@@ -62,6 +67,18 @@ export class PaymentCodComponent implements OnInit {
 
   ionViewDidEnter() {
     this.observeFetchState();
+
+    this.backButton = this.platform.backButton.subscribeWithPriority(20, () => {
+      this.goBack();
+    });
+  }
+
+  ionViewDidLeave() {
+    this.backButton.unsubscribe();
+  }
+
+  goBack() {
+    this.navCtrl.navigateBack(this.previousUrl);
   }
 
   observeFetchState() {
@@ -114,7 +131,7 @@ export class PaymentCodComponent implements OnInit {
         .add(body)
         .then((res) => {
           this.removeVoucher();
-          this.router.navigate(['/my-order']);
+          this.navCtrl.navigateBack('my-order');
         })
         .catch((err) => {
           const error = err.error.error;

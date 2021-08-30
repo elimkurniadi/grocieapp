@@ -11,9 +11,9 @@
 
 <ion-content>
   <ion-grid class="ion-no-padding">
-    <ion-row>
+    <ion-row *ngIf="inbox?.global_notification?.image_url">
       <ion-col>
-        <img class="img-banner" [src]="inbox?.global_notification?.image_url"/>
+        <img class="img-banner" [src]="inbox?.global_notification?.image_url" />
       </ion-col>
     </ion-row>
     <ion-row class="ion-padding">

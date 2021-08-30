@@ -11,6 +11,7 @@ export class ModalConfirmationComponent implements OnInit {
   @Input() message: string;
   @Input() cancelText = 'NO';
   @Input() submitText = 'YES';
+  @Input() messageClass = 'modal-message';
 
   constructor(private modalCtrl: ModalController) {}
 

@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar mode="ios">
     <ion-buttons mode="md" class="ion-text-center">
-      <ion-back-button [defaultHref]="previousUrl" icon="chevron-back-outline"> </ion-back-button>
+      <ion-back-button [defaultHref]="previousUrl" icon="chevron-back-outline" (click)="goBack()"> </ion-back-button>
     </ion-buttons>
     <ion-title>{{ 'MANUAL_BANK_TRANSFER' | translate }}</ion-title>
   </ion-toolbar>
@@ -30,7 +30,15 @@
       </ion-text>
     </ion-col>
     <ion-col size="12">
-      <ion-text class="text-content"> Lorem Ipsum dolor sir amet </ion-text>
+      <ion-text class="text-content">
+        Terima kasih sudah berbelanja di Grocie. Silahkan transfer ke rekening berikut:
+        <br />
+        <br />
+        <strong>PT Mitra Kreasi Santosa 040 899 5577</strong>
+        <br />
+        <br />
+        Terima kasih. Happy shopping
+      </ion-text>
     </ion-col>
   </ion-row>
 </ion-content>

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Page, Sort } from '@shared/models';
 import { AuthService } from '../auth.service';
 import { ApiService } from '../core/api.service';
 import { GlobalService } from '../global.service';
@@ -164,6 +165,21 @@ export class UserService {
       subscription.subscribe(
         (res: any) => {
           res.code === 200 ? resolve(true) : reject(false);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  getLoyaltyHistory(pagination?: Page, ordering?: Sort): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const subscription = this.api.getData('loyalty-history', pagination, ordering);
+      this.gs.pushSubscription(subscription);
+      subscription.subscribe(
+        (res: any) => {
+          resolve(res?.response);
         },
         (err) => {
           reject(err);

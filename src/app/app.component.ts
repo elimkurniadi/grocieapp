@@ -111,7 +111,7 @@ export class AppComponent {
       const data = res.data;
 
       if (data && data.confirm) {
-        this.market.open('com.klikgo.klikgo');
+        this.market.open('com.grocie.grocie');
       }
     });
 

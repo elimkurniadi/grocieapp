@@ -230,9 +230,11 @@ export class HttpIonicService {
   // }
 
   private prepareHeaders(data: any, multipart = false) {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const headers = {
       Accept: 'application/json',
       osType: this.platform.is('android') ? 'android' : 'ios',
+      tz: encodeURIComponent(tz),
     };
 
     if (data) {

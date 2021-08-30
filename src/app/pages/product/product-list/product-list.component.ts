@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { ModalFilterProductComponent } from '@shared/common/modals/modal-filter-product/modal-filter-product.component';
 import { ModalSortProductComponent } from '@shared/common/modals/modal-sort-product/modal-sort-product.component';
 import { Category, Product, Response, ResponsePagination, Sort } from '@shared/models';
-import { ToastService } from '@shared/services';
+import { GlobalService, ToastService } from '@shared/services';
 import { CategoryService, ProductService } from '@shared/services/modules';
 
 @Component({
@@ -24,6 +24,7 @@ export class ProductListComponent implements OnInit {
   filter: any;
   productType: string;
   brandImage: string;
+  categoriesChunk: any[];
 
   constructor(
     private router: Router,
@@ -31,28 +32,19 @@ export class ProductListComponent implements OnInit {
     private categorySrv: CategoryService,
     private productSrv: ProductService,
     private toastSrv: ToastService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private gs: GlobalService,
+    private navCtrl: NavController,
+    private zone: NgZone
   ) {
     this.route.queryParams.subscribe((param) => {
-      this.setKeyword(param);
-      this.setCategoryId(param);
-      this.setBrand(param);
-      this.setFilterParam(param);
+      this.zone.run(() => {
+        this.setKeyword(param);
+        this.setCategoryId(param);
+        this.setBrand(param);
+        this.setFilterParam(param);
+      });
     });
-  }
-
-  ionViewWillEnter() {
-    if (this.categoryId && this.categoryId !== null) {
-      this.getCategory();
-      this.productType = 'category';
-      this.assignProductList();
-    } else if (this.brandId && this.brandId !== null) {
-      this.productType = 'brand';
-      this.assignProductList();
-    } else if (this.search && this.search !== null) {
-      this.productType = 'keyword';
-      this.assignProductList();
-    }
   }
 
   ngOnInit() {}
@@ -124,26 +116,49 @@ export class ProductListComponent implements OnInit {
       });
   }
 
+  getSubcategory(id: any) {
+    this.categorySrv
+      .getSubcategory(id)
+      .then((res) => {
+        const categories = res.response as Category[];
+        this.categoriesChunk = this.gs.chunk(categories, 3);
+      })
+      .catch((err) => {
+        const error = err.error.error;
+        this.toastSrv.show(error.message);
+      });
+  }
+
   setKeyword(param: any) {
-    if (param.search !== null && param.search !== '') {
+    if (param.search !== null && param.search !== '' && typeof param.search !== 'undefined') {
       this.search = param.search;
+
+      this.productType = 'keyword';
+      this.assignProductList();
     } else {
       this.search = null;
     }
   }
 
   setCategoryId(param: any) {
-    if (param.cat_id !== null && param.cat_id !== '') {
+    if (param.cat_id !== null && param.cat_id !== '' && typeof param.cat_id !== 'undefined') {
       this.categoryId = param.cat_id;
+      this.getSubcategory(this.categoryId);
+      this.getCategory();
+      this.productType = 'category';
+      this.assignProductList();
     } else {
       this.categoryId = null;
     }
   }
 
   setBrand(param: any) {
-    if (param.brand_id !== null && param.brand_id !== '') {
+    if (param.brand_id !== null && param.brand_id !== '' && typeof param.brand_id !== 'undefined') {
       this.brandId = param.brand_id;
       this.title = param.brand_name;
+
+      this.productType = 'brand';
+      this.assignProductList();
     } else {
       this.brandId = null;
       this.title = null;
@@ -217,5 +232,11 @@ export class ProductListComponent implements OnInit {
   refreshProduct() {
     this.products = [];
     this.assignProductList();
+  }
+
+  goBack() {
+    this.zone.run(() => {
+      this.navCtrl.back();
+    });
   }
 }

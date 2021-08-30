@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ToastService } from '@shared/services';
 import { AddressService } from '@shared/services/modules';
@@ -13,14 +13,26 @@ export class CardAddressComponent implements OnInit {
   @Input() addressList = null;
   @Input() isSelectMode = true;
   @Output() action = new EventEmitter();
+
+  selectedAddressId: any;
+
   constructor(
     private navCtrl: NavController,
     private addressSrv: AddressService,
     private toast: ToastService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe((param) => {
+      if (param.address_id) {
+        this.selectedAddressId = param.address_id;
+      } else {
+        this.selectedAddressId = null;
+      }
+    });
+  }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   onUseAddress(data, event) {
     event.stopPropagation();
@@ -38,6 +50,5 @@ export class CardAddressComponent implements OnInit {
         this.action.emit();
       });
     }
-
   }
 }

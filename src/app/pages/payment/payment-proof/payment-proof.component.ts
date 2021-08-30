@@ -4,7 +4,7 @@ import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { GlobalService, RxValidatorService, ToastService } from '@shared/services';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { TranslateService } from '@shared/pipes/translate/translate.service';
-import { ActionSheetController, ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController, NavController, Platform } from '@ionic/angular';
 import { PaymentProofSuccessComponent } from '../payment-proof-success/payment-proof-success.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionService } from '@shared/services/modules';
@@ -20,6 +20,7 @@ export class PaymentProofComponent implements OnInit {
   orderId: any;
   previousUrl: string;
   isOnFetch = false;
+  backButton: any;
 
   constructor(
     private validatorSrv: RxValidatorService,
@@ -32,7 +33,9 @@ export class PaymentProofComponent implements OnInit {
     private modalCtrl: ModalController,
     private route: ActivatedRoute,
     private transactionSrv: TransactionService,
-    private toastSrv: ToastService
+    private toastSrv: ToastService,
+    private navCtrl: NavController,
+    private platform: Platform
   ) {
     this.route.params.subscribe((param) => {
       if (param.id) {
@@ -47,6 +50,18 @@ export class PaymentProofComponent implements OnInit {
 
   ionViewDidEnter() {
     this.observeFetchState();
+
+    this.backButton = this.platform.backButton.subscribeWithPriority(20, () => {
+      this.goBack();
+    });
+  }
+
+  ionViewDidLeave() {
+    this.backButton.unsubscribe();
+  }
+
+  goBack() {
+    this.navCtrl.navigateBack(this.previousUrl);
   }
 
   observeFetchState() {

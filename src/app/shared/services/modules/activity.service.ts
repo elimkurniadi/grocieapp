@@ -115,7 +115,7 @@ export class ActivityService {
       header: title,
       message: body,
       position: 'top',
-      color: 'limegreen',
+      color: 'white',
       duration: 3000,
       buttons: [
         {
@@ -129,5 +129,4 @@ export class ActivityService {
     });
     toast.present();
   }
-  
 }

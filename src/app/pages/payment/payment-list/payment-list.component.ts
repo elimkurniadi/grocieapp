@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavController, Platform } from '@ionic/angular';
 import { PaymentMethod, PaymentSummary, Response } from '@shared/models';
 import { CacheService, GlobalService, ToastService } from '@shared/services';
 import { BrowserService } from '@shared/services/browser.service';
@@ -23,7 +24,7 @@ export class PaymentListComponent implements OnInit {
   paymentSummary: PaymentSummary;
   paymentMethods: PaymentMethod[];
   isOnFetch = false;
-
+  backButton: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -32,7 +33,9 @@ export class PaymentListComponent implements OnInit {
     private browserSrv: BrowserService,
     private toastSrv: ToastService,
     private cache: CacheService,
-    private gs: GlobalService
+    private gs: GlobalService,
+    private platform: Platform,
+    private navCtrl: NavController
   ) {
     this.route.queryParams.subscribe((param) => {
       this.isNow = param.is_now === 'true';
@@ -59,6 +62,18 @@ export class PaymentListComponent implements OnInit {
 
   ionViewDidEnter() {
     this.observeFetchState();
+
+    this.backButton = this.platform.backButton.subscribeWithPriority(20, () => {
+      this.goBack();
+    });
+  }
+
+  ionViewDidLeave() {
+    this.backButton.unsubscribe();
+  }
+
+  goBack() {
+    this.navCtrl.navigateBack(this.previousUrl);
   }
 
   observeFetchState() {
@@ -133,7 +148,7 @@ export class PaymentListComponent implements OnInit {
       .then((res) => {
         this.removeVoucher();
         this.browserSrv.openBrowser({ url: res.response });
-        this.router.navigate(['/my-order']);
+        this.navCtrl.navigateBack('my-order');
       })
       .catch((err) => {
         const error = err.error.error;

@@ -3,19 +3,11 @@
     <ion-buttons slot="start" mode="md" class="title">
       <ion-back-button icon="chevron-back" defaultHref="/tabs/inbox"></ion-back-button>
     </ion-buttons>
-    <ion-title> Klikgo Article </ion-title>
+    <ion-title> {{ 'ARTICLE_TITLE' | translate }} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- <ion-row class="ion-padding ion-no-padding-bottom">
-    <ion-col size="12">
-      <ion-text class="section-title">{{ 'KLIKGO_ARTICLE' | translate }}</ion-text>
-    </ion-col>
-    <ion-col size="12" class="ion-padding-top">
-      <ion-text class="section-desc">{{ 'KLIKGO_ARTICLE_DESC' | translate }}</ion-text>
-    </ion-col>
-  </ion-row> -->
   <ion-row class="ion-padding-horizontal">
     <ion-col size="12" *ngFor="let article of articles">
       <ion-card class="ion-no-border ion-no-margin ion-padding-top" (click)="goToNewsDetail(article)">
