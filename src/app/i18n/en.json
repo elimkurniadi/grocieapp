@@ -74,7 +74,7 @@
   "VERIFY_EMAIL_BODY": "You will get an extra point whenever you verify your email. Verify now?",
   "SKIP": "Skip",
   "VERIFY": "Verify",
-  "CLOSE_CONFIRM": "Are you sure you want to close this modal?",
+  "CLOSE_CONFIRM": "Are you sure you want to skip verification?",
   "CANCEL": "Cancel",
   "OTP_WORDING": "Please enter OTP code that has been sent to your phone",
   "RESEND_OTP": "Resend OTP",

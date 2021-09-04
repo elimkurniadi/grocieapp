@@ -73,7 +73,7 @@
   "VERIFY_EMAIL_BODY": "Anda akan mendapatkan tambahan poin apabila anda verifikasi email Anda. Verifikasi sekarang?",
   "SKIP": "Lewati",
   "VERIFY": "Verifikasi",
-  "CLOSE_CONFIRM": "Apakah Anda yakin ingin menutup modal ini?",
+  "CLOSE_CONFIRM": "Apakah Anda yakin ingin melewati verifikasi?",
   "CANCEL": "Batal",
   "OTP_WORDING": "Silahkan masukkan kode OTP yang telah kami kirimkan ke perangkat Anda",
   "RESEND_OTP": "Kirim ulang kode OTP",
