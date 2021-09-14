@@ -17,6 +17,7 @@ import { SlideBrandModule } from '@shared/common/slide-brand/slide-brand.module'
 import { ProductSearchWithKeywordComponent } from './product-search/product-search-with-keyword/product-search-with-keyword.component';
 import { ProductSearchWithoutKeywordComponent } from './product-search/product-search-without-keyword/product-search-without-keyword.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductSkeletonComponent } from './product-skeleton/product-skeleton.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     ProductSearchWithKeywordComponent,
     ProductSearchWithoutKeywordComponent,
     ProductDetailComponent,
+    ProductSkeletonComponent,
   ],
 })
 export class ProductPageModule {}

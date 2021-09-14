@@ -60,8 +60,14 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class="padding-product" *ngIf="!products || (products && !products.length)">
+    <ion-row class="padding-product" *ngIf="(!products || (products && !products.length)) && !fetching">
       <ion-col class="ion-text-center"> Data Not Found </ion-col>
+    </ion-row>
+
+    <ion-row class="padding-product" *ngIf="(!products || (products && !products.length)) && fetching">
+      <ion-col class="ion-padding-horizontal" size="4" *ngFor="let item of [1, 2, 3, 4]">
+        <app-product-skeleton></app-product-skeleton>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

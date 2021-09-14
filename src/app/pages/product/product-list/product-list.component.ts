@@ -25,6 +25,7 @@ export class ProductListComponent implements OnInit {
   productType: string;
   brandImage: string;
   categoriesChunk: any[];
+  fetching = false;
 
   constructor(
     private router: Router,
@@ -100,6 +101,7 @@ export class ProductListComponent implements OnInit {
     return filter;
   }
   assignProductList() {
+    this.fetching = true;
     this.getProductList(this.productType)
       .then((res: ResponsePagination) => {
         const products = res.response.rows as Product[];
@@ -109,10 +111,12 @@ export class ProductListComponent implements OnInit {
         if (res.response.image_url) {
           this.brandImage = res.response.image_url;
         }
+        this.fetching = false;
       })
       .catch((err) => {
         const error = err.error.error;
         this.toastSrv.show(error.message);
+        this.fetching = false;
       });
   }
 
