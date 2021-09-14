@@ -31,24 +31,67 @@
     </ion-col>
     <ion-col size="12">
       <ion-text class="text-content">
-        Terima kasih sudah berbelanja di Grocie. Silahkan transfer ke rekening berikut:
-        <br />
-        <br />
-        <strong>PT Mitra Kreasi Santosa 040 899 5577</strong>
-        <br />
-        <br />
-        Terima kasih. Happy shopping
+        <ion-row>
+          <ion-col size="1"> 1 </ion-col>
+          <ion-col>
+            {{ 'MANUAL_PAYMENT_STEP1' | translate }}
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="1"> 2</ion-col>
+          <ion-col>
+            <span innerHTML="{{ 'MANUAL_PAYMENT_STEP2' | translate }} "></span>
+            <br />
+            <ion-grid class="ion-padding-vertical">
+              <ion-row class="ion-no-padding">
+                <ion-col class="ion-no-padding"><strong>Nama Bank</strong></ion-col>
+                <ion-col class="ion-no-padding" size="1"> : </ion-col>
+                <ion-col class="ion-no-padding"><strong>Bank Central Asia</strong></ion-col>
+              </ion-row>
+              <ion-row class="ion-no-padding">
+                <ion-col class="ion-no-padding"><strong>Nomor Rekening</strong></ion-col>
+                <ion-col class="ion-no-padding" size="1"> : </ion-col>
+                <ion-col class="ion-no-padding"><strong>040 899 5577</strong></ion-col>
+              </ion-row>
+              <ion-row class="ion-no-padding">
+                <ion-col class="ion-no-padding"><strong>Pemilik Rekening</strong></ion-col>
+                <ion-col class="ion-no-padding" size="1"> : </ion-col>
+                <ion-col class="ion-no-padding"><strong>PT Mitra Kreasi Santosa</strong></ion-col>
+              </ion-row>
+            </ion-grid>
+            <table>
+              <tr>
+                <td></td>
+              </tr>
+            </table>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="1"> 3 </ion-col>
+          <ion-col class="text-content" innerHTML="{{ 'MANUAL_PAYMENT_STEP3' | translate }}"> </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="1"> 4 </ion-col>
+          <ion-col class="text-content" innerHTML="{{ 'MANUAL_PAYMENT_STEP4' | translate }}"> </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="1"> 5 </ion-col>
+          <ion-col class="text-content" innerHTML="{{ 'MANUAL_PAYMENT_STEP5' | translate }}"> </ion-col>
+        </ion-row>
       </ion-text>
     </ion-col>
   </ion-row>
 </ion-content>
 
-<ion-footer class="ion-no-border">
-  <ion-row class="ion-padding">
-    <ion-col>
-      <ion-button color="success" expand="block" shape="round" (click)="pay()" [disabled]="isOnFetch">
-        {{ 'PAY' | translate }} <ion-spinner *ngIf="isOnFetch" name="dots" color="dark"></ion-spinner>
-      </ion-button>
-    </ion-col>
-  </ion-row>
+<ion-footer class="ion-no-border" color="light" [translucent]="false" [mode]="'md'">
+  <ion-grid class="ion-no-padding" style="background: white">
+    <ion-row class="ion-padding">
+      <ion-col>
+        <ion-button color="success" expand="block" shape="round" (click)="pay()" [disabled]="isOnFetch">
+          {{ 'PAY' | translate }} <ion-spinner *ngIf="isOnFetch" name="dots" color="dark"></ion-spinner>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-footer>

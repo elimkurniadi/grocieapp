@@ -274,5 +274,10 @@
   "POINT_NOT_AVAILABLE": "Point not available",
   "CHOOSE_STORE_LOCATION": "Choose Store Location",
   "STORE_NOT_FOUND": "Store Not Found",
-  "PROMO": "Promo"
+  "PROMO": "Promo",
+  "MANUAL_PAYMENT_STEP1": "Enter the payment amount that corresponds to the bill given (incorrect input of the payment  amount can cause your order to be automatically canceled)",
+  "MANUAL_PAYMENT_STEP2": "Make the full payment <strong>ONLY</strong> to the designated account details;",
+  "MANUAL_PAYMENT_STEP3": "Confirm your payment to proceed for order confirmation. Go to your <strong>“Order Detail”</strong> > <strong>“Upload Payment Proof”</strong>, Fill out the required fields and proceed to <strong>“Next”</strong>",
+  "MANUAL_PAYMENT_STEP4": "Your order will proceed for Delivery <strong>ONLY</strong> once full payment is accepted and your payment confirmation has been submitted",
+  "MANUAL_PAYMENT_STEP5": "Sit back and relax while we prepare your order for the soonest delivery"
 }

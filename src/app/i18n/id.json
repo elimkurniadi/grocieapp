@@ -264,5 +264,10 @@
   "POINT_NOT_AVAILABLE": "Point tidak tersedia",
   "CHOOSE_STORE_LOCATION": "Pilih Lokasi Toko",
   "STORE_NOT_FOUND": "Toko tidak ditemukan",
-  "PROMO": "Promo"
+  "PROMO": "Promo",
+  "MANUAL_PAYMENT_STEP1": "Masukkan jumlah pembayaran penuh sesuai dengan tagihan yang diberikan (Salah memasukan jumlah pembayaran menyebabkan pesanan Anda dibatalkan secara otomatis)",
+  "MANUAL_PAYMENT_STEP2": "Lakukan pembayaran penuh <strong>HANYA</strong> ke rincian rekening yang ditunjuk;",
+  "MANUAL_PAYMENT_STEP3": "Konfirmasi pembayaran Anda untuk melanjutkan konfirmasi pesanan. Buka <strong>“Detail Pesanan”</strong>  > <strong>“Unggah Bukti Pembayaran”</strong>, Isi kolom yang diperlukan dan lanjutkan ke <strong>“Berikutnya”</strong>",
+  "MANUAL_PAYMENT_STEP4": "Pesanan Anda akan diproses untuk Pengiriman <strong>HANYA</strong> setelah pembayaran penuh diterima dan konfirmasi pembayaran Anda telah dilakukan",
+  "MANUAL_PAYMENT_STEP5": "Duduk dan bersantailah sementara kami menyiapkan pesanan Anda untuk pengiriman tercepat"
 }
