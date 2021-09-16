@@ -16,6 +16,7 @@ import { FCM } from '@capacitor-community/fcm';
 import { ToastService } from '../toast.service';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { environment } from '@env/environment';
 
 const { PushNotifications } = Plugins;
 const fcm = new FCM();
@@ -67,13 +68,20 @@ export class ActivityService {
       if (permission.granted) {
         PushNotifications.register().then(() => {
           this.userSrv.getProfile().then((user) => {
+            let topicUser = user?.user_id;
+            let topicGlobal = 'global';
+            if (environment.production) {
+              topicUser = 'prod-' + user?.user_id;
+              topicGlobal = 'prod-global';
+            }
+
             fcm
-              .subscribeTo({ topic: user?.user_id })
+              .subscribeTo({ topic: topicUser })
               .then((r) => this.gs.log('TOPIC yang ke subscribe 1', r))
               .catch((err) => this.gs.log(err));
 
             fcm
-              .subscribeTo({ topic: 'global' })
+              .subscribeTo({ topic: topicGlobal })
               .then((r) => this.gs.log('TOPIC yang ke subscribe 2', r))
               .catch((err) => this.gs.log(err));
           });
