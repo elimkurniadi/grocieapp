@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="app_name">Grocie</string>
+  <string name="title_activity_main">Grocie</string>
+  <string name="package_name">com.grocie.grocie</string>
+  <string name="custom_url_scheme">grocie</string>
+  <string name="custom_host_scheme">app.myklikgo.com</string>
+  <string name="server_client_id">852595832919-73lbej9udcco4jnpnuegraik09rmmbrh.apps.googleusercontent.com</string>
+  <string name="facebook_app_id">729501611082377</string>
+  <string name="fb_login_protocol_scheme">fb729501611082377</string>
+</resources>

@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../../fonts/Regular/Metropolis-Regular.woff2') format('woff2'),
+        url('../../fonts/Regular/Metropolis-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../../fonts/Semibold/Metropolis-SemiBold.woff2') format('woff2'),
+        url('../../fonts/Semibold/Metropolis-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../../fonts/Bold/Metropolis-Bold.woff2') format('woff2'),
+        url('../../fonts/Bold/Metropolis-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { IntroGuard } from './guards/intro.guard';
 import { AuthGuard } from '@shared/guards/auth.guard';
 
 const routes: Routes = [
@@ -7,6 +8,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginPageModule),
+    canLoad: [IntroGuard]
+  },  
+  {
+    path: 'intro',
+    loadChildren: () => import('./pages/onboarding/onboarding.module').then((m) => m.OnboardingPageModule),
   },
   {
     path: 'register',

@@ -149,14 +149,16 @@ export class ModalOtpComponent implements OnInit {
     this.userSrv
       .sendOtp()
       .then((valid) => {
+        console.log("SUCCESS OTP " + valid);
         if (!valid) {
           const errMsg = this.translateSrv.get('INVALID_OTP');
-          this.toastSrv.show(errMsg);
+          //this.toastSrv.show(errMsg);
         }
       })
       .catch((err) => {
-        const error = err.error.error;
-        this.toastSrv.show(error.message);
+        console.log("ERROR OTP MODAL " + err?.error?.error.message);
+        const error = err?.error?.error;
+        //this.toastSrv.show("ERROR OTP"+error.message);
       });
   }
 }

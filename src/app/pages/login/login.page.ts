@@ -4,6 +4,7 @@ import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Response } from '@shared/models';
 import { AuthService, CacheService, ToastService } from '@shared/services';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -35,8 +36,9 @@ export class LoginPage implements OnInit {
         }
       })
       .catch((err) => {
-        const error = err.error.error;
-        this.toastSrv.show(error.message);
+        console.log(err);
+        const error = err?.error?.error;
+        this.toastSrv.show(error?.message);
       });
   }
 
@@ -53,8 +55,9 @@ export class LoginPage implements OnInit {
         }
       })
       .catch((err) => {
-        const error = err.error.error;
-        this.toastSrv.show(error.message);
+        console.log(err);
+        const error = err?.error?.error;
+        this.toastSrv.show(error?.message);
       });
   }
 }

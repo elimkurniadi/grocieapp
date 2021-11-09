@@ -23,8 +23,10 @@ export class UserService {
         (res: any) => {
           this.authSrv.loginByToken(res.response);
           resolve(res);
+          console.log("success register usersrv " + resolve);
         },
         (err) => {
+          console.log("error register usersrv " + err);
           reject(err);
         }
       );
@@ -34,12 +36,15 @@ export class UserService {
   getProfile(): Promise<any> {
     return new Promise((resolve, reject) => {
       const subscription = this.api.getData('profile');
+      console.log("getProfile",subscription);
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
           resolve(res?.response);
+          console.log("success get profile ",resolve);
         },
         (err) => {
+          console.log("error get profile ",err);
           reject(err);
         }
       );
@@ -164,9 +169,11 @@ export class UserService {
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
+          console.log("res code " + res.code);
           res.code === 200 ? resolve(true) : reject(false);
         },
         (err) => {
+          console.log("error res code " + err);
           reject(err);
         }
       );

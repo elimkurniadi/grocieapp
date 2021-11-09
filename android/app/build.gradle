@@ -1,19 +1,29 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'  // Google Services plugin
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    signingConfigs {
+      debug {
+        storeFile file('C:\\Users\\kishi\\Documents\\Work\\Tess\\grocie\\keystorefile.jks')
+        storePassword 'grocie1234'
+        keyAlias 'key0'
+        keyPassword 'grocie1234'
+      }
+    }
+  compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.grocie.grocie"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+      signingConfig signingConfigs.debug
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+          signingConfig signingConfigs.debug
         }
     }
 }
@@ -32,14 +42,23 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
-    implementation platform('com.google.firebase:firebase-bom:26.1.1')
-    implementation('com.facebook.android:facebook-login:[8,9)'){
-        exclude group: 'com.google.zxing'
-    }
-}
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:28.4.1')
 
-configurations {
-  implementation.exclude group: 'com.google.zxing'
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+
+    // Declare the dependency for the Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics'
+
+    // Declare the dependencies for any other desired Firebase products
+    // For example, declare the dependencies for Firebase Authentication and Cloud Firestore
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+
+    implementation 'com.google.firebase:firebase-messaging:20.2.3'
+
+    implementation("com.google.firebase:firebase-iid")
+
 }
 
 apply from: 'capacitor.build.gradle'
@@ -51,4 +70,8 @@ try {
     }
 } catch(Exception e) {
     logger.warn("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}
+
+configurations {
+  compile.exclude group: 'com.google.zxing'
 }

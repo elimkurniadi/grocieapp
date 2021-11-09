@@ -68,6 +68,7 @@ export class AuthService {
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
+          console.log("res google ",res);
           const token = res.response;
           if (token) {
             this.loginByToken(token);
@@ -95,6 +96,7 @@ export class AuthService {
       this.gs.pushSubscription(subscription);
       subscription.subscribe(
         (res: any) => {
+          console.log("res google ",res);
           const token = res.response;
           if (token) {
             this.loginByToken(token);
@@ -189,6 +191,8 @@ export class AuthService {
 
   loginByToken(token) {
     const decoded = this.jwtHelper.decodeToken(token);
+    console.log("decoded: ",decoded);
+    console.log("token: ",token);
     this.cache.setCurrentUser(decoded, token);
   }
 

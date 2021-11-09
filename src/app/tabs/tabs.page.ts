@@ -139,6 +139,7 @@ export class TabsPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log("Init tabs");
     this.initMenuIcon();
     this.fetchUserData();
   }
@@ -167,12 +168,17 @@ export class TabsPage implements OnInit {
   }
 
   fetchUserData() {
+  console.log("fetchuserdata in");
     this.userSrv.getProfile().then((res) => {
       this.userData = res;
-
+      console.log("Phone_verified" + this.userData.is_phone_verified);
       if (!this.userData.is_phone_verified) {
         this.showModalOtp();
       }
-    });
+    })
+    .catch((err) => {
+        const error = err?.error?.error;
+        console.log("Phone_verified error",err);
+    });;
   }
 }

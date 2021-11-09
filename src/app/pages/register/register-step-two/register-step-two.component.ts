@@ -110,10 +110,11 @@ export class RegisterStepTwoComponent implements OnInit {
         platform = '/facebook';
       }
 
-      this.userSrv.register(value, platform).then(() => {
+      this.userSrv.register(value, platform).then(success => {
+        console.log("register step two" + success);
         this.cache.clearSocialInfo();
         this.router.navigate(['/tabs', 'home']);
-        // this.showModalOtp();
+        //this.showModalOtp();
       });
     }
   }

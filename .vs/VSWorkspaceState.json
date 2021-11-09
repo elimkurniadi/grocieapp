@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\android",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\pages",
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\common",
+    "\\src\\app\\shared\\services",
+    "\\src\\app\\shared\\services\\modules",
+    "\\src\\app\\tabs"
+  ],
+  "PreviewInSolutionExplorer": false
+}
