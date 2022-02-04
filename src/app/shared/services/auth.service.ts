@@ -84,7 +84,7 @@ export class AuthService {
   }
 
   async loginFb() {
-    const FACEBOOK_PERMISSIONS = ['public_profile', 'email'];
+    const FACEBOOK_PERMISSIONS = ['public_profile', 'email']; 
     const result = await Plugins.FacebookLogin.login({
       permissions: FACEBOOK_PERMISSIONS,
     });
